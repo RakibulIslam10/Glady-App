@@ -1,0 +1,56 @@
+import 'package:get/get_navigation/src/routes/get_route.dart';
+
+import '../bind/appointment_binding.dart';
+import '../bind/find_binding.dart';
+import '../bind/forgot_password_binding.dart';
+import '../bind/home_binding.dart';
+import '../bind/login_binding.dart';
+import '../bind/navigation_binding.dart';
+import '../bind/offline_binding.dart';
+import '../bind/onboard_binding.dart';
+import '../bind/otp_binding.dart';
+import '../bind/profile_binding.dart';
+import '../bind/register_binding.dart';
+import '../bind/reset_password_binding.dart';
+import '../bind/splash_binding.dart';
+import '../bind/upload_doc_binding.dart';
+import '../bind/verification_binding.dart';
+import '../bind/welcome_binding.dart';
+import '../views/appointment/screen/appointment_screen.dart';
+import '../views/find/screen/find_screen.dart';
+import '../views/forgot_password/screen/forgot_password_screen.dart';
+import '../views/home/screen/home_screen.dart';
+import '../views/login/screen/login_screen.dart';
+import '../views/navigation/screen/navigation_screen.dart';
+import '../views/offline/screen/offline_screen.dart';
+import '../views/onboard/screen/onboard_screen.dart';
+import '../views/otp/screen/otp_screen.dart';
+import '../views/profile/screen/profile_screen.dart';
+import '../views/register/screen/register_screen.dart';
+import '../views/reset_password/screen/reset_password_screen.dart';
+import '../views/splash/screen/splash_screen.dart';
+import '../views/upload_doc/screen/upload_doc_screen.dart';
+import '../views/verification/screen/verification_screen.dart';
+import '../views/welcome/screen/welcome_screen.dart';
+part 'pages.dart';
+
+class Routes {
+  static var list = RoutePageList.list;
+static const profileScreen = '/profileScreen';
+static const appointmentScreen = '/appointmentScreen';
+static const findScreen = '/findScreen';
+static const homeScreen = '/homeScreen';
+static const welcomeScreen = '/welcomeScreen';
+static const verificationScreen = '/verificationScreen';
+static const navigationScreen = '/navigationScreen';
+static const onboardScreen = '/onboardScreen';
+static const uploadDocScreen = '/upload_docScreen';
+static const resetPasswordScreen = '/reset_passwordScreen';
+static const otpScreen = '/otpScreen';
+static const forgotPasswordScreen = '/forgot_passwordScreen';
+static const registerScreen = '/registerScreen';
+static const loginScreen = '/loginScreen';
+static const offlineScreen = '/offlineScreen';
+static const splashScreen = '/splashScreen';
+
+}
