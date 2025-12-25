@@ -58,6 +58,8 @@ class _BottomBarItem extends StatelessWidget {
   final double? svgSize;
   final bool isCenter;
 
+
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<NavigationController>();
