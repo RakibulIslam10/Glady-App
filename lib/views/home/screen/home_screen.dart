@@ -6,6 +6,8 @@ import '../../../core/widgets/common_app_bar.dart';
 import '../controller/home_controller.dart';
 
 part 'home_screen_mobile.dart';
+part '../widget/my_app_bar_widget.dart';
+part '../widget/search_header_widget.dart';
 
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
