@@ -29,8 +29,11 @@ class $AssetsDummyGen {
   /// File path: assets/dummy/pana.svg
   String get pana => 'assets/dummy/pana.svg';
 
+  /// File path: assets/dummy/sh.png
+  AssetGenImage get sh => const AssetGenImage('assets/dummy/sh.png');
+
   /// List of all assets
-  List<dynamic> get values => [amico, d, ddd, logo, pana];
+  List<dynamic> get values => [amico, d, ddd, logo, pana, sh];
 }
 
 class $AssetsIconsGen {
