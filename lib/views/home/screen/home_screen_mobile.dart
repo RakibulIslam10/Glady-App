@@ -13,7 +13,8 @@ class HomeScreenMobile extends GetView<HomeController> {
           children: [
             Space.height.v20,
             SearchHeaderWidget(),
-            SliderItemWidget()
+            SliderItemWidget(),
+            SectionHeader(title: "Daily Wellness Tips", onViewAllTap: () {}),
           ],
         ),
       ),

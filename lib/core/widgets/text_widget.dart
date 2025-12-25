@@ -59,7 +59,7 @@ class TextWidget extends StatelessWidget {
                 GoogleFonts.athiti(
                   color: color ?? CustomColors.blackColor,
                   fontSize: fontSize ?? Dimensions.titleMedium,
-                  fontWeight: fontWeight ?? FontWeight.w500,
+                  fontWeight: fontWeight ?? FontWeight.w600,
                 ),
           ),
         ),
