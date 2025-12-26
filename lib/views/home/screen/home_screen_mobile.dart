@@ -17,7 +17,12 @@ class HomeScreenMobile extends GetView<HomeController> {
             Space.height.v20,
             SearchHeaderWidget(),
             SliderItemWidget(),
-            SectionHeader(title: "Daily Wellness Tips", onViewAllTap: () {}),
+            SectionHeader(
+              title: "Daily Wellness Tips",
+              onViewAllTap: () {
+                Get.toNamed(Routes.tipsScreen);
+              },
+            ),
             TipsCardWidget(),
             SectionHeader(title: "Popular Specialties", onViewAllTap: () {}),
             CategorySectionWidget(),
