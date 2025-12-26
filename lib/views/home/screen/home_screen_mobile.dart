@@ -24,7 +24,12 @@ class HomeScreenMobile extends GetView<HomeController> {
               },
             ),
             TipsCardWidget(),
-            SectionHeader(title: "Popular Specialties", onViewAllTap: () {}),
+            SectionHeader(
+              title: "Popular Specialties",
+              onViewAllTap: () {
+                Get.toNamed(Routes.allCategoryScreen);
+              },
+            ),
             CategorySectionWidget(),
             SectionHeader(title: "Popular Doctor", onViewAllTap: () {}),
             HomeDoctorCardWidget(),

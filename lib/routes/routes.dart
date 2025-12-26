@@ -1,5 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 
+import '../bind/all_category_binding.dart';
 import '../bind/appointment_binding.dart';
 import '../bind/find_binding.dart';
 import '../bind/forgot_password_binding.dart';
@@ -18,6 +19,7 @@ import '../bind/tips_binding.dart';
 import '../bind/upload_doc_binding.dart';
 import '../bind/verification_binding.dart';
 import '../bind/welcome_binding.dart';
+import '../views/all_category/screen/all_category_screen.dart';
 import '../views/appointment/screen/appointment_screen.dart';
 import '../views/find/screen/find_screen.dart';
 import '../views/forgot_password/screen/forgot_password_screen.dart';
@@ -40,6 +42,7 @@ part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
+static const allCategoryScreen = '/all_categoryScreen';
 static const notificationScreen = '/notificationScreen';
 static const tipsScreen = '/tipsScreen';
 static const profileScreen = '/profileScreen';
