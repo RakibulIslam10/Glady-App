@@ -6,15 +6,24 @@ class HomeScreenMobile extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(flexibleSpace: MyAppBarWidget()),
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+        flexibleSpace: MyAppBarWidget(),
+      ),
       body: SafeArea(
         child: ListView(
-          padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
+          physics: BouncingScrollPhysics(),
           children: [
             Space.height.v20,
             SearchHeaderWidget(),
             SliderItemWidget(),
             SectionHeader(title: "Daily Wellness Tips", onViewAllTap: () {}),
+            TipsCardWidget(),
+            SectionHeader(title: "Popular Specialties", onViewAllTap: () {}),
+            CategorySectionWidget(),
+            SectionHeader(title: "Popular Doctor", onViewAllTap: () {}),
+            HomeDoctorCardWidget(),
+            BottomBannerWidget(),
           ],
         ),
       ),

@@ -6,6 +6,8 @@ class SearchHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: Dimensions.defaultHorizontalSize.edgeHorizontal,
+
       height: 56.h,
       decoration: BoxDecoration(
         color: Colors.white,

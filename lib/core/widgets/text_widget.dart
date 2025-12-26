@@ -56,7 +56,7 @@ class TextWidget extends StatelessWidget {
                 //   fontSize: fontSize ?? Dimensions.titleMedium, // already .sp
                 //   fontWeight: fontWeight,
                 // ),
-                GoogleFonts.athiti(
+                GoogleFonts.outfit(
                   color: color ?? CustomColors.blackColor,
                   fontSize: fontSize ?? Dimensions.titleMedium,
                   fontWeight: fontWeight ?? FontWeight.w600,

@@ -22,7 +22,7 @@ class SectionHeader extends StatelessWidget {
             left: Dimensions.defaultHorizontalSize,
             right: Dimensions.defaultHorizontalSize,
             top: Dimensions.heightSize * 1.5,
-            bottom: Dimensions.heightSize * 0.9,
+            bottom: Dimensions.heightSize,
           ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -17,11 +17,17 @@ class $AssetsDummyGen {
   /// File path: assets/dummy/amico.svg
   String get amico => 'assets/dummy/amico.svg';
 
+  /// File path: assets/dummy/bro.svg
+  String get bro => 'assets/dummy/bro.svg';
+
   /// File path: assets/dummy/d.png
   AssetGenImage get d => const AssetGenImage('assets/dummy/d.png');
 
   /// File path: assets/dummy/ddd.svg
   String get ddd => 'assets/dummy/ddd.svg';
+
+  /// File path: assets/dummy/fa.png
+  AssetGenImage get fa => const AssetGenImage('assets/dummy/fa.png');
 
   /// File path: assets/dummy/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/dummy/logo.png');
@@ -33,7 +39,7 @@ class $AssetsDummyGen {
   AssetGenImage get sh => const AssetGenImage('assets/dummy/sh.png');
 
   /// List of all assets
-  List<dynamic> get values => [amico, d, ddd, logo, pana, sh];
+  List<dynamic> get values => [amico, bro, d, ddd, fa, logo, pana, sh];
 }
 
 class $AssetsIconsGen {
@@ -72,11 +78,22 @@ class $AssetsIconsGen {
   ];
 }
 
+class $AssetsLogoGen {
+  const $AssetsLogoGen();
+
+  /// File path: assets/logo/ssraad.png
+  AssetGenImage get ssraad => const AssetGenImage('assets/logo/ssraad.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [ssraad];
+}
+
 class Assets {
   const Assets._();
 
   static const $AssetsDummyGen dummy = $AssetsDummyGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsLogoGen logo = $AssetsLogoGen();
 }
 
 class AssetGenImage {
