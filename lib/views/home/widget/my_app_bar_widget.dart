@@ -19,20 +19,23 @@ class MyAppBarWidget extends GetView<HomeController> {
               alignment: WrapAlignment.center,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                Container(
-                  padding: EdgeInsets.all(Dimensions.paddingSize * 0.5),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: CustomColors.disableColor.withOpacity(0.2),
+                GestureDetector(
+                  onTap: () => Get.toNamed(Routes.notificationScreen),
+                  child: Container(
+                    padding: EdgeInsets.all(Dimensions.paddingSize * 0.5),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: CustomColors.disableColor.withOpacity(0.2),
+                      ),
+                      shape: BoxShape.circle,
+                      color: CustomColors.whiteColor,
                     ),
-                    shape: BoxShape.circle,
-                    color: CustomColors.whiteColor,
-                  ),
 
-                  child: Icon(
-                    Icons.notifications_active_outlined,
-                    color: CustomColors.primary,
-                    size: Dimensions.iconSizeLarge,
+                    child: Icon(
+                      Icons.notifications_active_outlined,
+                      color: CustomColors.primary,
+                      size: Dimensions.iconSizeLarge,
+                    ),
                   ),
                 ),
                 Space.width.v10,

@@ -6,6 +6,7 @@ import '../bind/forgot_password_binding.dart';
 import '../bind/home_binding.dart';
 import '../bind/login_binding.dart';
 import '../bind/navigation_binding.dart';
+import '../bind/notification_binding.dart';
 import '../bind/offline_binding.dart';
 import '../bind/onboard_binding.dart';
 import '../bind/otp_binding.dart';
@@ -23,6 +24,7 @@ import '../views/forgot_password/screen/forgot_password_screen.dart';
 import '../views/home/screen/home_screen.dart';
 import '../views/login/screen/login_screen.dart';
 import '../views/navigation/screen/navigation_screen.dart';
+import '../views/notification/screen/notification_screen.dart';
 import '../views/offline/screen/offline_screen.dart';
 import '../views/onboard/screen/onboard_screen.dart';
 import '../views/otp/screen/otp_screen.dart';
@@ -38,6 +40,7 @@ part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
+static const notificationScreen = '/notificationScreen';
 static const tipsScreen = '/tipsScreen';
 static const profileScreen = '/profileScreen';
 static const appointmentScreen = '/appointmentScreen';
