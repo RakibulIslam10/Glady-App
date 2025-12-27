@@ -18,6 +18,9 @@ class HomeDoctorCardWidget extends GetView<HomeController> {
           rating: '4.7',
           name: 'Elowyn Starcrest',
           profession: 'Psychologist',
+          onTap: () {
+            Get.toNamed(Routes.doctorDetailsScreen);
+          },
           hospital: 'Central Dental Care',
         ),
       ),

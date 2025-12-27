@@ -27,7 +27,9 @@ class AllDoctorsScreenMobile extends GetView<AllDoctorsController> {
             name: 'Elowyn Starcrest',
             profession: 'Psychologist',
             hospital: 'Central Dental Care',
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(Routes.doctorDetailsScreen);
+            },
           );
         },
       ),

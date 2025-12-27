@@ -80,7 +80,7 @@ class PrimaryButtonWidget extends StatelessWidget {
                           shape ??
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
-                              Dimensions.radius * 0.8,
+                              Dimensions.radius * 2.5,
                             ),
                           ),
                       backgroundColor: Colors.transparent,
@@ -121,7 +121,7 @@ class PrimaryButtonWidget extends StatelessWidget {
                           shape ??
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
-                              Dimensions.radius * 0.8,
+                              Dimensions.radius * 2.5,
                             ),
                           ),
                       side: BorderSide(
