@@ -12,7 +12,9 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
           vertical: Dimensions.verticalSize,
         ),
         title: "Book Appointment ",
-        onPressed: () {},
+        onPressed: () {
+          Get.dialog(const BookingDialog(), barrierDismissible: true);
+        },
       ),
       appBar: CommonAppBar(title: "Doctor Details"),
       body: SafeArea(

@@ -1,11 +1,7 @@
 import '../../../core/utils/basic_import.dart';
+import '../model/rating_model.dart';
+
 class DoctorDetailsController extends GetxController {
-
-
-
-
-
-
   final ratings = <RatingData>[
     RatingData(stars: 5, count: 80),
     RatingData(stars: 4, count: 20),
@@ -22,11 +18,38 @@ class DoctorDetailsController extends GetxController {
     return totalRatings > 0 ? (count / totalRatings) : 0.0;
   }
 
+  RxString selectedDate = ''.obs;
+  RxString selectedTime = ''.obs;
+  RxBool showTimeSlots = false.obs;
 
-}
-class RatingData {
-  final int stars;
-  final int count;
+  RxInt selectedDateIndex = (-1).obs;
+  RxInt selectedTimeIndex = (-1).obs;
 
-  RatingData({required this.stars, required this.count});
+
+  final List<String> datesDayList = [
+    'Sun 1 Jan',
+    'Mon 5 Feb',
+    'Tue 8 Mar',
+    'Wed 1 Apr',
+    'Thu 4 May',
+    'Fri 27 Jun',
+    'Sat 14 Jul',
+    'Sun 8 Aug',
+    'Mon 23 Sep',
+    'Tue 20 Oct',
+    'Wed 5 Nov',
+    'Thu 16 Dec',
+  ];
+
+  List<String> timeList = [
+    '09:00 AM',
+    '10:00 AM',
+    '11:00 AM',
+    '12:00 PM',
+    '02:00 PM',
+    '03:00 PM',
+    '04:00 PM',
+    '05:00 PM',
+    '06:00 PM',
+  ];
 }
