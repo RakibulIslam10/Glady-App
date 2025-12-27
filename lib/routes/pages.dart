@@ -4,6 +4,11 @@ class RoutePageList {
   static var list = [
     //Page Route List
     GetPage(
+      name: Routes.paymentScreen,
+      page: () => const PaymentScreen(),
+      binding: PaymentBinding(),
+    ),
+    GetPage(
       name: Routes.bookInfoScreen,
       page: () => const BookInfoScreen(),
       binding: BookInfoBinding(),

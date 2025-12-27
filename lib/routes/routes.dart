@@ -15,6 +15,7 @@ import '../bind/notification_binding.dart';
 import '../bind/offline_binding.dart';
 import '../bind/onboard_binding.dart';
 import '../bind/otp_binding.dart';
+import '../bind/payment_binding.dart';
 import '../bind/profile_binding.dart';
 import '../bind/register_binding.dart';
 import '../bind/reset_password_binding.dart';
@@ -38,6 +39,7 @@ import '../views/notification/screen/notification_screen.dart';
 import '../views/offline/screen/offline_screen.dart';
 import '../views/onboard/screen/onboard_screen.dart';
 import '../views/otp/screen/otp_screen.dart';
+import '../views/payment/screen/payment_screen.dart';
 import '../views/profile/screen/profile_screen.dart';
 import '../views/register/screen/register_screen.dart';
 import '../views/reset_password/screen/reset_password_screen.dart';
@@ -50,6 +52,7 @@ part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
+static const paymentScreen = '/paymentScreen';
 static const bookInfoScreen = '/book_infoScreen';
 static const allReviewScreen = '/all_reviewScreen';
 static const doctorDetailsScreen = '/doctor_detailsScreen';
