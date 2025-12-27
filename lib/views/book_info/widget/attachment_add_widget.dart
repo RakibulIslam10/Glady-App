@@ -9,17 +9,16 @@ class AttachmentAddWidget extends GetView<BookInfoController> {
       children: List.generate(controller.attachmentList.length + 1, (index) {
         if (controller.attachmentList.length == index) {
           return GestureDetector(
-              onTap: () {
-                BottomImagePicker.show(
-                  multiple: true,
+            onTap: () {
+              BottomImagePicker.show(
+                multiple: true,
                 multipleImagesVariable: (image) {
                   controller.multipleImages.value = image;
                   // print('✅ Single: ${image?.path}');
                   return image;
                 },
               );
-
-              },
+            },
             child: Container(
               margin: EdgeInsets.only(right: Dimensions.widthSize),
               decoration: BoxDecoration(

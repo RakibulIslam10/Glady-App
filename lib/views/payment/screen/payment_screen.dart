@@ -1,4 +1,7 @@
+import 'package:glady/views/doctor_details/screen/doctor_details_screen.dart';
+
 import '../../../core/utils/basic_import.dart';
+import '../../../core/widgets/bottom_image_picker.dart';
 import '../../../core/widgets/common_app_bar.dart';
 import '../controller/payment_controller.dart';
 
