@@ -7,6 +7,7 @@ class DoctorCardWidget extends StatelessWidget {
   final String profession;
   final String hospital;
   final VoidCallback? onTap;
+  final double? height;
 
   const DoctorCardWidget({
     super.key,
@@ -15,6 +16,7 @@ class DoctorCardWidget extends StatelessWidget {
     required this.name,
     required this.profession,
     required this.hospital,
+     this.height,
     this.onTap,
   });
 
@@ -24,6 +26,7 @@ class DoctorCardWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 175.w,
+        height: height,
         margin: EdgeInsets.only(right: Dimensions.widthSize),
         decoration: BoxDecoration(
           color: const Color(0xffF8F8F8),
