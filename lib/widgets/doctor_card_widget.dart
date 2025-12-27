@@ -16,7 +16,7 @@ class DoctorCardWidget extends StatelessWidget {
     required this.name,
     required this.profession,
     required this.hospital,
-     this.height,
+    this.height,
     this.onTap,
   });
 
@@ -30,9 +30,7 @@ class DoctorCardWidget extends StatelessWidget {
         margin: EdgeInsets.only(right: Dimensions.widthSize),
         decoration: BoxDecoration(
           color: const Color(0xffF8F8F8),
-          border: Border.all(
-            color: CustomColors.disableColor.withOpacity(0.1),
-          ),
+          border: Border.all(color: CustomColors.disableColor.withOpacity(0.1)),
           borderRadius: BorderRadius.circular(Dimensions.radius * 2),
         ),
         child: Column(
@@ -45,14 +43,8 @@ class DoctorCardWidget extends StatelessWidget {
               fontSize: Dimensions.titleLarge * 0.85,
               fontWeight: FontWeight.w600,
             ),
-            _text(
-              profession,
-              color: CustomColors.blackColor.withOpacity(0.7),
-            ),
-            _text(
-              hospital,
-              color: CustomColors.blackColor.withOpacity(0.7),
-            ),
+            _text(profession, color: CustomColors.blackColor.withOpacity(0.7)),
+            _text(hospital, color: CustomColors.blackColor.withOpacity(0.7)),
           ],
         ),
       ),
@@ -70,12 +62,13 @@ class DoctorCardWidget extends StatelessWidget {
             imageUrl: imageUrl,
             height: 150.h,
             width: double.infinity,
-            fit: BoxFit.cover,
+            fit: BoxFit.fitWidth,
             errorWidget: (_, __, ___) => Icon(
-              Icons.error_outline,
+              Icons.image_not_supported_outlined,
               color: CustomColors.rejected,
             ),
           ),
+
           Positioned(
             right: 10.w,
             top: 10.h,
@@ -86,9 +79,7 @@ class DoctorCardWidget extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: CustomColors.whiteColor,
-                borderRadius: BorderRadius.circular(
-                  Dimensions.radius * 1.5,
-                ),
+                borderRadius: BorderRadius.circular(Dimensions.radius * 1.5),
               ),
               child: Wrap(
                 spacing: Dimensions.widthSize * 0.25,
@@ -114,11 +105,11 @@ class DoctorCardWidget extends StatelessWidget {
   }
 
   Widget _text(
-      String text, {
-        double? fontSize,
-        FontWeight? fontWeight,
-        Color? color,
-      }) {
+    String text, {
+    double? fontSize,
+    FontWeight? fontWeight,
+    Color? color,
+  }) {
     return TextWidget(
       padding: EdgeInsets.symmetric(
         horizontal: Dimensions.defaultHorizontalSize * 0.6,
