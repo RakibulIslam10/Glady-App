@@ -20,22 +20,28 @@ class AllCategoryScreenMobile extends GetView<AllCategoryController> {
             childAspectRatio: 5 / 2,
             crossAxisSpacing: Dimensions.widthSize,
           ),
-          itemBuilder: (context, index) => Container(
-            alignment: AlignmentGeometry.center,
-            margin: EdgeInsets.only(bottom: Dimensions.heightSize),
-            decoration: BoxDecoration(
-              color: Color(0xffF8F8F8),
-              borderRadius: BorderRadius.circular(Dimensions.radius * 1.5),
+          itemBuilder: (context, index) => GestureDetector(
+            onTap: () => Get.toNamed(Routes.categoryDetailsScreen,
+
+            // arguments: controller.
             ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: Dimensions.defaultHorizontalSize,
-                vertical: Dimensions.verticalSize * 0.7,
+            child: Container(
+              alignment: AlignmentGeometry.center,
+              margin: EdgeInsets.only(bottom: Dimensions.heightSize),
+              decoration: BoxDecoration(
+                color: Color(0xffF8F8F8),
+                borderRadius: BorderRadius.circular(Dimensions.radius * 1.5),
               ),
-              child: TextWidget(
-                "Dermatologist",
-                maxLines: 2,
-                color: CustomColors.primary,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.defaultHorizontalSize,
+                  vertical: Dimensions.verticalSize * 0.7,
+                ),
+                child: TextWidget(
+                  "Dermatologist",
+                  maxLines: 2,
+                  color: CustomColors.primary,
+                ),
               ),
             ),
           ),

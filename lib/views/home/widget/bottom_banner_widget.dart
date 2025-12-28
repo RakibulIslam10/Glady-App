@@ -5,7 +5,7 @@ class BottomBannerWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return   SizedBox(
+    return SizedBox(
       height: 290.h,
       child: Stack(
         alignment: Alignment.bottomCenter,
@@ -55,9 +55,7 @@ class BottomBannerWidget extends GetView<HomeController> {
 
                   decoration: BoxDecoration(
                     color: CustomColors.whiteColor,
-                    borderRadius: BorderRadius.circular(
-                      Dimensions.radius * 2,
-                    ),
+                    borderRadius: BorderRadius.circular(Dimensions.radius * 2),
                   ),
 
                   child: TextWidget(

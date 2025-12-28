@@ -3,11 +3,16 @@ part of 'routes.dart';
 class RoutePageList {
   static var list = [
     //Page Route List
-GetPage(
-    name: Routes.likedTipsScreen,
-    page: () => const LikedTipsScreen(),
-    binding: LikedTipsBinding(),
-  ),
+    GetPage(
+      name: Routes.categoryDetailsScreen,
+      page: () => const CategoryDetailsScreen(),
+      binding: CategoryDetailsBinding(),
+    ),
+    GetPage(
+      name: Routes.likedTipsScreen,
+      page: () => const LikedTipsScreen(),
+      binding: LikedTipsBinding(),
+    ),
     GetPage(
       name: Routes.paymentScreen,
       page: () => const PaymentScreen(),

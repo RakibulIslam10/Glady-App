@@ -12,9 +12,12 @@ class SliderItemWidget extends GetView<HomeController> {
         crossAxisAlignment: crossStart,
         children: [
           SizedBox(
-            height: 160.h,
+            height: 155.h,
             child: PageView.builder(
               onPageChanged: (value) => controller.currentIndex.value = value,
+              physics: BouncingScrollPhysics(),
+              itemCount: 3,
+
               itemBuilder: (context, index) => Row(
                 mainAxisAlignment: mainSpaceBet,
                 children: [
@@ -23,12 +26,12 @@ class SliderItemWidget extends GetView<HomeController> {
                       left: Dimensions.widthSize * 2,
                     ),
                     "WeCure \nYour Health\n Comes First ",
-                    fontSize: Dimensions.titleLarge * 1.15,
+                    fontSize: Dimensions.titleLarge,
                     fontWeight: FontWeight.w600,
                     // color: CustomColors.whiteColor,
                   ),
 
-                  Image.asset(Assets.dummy.sh.path, height: 130.h),
+                  Image.asset(Assets.dummy.sh.path, height: 125.h),
                 ],
               ),
             ),
@@ -40,8 +43,8 @@ class SliderItemWidget extends GetView<HomeController> {
               (index) => Obx(
                 () => Container(
                   margin: Dimensions.widthSize.edgeHorizontal * 0.5,
-                  height: 9.h,
-                  width: 9.w,
+                  height: 8.h,
+                  width: 8.w,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: controller.currentIndex.value == index

@@ -10,11 +10,15 @@ class HomeDoctorCardWidget extends GetView<HomeController> {
       height: 240.h,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
+        addRepaintBoundaries: true,
+        cacheExtent: 500,
+        shrinkWrap: true,
+        primary: true,
         scrollDirection: Axis.horizontal,
         itemCount: 10,
         itemBuilder: (context, index) => DoctorCardWidget(
           imageUrl:
-              'https://i.pinimg.com/736x/2a/12/5c/2a125c7aa0d47538b857291fa0901286.jpg',
+              'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/doctorpp.png',
           rating: '4.7',
           name: 'Elowyn Starcrest',
           profession: 'Psychologist',

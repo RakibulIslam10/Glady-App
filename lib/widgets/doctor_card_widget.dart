@@ -40,11 +40,15 @@ class DoctorCardWidget extends StatelessWidget {
             Space.height.v5,
             _text(
               name,
-              fontSize: Dimensions.titleLarge * 0.85,
               fontWeight: FontWeight.w600,
             ),
-            _text(profession, color: CustomColors.blackColor.withOpacity(0.7)),
-            _text(hospital, color: CustomColors.blackColor.withOpacity(0.7)),
+            _text(profession, color: CustomColors.blackColor.withOpacity(0.7),
+                fontSize: Dimensions.titleSmall
+
+            ),
+            _text(hospital, color: CustomColors.blackColor.withOpacity(0.7),
+            fontSize: Dimensions.titleSmall
+            ),
           ],
         ),
       ),

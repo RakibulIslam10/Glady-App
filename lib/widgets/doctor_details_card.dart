@@ -11,7 +11,7 @@ class DoctorDetailsCard extends StatelessWidget {
     required this.yearsOfExperience,
     this.startingPrice,
     this.onTap,
-    this.isPriceShow,
+    this.isPriceShow, this.borderHide,
   });
 
   final String imageUrl;
@@ -20,6 +20,7 @@ class DoctorDetailsCard extends StatelessWidget {
   final String clinicName;
   final double rating;
   final bool? isPriceShow;
+  final bool? borderHide;
   final int yearsOfExperience;
   final double? startingPrice;
   final VoidCallback? onTap;
@@ -35,7 +36,7 @@ class DoctorDetailsCard extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.radius),
-          border: Border.all(color: CustomColors.grayShade.withOpacity(0.15)),
+          border: borderHide == true ? null : Border.all(color: CustomColors.grayShade.withOpacity(0.15))
         ),
         child: Row(
           crossAxisAlignment: crossStart,

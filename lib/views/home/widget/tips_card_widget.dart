@@ -5,22 +5,19 @@ class TipsCardWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       margin: EdgeInsets.only(left: Dimensions.defaultHorizontalSize),
       color: Colors.white,
-      height: 160,
+      height: 140.h,
       child: PageView.builder(
-        controller: PageController(
-          viewportFraction: 0.9,
-          initialPage: 0,
-        ),
+        controller: PageController(viewportFraction: 0.9, initialPage: 0),
         itemCount: 3,
         physics: BouncingScrollPhysics(),
         allowImplicitScrolling: true,
         padEnds: false,
         pageSnapping: true,
         itemBuilder: (context, index) => Container(
-          margin: EdgeInsets.only(right: Dimensions.widthSize,),
+          margin: EdgeInsets.only(right: Dimensions.widthSize),
           decoration: BoxDecoration(
             color: CustomColors.secondary,
 
@@ -33,9 +30,7 @@ class TipsCardWidget extends GetView<HomeController> {
           ),
           child: Stack(
             children: [
-              Positioned.fill(
-                child: SvgPicture.asset(Assets.dummy.bro),
-              ),
+              Positioned.fill(child: SvgPicture.asset(Assets.dummy.bro)),
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.defaultHorizontalSize,
@@ -47,20 +42,18 @@ class TipsCardWidget extends GetView<HomeController> {
                   children: [
                     TextWidget(
                       "Drink water regularly throughout the day to keep your body energized and functioning smoothly.",
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                       color: CustomColors.whiteColor,
-                      fontSize: Dimensions.titleLarge * 0.8,
                     ),
                     Container(
                       decoration: BoxDecoration(
                         color: CustomColors.blackColor,
                         shape: BoxShape.circle,
                       ),
-                      padding: EdgeInsets.all(
-                        Dimensions.paddingSize * 0.4,
-                      ),
+                      padding: EdgeInsets.all(Dimensions.paddingSize * 0.3),
                       child: Icon(
                         Icons.favorite_border,
+                        size: Dimensions.iconSizeLarge * 0.8,
                         color: CustomColors.whiteColor,
                       ),
                     ),

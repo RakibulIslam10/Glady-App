@@ -24,7 +24,7 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
           children: [
             DoctorDetailsCard(
               imageUrl:
-                  'https://i.pinimg.com/736x/2a/12/5c/2a125c7aa0d47538b857291fa0901286.jpg',
+                  'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/doctorpp.png',
               name: 'Dr. Elowyn Starcrest',
               specialty: 'Dentist',
               clinicName: 'Central Dental Care',

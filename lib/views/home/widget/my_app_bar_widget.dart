@@ -41,8 +41,7 @@ class MyAppBarWidget extends GetView<HomeController> {
                 Space.width.v10,
                 ProfileAvatarWidget(
                   size: 50.h,
-                  imageUrl:
-                      'https://img.freepik.com/free-photo/front-view-business-woman-suit_23-2148603018.jpg?semt=ais_hybrid&w=740&q=80',
+                  imageUrl:'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/doctorpp.png'
                 ),
               ],
             ),

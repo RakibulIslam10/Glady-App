@@ -29,15 +29,15 @@ class SectionHeader extends StatelessWidget {
         children: [
           TextWidget(
             title,
-            fontWeight: FontWeight.w700,
-            fontSize: Dimensions.titleLarge * 0.9,
+            fontWeight: FontWeight.w600,
+            fontSize: Dimensions.titleLarge * 0.8,
           ),
           TextWidget(
             viewAllText,
             onTap: onViewAllTap,
             color: CustomColors.blackColor.withOpacity(0.7),
-            fontSize: Dimensions.titleLarge * 0.8,
-            fontWeight: FontWeight.w700,
+            fontSize: Dimensions.titleLarge * 0.7,
+            fontWeight: FontWeight.w600,
           ),
         ],
       ),
