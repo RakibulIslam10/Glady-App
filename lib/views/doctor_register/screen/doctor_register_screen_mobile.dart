@@ -1,15 +1,16 @@
-part of 'register_screen.dart';
+part of 'doctor_register_screen.dart';
 
-class RegisterScreenMobile extends GetView<RegisterController> {
-  const RegisterScreenMobile({super.key});
+class DoctorRegisterScreenMobile extends GetView<DoctorRegisterController> {
+  const DoctorRegisterScreenMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(title: ""),
+      appBar: CommonAppBar(title: "DoctorRegister"),
       body: SafeArea(
         child: ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
+          physics: BouncingScrollPhysics(),
           children: [
             Align(alignment: Alignment.topRight, child: CustomLogoWidget()),
 
@@ -19,7 +20,7 @@ class RegisterScreenMobile extends GetView<RegisterController> {
               fontWeight: FontWeight.w500,
             ),
             TextWidget(
-              "Hello! Register to Get Started",
+              "Hello! Doctor Register to Get Started",
               fontSize: Dimensions.titleSmall * 1.2,
               fontWeight: FontWeight.w500,
             ),
@@ -30,15 +31,24 @@ class RegisterScreenMobile extends GetView<RegisterController> {
                 crossAxisAlignment: crossStart,
                 children: [
                   Space.height.v20,
+
                   PrimaryInputFieldWidget(
                     controller: controller.nameController,
                     hintText: 'Enter Your Name',
                     // label: 'Full Name',
+                    nextFocusNode: controller.idFocus,
+                    // requiredField: false,
+                  ),
+                  Space.height.betweenInputBox,
+                  PrimaryInputFieldWidget(
+                    controller: controller.idController,
+                    hintText: 'National Doctor ID',
+                    // label: 'Full Name',
+                    focusNode: controller.idFocus,
                     nextFocusNode: controller.emailFocus,
                     // requiredField: false,
                   ),
                   Space.height.betweenInputBox,
-
                   PrimaryInputFieldWidget(
                     // label: "Email",
                     isEmail: true,
@@ -104,24 +114,6 @@ class RegisterScreenMobile extends GetView<RegisterController> {
                     ],
                   ),
                   Space.height.v40,
-
-                  TextWidget(
-                    textAlign: TextAlign.left,
-                    'Create account as a Doctor',
-                    color: CustomColors.blackColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: Dimensions.titleSmall * 1.1,
-                  ),
-                  Space.height.btnInputTitleAndBox,
-                  PrimaryButtonWidget(
-                    outlineButton: true,
-                    borderWidth: 1.5,
-                    fontWeight: FontWeight.w600,
-                    title: 'Doctor Account',
-                    onPressed: () {
-                      Get.toNamed(Routes.doctorRegisterScreen);
-                    },
-                  ),
                 ],
               ),
             ),
