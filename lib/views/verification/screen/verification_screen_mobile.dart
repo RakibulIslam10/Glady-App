@@ -53,27 +53,9 @@ class VerificationScreenMobile extends GetView<VerificationController> {
               onPressed: () => Get.offAllNamed(Routes.navigationScreen),
             ),
             Space.height.v15,
-            Row(
-              mainAxisAlignment: mainEnd,
-              children: [
-                TextWidget(
-                  onTap: () => Get.toNamed(Routes.registerScreen),
-                  textAlign: TextAlign.end,
-                  "Haven’t Received the OTP?",
-                  color: CustomColors.blackColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: Dimensions.titleSmall,
-                ),
-                TextWidget(
-                  onTap: () => Get.offAllNamed(Routes.loginScreen),
-                  textAlign: TextAlign.end,
-                  "  Resend OTP",
-                  color: CustomColors.primary,
-                  fontWeight: FontWeight.w600,
-                  fontSize: Dimensions.titleSmall,
-                ),
-              ],
-            ),
+          TimerWidget(onResendCode: () {
+            
+          },)
           ],
         ),
       ),

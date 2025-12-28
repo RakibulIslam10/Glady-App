@@ -53,27 +53,10 @@ class OtpScreenMobile extends GetView<OtpController> {
               onPressed: () => Get.offAllNamed(Routes.resetPasswordScreen),
             ),
             Space.height.v15,
-            Row(
-              mainAxisAlignment: mainEnd,
-              children: [
-                TextWidget(
-                  onTap: () => Get.toNamed(Routes.registerScreen),
-                  textAlign: TextAlign.end,
-                  "Haven’t Received the OTP?",
-                  color: CustomColors.blackColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: Dimensions.titleSmall,
-                ),
-                TextWidget(
-                  onTap: () {},
-                  textAlign: TextAlign.end,
-                  "  Resend OTP",
-                  color: CustomColors.primary,
-                  fontWeight: FontWeight.w600,
-                  fontSize: Dimensions.titleSmall,
-                ),
-              ],
-            ),
+
+            TimerWidget(onResendCode: () {
+
+            },)
           ],
         ),
       ),

@@ -1,5 +1,8 @@
 import 'dart:async';
 import '../utils/basic_import.dart';
+import 'dart:async';
+
+
 class TimerWidget extends StatefulWidget {
   const TimerWidget({super.key, required this.onResendCode});
 
@@ -17,7 +20,7 @@ class _TimerWidgetState extends State<TimerWidget> {
   @override
   void initState() {
     super.initState();
-    totalTimeInSeconds = _parseTime('00:30');
+    totalTimeInSeconds = _parseTime('00:60');
     startTimer();
   }
 
@@ -61,7 +64,7 @@ class _TimerWidgetState extends State<TimerWidget> {
   String formatTime(int seconds) {
     final minutes = (seconds ~/ 60).toString().padLeft(2, '0');
     final remainingSeconds = (seconds % 60).toString().padLeft(2, '0');
-    return ':';
+    return '$minutes:$remainingSeconds';
   }
 
   @override
