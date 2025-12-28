@@ -68,7 +68,10 @@ class CategoryDetailsScreenMobile extends GetView<CategoryDetailsController> {
                               TextWidget(
                                 'View all',
                                 onTap: () {
-                                  Get.toNamed(Routes.doctorDetailsScreen);
+                                  Get.dialog(
+                                    CategoryDialog(),
+                                    barrierDismissible: true,
+                                  );
                                 },
                                 color: CustomColors.blackColor.withOpacity(0.7),
                                 fontWeight: FontWeight.w600,

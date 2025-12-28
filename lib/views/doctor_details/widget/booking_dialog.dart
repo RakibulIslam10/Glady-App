@@ -113,72 +113,86 @@ class BookingDialog extends GetView<DoctorDetailsController> {
                         },
                       ),
 
-                      if (controller.showTimeSlots.value) ...[
-                        Space.height.v15,
-                        TextWidget(
-                          'Select Date',
-                          fontSize: Dimensions.titleLarge * 0.8,
-                        ),
-                        Space.height.v10,
-                        GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                childAspectRatio: 2.2,
-                                crossAxisSpacing: 12,
-                                mainAxisSpacing: 12,
-                              ),
-                          itemCount: controller.timeList.length,
-                          itemBuilder: (context, index) {
-                            final time = controller.timeList[index];
+                      AnimatedSize(
+                        duration: Duration(milliseconds: 300),
+                        child: controller.showTimeSlots.value
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Space.height.v15,
+                                  TextWidget(
+                                    'Select Date',
+                                    fontSize: Dimensions.titleLarge * 0.8,
+                                  ),
+                                  Space.height.v10,
+                                  GridView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 3,
+                                          childAspectRatio: 2.2,
+                                          crossAxisSpacing: 12,
+                                          mainAxisSpacing: 12,
+                                        ),
+                                    itemCount: controller.timeList.length,
+                                    itemBuilder: (context, index) {
+                                      final time = controller.timeList[index];
 
-                            return InkWell(
-                              onTap: () {
-                                controller.selectedTimeIndex.value = index;
-                                controller.selectedTime.value = time;
-                                print(controller.selectedTime.value);
-                              },
-                              borderRadius: BorderRadius.circular(
-                                Dimensions.radius,
-                              ),
-                              child: Obx(
-                                () => Container(
-                                  decoration: BoxDecoration(
-                                    color:
-                                        controller.selectedTimeIndex.value ==
-                                            index
-                                        ? CustomColors.primary
-                                        : Color(0xFFF5F5F5),
-                                    borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(
-                                      color: Colors.transparent,
-                                      width: 2,
-                                    ),
+                                      return InkWell(
+                                        onTap: () {
+                                          controller.selectedTimeIndex.value =
+                                              index;
+                                          controller.selectedTime.value = time;
+                                          print(controller.selectedTime.value);
+                                        },
+                                        borderRadius: BorderRadius.circular(
+                                          Dimensions.radius,
+                                        ),
+                                        child: Obx(
+                                          () => Container(
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  controller
+                                                          .selectedTimeIndex
+                                                          .value ==
+                                                      index
+                                                  ? CustomColors.primary
+                                                  : Color(0xFFF5F5F5),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              border: Border.all(
+                                                color: Colors.transparent,
+                                                width: 2,
+                                              ),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                time,
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w500,
+                                                  color:
+                                                      controller
+                                                              .selectedTimeIndex
+                                                              .value ==
+                                                          index
+                                                      ? Colors.white
+                                                      : CustomColors.blackColor,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
-                                  child: Center(
-                                    child: Text(
-                                      time,
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                        color:
-                                            controller
-                                                    .selectedTimeIndex
-                                                    .value ==
-                                                index
-                                            ? Colors.white
-                                            : CustomColors.blackColor,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                                ],
+                              )
+                            : SizedBox.shrink(),
+                      ),
                     ],
                   ),
                 ),
