@@ -18,7 +18,21 @@ class ProfileScreenMobile extends GetView<ProfileController> {
               children: List.generate(
                 5,
                 (index) => GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    controller.profileList[index]['onTap'] != null
+                        ? Get.toNamed(controller.profileList[index]['onTap'])
+                        : showModalBottomSheet(
+                            context: context,
+                            builder: (context) => BottomSheetDialogWidget(
+                              title: "Logout",
+                              subTitle: 'Are you sure you want to logout?',
+                              isLoading: false.obs,
+                              action: () {
+                                Get.offAllNamed(Routes.loginScreen);
+                              },
+                            ),
+                          );
+                  },
                   child: Container(
                     margin: EdgeInsetsGeometry.only(
                       bottom: Dimensions.heightSize * 1.5,
@@ -41,7 +55,11 @@ class ProfileScreenMobile extends GetView<ProfileController> {
                           children: [
                             Icon(
                               controller.profileList[index]['icon'],
-                              color: CustomColors.primary,
+                              color:
+                                  controller.profileList[index]['title'] ==
+                                      'Logout'
+                                  ? Colors.red
+                                  : CustomColors.primary,
                             ),
 
                             TextWidget(controller.profileList[index]['title']),
