@@ -1,16 +1,19 @@
 import '../utils/basic_import.dart';
 
+
 class ConfirmationWidget extends StatelessWidget {
-  final String iconPath;
+  final String? iconPath;
+  final Widget? icon;
   final String title;
   final String subtitle;
   final TextStyle? titleStyle;
   final TextStyle? subtitleStyle;
-  final void Function()? onTap;
+  final VoidCallback? onTap;
 
   const ConfirmationWidget({
     super.key,
-    required this.iconPath,
+    this.iconPath,
+    this.icon,
     required this.title,
     required this.subtitle,
     this.titleStyle,
@@ -22,12 +25,16 @@ class ConfirmationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        crossAxisAlignment: crossCenter,
         mainAxisAlignment: mainCenter,
+        crossAxisAlignment: crossCenter,
         children: [
-          SvgPicture.asset(iconPath),
+          if (icon != null)
+            icon!
+          else if (iconPath != null)
+            SvgPicture.asset(iconPath!),
+
           TextWidget(
-            padding: EdgeInsetsGeometry.only(
+            padding: EdgeInsets.only(
               top: Dimensions.heightSize * 2,
               bottom: Dimensions.heightSize,
             ),
@@ -35,14 +42,18 @@ class ConfirmationWidget extends StatelessWidget {
             fontWeight: titleStyle?.fontWeight ?? FontWeight.bold,
             fontSize: titleStyle?.fontSize ?? Dimensions.titleMedium * 1.2,
             color: titleStyle?.color,
-          ),
-          TextWidget(
             textAlign: TextAlign.center,
+          ),
+
+          TextWidget(
             subtitle,
+            textAlign: TextAlign.center,
             color: subtitleStyle?.color ?? CustomColors.grayShade,
             fontSize: subtitleStyle?.fontSize ?? Dimensions.titleSmall,
             maxLines: 2,
           ),
+
+          Space.height.v30,
 
           PrimaryButtonWidget(
             padding: EdgeInsets.symmetric(
@@ -50,7 +61,8 @@ class ConfirmationWidget extends StatelessWidget {
               vertical: Dimensions.verticalSize,
             ),
             title: "Okay",
-            onPressed: onTap ?? () => onTap ?? Get.offAllNamed(Routes.navigationScreen),
+            onPressed: onTap ??
+                    () => Get.offAllNamed(Routes.navigationScreen),
           ),
         ],
       ),

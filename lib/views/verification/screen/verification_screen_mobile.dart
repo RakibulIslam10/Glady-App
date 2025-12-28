@@ -50,12 +50,17 @@ class VerificationScreenMobile extends GetView<VerificationController> {
 
             PrimaryButtonWidget(
               title: 'Verify',
-              onPressed: () => Get.offAllNamed(Routes.navigationScreen),
+              onPressed: () {
+                if (AppStorage.isUser == 'USER') {
+                  print('USER');
+                  Get.offAllNamed(Routes.navigationScreen);
+                } else {
+                  Get.toNamed(Routes.aditionalScreen);
+                }
+              },
             ),
             Space.height.v15,
-          TimerWidget(onResendCode: () {
-
-          },)
+            TimerWidget(onResendCode: () {}),
           ],
         ),
       ),

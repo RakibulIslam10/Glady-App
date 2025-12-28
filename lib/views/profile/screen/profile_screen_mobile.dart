@@ -29,6 +29,7 @@ class ProfileScreenMobile extends GetView<ProfileController> {
                               isLoading: false.obs,
                               action: () {
                                 Get.offAllNamed(Routes.loginScreen);
+                                AppStorage.clear();
                               },
                             ),
                           );

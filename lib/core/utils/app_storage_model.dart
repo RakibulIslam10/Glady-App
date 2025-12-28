@@ -2,7 +2,7 @@ class AppStorageModel {
   final String token;
   final String temporaryToken;
   final String userId;
-  final bool isUser;
+  final String isUser;
   final String mobileCode;
   final bool onboardSave;
   final String waitTime;

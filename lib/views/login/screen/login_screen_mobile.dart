@@ -5,6 +5,8 @@ class LoginScreenMobile extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    log('══════════════════════════════════════════════════════════════════════════════');
+    log('═══════════════════ Is User = ${AppStorage.isUser} ════════════════════════');
     return Scaffold(
       appBar: CommonAppBar(title: "", isBack: false),
       body: SafeArea(
