@@ -68,8 +68,9 @@ class DoctorCardWidget extends StatelessWidget {
             width: double.infinity,
             fit: BoxFit.fitWidth,
             errorWidget: (_, __, ___) => Icon(
-              Icons.image_not_supported_outlined,
-              color: CustomColors.rejected,
+              Icons.image,
+              color: Colors.grey.shade400,
+              size: Dimensions.iconSizeLarge * 2.5,
             ),
           ),
 

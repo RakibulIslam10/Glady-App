@@ -25,7 +25,7 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
             Space.height.v10,
             DoctorDetailsCard(
               imageUrl:
-                  'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/doctorpp.png',
+                  'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
               name: 'Dr. Elowyn Starcrest',
               specialty: 'Dentist',
               clinicName: 'Central Dental Care',

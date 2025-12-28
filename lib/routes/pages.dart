@@ -4,6 +4,21 @@ class RoutePageList {
   static var list = [
     //Page Route List
     GetPage(
+      name: Routes.videoCallScreen,
+      page: () => const VideoCallScreen(),
+      binding: VideoCallBinding(),
+    ),
+    GetPage(
+      name: Routes.inboxScreen,
+      page: () => const InboxScreen(),
+      binding: InboxBinding(),
+    ),
+    GetPage(
+      name: Routes.appointmentDetailsScreen,
+      page: () => const AppointmentDetailsScreen(),
+      binding: AppointmentDetailsBinding(),
+    ),
+    GetPage(
       name: Routes.categoryDetailsScreen,
       page: () => const CategoryDetailsScreen(),
       binding: CategoryDetailsBinding(),

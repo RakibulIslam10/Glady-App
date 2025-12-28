@@ -35,7 +35,7 @@ class CategoryDetailsScreenMobile extends GetView<CategoryDetailsController> {
                 children: [
                   DoctorDetailsCard(
                     imageUrl:
-                        'https://i.pinimg.com/736x/2a/12/5c/2a125c7aa0d47538b857291fa0901286.jpg',
+                        'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
                     name: 'Dr. Elowyn Starcrest',
                     specialty: 'Dentist',
                     clinicName: 'Central Dental Care',

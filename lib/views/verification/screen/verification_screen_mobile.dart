@@ -54,7 +54,7 @@ class VerificationScreenMobile extends GetView<VerificationController> {
             ),
             Space.height.v15,
           TimerWidget(onResendCode: () {
-            
+
           },)
           ],
         ),

@@ -39,8 +39,11 @@ class CategorySectionWidget extends GetView<HomeController> {
                       'https://www.iconpacks.net/icons/2/free-medicine-icon-3193-thumb.png',
                   height: 35.h,
                   // color: CustomColors.primary,
-                  errorWidget: (context, url, error) =>
-                      Icon(Icons.error_outline, color: CustomColors.rejected),
+                  errorWidget: (_, __, ___) => Icon(
+                    Icons.image,
+                    color: Colors.grey.shade400,
+                    size: Dimensions.iconSizeLarge * 2.5,
+                  ),
                 ),
 
                 Space.height.v10,

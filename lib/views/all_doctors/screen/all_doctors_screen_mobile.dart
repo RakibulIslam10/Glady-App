@@ -22,7 +22,7 @@ class AllDoctorsScreenMobile extends GetView<AllDoctorsController> {
         itemBuilder: (context, index) {
           return DoctorCardWidget(
             imageUrl:
-                'https://i.pinimg.com/736x/2a/12/5c/2a125c7aa0d47538b857291fa0901286.jpg',
+                'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
             rating: '4.7',
             name: 'Elowyn Starcrest',
             profession: 'Psychologist',

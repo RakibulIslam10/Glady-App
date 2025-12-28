@@ -18,7 +18,7 @@ class HomeDoctorCardWidget extends GetView<HomeController> {
         itemCount: 10,
         itemBuilder: (context, index) => DoctorCardWidget(
           imageUrl:
-              'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/doctorpp.png',
+              'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
           rating: '4.7',
           name: 'Elowyn Starcrest',
           profession: 'Psychologist',
