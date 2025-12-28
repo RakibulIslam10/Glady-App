@@ -10,15 +10,12 @@ import '../model/inbox_args_model.dart';
 
 class InboxController extends GetxController {
   final textController = TextEditingController();
-  final RxBool hasText = false.obs;
   final  scrollController = ScrollController();
   final  args = InboxArgsModel.fromMap(Get.arguments);
 
   final RxBool shouldAutoScroll = true.obs;
   final RxBool isLoading = false.obs;
   final int maxImageCount = 5;
-  RxBool isBlock = false.obs;
-  RxBool isBlockedByMe = false.obs;
 
   RxList<ChatMessageModel> messagesList = <ChatMessageModel>[].obs;
   final RxList<XFile> multipleImages = <XFile>[].obs;
@@ -27,12 +24,6 @@ class InboxController extends GetxController {
   late IO.Socket socket;
   final String myId = AppStorage.userId;
 
-  final isEmojiOpen = false.obs;
-
-  void toggleEmoji(BuildContext context) {
-    FocusScope.of(context).unfocus(); // keyboard hide
-    isEmojiOpen.toggle();
-  }
 
   void onEmojiSelect(String emoji) {
     textController.text += emoji;
@@ -45,9 +36,6 @@ class InboxController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    textController.addListener(() {
-      hasText.value = textController.text.trim().isNotEmpty;
-    });
     _initSocket();
     if (args.receiverId.isNotEmpty) getOldMessages();
   }
@@ -290,23 +278,6 @@ class InboxController extends GetxController {
       return [];
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   void getOldMessages ({bool isPagination =  false}){}
