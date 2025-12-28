@@ -3,6 +3,7 @@ class FindController extends GetxController {
 
 
 
+  final recentSearches =[].obs;
 
 
 
