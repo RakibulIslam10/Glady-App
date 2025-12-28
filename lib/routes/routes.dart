@@ -31,6 +31,7 @@ import '../bind/splash_binding.dart';
 import '../bind/support_binding.dart';
 import '../bind/terms_binding.dart';
 import '../bind/tips_binding.dart';
+import '../bind/update_profile_binding.dart';
 import '../bind/upload_doc_binding.dart';
 import '../bind/verification_binding.dart';
 import '../bind/video_call_binding.dart';
@@ -66,6 +67,7 @@ import '../views/splash/screen/splash_screen.dart';
 import '../views/support/screen/support_screen.dart';
 import '../views/terms/screen/terms_screen.dart';
 import '../views/tips/screen/tips_screen.dart';
+import '../views/update_profile/screen/update_profile_screen.dart';
 import '../views/upload_doc/screen/upload_doc_screen.dart';
 import '../views/verification/screen/verification_screen.dart';
 import '../views/video_call/screen/video_call_screen.dart';
@@ -74,6 +76,8 @@ part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
+static const confirmationScreen = '/confirmationScreen';
+static const updateProfileScreen = '/update_profileScreen';
 static const bankDetailsScreen = '/bank_detailsScreen';
 static const changePasswordScreen = '/change_passwordScreen';
 static const policyScreen = '/policyScreen';

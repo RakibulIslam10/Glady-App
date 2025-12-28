@@ -48,6 +48,9 @@ class $AssetsDummyGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/Vector.svg
+  String get vector => 'assets/icons/Vector.svg';
+
   /// File path: assets/icons/appoinment.svg
   String get appoinment => 'assets/icons/appoinment.svg';
 
@@ -71,6 +74,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<String> get values => [
+    vector,
     appoinment,
     empty,
     find,

@@ -1,4 +1,5 @@
 import '../utils/basic_import.dart';
+
 class ConfirmationWidget extends StatelessWidget {
   final String iconPath;
   final String title;
@@ -17,8 +18,8 @@ class ConfirmationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
+    return Scaffold(
+      body: Column(
         crossAxisAlignment: crossCenter,
         mainAxisAlignment: mainCenter,
         children: [
@@ -39,6 +40,15 @@ class ConfirmationWidget extends StatelessWidget {
             color: subtitleStyle?.color ?? CustomColors.grayShade,
             fontSize: subtitleStyle?.fontSize ?? Dimensions.titleSmall,
             maxLines: 2,
+          ),
+
+          PrimaryButtonWidget(
+            padding: EdgeInsets.symmetric(
+              horizontal: Dimensions.defaultHorizontalSize,
+              vertical: Dimensions.verticalSize,
+            ),
+            title: "Okay",
+            onPressed: () => Get.offAllNamed(Routes.navigationScreen),
           ),
         ],
       ),

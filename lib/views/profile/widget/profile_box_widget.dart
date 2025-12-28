@@ -118,21 +118,26 @@ class ProfileBoxWidget extends StatelessWidget {
                 mainAxisAlignment: mainSpaceBet,
                 children: [
                   Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: CustomColors.primary,
+                    child: GestureDetector(
+                      onTap: () => Get.toNamed(Routes.updateProfileScreen),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: CustomColors.primary,
 
-                        borderRadius: BorderRadius.circular(Dimensions.radius),
-                      ),
+                          borderRadius: BorderRadius.circular(
+                            Dimensions.radius,
+                          ),
+                        ),
 
-                      padding: EdgeInsetsGeometry.symmetric(
-                        horizontal: Dimensions.defaultHorizontalSize * 2,
-                        vertical: Dimensions.verticalSize * 0.4,
-                      ),
-                      child: TextWidget(
-                        'Edit Profile',
-                        color: CustomColors.whiteColor,
+                        padding: EdgeInsetsGeometry.symmetric(
+                          horizontal: Dimensions.defaultHorizontalSize * 2,
+                          vertical: Dimensions.verticalSize * 0.4,
+                        ),
+                        child: TextWidget(
+                          'Edit Profile',
+                          color: CustomColors.whiteColor,
+                        ),
                       ),
                     ),
                   ),

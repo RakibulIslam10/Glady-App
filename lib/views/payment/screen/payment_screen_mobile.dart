@@ -8,7 +8,16 @@ class PaymentScreenMobile extends GetView<PaymentController> {
     return Scaffold(
       bottomNavigationBar: PrimaryButtonWidget(
         title: 'Make payment',
-        onPressed: () {},
+        onPressed: () {
+          Get.offAll(
+            ConfirmationWidget(
+              iconPath: Assets.icons.vector,
+              title: "payment successful",
+              subtitle:
+                  'About this payment information has been sent your email\n Waiting for doctor Confirmation',
+            ),
+          );
+        },
 
         padding: EdgeInsets.symmetric(
           horizontal: Dimensions.defaultHorizontalSize,
