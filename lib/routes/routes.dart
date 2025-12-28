@@ -9,6 +9,7 @@ import '../bind/doctor_details_binding.dart';
 import '../bind/find_binding.dart';
 import '../bind/forgot_password_binding.dart';
 import '../bind/home_binding.dart';
+import '../bind/liked_tips_binding.dart';
 import '../bind/login_binding.dart';
 import '../bind/navigation_binding.dart';
 import '../bind/notification_binding.dart';
@@ -33,6 +34,7 @@ import '../views/doctor_details/screen/doctor_details_screen.dart';
 import '../views/find/screen/find_screen.dart';
 import '../views/forgot_password/screen/forgot_password_screen.dart';
 import '../views/home/screen/home_screen.dart';
+import '../views/liked_tips/screen/liked_tips_screen.dart';
 import '../views/login/screen/login_screen.dart';
 import '../views/navigation/screen/navigation_screen.dart';
 import '../views/notification/screen/notification_screen.dart';
@@ -52,6 +54,7 @@ part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
+static const likedTipsScreen = '/liked_tipsScreen';
 static const paymentScreen = '/paymentScreen';
 static const bookInfoScreen = '/book_infoScreen';
 static const allReviewScreen = '/all_reviewScreen';

@@ -10,7 +10,7 @@ class TipsScreenMobile extends GetView<TipsController> {
         title: "Daily Health Tips",
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => Get.toNamed(Routes.likedTipsScreen),
             icon: Icon(Icons.favorite_border, color: CustomColors.rejected),
           ),
         ],
