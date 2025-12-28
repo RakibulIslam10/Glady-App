@@ -1,3 +1,6 @@
+import 'package:glady/core/widgets/profile_avater_widget.dart';
+import 'package:glady/widgets/custom_logo_widget.dart';
+
 import '../../../core/utils/basic_import.dart';
 import '../../../core/widgets/common_app_bar.dart';
 import '../controller/profile_controller.dart';

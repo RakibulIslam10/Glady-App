@@ -12,6 +12,8 @@ class CustomColors {
   static Color tertiary = Color(0xffF5F5F5);
   static Color background = Color(0xffF7F8F8);
   static Color disableColor = Color(0xffBCBCBC);
+  static Color borderColor = Color(0xffE8E8E8);
+  static Color offWhite = Color(0xffF8F8F8);
 
   //Dark Color
   static Color primaryDark = HexColor('#007bff');
