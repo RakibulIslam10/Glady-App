@@ -1,51 +1,156 @@
 import '../../../core/utils/basic_import.dart';
 import 'dart:async';
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+
 
 class VideoCallController extends GetxController {
+  // Agora Configuration
+  static const String appId = "296efbe76c6947018979a48113a46c7a";
+  final String channelName = "test_channel";
+  final String token = "007eJxTYGg6vXOV/m7Hz6JPHnsvDbqpZKp/Nu9X3/VNQrfydCYtzIpSYDCyNEtNS0o1N0s2szQxNzC0sDS3TDSxMDQ0TjQxSzZPnDw3MLMhkJFB36GNhZEBAkF8HoaS1OKS+OSMxLy81BwGBgDCGCMr";
+
+
+  // Agora Engine
+  late RtcEngine agoraEngine;
+
   // Observable states
   final RxBool isMuted = false.obs;
   final RxBool isCameraFlipped = false.obs;
   final RxBool isConnected = false.obs;
   final RxString callDuration = '00:00'.obs;
+  final RxBool isLocalUserJoined = false.obs;
+  final RxBool isRemoteUserJoined = false.obs;
 
-  Rx<Widget?> localVideoWidget = Rx<Widget?>(null);
-  Rx<Widget?> remoteVideoWidget = Rx<Widget?>(null);
+  // User IDs
+  int? localUid;
+  int? remoteUid;
 
+  // Timer for call duration
   Timer? _durationTimer;
   int _seconds = 0;
 
   @override
   void onInit() {
     super.onInit();
-    _initializeCall();
+    _initializeAgora();
   }
 
   @override
   void onClose() {
     _durationTimer?.cancel();
-    _cleanupCall();
+    _leaveChannel();
+    agoraEngine.release();
     super.onClose();
   }
 
-  /// Initialize video call
-  Future<void> _initializeCall() async {
+  /// Initialize Agora Engine
+  Future<void> _initializeAgora() async {
     try {
-      // TODO: Initialize your video call SDK here
-      // Example: await videoCallSDK.initialize();
+      // Request permissions
+      await _requestPermissions();
 
-      isConnected.value = false;
+      // Create Agora Engine
+      agoraEngine = createAgoraRtcEngine();
 
-      // TODO: Setup local and remote video streams
-      // localVideoWidget.value = videoCallSDK.getLocalVideoWidget();
-      // remoteVideoWidget.value = videoCallSDK.getRemoteVideoWidget();
+      // Initialize
+      await agoraEngine.initialize(const RtcEngineContext(
+        appId: appId,
+        channelProfile: ChannelProfileType.channelProfileCommunication,
+      ));
 
-      // Simulate connection (remove this in production)
-      await Future.delayed(Duration(seconds: 2));
-      isConnected.value = true;
+      // Setup event handlers
+      _setupEventHandlers();
 
-      _startDurationTimer();
+      // Enable video
+      await agoraEngine.enableVideo();
+      await agoraEngine.startPreview();
+
+      // Join channel
+      await _joinChannel();
+
     } catch (e) {
-      print('Error initializing call: $e');
+      print('Error initializing Agora: $e');
+      Get.snackbar('Error', 'Failed to initialize video call');
+    }
+  }
+
+  /// Request Camera and Microphone permissions
+  Future<void> _requestPermissions() async {
+    await [Permission.camera, Permission.microphone].request();
+  }
+
+  /// Setup Agora Event Handlers
+  void _setupEventHandlers() {
+    agoraEngine.registerEventHandler(
+      RtcEngineEventHandler(
+        // Local user joined
+        onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
+          print('Local user joined: ${connection.localUid}');
+          localUid = connection.localUid;
+          isLocalUserJoined.value = true;
+          isConnected.value = true;
+          _startDurationTimer();
+        },
+
+        // Remote user joined
+        onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
+          print('Remote user joined: $remoteUid');
+          this.remoteUid = remoteUid;
+          isRemoteUserJoined.value = true;
+        },
+
+        // Remote user left
+        onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
+          print('Remote user left: $remoteUid');
+          this.remoteUid = null;
+          isRemoteUserJoined.value = false;
+        },
+
+        // Network quality
+        onNetworkQuality: (RtcConnection connection, int remoteUid,
+            QualityType txQuality, QualityType rxQuality) {
+          // Handle network quality
+          print('Network quality - TX: $txQuality, RX: $rxQuality');
+        },
+
+        // Error handling
+        onError: (ErrorCodeType err, String msg) {
+          print('Agora Error: $err - $msg');
+        },
+      ),
+    );
+  }
+
+  /// Join Channel
+  Future<void> _joinChannel() async {
+    try {
+      await agoraEngine.joinChannel(
+        token: token,
+        channelId: channelName,
+        uid: 0, // 0 means auto-generate UID
+        options: const ChannelMediaOptions(
+          channelProfile: ChannelProfileType.channelProfileCommunication,
+          clientRoleType: ClientRoleType.clientRoleBroadcaster,
+          publishCameraTrack: true,
+          publishMicrophoneTrack: true,
+        ),
+      );
+    } catch (e) {
+      print('Error joining channel: $e');
+    }
+  }
+
+  /// Leave Channel
+  Future<void> _leaveChannel() async {
+    try {
+      await agoraEngine.leaveChannel();
+      isLocalUserJoined.value = false;
+      isRemoteUserJoined.value = false;
+      isConnected.value = false;
+    } catch (e) {
+      print('Error leaving channel: $e');
     }
   }
 
@@ -61,24 +166,21 @@ class VideoCallController extends GetxController {
   }
 
   /// Toggle camera on/off
-  void toggleCamera() {
+  Future<void> toggleCamera() async {
     try {
-      // TODO: Implement camera toggle logic
-      // await videoCallSDK.toggleCamera();
-
+      bool isEnabled = !isCameraFlipped.value;
+      await agoraEngine.enableLocalVideo(isEnabled);
+      print('Camera ${isEnabled ? 'enabled' : 'disabled'}');
     } catch (e) {
       print('Error toggling camera: $e');
     }
   }
 
   /// Toggle microphone mute/unmute
-  void toggleMute() {
+  Future<void> toggleMute() async {
     try {
       isMuted.value = !isMuted.value;
-
-      // TODO: Implement mute logic with your video call SDK
-      // await videoCallSDK.toggleMute(isMuted.value);
-
+      await agoraEngine.muteLocalAudioStream(isMuted.value);
       print('Microphone ${isMuted.value ? 'muted' : 'unmuted'}');
     } catch (e) {
       print('Error toggling mute: $e');
@@ -86,13 +188,10 @@ class VideoCallController extends GetxController {
   }
 
   /// Flip camera (front/back)
-  void flipCamera() {
+  Future<void> flipCamera() async {
     try {
+      await agoraEngine.switchCamera();
       isCameraFlipped.value = !isCameraFlipped.value;
-
-      // TODO: Implement camera flip logic
-      // await videoCallSDK.switchCamera();
-
       print('Camera flipped to ${isCameraFlipped.value ? 'back' : 'front'}');
     } catch (e) {
       print('Error flipping camera: $e');
@@ -103,51 +202,11 @@ class VideoCallController extends GetxController {
   Future<void> endCall() async {
     try {
       _durationTimer?.cancel();
-
-      // TODO: Implement end call logic
-      // await videoCallSDK.endCall();
-
-      _cleanupCall();
-
-      // Navigate back or close the screen
+      await _leaveChannel();
       Get.back();
-
       print('Call ended');
     } catch (e) {
       print('Error ending call: $e');
     }
-  }
-
-  /// Cleanup call resources
-  void _cleanupCall() {
-    // TODO: Cleanup video call SDK resources
-    // videoCallSDK.dispose();
-
-    localVideoWidget.value = null;
-    remoteVideoWidget.value = null;
-    isConnected.value = false;
-    isMuted.value = false;
-    isCameraFlipped.value = false;
-    _seconds = 0;
-    callDuration.value = '00:00';
-  }
-
-  /// Handle network quality changes
-  void onNetworkQualityChanged(int quality) {
-    // quality: 0-5 (0 = disconnected, 5 = excellent)
-    // You can show network quality indicator based on this
-    print('Network quality: $quality');
-  }
-
-  /// Handle remote user joined
-  void onRemoteUserJoined() {
-    isConnected.value = true;
-    print('Remote user joined');
-  }
-
-  /// Handle remote user left
-  void onRemoteUserLeft() {
-    print('Remote user left');
-    // You might want to show a message or end the call
   }
 }

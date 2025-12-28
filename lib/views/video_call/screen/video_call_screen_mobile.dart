@@ -22,15 +22,14 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
               backgroundColor: Colors.white.withOpacity(0.9),
             ),
             Obx(
-              () => _buildControlButton(
+                  () => _buildControlButton(
                 icon: controller.isMuted.value ? Icons.mic_off : Icons.mic,
                 onTap: controller.toggleMute,
                 backgroundColor: Colors.white.withOpacity(0.9),
               ),
             ),
-
             Obx(
-              () => _buildControlButton(
+                  () => _buildControlButton(
                 icon: controller.isCameraFlipped.value
                     ? Icons.flip_camera_ios
                     : Icons.flip_camera_android,
@@ -38,7 +37,6 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
                 backgroundColor: Colors.white.withOpacity(0.9),
               ),
             ),
-
             _buildControlButton(
               icon: Icons.call_end,
               onTap: controller.endCall,
@@ -50,54 +48,83 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
       ),
       body: Stack(
         children: [
+          // Remote video view (full screen)
           Positioned.fill(
             child: Obx(
-              () => Container(
+                  () => controller.isRemoteUserJoined.value && controller.remoteUid != null
+                  ? AgoraVideoView(
+                controller: VideoViewController.remote(
+                  rtcEngine: controller.agoraEngine,
+                  canvas: VideoCanvas(uid: controller.remoteUid),
+                  connection: RtcConnection(channelId: controller.channelName),
+                ),
+              )
+                  : Container(
                 color: Colors.grey.shade200,
-                child:
-                    controller.remoteVideoWidget.value ??
-                    Center(
-                      child: CircularProgressIndicator(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(
                         color: CustomColors.primary,
                       ),
-                    ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 60,
-            right: 16,
-            child: Obx(
-              () => Container(
-                width: 120.w,
-                height: 160.h,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(Dimensions.radius),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(Dimensions.radius),
-                  child:
-                      controller.localVideoWidget.value ??
-                      Center(
-                        child: Icon(
-                          Icons.person,
-                          size: 40.h,
-                          color: Colors.grey,
+                      SizedBox(height: 16.h),
+                      Text(
+                        'Waiting for other user...',
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: Colors.grey.shade600,
                         ),
                       ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
 
+          // Local video preview (Picture in Picture)
+          Positioned(
+            top: 60,
+            right: 16,
+            child: Obx(
+                  () => controller.isLocalUserJoined.value
+                  ? Container(
+                width: 120.w,
+                height: 160.h,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(Dimensions.radius),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 8,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(Dimensions.radius),
+                  child: AgoraVideoView(
+                    controller: VideoViewController(
+                      rtcEngine: controller.agoraEngine,
+                      canvas: const VideoCanvas(uid: 0),
+                    ),
+                  ),
+                ),
+              )
+                  : SizedBox.shrink(),
+            ),
+          ),
+
+          // Call duration timer
           Positioned(
             top: 70,
             left: 0,
             right: 0,
             child: Center(
               child: Obx(
-                () => Container(
+                    () => Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: 16.w,
                     vertical: 8.h,
@@ -132,7 +159,7 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
                   ),
                   decoration: BoxDecoration(
                     color: CustomColors.primary.withOpacity(0.9),
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(16.r),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -143,16 +170,16 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
                         child: CircularProgressIndicator(
                           strokeWidth: 2.w,
                           valueColor: AlwaysStoppedAnimation<Color>(
-                            CustomColors.primary,
+                            Colors.white,
                           ),
                         ),
                       ),
-                      SizedBox(width: 8),
+                      SizedBox(width: 8.w),
                       Text(
                         'Connecting...',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -182,6 +209,13 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
         decoration: BoxDecoration(
           color: backgroundColor,
           shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 8,
+              offset: Offset(0, 2),
+            ),
+          ],
         ),
         child: Icon(icon, color: iconColor ?? Colors.black87, size: 28.h),
       ),
