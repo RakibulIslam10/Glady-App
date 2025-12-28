@@ -11,7 +11,7 @@ class CategoryDetailsScreenMobile extends GetView<CategoryDetailsController> {
         child: ListView.builder(
           padding: EdgeInsetsGeometry.symmetric(
             horizontal: Dimensions.defaultHorizontalSize,
-            vertical: Dimensions.verticalSize,
+            vertical: Dimensions.verticalSize * 0.5,
           ),
           itemCount: 10,
           addRepaintBoundaries: true,

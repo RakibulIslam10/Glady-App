@@ -22,6 +22,7 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
           physics: BouncingScrollPhysics(),
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
+            Space.height.v10,
             DoctorDetailsCard(
               imageUrl:
                   'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/doctorpp.png',

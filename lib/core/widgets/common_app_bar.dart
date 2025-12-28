@@ -35,6 +35,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: isBack
           ? InkWell(
               borderRadius: BorderRadius.circular(8),
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              hoverColor: Colors.transparent,
               onTap: () => Get.back(),
               child: Container(
                 margin: EdgeInsets.only(left: Dimensions.widthSize),
