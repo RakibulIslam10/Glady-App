@@ -1,4 +1,5 @@
 import 'package:glady/core/widgets/profile_avater_widget.dart';
+import 'package:glady/views/profile/widget/profile_box_widget.dart';
 import 'package:glady/widgets/custom_logo_widget.dart';
 
 import '../../../core/utils/basic_import.dart';
