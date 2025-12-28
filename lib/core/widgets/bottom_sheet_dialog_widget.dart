@@ -7,6 +7,7 @@ class BottomSheetDialogWidget extends StatelessWidget {
   final RxBool isLoading;
   final void Function() action;
   final bool? isInputField;
+  final Color ? titleColor;
   final TextEditingController? inputController;
 
   const BottomSheetDialogWidget({
@@ -18,7 +19,7 @@ class BottomSheetDialogWidget extends StatelessWidget {
     required this.isLoading,
     required this.action,
     this.isInputField = false,
-    this.inputController,
+    this.inputController, this.titleColor,
   });
 
   @override
@@ -52,6 +53,7 @@ class BottomSheetDialogWidget extends StatelessWidget {
           Space.height.v20,
           TextWidget(
             title,
+            color: titleColor ?? CustomColors.blackColor,
             fontWeight: FontWeight.bold,
             fontSize: Dimensions.titleMedium * 1.1,
             padding: EdgeInsets.only(bottom: Dimensions.verticalSize * 0.15),

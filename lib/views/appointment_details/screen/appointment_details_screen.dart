@@ -1,6 +1,8 @@
 import '../../../core/utils/basic_import.dart';
+import '../../../core/widgets/bottom_sheet_dialog_widget.dart';
 import '../../../core/widgets/common_app_bar.dart';
 import '../../../widgets/doctor_details_card.dart';
+import '../../../widgets/info_pair_row_widget.dart';
 import '../controller/appointment_details_controller.dart';
 
 part 'appointment_details_screen_mobile.dart';
