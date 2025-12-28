@@ -6,6 +6,48 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+      bottomNavigationBar: SafeArea(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildControlButton(
+              icon: Icons.mark_chat_read_outlined,
+              onTap: () => Get.toNamed(Routes.inboxScreen),
+              backgroundColor: Colors.white.withOpacity(0.9),
+            ),
+            _buildControlButton(
+              icon: Icons.cameraswitch,
+              onTap: controller.toggleCamera,
+              backgroundColor: Colors.white.withOpacity(0.9),
+            ),
+            Obx(
+              () => _buildControlButton(
+                icon: controller.isMuted.value ? Icons.mic_off : Icons.mic,
+                onTap: controller.toggleMute,
+                backgroundColor: Colors.white.withOpacity(0.9),
+              ),
+            ),
+
+            Obx(
+              () => _buildControlButton(
+                icon: controller.isCameraFlipped.value
+                    ? Icons.flip_camera_ios
+                    : Icons.flip_camera_android,
+                onTap: controller.flipCamera,
+                backgroundColor: Colors.white.withOpacity(0.9),
+              ),
+            ),
+
+            _buildControlButton(
+              icon: Icons.call_end,
+              onTap: controller.endCall,
+              backgroundColor: Colors.red,
+              iconColor: Colors.white,
+            ),
+          ],
+        ),
+      ),
       body: Stack(
         children: [
           Positioned.fill(
@@ -22,14 +64,13 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
               ),
             ),
           ),
-
           Positioned(
             top: 60,
             right: 16,
             child: Obx(
               () => Container(
-                width: 120,
-                height: 160,
+                width: 120.w,
+                height: 160.h,
                 decoration: BoxDecoration(
                   color: Colors.grey.shade300,
                   borderRadius: BorderRadius.circular(Dimensions.radius),
@@ -75,46 +116,6 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
                   ),
                 ),
               ),
-            ),
-          ),
-
-          Positioned(
-            bottom: 40,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildControlButton(
-                  icon: Icons.cameraswitch,
-                  onTap: controller.toggleCamera,
-                  backgroundColor: Colors.white.withOpacity(0.9),
-                ),
-                Obx(
-                  () => _buildControlButton(
-                    icon: controller.isMuted.value ? Icons.mic_off : Icons.mic,
-                    onTap: controller.toggleMute,
-                    backgroundColor: Colors.white.withOpacity(0.9),
-                  ),
-                ),
-
-                Obx(
-                  () => _buildControlButton(
-                    icon: controller.isCameraFlipped.value
-                        ? Icons.flip_camera_ios
-                        : Icons.flip_camera_android,
-                    onTap: controller.flipCamera,
-                    backgroundColor: Colors.white.withOpacity(0.9),
-                  ),
-                ),
-
-                _buildControlButton(
-                  icon: Icons.call_end,
-                  onTap: controller.endCall,
-                  backgroundColor: Colors.red,
-                  iconColor: Colors.white,
-                ),
-              ],
             ),
           ),
 
