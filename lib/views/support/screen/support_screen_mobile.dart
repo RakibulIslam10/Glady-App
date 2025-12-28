@@ -36,7 +36,16 @@ class SupportScreenMobile extends GetView<SupportController> {
               () => PrimaryButtonWidget(
                 isLoading: controller.isLoading.value,
                 title: "Submit",
-                onPressed: () {},
+                onPressed: () {
+                  Get.offAll(
+                    ConfirmationWidget(
+                      iconPath: Assets.icons.vector,
+                      title: 'submit successfully',
+                      subtitle: 'your message has been sent successfully',
+                      onTap: () => Get.offAllNamed(Routes.navigationScreen),
+                    ),
+                  );
+                },
               ),
             ),
           ],

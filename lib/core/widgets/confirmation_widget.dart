@@ -6,6 +6,7 @@ class ConfirmationWidget extends StatelessWidget {
   final String subtitle;
   final TextStyle? titleStyle;
   final TextStyle? subtitleStyle;
+  final void Function()? onTap;
 
   const ConfirmationWidget({
     super.key,
@@ -14,6 +15,7 @@ class ConfirmationWidget extends StatelessWidget {
     required this.subtitle,
     this.titleStyle,
     this.subtitleStyle,
+    this.onTap,
   });
 
   @override
@@ -48,7 +50,7 @@ class ConfirmationWidget extends StatelessWidget {
               vertical: Dimensions.verticalSize,
             ),
             title: "Okay",
-            onPressed: () => Get.offAllNamed(Routes.navigationScreen),
+            onPressed: onTap ?? () => onTap ?? Get.offAllNamed(Routes.navigationScreen),
           ),
         ],
       ),
