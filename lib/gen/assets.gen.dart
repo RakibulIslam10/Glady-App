@@ -54,6 +54,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/appoinment.svg
   String get appoinment => 'assets/icons/appoinment.svg';
 
+  /// File path: assets/icons/buble.svg
+  String get buble => 'assets/icons/buble.svg';
+
+  /// File path: assets/icons/chat.png
+  AssetGenImage get chat => const AssetGenImage('assets/icons/chat.png');
+
   /// File path: assets/icons/empty.svg
   String get empty => 'assets/icons/empty.svg';
 
@@ -69,18 +75,28 @@ class $AssetsIconsGen {
   /// File path: assets/icons/reject.svg
   String get reject => 'assets/icons/reject.svg';
 
+  /// File path: assets/icons/reques.png
+  AssetGenImage get reques => const AssetGenImage('assets/icons/reques.png');
+
+  /// File path: assets/icons/sr.svg
+  String get sr => 'assets/icons/sr.svg';
+
   /// File path: assets/icons/success.svg
   String get success => 'assets/icons/success.svg';
 
   /// List of all assets
-  List<String> get values => [
+  List<dynamic> get values => [
     vector,
     appoinment,
+    buble,
+    chat,
     empty,
     find,
     hh,
     profile,
     reject,
+    reques,
+    sr,
     success,
   ];
 }

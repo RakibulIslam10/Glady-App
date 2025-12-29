@@ -11,6 +11,7 @@ import '../bind/book_info_binding.dart';
 import '../bind/category_details_binding.dart';
 import '../bind/change_password_binding.dart';
 import '../bind/doctor_details_binding.dart';
+import '../bind/doctor_home_binding.dart';
 import '../bind/doctor_register_binding.dart';
 import '../bind/find_binding.dart';
 import '../bind/forgot_password_binding.dart';
@@ -56,6 +57,7 @@ import '../views/bank_details/screen/bank_details_screen.dart';
 import '../views/book_info/screen/book_info_screen.dart';
 import '../views/category_details/screen/category_details_screen.dart';
 import '../views/doctor_details/screen/doctor_details_screen.dart';
+import '../views/doctor_home/screen/doctor_home_screen.dart';
 import '../views/find/screen/find_screen.dart';
 import '../views/home/screen/home_screen.dart';
 import '../views/inbox/screen/inbox_screen.dart';
@@ -81,6 +83,7 @@ part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
+static const doctor_homeScreen = '/doctor_homeScreen';
   static const aditionalScreen = '/aditionalScreen';
   static const doctorRegisterScreen = '/doctor_registerScreen';
   static const confirmationScreen = '/confirmationScreen';

@@ -1,3 +1,6 @@
+import 'package:glady/core/utils/app_storage.dart';
+import 'package:glady/views/doctor_home/screen/doctor_home_screen.dart';
+
 import '../../../core/utils/basic_import.dart';
 import '../../appointment/screen/appointment_screen.dart';
 import '../../find/screen/find_screen.dart';
@@ -8,9 +11,10 @@ class NavigationController extends GetxController {
   RxInt selectedIndex = 0.obs;
 
   List<Widget> bodyScreen = [
-    HomeScreen(),
+    AppStorage.isUser == 'USER' ? HomeScreen() : DoctorHomeScreen(),
     FindScreen(),
     AppointmentScreen(),
+    ProfileScreen(),
     ProfileScreen(),
   ];
 

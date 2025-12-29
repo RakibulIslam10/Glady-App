@@ -5,6 +5,7 @@ class BottomNavWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isUser = AppStorage.isUser == 'USER';
     return BottomAppBar(
       height: 70.h,
       padding: EdgeInsets.zero,
@@ -26,14 +27,42 @@ class BottomNavWidget extends StatelessWidget {
               index: 0,
               svgSize: 21.h,
             ),
-            _BottomBarItem(path: Assets.icons.find, label: '', index: 1),
+
+            // 2. Find/Schedule - Second (index 1)
+            isUser
+                ? _BottomBarItem(
+              path: Assets.icons.find,
+              label: '',
+              index: 1,
+            )
+                : _BottomBarItem(
+              path: Assets.icons.sr,
+              label: '',
+              index: 1,
+            ),
+
+            // 3. Appointment - Center (index 2)
             _BottomBarItem(
               path: Assets.icons.appoinment,
               label: '',
               index: 2,
               isCenter: true,
             ),
-            _BottomBarItem(path: Assets.icons.profile, label: '', index: 3),
+
+            // 4. Message - Only for Doctor (index 3)
+            if (!isUser)
+              _BottomBarItem(
+                path: Assets.icons.buble,
+                label: '',
+                index: 3,
+              ),
+
+            // 5. Profile - Last (index 3 for User, 4 for Doctor)
+            _BottomBarItem(
+              path: Assets.icons.profile,
+              label: '',
+              index: isUser ? 3 : 4,
+            ),
           ],
         ),
       ),
@@ -57,8 +86,6 @@ class _BottomBarItem extends StatelessWidget {
   final int index;
   final double? svgSize;
   final bool isCenter;
-
-
 
   @override
   Widget build(BuildContext context) {

@@ -12,45 +12,54 @@ class AppointmentDetailsScreenMobile
           vertical: Dimensions.verticalSize * 1.25,
           horizontal: Dimensions.defaultHorizontalSize,
         ),
-        child: Row(
+        child: Column(
+          mainAxisSize: mainMin,
           children: [
-            Expanded(
-              child: PrimaryButtonWidget(
-                outlineButton: true,
-                buttonTextColor: CustomColors.rejected,
-                borderColor: CustomColors.rejected,
-                borderWidth: 1.5,
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) => BottomSheetDialogWidget(
-                      titleColor: CustomColors.rejected,
-                      title: 'Cancel Request',
-                      subTitle: 'Are you sure you want to Cancel this request',
-                      isLoading: false.obs,
-                      action: () {},
+            Row(
+              children: [
+                Expanded(
+                  child: PrimaryButtonWidget(
+                    outlineButton: true,
+                    buttonTextColor: CustomColors.rejected,
+                    borderColor: CustomColors.rejected,
+                    borderWidth: 1.5,
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) => BottomSheetDialogWidget(
+                          titleColor: CustomColors.rejected,
+                          title: 'Cancel Request',
+                          subTitle: 'Are you sure you want to Cancel this request',
+                          isLoading: false.obs,
+                          action: () {},
+                        ),
+                      );
+                    },
+                    title: 'Cancel  Appointment',
+                  ),
+                ),
+                Space.width.v10,
+                GestureDetector(
+                  onTap: () => Get.toNamed(Routes.inboxScreen),
+                  child: Container(
+                    padding: EdgeInsetsGeometry.symmetric(
+                      horizontal: Dimensions.defaultHorizontalSize,
+                      vertical: Dimensions.verticalSize * 0.55,
                     ),
-                  );
-                },
-                title: 'Cancel  Appointment',
-              ),
-            ),
-            Space.width.v10,
-            GestureDetector(
-              onTap: () => Get.toNamed(Routes.inboxScreen),
-              child: Container(
-                padding: EdgeInsetsGeometry.symmetric(
-                  horizontal: Dimensions.defaultHorizontalSize,
-                  vertical: Dimensions.verticalSize * 0.55,
+                    decoration: BoxDecoration(
+                      color: CustomColors.primary,
+                      borderRadius: BorderRadius.circular(Dimensions.radius),
+                    ),
+            
+                    child: TextWidget("Chat", color: CustomColors.whiteColor),
+                  ),
                 ),
-                decoration: BoxDecoration(
-                  color: CustomColors.primary,
-                  borderRadius: BorderRadius.circular(Dimensions.radius),
-                ),
-
-                child: TextWidget("Chat", color: CustomColors.whiteColor),
-              ),
+              ],
             ),
+            if(AppStorage.isUser == '')...[
+              Space.height.v15,
+              PrimaryButtonWidget(title: "Accept Request", onPressed: () {},),
+            ]
           ],
         ),
       ),
@@ -62,9 +71,11 @@ class AppointmentDetailsScreenMobile
           physics: BouncingScrollPhysics(),
           children: [
             Space.height.v15,
-            DoctorDetailsCard(
+
+
+            if(AppStorage.isUser == 'USER')  DoctorDetailsCard(
               imageUrl:
-                  'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
+              'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
               name: 'Dr. Elowyn Starcrest',
               specialty: 'Dentist',
               clinicName: 'Central Dental Care',
@@ -73,6 +84,22 @@ class AppointmentDetailsScreenMobile
               startingPrice: 10,
               onTap: () {},
             ),
+
+            PatientInfoWidgetWithAsset(
+              patientImageNetwork: 'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
+              patientName: 'Luna Kellan',
+              dateOfBirth: '10- Aug-1986',
+              phoneNumber: '+1263565 36565',
+              bloodGroup: 'A+',
+              allergies: [
+                'Food Allergies',
+                'Seasonal Allergies',
+                'Pet Allergies',
+                'Insect Sting Allergies',
+              ],
+            ),
+
+
             TextWidget(
               padding: EdgeInsetsGeometry.symmetric(
                 vertical: Dimensions.verticalSize,
