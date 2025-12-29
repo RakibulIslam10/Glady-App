@@ -30,11 +30,53 @@ android {
         versionName = flutter.versionName
     }
 
+    // ✅ Split APK configuration যোগ করুন
+    splits {
+        abi {
+            // শুধু release build এ enable হবে
+            isEnable = gradle.startParameter.taskNames.any {
+                it.contains("Release") || it.contains("Bundle")
+            }
+            reset()
+            include("armeabi-v7a", "arm64-v8a", "x86_64")
+            isUniversalApk = false
+        }
+    }
+
+    // ✅ Packaging options যোগ করুন (Agora এর জন্য)
+    packaging {
+        resources {
+            pickFirsts += setOf(
+                "lib/armeabi-v7a/libc++_shared.so",
+                "lib/arm64-v8a/libc++_shared.so",
+                "lib/x86_64/libc++_shared.so"
+            )
+            excludes += setOf(
+                "META-INF/*.kotlin_module",
+                "META-INF/DEPENDENCIES",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt"
+            )
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
+
+            // ✅ Already added - good!
+            isMinifyEnabled = true
+            isShrinkResources = true
+
+            // ✅ ProGuard rules যোগ করুন (optional but recommended)
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 }

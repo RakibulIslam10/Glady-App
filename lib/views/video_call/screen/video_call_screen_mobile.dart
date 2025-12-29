@@ -22,14 +22,14 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
               backgroundColor: Colors.white.withOpacity(0.9),
             ),
             Obx(
-                  () => _buildControlButton(
+              () => _buildControlButton(
                 icon: controller.isMuted.value ? Icons.mic_off : Icons.mic,
                 onTap: controller.toggleMute,
                 backgroundColor: Colors.white.withOpacity(0.9),
               ),
             ),
             Obx(
-                  () => _buildControlButton(
+              () => _buildControlButton(
                 icon: controller.isCameraFlipped.value
                     ? Icons.flip_camera_ios
                     : Icons.flip_camera_android,
@@ -51,35 +51,39 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
           // Remote video view (full screen)
           Positioned.fill(
             child: Obx(
-                  () => controller.isRemoteUserJoined.value && controller.remoteUid != null
+              () =>
+                  controller.isRemoteUserJoined.value &&
+                      controller.remoteUid != null
                   ? AgoraVideoView(
-                controller: VideoViewController.remote(
-                  rtcEngine: controller.agoraEngine,
-                  canvas: VideoCanvas(uid: controller.remoteUid),
-                  connection: RtcConnection(channelId: controller.channelName),
-                ),
-              )
-                  : Container(
-                color: Colors.grey.shade200,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(
-                        color: CustomColors.primary,
-                      ),
-                      SizedBox(height: 16.h),
-                      Text(
-                        'Waiting for other user...',
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          color: Colors.grey.shade600,
+                      controller: VideoViewController.remote(
+                        rtcEngine: controller.agoraEngine,
+                        canvas: VideoCanvas(uid: controller.remoteUid),
+                        connection: RtcConnection(
+                          channelId: controller.channelName,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
+                    )
+                  : Container(
+                      color: Colors.grey.shade200,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircularProgressIndicator(
+                              color: CustomColors.primary,
+                            ),
+                            SizedBox(height: 16.h),
+                            Text(
+                              'Waiting for other user...',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                color: Colors.grey.shade600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
             ),
           ),
 
@@ -88,31 +92,31 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
             top: 60,
             right: 16,
             child: Obx(
-                  () => controller.isLocalUserJoined.value
+              () => controller.isLocalUserJoined.value
                   ? Container(
-                width: 120.w,
-                height: 160.h,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(Dimensions.radius),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 8,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(Dimensions.radius),
-                  child: AgoraVideoView(
-                    controller: VideoViewController(
-                      rtcEngine: controller.agoraEngine,
-                      canvas: const VideoCanvas(uid: 0),
-                    ),
-                  ),
-                ),
-              )
+                      width: 120.w,
+                      height: 160.h,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(Dimensions.radius),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            blurRadius: 8,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(Dimensions.radius),
+                        child: AgoraVideoView(
+                          controller: VideoViewController(
+                            rtcEngine: controller.agoraEngine,
+                            canvas: const VideoCanvas(uid: 0),
+                          ),
+                        ),
+                      ),
+                    )
                   : SizedBox.shrink(),
             ),
           ),
@@ -124,7 +128,7 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
             right: 0,
             child: Center(
               child: Obx(
-                    () => Container(
+                () => Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: 16.w,
                     vertical: 8.h,

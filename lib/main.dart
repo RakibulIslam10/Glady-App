@@ -4,8 +4,10 @@ import 'initial.dart';
 import 'views/splash/controller/splash_controller.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await Initial.init();
+
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: CustomColors.backgroundDark,
@@ -21,7 +23,8 @@ void main() async {
         Get.toNamed(Routes.offlineScreen);
       } else {
         if (Get.currentRoute == Routes.offlineScreen) {
-          Get.offAllNamed(Routes.splashScreen);
+          // Get.offAllNamed(Routes.splashScreen);
+          Get.close(1);
         }
         CustomSnackBar.success(
           title: Strings.connectionRestored,
@@ -31,6 +34,8 @@ void main() async {
     }
     lastStatus = isConnected;
   });
+  PaintingBinding.instance.imageCache.maximumSize = 1000;
+  PaintingBinding.instance.imageCache.maximumSizeBytes = 200 << 20; // 200 MB
 
   runApp(MyApp(hasInternet: hasInternet));
 }

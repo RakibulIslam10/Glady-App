@@ -1,6 +1,6 @@
 part of '../screen/home_screen.dart';
 
-class BottomBannerWidget extends GetView<HomeController> {
+class BottomBannerWidget extends StatelessWidget {
   const BottomBannerWidget({super.key});
 
   @override
@@ -8,26 +8,43 @@ class BottomBannerWidget extends GetView<HomeController> {
     return SizedBox(
       height: 290.h,
       child: Stack(
-        alignment: Alignment.bottomCenter,
         children: [
-          Container(color: CustomColors.primary, height: 160.h),
+          // Background
           Positioned(
-            child: Padding(
-              padding: Dimensions.verticalSize.edgeBottom,
-              child: Image.asset(
-                Assets.logo.ssraad.path,
-                fit: BoxFit.contain,
-                height: 250.h,
-                width: double.infinity,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 160.h,
+            child: Container(
+              color: CustomColors.primary,
+            ),
+          ),
+
+          // Image
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: Dimensions.verticalSize.edgeBottom,
+                child: Image.asset(
+                  Assets.logo.ssraad.path,
+                  fit: BoxFit.contain,
+                  height: 250.h,
+                  width: double.infinity,
+                  // Performance optimization
+                  cacheHeight: (250 * MediaQuery.of(context).devicePixelRatio).toInt(),
+                  filterQuality: FilterQuality.low,
+                  isAntiAlias: false,
+                ),
               ),
             ),
           ),
 
+          // Content
           Positioned(
             left: Dimensions.defaultHorizontalSize * 2.5,
             top: Dimensions.verticalSize * 1.5,
             right: Dimensions.defaultHorizontalSize * 2.5,
-            // ✅ width constraint
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,36 +55,42 @@ class BottomBannerWidget extends GetView<HomeController> {
                   color: CustomColors.whiteColor,
                   fontSize: Dimensions.titleLarge,
                 ),
-                Space.height.v10,
+                SizedBox(height: 10.h),
                 TextWidget(
                   "Your small donation can help provide free consultations to those in need. Make a difference today!",
                   maxLines: 3,
                   textOverflow: TextOverflow.ellipsis,
                   color: CustomColors.whiteColor,
                 ),
-                Space.height.v20,
-
-                Container(
-                  padding: EdgeInsetsGeometry.symmetric(
-                    horizontal: Dimensions.defaultHorizontalSize,
-                    vertical: Dimensions.verticalSize * 0.4,
-                  ),
-
-                  decoration: BoxDecoration(
-                    color: CustomColors.whiteColor,
-                    borderRadius: BorderRadius.circular(Dimensions.radius * 2),
-                  ),
-
-                  child: TextWidget(
-                    "Donate Now",
-                    fontWeight: FontWeight.bold,
-                    color: CustomColors.primary,
-                  ),
-                ),
+                SizedBox(height: 20.h),
+                const _DonateButton(),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _DonateButton extends StatelessWidget {
+  const _DonateButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: Dimensions.defaultHorizontalSize,
+        vertical: Dimensions.verticalSize * 0.4,
+      ),
+      decoration: BoxDecoration(
+        color: CustomColors.whiteColor,
+        borderRadius: BorderRadius.circular(Dimensions.radius * 2),
+      ),
+      child: TextWidget(
+        "Donate Now",
+        fontWeight: FontWeight.bold,
+        color: CustomColors.primary,
       ),
     );
   }
