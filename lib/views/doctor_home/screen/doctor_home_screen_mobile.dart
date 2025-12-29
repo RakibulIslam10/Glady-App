@@ -29,7 +29,10 @@ class DoctorHomeScreenMobile extends GetView<DoctorHomeController> {
                 mainAxisAlignment: mainSpaceBet,
                 children: [
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: Dimensions.defaultHorizontalSize * 0.5,vertical: Dimensions.verticalSize * 0.5),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Dimensions.defaultHorizontalSize * 0.5,
+                      vertical: Dimensions.verticalSize * 0.5,
+                    ),
                     child: Column(
                       crossAxisAlignment: crossStart,
                       children: [
@@ -42,9 +45,16 @@ class DoctorHomeScreenMobile extends GetView<DoctorHomeController> {
                       ],
                     ),
                   ),
-                  Container(width: 1,height: 60.h, color: Colors.grey.withOpacity(0.5)),
+                  Container(
+                    width: 1,
+                    height: 60.h,
+                    color: Colors.grey.withOpacity(0.5),
+                  ),
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: Dimensions.defaultHorizontalSize * 0.5,vertical: Dimensions.verticalSize * 0.5),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Dimensions.defaultHorizontalSize * 0.5,
+                      vertical: Dimensions.verticalSize * 0.5,
+                    ),
                     child: Column(
                       crossAxisAlignment: crossEnd,
                       children: [
@@ -77,7 +87,9 @@ class DoctorHomeScreenMobile extends GetView<DoctorHomeController> {
                   time: "10:30 PM - 11:00 PM",
                   status: "23 November",
                   buttonTitle: 'View',
-                  onTap: () {},
+                  cardOnTap: () {
+                    Get.toNamed(Routes.appointmentDetailsScreen);
+                  },
                 ),
               ),
             ),
