@@ -1,3 +1,4 @@
+import '../../../core/utils/app_storage.dart';
 import '../../../core/utils/basic_import.dart';
 import '../../../core/widgets/profile_avater_widget.dart';
 import '../../../widgets/custom_logo_widget.dart';
@@ -129,7 +130,6 @@ class ProfileBoxWidget extends StatelessWidget {
                             Dimensions.radius,
                           ),
                         ),
-
                         padding: EdgeInsetsGeometry.symmetric(
                           horizontal: Dimensions.defaultHorizontalSize * 2,
                           vertical: Dimensions.verticalSize * 0.4,
@@ -142,6 +142,7 @@ class ProfileBoxWidget extends StatelessWidget {
                     ),
                   ),
                   Space.width.v10,
+                if (AppStorage.isUser == 'USER')
                   TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: CustomColors.whiteColor,
