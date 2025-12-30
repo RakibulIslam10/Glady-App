@@ -12,10 +12,8 @@ class ProfileScreenMobile extends GetView<ProfileController> {
           physics: BouncingScrollPhysics(),
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
-            if(AppStorage.isUser == 'USER')
-              ProfileBoxWidget(),
-            if(AppStorage.isUser == 'DOCTOR')
-              DoctorProfileBox(),
+            if (AppStorage.isUser == 'USER') ProfileBoxWidget(),
+            if (AppStorage.isUser == 'DOCTOR') DoctorProfileBox(),
 
             Space.height.v40,
             Column(
