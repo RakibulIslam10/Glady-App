@@ -25,12 +25,21 @@ class UpdateProfileScreenMobile extends GetView<UpdateProfileController> {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      ProfileAvatarWidget(
-                        size: 100,
-                        // imageFile: controller.profileImage.value,
-                        imageUrl:
-                            'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
-                      ),
+                      if (AppStorage.isUser == 'USER')
+                        ProfileAvatarWidget(
+                          size: 100,
+                          // imageFile: controller.profileImage.value,
+                          imageUrl:
+                              'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
+                        ),
+
+                      if (AppStorage.isUser == 'DOCTOR')
+                        ProfileAvatarWidget(
+                          size: 100,
+                          // imageFile: controller.profileImage.value,
+                          imageUrl:
+                              'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
+                        ),
                       Container(
                         height: 100.h,
                         width: 100.w,
@@ -75,7 +84,6 @@ class UpdateProfileScreenMobile extends GetView<UpdateProfileController> {
 
                 Space.height.betweenInputBox,
 
-
                 PrimaryInputFieldWidget(
                   controller: controller.dobController,
                   hintText: 'Date of Birth',
@@ -86,18 +94,18 @@ class UpdateProfileScreenMobile extends GetView<UpdateProfileController> {
 
                 if (AppStorage.isUser != 'USER') ...[
                   _filedDoctorCard(
-                        () => Get.toNamed(Routes.aboutScreen),
+                    () => Get.toNamed(Routes.aboutScreen),
                     'About',
                   ),
                   Space.height.betweenInputBox,
                   _filedDoctorCard(
-                        () => Get.toNamed(Routes.serviceScreen),
+                    () => Get.toNamed(Routes.serviceScreen),
                     'Services',
                   ),
                   Space.height.betweenInputBox,
                   Space.height.betweenInputBox,
                   _filedDoctorCard(
-                        () => Get.toNamed(Routes.experienceScreen),
+                    () => Get.toNamed(Routes.experienceScreen),
                     'Work Experience',
                   ),
                   Space.height.betweenInputBox,
