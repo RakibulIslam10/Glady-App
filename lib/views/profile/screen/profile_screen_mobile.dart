@@ -9,7 +9,7 @@ class ProfileScreenMobile extends GetView<ProfileController> {
       appBar: CommonAppBar(title: "Profile", isBack: false),
       body: SafeArea(
         child: ListView(
-          physics: BouncingScrollPhysics(ss),
+          physics: BouncingScrollPhysics(),
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
             if(AppStorage.isUser == 'USER')
