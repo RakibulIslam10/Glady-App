@@ -15,7 +15,18 @@ class LoginController extends GetxController {
   final isPasswordVisible = false.obs;
   final rememberMe = false.obs;
 
+@override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
 
+    // emailController.text = 'user@gmail.com';
+    // passwordController.text = '111111';
+
+    emailController.text = 'doctor@gmail.com';
+    passwordController.text = '111111';
+
+  }
 
 
 

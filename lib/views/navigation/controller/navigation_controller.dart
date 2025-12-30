@@ -15,9 +15,8 @@ class NavigationController extends GetxController {
   List<Widget> bodyScreen = [
     AppStorage.isUser == 'USER' ? HomeScreen() : DoctorHomeScreen(),
     AppStorage.isUser == 'USER' ? FindScreen() : RequestViewScreen(),
-
     AppointmentScreen(),
-    ChatScreen(),
+    if (AppStorage.isUser != 'USER') ChatScreen(),
     ProfileScreen(),
   ];
 
@@ -27,5 +26,17 @@ class NavigationController extends GetxController {
 
   void goToHomeNav() {
     changeNavScreen(0);
+  }
+
+  void goToSearchNav() {
+    changeNavScreen(1);
+  }
+
+  void goToProfile() {
+    changeNavScreen(AppStorage.isUser == 'USER' ? 3 : 4);
+  }
+
+  void goToAppointment() {
+    changeNavScreen(2);
   }
 }

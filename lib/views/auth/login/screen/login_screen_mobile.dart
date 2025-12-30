@@ -6,7 +6,7 @@ class LoginScreenMobile extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     log('══════════════════════════════════════════════════════════════════════════════');
-    log('═══════════════════ Is User => ${AppStorage.isUser == "USER" ? 'USER' : 'DOCTOR'} ════════════════════════');
+    log('═══════════════════ ROLE => ${AppStorage.isUser != "USER" ? 'DOCTOR' : 'USER'} ════════════════════════');
     return Scaffold(
       appBar: CommonAppBar(title: "", isBack: false),
       body: SafeArea(
@@ -59,6 +59,7 @@ class LoginScreenMobile extends GetView<LoginController> {
                       if (controller.formKey.currentState!.validate()) {
                         // controller.loginProcess();
                         Get.offAllNamed(Routes.navigationScreen);
+                        AppStorage.save(isUser: controller.emailController.text.contains('user') ? 'USER' : 'DOCTOR');
                       }
                     },
                   ),

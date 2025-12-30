@@ -9,7 +9,7 @@ class VideoCallController extends GetxController {
   // Agora Configuration
   static const String appId = "296efbe76c6947018979a48113a46c7a";
   final String channelName = "test_channel";
-  final String token = "007eJxTYGg6vXOV/m7Hz6JPHnsvDbqpZKp/Nu9X3/VNQrfydCYtzIpSYDCyNEtNS0o1N0s2szQxNzC0sDS3TDSxMDQ0TjQxSzZPnDw3MLMhkJFB36GNhZEBAkF8HoaS1OKS+OSMxLy81BwGBgDCGCMr";
+  final String token = "007eJxTYJg2iXFJ0KQzOa+XvFZjMtxm1rvH6xJH4oTShW6sp/foyxUpMBhZmqWmJaWamyWbWZqYGxhaWJpbJppYGBoaJ5qYJZsnaiQGZzYEMjKEerYzMTJAIIjPw1CSWlwSn5yRmJeXmsPAAADXPSBN";
 
 
   // Agora Engine
