@@ -1,6 +1,7 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 
 import '../bind/about_binding.dart';
+import '../bind/add_experience_binding.dart';
 import '../bind/aditional_binding.dart';
 import '../bind/all_category_binding.dart';
 import '../bind/all_doctors_binding.dart';
@@ -47,6 +48,7 @@ import '../bind/verification_binding.dart';
 import '../bind/video_call_binding.dart';
 import '../bind/welcome_binding.dart';
 import '../views/about/screen/about_screen.dart';
+import '../views/add_experience/screen/add_experience_screen.dart';
 import '../views/aditional/screen/aditional_screen.dart';
 import '../views/all_category/screen/all_category_screen.dart';
 import '../views/all_doctors/screen/all_doctors_screen.dart';
@@ -97,6 +99,7 @@ part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
+static const addExperienceScreen = '/add_experienceScreen';
 static const serviceScreen = '/serviceScreen';
 static const experienceScreen = '/experienceScreen';
 static const aboutScreen = '/aboutScreen';

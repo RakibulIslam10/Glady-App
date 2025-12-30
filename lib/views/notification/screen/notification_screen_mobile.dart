@@ -9,11 +9,16 @@ class NotificationScreenMobile extends GetView<NotificationController> {
       appBar: CommonAppBar(title: "Notification"),
       body: SafeArea(
         child: ListView.builder(
-          physics: BouncingScrollPhysics(),
           padding: EdgeInsetsGeometry.symmetric(
             horizontal: Dimensions.defaultHorizontalSize,
             vertical: Dimensions.verticalSize,
           ),
+          itemCount: 10,
+          addRepaintBoundaries: true,
+          cacheExtent: 500,
+          shrinkWrap: true,
+          primary: true,
+          physics: BouncingScrollPhysics(),
           itemBuilder: (context, index) {
             return Container(
               margin: EdgeInsets.only(bottom: Dimensions.heightSize),

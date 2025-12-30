@@ -12,8 +12,16 @@ class ServiceScreenMobile extends GetView<ServiceController> {
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           physics: BouncingScrollPhysics(),
           children: [
+            Space.height.v20,
+            PrimaryInputFieldWidget(
+              label: 'Service',
+              controller: TextEditingController(),
+              hintText: 'Name of Service',
+            ),
 
-          
+            Space.height.v20,
+            Space.height.v20,
+            PrimaryButtonWidget(title: "Save", onPressed: () => Get.back()),
           ],
         ),
       ),
