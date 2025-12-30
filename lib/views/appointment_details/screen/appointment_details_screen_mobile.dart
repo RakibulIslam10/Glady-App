@@ -7,60 +7,61 @@ class AppointmentDetailsScreenMobile
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: Dimensions.verticalSize * 1.25,
-          horizontal: Dimensions.defaultHorizontalSize,
-        ),
-        child: Column(
-          mainAxisSize: mainMin,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: PrimaryButtonWidget(
-                    outlineButton: true,
-                    buttonTextColor: CustomColors.rejected,
-                    borderColor: CustomColors.rejected,
-                    borderWidth: 1.5,
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) => BottomSheetDialogWidget(
-                          titleColor: CustomColors.rejected,
-                          title: 'Cancel Request',
-                          subTitle: 'Are you sure you want to Cancel this request',
-                          isLoading: false.obs,
-                          action: () {},
-                        ),
-                      );
-                    },
-                    title: 'Cancel  Appointment',
-                  ),
-                ),
-                Space.width.v10,
-                GestureDetector(
-                  onTap: () => Get.toNamed(Routes.inboxScreen),
-                  child: Container(
-                    padding: EdgeInsetsGeometry.symmetric(
-                      horizontal: Dimensions.defaultHorizontalSize,
-                      vertical: Dimensions.verticalSize * 0.55,
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimensions.defaultHorizontalSize,
+          ),
+          child: Column(
+            mainAxisSize: mainMin,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: PrimaryButtonWidget(
+                      outlineButton: true,
+                      buttonTextColor: CustomColors.rejected,
+                      borderColor: CustomColors.rejected,
+                      borderWidth: 1.5,
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => BottomSheetDialogWidget(
+                            titleColor: CustomColors.rejected,
+                            title: 'Cancel Request',
+                            subTitle: 'Are you sure you want to Cancel this request',
+                            isLoading: false.obs,
+                            action: () {},
+                          ),
+                        );
+                      },
+                      title: 'Cancel  Appointment',
                     ),
-                    decoration: BoxDecoration(
-                      color: CustomColors.primary,
-                      borderRadius: BorderRadius.circular(Dimensions.radius),
-                    ),
-            
-                    child: TextWidget("Chat", color: CustomColors.whiteColor),
                   ),
-                ),
-              ],
-            ),
-            if(AppStorage.isUser == '')...[
-              Space.height.v15,
-              PrimaryButtonWidget(title: "Accept Request", onPressed: () {},),
-            ]
-          ],
+                  Space.width.v10,
+                  GestureDetector(
+                    onTap: () => Get.toNamed(Routes.inboxScreen),
+                    child: Container(
+                      padding: EdgeInsetsGeometry.symmetric(
+                        horizontal: Dimensions.defaultHorizontalSize,
+                        vertical: Dimensions.verticalSize * 0.55,
+                      ),
+                      decoration: BoxDecoration(
+                        color: CustomColors.primary,
+                        borderRadius: BorderRadius.circular(Dimensions.radius),
+                      ),
+              
+                      child: TextWidget("Chat", color: CustomColors.whiteColor),
+                    ),
+                  ),
+                ],
+              ),
+              if(AppStorage.isUser != 'USER')...[
+                Space.height.v15,
+                PrimaryButtonWidget(title: "Accept Request", onPressed: () {},),
+              ]
+            ],
+          ),
         ),
       ),
 

@@ -95,25 +95,25 @@ class _TimePickerWidgetState extends State<TimePickerWidget> {
     return Column(
       crossAxisAlignment: crossStart,
       children: [
-        TextWidget(
-          padding: EdgeInsetsGeometry.only(
-            bottom: Dimensions.spaceBetweenInputTitleAndBox * 0.6,
-          ),
-          widget.label ?? "Select Time",
-          fontSize: Dimensions.titleSmall,
-          fontWeight: FontWeight.w500,
-          color: CustomColors.blackColor.withAlpha(888),
-        ),
+        // TextWidget(
+        //   padding: EdgeInsetsGeometry.only(
+        //     bottom: Dimensions.spaceBetweenInputTitleAndBox * 0.6,
+        //   ),
+        //   widget.label ?? "Select Time",
+        //   fontSize: Dimensions.titleSmall,
+        //   fontWeight: FontWeight.w500,
+        //   color: CustomColors.blackColor.withAlpha(888),
+        // ),
         InkWell(
           onTap: () => _pickTime(context),
           borderRadius: BorderRadius.circular(12),
           child: Container(
             padding: Dimensions.defaultHorizontalSize.edgeHorizontal * 0.5,
-            height: Dimensions.inputBoxHeight * 0.7,
+            height: Dimensions.inputBoxHeight * 0.85,
             decoration: BoxDecoration(
               border: Border.all(
                 color: _selectedTime == null
-                    ? CustomColors.disableColor
+                    ? CustomColors.borderColor
                     : CustomColors.primary,
                 width: 1.4,
               ),
@@ -125,18 +125,15 @@ class _TimePickerWidgetState extends State<TimePickerWidget> {
                 TextWidget(
                   _selectedTime == null
                       ? widget.hint
-                      : _selectedTime!.format(context), // local formatted
+                      : _selectedTime!.format(context),
 
-                  fontSize: Dimensions.titleSmall,
-                  color: _selectedTime == null
-                      ? CustomColors.disableColor
-                      : Colors.black,
+                  fontSize: Dimensions.titleSmall * 1.2,
+                  fontWeight: FontWeight.w500,
+                  color:  Colors.black.withOpacity(0.7),
                 ),
                 Icon(
                   Icons.access_time,
-                  color: _selectedTime == null
-                      ? CustomColors.disableColor
-                      : CustomColors.primary,
+                  color: CustomColors.primary,
                 ),
               ],
             ),

@@ -48,15 +48,15 @@ class _MultiSelectDropDownWidgetState extends State<MultiSelectDropDownWidget> {
     return Column(
       crossAxisAlignment: crossStart,
       children: [
-        TextWidget(
-          padding: EdgeInsetsGeometry.only(
-            bottom: Dimensions.spaceBetweenInputTitleAndBox * 0.6,
-          ),
-          widget.label ?? "Select Category",
-          fontSize: Dimensions.titleSmall,
-          fontWeight: FontWeight.w500,
-          color: CustomColors.blackColor,
-        ),
+        // TextWidget(
+        //   padding: EdgeInsetsGeometry.only(
+        //     bottom: Dimensions.spaceBetweenInputTitleAndBox * 0.6,
+        //   ),
+        //   widget.label ?? "Select Category",
+        //   fontSize: Dimensions.titleSmall,
+        //   fontWeight: FontWeight.w500,
+        //   color: CustomColors.blackColor,
+        // ),
 
         if (_selectedValues.isNotEmpty)
           Wrap(
@@ -79,11 +79,11 @@ class _MultiSelectDropDownWidgetState extends State<MultiSelectDropDownWidget> {
 
         Container(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal * 0.5,
-          height: Dimensions.inputBoxHeight * 0.7,
+          height: Dimensions.inputBoxHeight * 0.85,
           decoration: BoxDecoration(
             border: Border.all(
               color: _selectedValues.isEmpty
-                  ? CustomColors.disableColor
+                  ? CustomColors.borderColor
                   : CustomColors.primary,
               width: 1.4,
             ),
@@ -99,7 +99,8 @@ class _MultiSelectDropDownWidgetState extends State<MultiSelectDropDownWidget> {
               isExpanded: true,
               hint: TextWidget(
                 widget.hint,
-                color: Colors.grey,
+                color: CustomColors.blackColor.withOpacity(0.7),
+                fontWeight: FontWeight.w500,
                 fontSize: width * 0.04,
               ),
               items: widget.items
@@ -114,7 +115,7 @@ class _MultiSelectDropDownWidgetState extends State<MultiSelectDropDownWidget> {
                         onChanged: (_) => _toggleValue(item),
                       ),
                       TextWidget(item,
-                          fontSize: Dimensions.titleSmall,
+                          fontSize: Dimensions.titleSmall * 1.2,
                           color: CustomColors.blackColor),
                     ],
                   ),
