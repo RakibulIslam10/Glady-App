@@ -17,7 +17,6 @@ class SliderItemWidget extends GetView<HomeController> {
               onPageChanged: (value) => controller.currentIndex.value = value,
               physics: BouncingScrollPhysics(),
               itemCount: 3,
-
               itemBuilder: (context, index) => Row(
                 mainAxisAlignment: mainSpaceBet,
                 children: [
@@ -28,7 +27,7 @@ class SliderItemWidget extends GetView<HomeController> {
                     "WeCure \nYour Health\n Comes First ",
                     fontSize: Dimensions.titleLarge,
                     fontWeight: FontWeight.w600,
-                    // color: CustomColors.whiteColor,
+
                   ),
 
                   Image.asset(Assets.dummy.sh.path, height: 125.h),

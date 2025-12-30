@@ -1,7 +1,5 @@
 part of '../screen/home_screen.dart';
 
-
-
 class TipsCardWidget extends StatefulWidget {
   const TipsCardWidget({super.key});
 
@@ -61,45 +59,25 @@ class _TipsCard extends StatelessWidget {
           bottomRight: Radius.circular(Dimensions.radius * 2),
         ),
       ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Background SVG
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(Dimensions.radius * 0.6),
-              topRight: Radius.circular(Dimensions.radius * 0.6),
-              topLeft: Radius.circular(Dimensions.radius * 2),
-              bottomRight: Radius.circular(Dimensions.radius * 2),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: Dimensions.defaultHorizontalSize,
+          vertical: Dimensions.verticalSize * 0.7,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              child: TextWidget(
+                "Drink water regularly throughout the day to keep your body energized and functioning smoothly.",
+                fontWeight: FontWeight.w600,
+                color: CustomColors.whiteColor,
+              ),
             ),
-            child: SvgPicture.asset(
-              Assets.dummy.bro,
-              fit: BoxFit.cover,
-            ),
-          ),
-
-          // Content
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: Dimensions.defaultHorizontalSize,
-              vertical: Dimensions.verticalSize * 0.7,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: TextWidget(
-                    "Drink water regularly throughout the day to keep your body energized and functioning smoothly.",
-                    fontWeight: FontWeight.w600,
-                    color: CustomColors.whiteColor,
-                  ),
-                ),
-                const _FavoriteButton(),
-              ],
-            ),
-          ),
-        ],
+            const _FavoriteButton(),
+          ],
+        ),
       ),
     );
   }

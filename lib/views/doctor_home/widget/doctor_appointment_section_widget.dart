@@ -22,16 +22,19 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextWidget("Appointment", fontWeight: FontWeight.w500),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.swap_calls_sharp),
-                  TextWidget(
-                    " Manage",
-                    fontWeight: FontWeight.w500,
-                    fontSize: Dimensions.titleSmall,
-                  ),
-                ],
+              GestureDetector(
+                onTap: () => Get.toNamed(Routes.scheduleScreen),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.swap_calls_sharp),
+                    TextWidget(
+                      " Manage",
+                      fontWeight: FontWeight.w500,
+                      fontSize: Dimensions.titleSmall,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
