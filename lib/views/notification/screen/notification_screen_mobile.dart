@@ -11,7 +11,7 @@ class NotificationScreenMobile extends GetView<NotificationController> {
         child: ListView.builder(
           padding: EdgeInsetsGeometry.symmetric(
             horizontal: Dimensions.defaultHorizontalSize,
-            vertical: Dimensions.verticalSize,
+            vertical: Dimensions.verticalSize * 0.5,
           ),
           itemCount: 10,
           addRepaintBoundaries: true,
@@ -29,14 +29,18 @@ class NotificationScreenMobile extends GetView<NotificationController> {
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.defaultHorizontalSize,
-                  vertical: Dimensions.verticalSize * 0.7,
+                  vertical: Dimensions.verticalSize * 0.25,
                 ),
                 child: ListTile(
                   contentPadding: EdgeInsetsGeometry.zero,
 
-                  title: TextWidget('Dr. Elowyn Starcrest'),
-                  subtitle: TextWidget('Accept your booking request',color: CustomColors.blackColor.withOpacity(0.6),),
-                  trailing: TextWidget('9:30 PM'),
+                  title: TextWidget('Dr. Elowyn Starcrest',fontWeight: FontWeight.w500,),
+                  subtitle: TextWidget('Accept your booking request',color: CustomColors.blackColor.withOpacity(0.6),
+                  fontSize: Dimensions.titleSmall,
+
+                  fontWeight: FontWeight.w500,
+                  ),
+                  trailing: TextWidget('9:30 PM',fontSize: Dimensions.titleSmall,fontWeight: FontWeight.w500,),
                 ),
               ),
             );
