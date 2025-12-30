@@ -11,7 +11,10 @@ class ProfileScreenMobile extends GetView<ProfileController> {
         child: ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
-            ProfileBoxWidget(),
+            if(AppStorage.isUser == 'USER')
+              ProfileBoxWidget(),
+            if(AppStorage.isUser == 'DOCTOR')
+              DoctorProfileBox(),
 
             Space.height.v40,
             Column(

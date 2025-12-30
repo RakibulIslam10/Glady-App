@@ -10,7 +10,7 @@ class ChatScreenMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(title: 'Chat'),
+      appBar: CommonAppBar(title: 'Chat',isBack: false,),
       body: SafeArea(
         child: ListView.builder(
           padding: EdgeInsetsGeometry.symmetric(
