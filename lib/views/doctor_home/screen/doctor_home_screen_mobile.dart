@@ -12,6 +12,7 @@ class DoctorHomeScreenMobile extends GetView<DoctorHomeController> {
       ),
       body: SafeArea(
         child: ListView(
+          physics: BouncingScrollPhysics(),
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
             Space.height.v20,
@@ -78,7 +79,7 @@ class DoctorHomeScreenMobile extends GetView<DoctorHomeController> {
               cacheExtent: 500,
               shrinkWrap: true,
               primary: false,
-              physics: BouncingScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => Padding(
                 padding: EdgeInsets.only(bottom: Dimensions.heightSize),
                 child: RequestCard(
