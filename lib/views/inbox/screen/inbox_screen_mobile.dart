@@ -7,6 +7,7 @@ class InboxScreenMobile extends GetView<InboxController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         // actions: [IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))],
         title: Row(
           children: [

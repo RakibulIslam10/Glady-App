@@ -4,7 +4,6 @@ import 'initial.dart';
 import 'views/splash/controller/splash_controller.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await Initial.init();
 
@@ -35,7 +34,7 @@ void main() async {
     lastStatus = isConnected;
   });
   PaintingBinding.instance.imageCache.maximumSize = 1000;
-  PaintingBinding.instance.imageCache.maximumSizeBytes = 200 << 20; // 200 MB
+  PaintingBinding.instance.imageCache.maximumSizeBytes = 200 << 20;
 
   runApp(MyApp(hasInternet: hasInternet));
 }
