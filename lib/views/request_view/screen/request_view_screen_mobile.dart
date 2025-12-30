@@ -6,7 +6,7 @@ class RequestViewScreenMobile extends GetView<RequestViewController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(title: "Appointment Request"),
+      appBar: CommonAppBar(title: "Appointment Request",isBack: false,),
       body: SafeArea(
         child: ListView.builder(
           padding: EdgeInsetsGeometry.symmetric(

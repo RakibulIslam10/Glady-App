@@ -53,8 +53,8 @@ class ChatScreenMobile extends StatelessWidget {
             return Container(
               margin: EdgeInsets.only(bottom: Dimensions.heightSize),
               decoration: BoxDecoration(
-                border: Border.all(color: CustomColors.borderColor),
-                borderRadius: BorderRadius.circular(Dimensions.radius),
+                border: Border.all(color: CustomColors.borderColor.withOpacity(0.8)),
+                borderRadius: BorderRadius.circular(Dimensions.radius * 1.5),
               ),
               child: ListTile(
                 onTap: () {

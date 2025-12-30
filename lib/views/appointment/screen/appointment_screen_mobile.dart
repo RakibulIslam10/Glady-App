@@ -8,7 +8,36 @@ class AppointmentScreenMobile extends GetView<AppointmentController> {
     return Scaffold(
       appBar: CommonAppBar(title: "Appointment", isBack: false),
       body: SafeArea(
-        child: ListView.builder(
+        child: AppStorage.isUser != 'USER' ?             ListView.builder(
+          itemCount: 5,
+          addRepaintBoundaries: true,
+          cacheExtent: 500,
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimensions.defaultHorizontalSize,
+            vertical: Dimensions.verticalSize * 0.5,
+          ),
+          shrinkWrap: true,
+          primary: false,
+          physics: BouncingScrollPhysics(),
+          itemBuilder: (context, index) => Padding(
+            padding: EdgeInsets.only(bottom: Dimensions.heightSize),
+            child: RequestCard(
+              name: "Luna Kellan",
+              service: "Professional cleaning",
+              time: "10:30 PM - 11:00 PM",
+              status: "23 November",
+              buttonTitle: 'Join',
+              onTap: () => Get.toNamed(Routes.videoCallScreen),
+
+              cardOnTap: () {
+                Get.toNamed(Routes.appointmentDetailsScreen);
+              },
+            ),
+          ),
+        ) :
+
+
+        ListView.builder(
           padding: EdgeInsets.symmetric(
             horizontal: Dimensions.defaultHorizontalSize,
             vertical: Dimensions.verticalSize,
