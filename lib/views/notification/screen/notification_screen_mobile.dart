@@ -33,14 +33,21 @@ class NotificationScreenMobile extends GetView<NotificationController> {
                 ),
                 child: ListTile(
                   contentPadding: EdgeInsetsGeometry.zero,
-
-                  title: TextWidget('Dr. Elowyn Starcrest',fontWeight: FontWeight.w500,),
-                  subtitle: TextWidget('Accept your booking request',color: CustomColors.blackColor.withOpacity(0.6),
-                  fontSize: Dimensions.titleSmall,
-
-                  fontWeight: FontWeight.w500,
+                  title: TextWidget(
+                    'Dr. Elowyn Starcrest', fontWeight: FontWeight.w500,
                   ),
-                  trailing: TextWidget('9:30 PM',fontSize: Dimensions.titleSmall,fontWeight: FontWeight.w500,),
+                  subtitle: TextWidget(
+                    'Accept your booking request',
+                    color: CustomColors.blackColor.withOpacity(0.6),
+                    fontSize: Dimensions.titleSmall,
+
+                    fontWeight: FontWeight.w500,
+                  ),
+                  trailing: TextWidget(
+                    '9:30 PM',
+                    fontSize: Dimensions.titleSmall,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             );

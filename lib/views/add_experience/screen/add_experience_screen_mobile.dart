@@ -36,29 +36,44 @@ class AddExperienceScreenMobile extends GetView<AddExperienceController> {
             ),
             DatePickerWidget(label: 'Starting Date', onDateSelected: (date) {}),
             Space.height.v10,
-            Row(
-              children: [
-                TextWidget("Current working here"),
-                Space.width.v10,
-                Container(
-                  height: 18.h,
-                  width: 18.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      Dimensions.radius * 0.4,
-                    ),
-                    border: Border.all(
-                      color: CustomColors.blackColor,
-                      width: 1.2.w,
+            GestureDetector(
+              onTap: () {
+                controller.isChecked.value != controller.isChecked.value;
+              },
+              child: Row(
+                children: [
+                  TextWidget("Current working here"),
+                  Space.width.v10,
+                  Obx(
+                    () => Container(
+                      height: 18.h,
+                      width: 18.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          Dimensions.radius * 0.4,
+                        ),
+                        border: Border.all(
+                          color: controller.isChecked.value
+                              ? CustomColors.primary
+                              : CustomColors.borderColor,
+                          width: 1.2.w,
+                        ),
+                      ),
+                      child: Icon(
+                       controller.isChecked.value
+                            ? Icons.check
+                            : Icons.close,
+                        fontWeight: FontWeight.w900,
+                        color: controller.isChecked.value
+                            ? CustomColors.primary
+                            : CustomColors.borderColor,
+
+                        size: 16.sp,
+                      ),
                     ),
                   ),
-                  child: Icon(
-                    Icons.check,
-                    color: CustomColors.blackColor.withOpacity(0.7),
-                    size: 16.sp,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
 
             Space.height.betweenInputBox,
