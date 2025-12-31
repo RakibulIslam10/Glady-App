@@ -68,9 +68,12 @@ class ExperienceScreenMobile extends GetView<ExperienceController> {
                 ),
                 trailing: Column(
                   children: [
-                    Icon(
-                      Icons.mode_edit_outline_outlined,
+                    IconButton(
+                      icon: Icon(Icons.mode_edit_outline_outlined),
                       color: CustomColors.primary,
+                      onPressed: () {
+                        Get.toNamed(Routes.addExperienceScreen);
+                      },
                     ),
                   ],
                 ),

@@ -25,10 +25,10 @@ void main() async {
           // Get.offAllNamed(Routes.splashScreen);
           Get.close(1);
         }
-        CustomSnackBar.success(
-          title: Strings.connectionRestored,
-          message: Strings.youAreBackOnline,
-        );
+        // CustomSnackBar.success(
+        //   title: Strings.connectionRestored,
+        //   message: Strings.youAreBackOnline,
+        // );
       }
     }
     lastStatus = isConnected;
@@ -63,7 +63,6 @@ class MyApp extends StatelessWidget {
         initialBinding: BindingsBuilder(() {
           Get.lazyPut(() => SplashController());
         }),
-
         builder: (context, widget) {
           return Overlay(
             initialEntries: [

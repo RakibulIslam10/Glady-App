@@ -15,26 +15,22 @@ class BottomBannerWidget extends StatelessWidget {
             left: 0,
             right: 0,
             height: 160.h,
-            child: Container(
-              color: CustomColors.primary,
-            ),
+            child: Container(color: Color(0xff0386B5)),
           ),
 
           // Image
           Positioned.fill(
             child: Align(
               alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: Dimensions.verticalSize.edgeBottom,
-                child: Image.asset(
-                  Assets.logo.ssraad.path,
-                  fit: BoxFit.contain,
-                  height: 250.h,
-                  width: double.infinity,
-                  // Performance optimization
-                  cacheHeight: (250 * MediaQuery.of(context).devicePixelRatio).toInt(),
-                  filterQuality: FilterQuality.low,
-                  isAntiAlias: false,
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: Dimensions.defaultHorizontalSize,
+                  vertical: Dimensions.verticalSize,
+                ),
+                decoration: BoxDecoration(
+                  color: CustomColors.primary,
+                  border: Border.all(color: CustomColors.whiteColor),
+                  borderRadius: BorderRadius.circular(Dimensions.radius),
                 ),
               ),
             ),

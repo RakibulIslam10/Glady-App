@@ -11,6 +11,7 @@ class AppointmentDetailsScreenMobile
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: Dimensions.defaultHorizontalSize,
+            vertical: Dimensions.verticalSize * 0.5
           ),
           child: Column(
             mainAxisSize: mainMin,
@@ -86,7 +87,7 @@ class AppointmentDetailsScreenMobile
               onTap: () {},
             ),
 
-            PatientInfoWidgetWithAsset(
+            if(AppStorage.isUser != 'USER') PatientInfoWidgetWithAsset(
               patientImageNetwork: 'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
               patientName: 'Luna Kellan',
               dateOfBirth: '10- Aug-1986',
