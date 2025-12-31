@@ -1,7 +1,7 @@
 import '../../../../core/utils/basic_import.dart';
-class LoginController extends GetxController {
 
-  final  formKey = GlobalKey<FormState>();
+class LoginController extends GetxController {
+  final formKey = GlobalKey<FormState>();
 
   // email
   final emailController = TextEditingController();
@@ -15,7 +15,7 @@ class LoginController extends GetxController {
   final isPasswordVisible = false.obs;
   final rememberMe = false.obs;
 
-@override
+  @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
@@ -25,10 +25,5 @@ class LoginController extends GetxController {
 
     // emailController.text = 'doctor@gmail.com';
     // passwordController.text = '111111';
-
   }
-
-
-
-
 }
