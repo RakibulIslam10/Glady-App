@@ -86,7 +86,6 @@ class AppointmentDetailsScreenMobile
               startingPrice: 10,
               onTap: () {},
             ),
-
             if(AppStorage.isUser != 'USER') PatientInfoWidgetWithAsset(
               patientImageNetwork: 'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
               patientName: 'Luna Kellan',
