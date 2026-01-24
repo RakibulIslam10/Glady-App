@@ -75,9 +75,8 @@ class RegisterScreenMobile extends GetView<RegisterController> {
                       title: "Register",
                       onPressed: () {
                         if (controller.fromKey.currentState!.validate()) {
-                          // controller.registerProcess();
-                          Get.toNamed(Routes.verificationScreen);
-                          AppStorage.save(isUser: 'USER');
+                          controller.registerProcess();
+
 
                         }
                       },

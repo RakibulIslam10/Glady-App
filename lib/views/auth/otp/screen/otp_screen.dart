@@ -1,4 +1,5 @@
 import 'package:glady/core/widgets/timer_widget.dart';
+import 'package:glady/views/auth/forgot_password/controller/forgot_password_controller.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../../core/utils/basic_import.dart';

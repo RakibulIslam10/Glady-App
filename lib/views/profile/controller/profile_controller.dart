@@ -1,3 +1,4 @@
+import '../../../core/api/services/auth_services.dart';
 import '../../../core/utils/basic_import.dart';
 
 class ProfileController extends GetxController {
@@ -24,4 +25,15 @@ class ProfileController extends GetxController {
     },
     {'title': 'Logout', 'icon': Icons.logout},
   ];
+
+
+  RxBool isLoading = false.obs;
+
+  Future<void> logoutProcess() async {
+    await AuthService.logoutService(
+      isLoading: isLoading,
+      callApi: true,
+    );
+  }
+
 }

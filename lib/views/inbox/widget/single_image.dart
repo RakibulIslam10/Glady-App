@@ -13,7 +13,7 @@ class SingleImageWidget {
     final cleanPath = imagePath
         .replaceAll('\\', '/')
         .replaceFirst(RegExp(r'^/+'), '');
-    final fullImageUrl = '${ApiEndPoints.mainDomain}/$cleanPath';
+    final fullImageUrl = '${ApiEndPoints.baseUrl}/$cleanPath';
 
     final imageWidget = Image.network(
       fullImageUrl,

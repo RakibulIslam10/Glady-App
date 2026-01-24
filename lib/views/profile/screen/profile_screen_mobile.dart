@@ -28,10 +28,9 @@ class ProfileScreenMobile extends GetView<ProfileController> {
                             builder: (context) => BottomSheetDialogWidget(
                               title: "Logout",
                               subTitle: 'Are you sure you want to logout?',
-                              isLoading: false.obs,
+                              isLoading: controller.isLoading,
                               action: () {
-                                Get.offAllNamed(Routes.loginScreen);
-                                AppStorage.clear();
+                              controller.logoutProcess();
                               },
                             ),
                           );

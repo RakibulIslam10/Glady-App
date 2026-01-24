@@ -38,7 +38,7 @@ class PrimaryInputFieldWidget extends StatefulWidget {
     this.confirmWith,
     this.requiredField = true,
     this.showBorder = false,
-    this.onChange, // default true
+    this.onChange,
   });
 
   @override
@@ -158,58 +158,58 @@ class _PrimaryInputFieldWidgetState extends State<PrimaryInputFieldWidget> {
           decoration: InputDecoration(
             hintText: widget.hintText,
             hintStyle: CustomStyle.bodyMedium.copyWith(
-              color: Colors.grey.shade400,
-              fontWeight: FontWeight.w400,
+              color: Colors.grey.shade600,
+              fontWeight: FontWeight.w600,
               fontSize: Dimensions.titleMedium * 0.95,
             ),
             suffixIcon: widget.isPassword
                 ? IconButton(
-                    icon: Icon(
-                      _obscureText ? Icons.visibility_off : Icons.visibility,
-                      color: _focusNode.hasFocus
-                          ? CustomColors.primary
-                          : CustomColors.disableColor,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
-                  )
+              icon: Icon(
+                _obscureText ? Icons.visibility_off : Icons.visibility,
+                color: _focusNode.hasFocus
+                    ? CustomColors.primary
+                    : CustomColors.disableColor,
+              ),
+              onPressed: () {
+                setState(() {
+                  _obscureText = !_obscureText;
+                });
+              },
+            )
                 : null,
             filled: widget.fillColor != null,
             fillColor:
-                widget.fillColor ??
+            widget.fillColor ??
                 // Theme.of(context).colorScheme.surface,
                 CustomColors.whiteColor.withAlpha(45),
 
             border: widget.showBorder
                 ? OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      Dimensions.radius * 0.9,
-                    ),
-                  )
+              borderRadius: BorderRadius.circular(
+                Dimensions.radius * 0.8,
+              ),
+            )
                 : InputBorder.none,
             focusedBorder: OutlineInputBorder(
               borderSide: widget.readOnly == true
                   ? BorderSide(color: CustomColors.disableColor, width: 1.4)
                   : BorderSide(color: CustomColors.primary, width: 1.4),
-              borderRadius: BorderRadius.circular(Dimensions.radius * 1.2),
+              borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),
             ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: CustomColors.primary.withAlpha(45),
+                color: CustomColors.disableColor.withAlpha(50),
                 width: 1.4,
               ),
-              borderRadius: BorderRadius.circular(Dimensions.radius * 1.2),
+              borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),
             ),
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: CustomColors.rejected, width: 1.4),
-              borderRadius: BorderRadius.circular(Dimensions.radius * 1.2),
+              borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: CustomColors.rejected, width: 1.4),
-              borderRadius: BorderRadius.circular(Dimensions.radius * 1.2),
+              borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),
             ),
           ),
         ),
@@ -217,3 +217,4 @@ class _PrimaryInputFieldWidgetState extends State<PrimaryInputFieldWidget> {
     );
   }
 }
+

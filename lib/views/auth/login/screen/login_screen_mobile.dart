@@ -5,8 +5,12 @@ class LoginScreenMobile extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    log('══════════════════════════════════════════════════════════════════════════════');
-    log('═══════════════════ ROLE => ${AppStorage.isUser != "USER" ? 'DOCTOR' : 'USER'} ════════════════════════');
+    log(
+      '══════════════════════════════════════════════════════════════════════════════',
+    );
+    log(
+      '═══════════════════ ROLE => ${AppStorage.isUser != "USER" ? 'DOCTOR' : 'USER'} ════════════════════════',
+    );
     return Scaffold(
       appBar: CommonAppBar(title: "", isBack: false),
       body: SafeArea(
@@ -53,15 +57,16 @@ class LoginScreenMobile extends GetView<LoginController> {
                   Space.height.v30,
 
                   /// Button
-                  PrimaryButtonWidget(
-                    title: 'Log In',
-                    onPressed: () {
-                      if (controller.formKey.currentState!.validate()) {
-                        // controller.loginProcess();
-                        Get.offAllNamed(Routes.navigationScreen);
-                        AppStorage.save(isUser: controller.emailController.text.contains('user') ? 'USER' : 'DOCTOR');
-                      }
-                    },
+                  Obx(
+                    () => PrimaryButtonWidget(
+                      title: 'Log In',
+                      isLoading: controller.isLoading.value,
+                      onPressed: () {
+                        if (controller.formKey.currentState!.validate()) {
+                          controller.loginProcess();
+                        }
+                      },
+                    ),
                   ),
                   Space.height.v20,
                   Row(

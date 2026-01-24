@@ -1,4 +1,7 @@
+
+import '../../../../core/api/services/auth_services.dart';
 import '../../../../core/utils/basic_import.dart';
+import '../model/login_model.dart';
 
 class LoginController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -15,15 +18,16 @@ class LoginController extends GetxController {
   final isPasswordVisible = false.obs;
   final rememberMe = false.obs;
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
 
-    emailController.text = 'user@gmail.com';
-    passwordController.text = '111111';
+  RxBool isLoading = false.obs;
 
-    // emailController.text = 'doctor@gmail.com';
-    // passwordController.text = '111111';
+  Future<LoginModel> loginProcess() async {
+    return await AuthService.loginService(
+      isLoading: isLoading,
+      email: emailController.text,
+      password: passwordController.text,
+    );
   }
+
+
 }

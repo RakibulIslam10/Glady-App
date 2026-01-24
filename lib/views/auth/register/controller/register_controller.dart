@@ -1,3 +1,5 @@
+import '../../../../core/api/model/basic_success_model.dart';
+import '../../../../core/api/services/auth_services.dart';
 import '../../../../core/utils/basic_import.dart';
 class RegisterController extends GetxController {
   final GlobalKey<FormState> fromKey = GlobalKey<FormState>();
@@ -24,11 +26,14 @@ class RegisterController extends GetxController {
 
   //Register api
   RxBool isLoading = false.obs;
-
-
-
-
-
+  Future<BasicSuccessModel>registerProcess() async {
+    return await AuthService.registerService(
+      isLoading: isLoading,
+      fullName: nameController.text,
+      email: emailController.text,
+      password: passwordController.text, role: 'USER',
+    );
+  }
 
 
 

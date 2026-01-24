@@ -3,6 +3,7 @@ part of 'routes.dart';
 class RoutePageList {
   static var list = [
     //Page Route List
+
     GetPage(
       name: Routes.addExperienceScreen,
       page: () => const AddExperienceScreen(),
@@ -179,11 +180,7 @@ class RoutePageList {
       page: () => const HomeScreen(),
       binding: HomeBinding(),
     ),
-    GetPage(
-      name: Routes.welcomeScreen,
-      page: () => const WelcomeScreen(),
-      binding: WelcomeBinding(),
-    ),
+
     GetPage(
       name: Routes.verificationScreen,
       page: () => const VerificationScreen(),

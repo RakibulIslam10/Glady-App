@@ -1,40 +1,35 @@
+import 'package:glady/views/splash/controller/splash_controller.dart';
+
 import 'core/helpers/network_manager.dart';
+import 'core/utils/app_storage.dart';
 import 'core/utils/basic_import.dart';
+import 'core/widgets/offline_widget.dart';
 import 'initial.dart';
-import 'views/splash/controller/splash_controller.dart';
+import 'views/splash/screen/splash_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Initial.init();
-
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      statusBarColor: CustomColors.backgroundDark,
-      statusBarIconBrightness: Brightness.light,
-    ),
-  );
+  Get.put(NetworkChecker());
+  Get.put(SplashController());
 
   final hasInternet = await NetworkManager.hasConnection();
   bool? lastStatus = hasInternet;
   NetworkManager.connectionStream().listen((isConnected) {
     if (lastStatus != null && lastStatus != isConnected) {
       if (!isConnected) {
-        Get.toNamed(Routes.offlineScreen);
+        Get.to(() => const OfflineWidget());
       } else {
-        if (Get.currentRoute == Routes.offlineScreen) {
-          // Get.offAllNamed(Routes.splashScreen);
-          Get.close(1);
+        if (Get.key.currentState?.canPop() ?? false) {
+          Get.back();
+        } else {
+          Get.offAllNamed(Routes.splashScreen);
         }
-        // CustomSnackBar.success(
-        //   title: Strings.connectionRestored,
-        //   message: Strings.youAreBackOnline,
-        // );
       }
     }
     lastStatus = isConnected;
   });
-  PaintingBinding.instance.imageCache.maximumSize = 1000;
-  PaintingBinding.instance.imageCache.maximumSizeBytes = 200 << 20;
 
   runApp(MyApp(hasInternet: hasInternet));
 }
@@ -46,23 +41,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String savedLang = AppStorage.languageCode;
+    final themes = Themes();
     return ScreenUtilInit(
       designSize: const Size(411, 915),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) => GetMaterialApp(
+        // translations: Languages(),
+        // locale: Locale(savedLang, savedLang == 'en' ? 'US' : 'GK'),
+        // fallbackLocale: Locale('en', 'US'),
+
         debugShowCheckedModeBanner: false,
-        initialRoute: hasInternet ? Routes.splashScreen : Routes.offlineScreen,
+        home: hasInternet ? const SplashScreen() : const OfflineWidget(),
         title: Strings.appName,
         theme: Themes.light,
         darkTheme: Themes.dark,
         getPages: Routes.list,
         defaultTransition: Transition.cupertino,
         transitionDuration: const Duration(milliseconds: 400),
-        themeMode: ThemeMode.light,
-        initialBinding: BindingsBuilder(() {
-          Get.lazyPut(() => SplashController());
-        }),
+        themeMode: themes.currentTheme,
+        // themeMode: ThemeMode.light,
+
+        // ✅ FIXED BUILDER
         builder: (context, widget) {
           return Overlay(
             initialEntries: [

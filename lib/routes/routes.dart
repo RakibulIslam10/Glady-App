@@ -46,7 +46,6 @@ import '../bind/update_profile_binding.dart';
 import '../bind/upload_doc_binding.dart';
 import '../bind/verification_binding.dart';
 import '../bind/video_call_binding.dart';
-import '../bind/welcome_binding.dart';
 import '../views/about/screen/about_screen.dart';
 import '../views/add_experience/screen/add_experience_screen.dart';
 import '../views/aditional/screen/aditional_screen.dart';
@@ -93,7 +92,6 @@ import '../views/tips/screen/tips_screen.dart';
 import '../views/update_profile/screen/update_profile_screen.dart';
 import '../views/upload_doc/screen/upload_doc_screen.dart';
 import '../views/video_call/screen/video_call_screen.dart';
-import '../views/welcome/screen/welcome_screen.dart';
 
 part 'pages.dart';
 

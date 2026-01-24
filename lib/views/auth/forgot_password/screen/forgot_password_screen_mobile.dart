@@ -12,7 +12,6 @@ class ForgotPasswordScreenMobile extends GetView<ForgotPasswordController> {
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
           children: [
             Space.height.v20,
-
             TextWidget(
               "Forgot password",
               fontSize: Dimensions.titleLarge * 1.4,
@@ -41,25 +40,22 @@ class ForgotPasswordScreenMobile extends GetView<ForgotPasswordController> {
                   Space.height.betweenInputBox,
 
                   Obx(
-                        () =>
-                        PrimaryButtonWidget(
-                          title: "Send confirmation ",
-                          isLoading: controller.isLoading.value,
-                          onPressed: () {
-                            if (controller.fromKey.currentState!.validate()) {
-                              // controller.forgetPasswordProcess();
-                              Get.toNamed(Routes.otpScreen);
-                            }
-                          },
-                        ),
+                    () => PrimaryButtonWidget(
+                      title: "Send confirmation ",
+                      isLoading: controller.isLoading.value,
+                      onPressed: () {
+                        if (controller.fromKey.currentState!.validate()) {
+                          controller.forgotPasswordProcess();
+                        }
+                      },
+                    ),
                   ),
-
                 ],
               ),
             ),
           ],
-        ),)
-      ,
+        ),
+      ),
     );
   }
 }

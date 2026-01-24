@@ -47,14 +47,7 @@ class ChangePasswordScreenMobile extends GetView<ChangePasswordController> {
                   isLoading: controller.isLoading.value,
                   onPressed: () {
                     if (controller.formKey.currentState!.validate()) {
-                      Get.offAll(
-                        ConfirmationWidget(
-                          iconPath: Assets.icons.vector,
-                          title: "Password Update Successfully",
-                          subtitle:
-                              'your password has been changed successfully',
-                        ),
-                      );
+                      controller.changePasswordProcess();
                     }
                   },
                 ),
