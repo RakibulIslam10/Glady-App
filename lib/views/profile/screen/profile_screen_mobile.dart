@@ -30,7 +30,7 @@ class ProfileScreenMobile extends GetView<ProfileController> {
                               subTitle: 'Are you sure you want to logout?',
                               isLoading: controller.isLoading,
                               action: () {
-                              controller.logoutProcess();
+                                controller.logoutProcess();
                               },
                             ),
                           );

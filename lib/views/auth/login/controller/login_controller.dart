@@ -18,16 +18,21 @@ class LoginController extends GetxController {
   final isPasswordVisible = false.obs;
   final rememberMe = false.obs;
 
-
   RxBool isLoading = false.obs;
 
-  Future<LoginModel> loginProcess() async {
+  @override
+  onInit(){
+    super.onInit();
+    emailController.text = '5xz@yopmail.com';
+    passwordController.text = 'rakibulislam';
+  }
+
+   loginProcess() async {
     return await AuthService.loginService(
       isLoading: isLoading,
       email: emailController.text,
       password: passwordController.text,
     );
   }
-
 
 }

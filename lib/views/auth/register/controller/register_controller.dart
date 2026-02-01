@@ -32,6 +32,7 @@ class RegisterController extends GetxController {
       fullName: nameController.text,
       email: emailController.text,
       password: passwordController.text, role: 'USER',
+      doctorId: ''
     );
   }
 

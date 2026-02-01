@@ -1,12 +1,10 @@
 import 'package:glady/views/splash/controller/splash_controller.dart';
-
 import 'core/helpers/network_manager.dart';
 import 'core/utils/app_storage.dart';
 import 'core/utils/basic_import.dart';
 import 'core/widgets/offline_widget.dart';
 import 'initial.dart';
 import 'views/splash/screen/splash_screen.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +41,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     String savedLang = AppStorage.languageCode;
     final themes = Themes();
+    print(MediaQuery.of(context).size.height);
     return ScreenUtilInit(
       designSize: const Size(411, 915),
       minTextAdapt: true,
@@ -51,7 +50,6 @@ class MyApp extends StatelessWidget {
         // translations: Languages(),
         // locale: Locale(savedLang, savedLang == 'en' ? 'US' : 'GK'),
         // fallbackLocale: Locale('en', 'US'),
-
         debugShowCheckedModeBanner: false,
         home: hasInternet ? const SplashScreen() : const OfflineWidget(),
         title: Strings.appName,

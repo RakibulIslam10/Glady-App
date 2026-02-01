@@ -120,6 +120,7 @@ class RegisterScreenMobile extends GetView<RegisterController> {
                     fontWeight: FontWeight.w600,
                     title: 'Doctor Account',
                     onPressed: () {
+                      AppStorage.save(isUser: 'DOCTOR');
                       Get.toNamed(Routes.doctorRegisterScreen);
                     },
                   ),

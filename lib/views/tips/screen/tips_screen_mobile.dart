@@ -17,12 +17,14 @@ class TipsScreenMobile extends GetView<TipsController> {
       ),
       body: SafeArea(
         child: ListView.builder(
+          itemCount: Get.find<HomeController>().wellnessTipsList.length,
           physics: BouncingScrollPhysics(),
           padding: EdgeInsetsGeometry.symmetric(
             horizontal: Dimensions.defaultHorizontalSize,
             vertical: Dimensions.verticalSize,
           ),
           itemBuilder: (context, index) {
+            final tip = Get.find<HomeController>().wellnessTipsList[index];
             return Container(
               margin: EdgeInsets.only(bottom: Dimensions.heightSize),
               decoration: BoxDecoration(
@@ -38,10 +40,7 @@ class TipsScreenMobile extends GetView<TipsController> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextWidget(
-                      "Drink water regularly throughout the day to keep your body energized and functioning smoothly.",
-                      fontWeight: FontWeight.w500,
-                    ),
+                    TextWidget(tip.content, fontWeight: FontWeight.w500),
                     Container(
                       decoration: BoxDecoration(
                         color: CustomColors.disableColor,

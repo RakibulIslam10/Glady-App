@@ -8,10 +8,11 @@ class ApiEndPoints {
   static const String forgotPassword = '/auth/send-reset-otp';
   static const String resetPassword = '/auth/reset-password';
   static const String verifyOtp = '/auth/verify-reg-otp';
+  static const String verifyResetOtp = '/auth/verify-reset-otp';
   static const String resendOtp = '/auth/resend-otp';
 
   //  USER ENDPOINTS
-  static const String userProfile = '/user/profile';
+  static const String wellnessTips = '/wellness-tips';
   static const String updateProfile = '/user/profile';
   static const String changePassword = '/users/change-password';
   static const String deleteAccount = '/user/delete';

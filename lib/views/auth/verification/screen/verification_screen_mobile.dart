@@ -11,7 +11,7 @@ class VerificationScreenMobile extends GetView<VerificationController> {
     );
   }
 
-  _bodyWidget() {
+  ListView _bodyWidget() {
     return ListView(
       padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
       children: [

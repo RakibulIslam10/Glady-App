@@ -41,7 +41,7 @@ class ForgotPasswordScreenMobile extends GetView<ForgotPasswordController> {
 
                   Obx(
                     () => PrimaryButtonWidget(
-                      title: "Send confirmation ",
+                      title: 'Continue',
                       isLoading: controller.isLoading.value,
                       onPressed: () {
                         if (controller.fromKey.currentState!.validate()) {

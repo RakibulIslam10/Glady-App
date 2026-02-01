@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:glady/views/auth/login/model/login_model.dart';
-
+import '../../../views/auth/otp/model/otp_verify_model.dart';
 import '../../utils/app_storage.dart';
 import '../../utils/basic_import.dart';
 import '../../widgets/confirmation_widget.dart';
@@ -41,19 +41,16 @@ class AuthService {
       endPoint: ApiEndPoints.login,
       isLoading: isLoading,
       body: inputBody,
+      queryParams: {},
+
       showSuccessSnackBar: false,
-      enableRetry: true,
-      maxRetries: 2,
       onSuccess: (result) {
-        // ✅ Save to AppStorage
         AppStorage.save(
           token: result.data?.accessToken,
           isUser: result.data?.role,
           isLoggedIn: true,
         );
-
         Get.offAllNamed(Routes.navigationScreen);
-
         log('✅ Login successful - Token saved');
       },
     );
@@ -82,6 +79,7 @@ class AuthService {
     required String email,
     required String password,
     required String role,
+     String? doctorId,
     String? phone,
   }) async {
     Map<String, dynamic> inputBody = {
@@ -89,7 +87,7 @@ class AuthService {
       'email': email.trim(),
       'password': password,
       'role': role,
-      if (phone != null && phone.isNotEmpty) 'phone': phone.trim(),
+      'doctorId' : doctorId
     };
 
     return await _api.post(
@@ -98,13 +96,8 @@ class AuthService {
       isLoading: isLoading,
       body: inputBody,
       showSuccessSnackBar: true,
-      enableRetry: true,
-      maxRetries: 2,
       onSuccess: (result) {
-        // ✅ Save token to AppStorage
-        // AppStorage.save(token: result.data.accessToken, isLoggedIn: true, isUser: role);
         Get.toNamed(Routes.verificationScreen);
-
         log('✅ Registration successful - Token saved');
       },
     );
@@ -117,10 +110,7 @@ class AuthService {
   RxBool isLoading = false.obs;
 
   otpVerifyProcess() async {
-    // Get email from storage or pass as argument
-    String email = AppStorage.tempEmail; // or from Get.arguments
-
-    return await AuthService.otpVerifyService(
+    return await AuthService.registerOtpVerifyService(
       isLoading: isLoading,
       code: otpController.text,
       email: email,
@@ -128,7 +118,7 @@ class AuthService {
   }
   ──────────────────────────────────────────────────────────────────────────
   */
-  static Future<LoginModel> otpVerifyService({
+  static Future<LoginModel> registerOtpVerifyService({
     required RxBool isLoading,
     required String code,
     required String email,
@@ -144,20 +134,47 @@ class AuthService {
       isLoading: isLoading,
       body: inputBody,
       showSuccessSnackBar: false,
-      enableRetry: false,
       onSuccess: (result) {
         AppStorage.save(
           isLoggedIn: true,
           token: result.data?.accessToken,
           isUser: result.data?.role,
-        );
 
-        if (AppStorage.isUser == 'USER') {
+        );
+        if (result.data?.role == 'USER') {
           log('USER');
           Get.offAllNamed(Routes.navigationScreen);
         } else {
+          log('DOCTOR');
           Get.toNamed(Routes.aditionalScreen);
         }
+        log('✅ OTP verified successfully');
+      },
+    );
+  }
+
+  static Future<ResetOtpVerifyModel> forgotOtpVerifyService({
+    required RxBool isLoading,
+    required String code,
+    required String email,
+  }) async {
+    Map<String, dynamic> inputBody = {
+      'email': email.trim(),
+      'otp': code.trim(),
+    };
+
+    return await _api.post(
+      fromJson: ResetOtpVerifyModel.fromJson,
+      endPoint: ApiEndPoints.verifyResetOtp,
+      isLoading: isLoading,
+      body: inputBody,
+      showSuccessSnackBar: false,
+      onSuccess: (result) {
+        AppStorage.save(
+          isLoggedIn: true,
+          temporaryToken: result.data?.resetToken,
+        );
+        Get.toNamed(Routes.resetPasswordScreen);
         log('✅ OTP verified successfully');
       },
     );
@@ -170,8 +187,6 @@ class AuthService {
   RxBool isResending = false.obs;
 
   resendOtpProcess() async {
-    String email = AppStorage.tempEmail; // or from Get.arguments
-
     return await AuthService.resendOtpService(
       isLoading: isResending,
       email: email,
@@ -191,7 +206,6 @@ class AuthService {
       isLoading: isLoading,
       body: inputBody,
       showSuccessSnackBar: true,
-      enableRetry: false,
       onSuccess: (result) {
         log('✅ OTP resent successfully');
       },
@@ -224,8 +238,6 @@ class AuthService {
       isLoading: isLoading,
       body: inputBody,
       showSuccessSnackBar: true,
-      enableRetry: true,
-      maxRetries: 2,
       onSuccess: (result) {
         Get.toNamed(Routes.otpScreen);
 
@@ -241,9 +253,6 @@ class AuthService {
   RxBool isLoading = false.obs;
 
   resetPasswordProcess() async {
-    // Get email from storage or pass as argument
-    String email = AppStorage.tempEmail; // or from Get.arguments
-
     return await AuthService.resetPasswordService(
       isLoading: isLoading,
       password: passwordController.text,
@@ -255,26 +264,23 @@ class AuthService {
   static Future<BasicSuccessModel> resetPasswordService({
     required RxBool isLoading,
     required String password,
-    required String email,
+    // required String email,
   }) async {
     Map<String, dynamic> inputBody = {
-      'email': email.trim(),
+      // 'email': email.trim(),
+      'resetToken': AppStorage.temporaryToken,
       'newPassword': password,
     };
 
-    return await _api.patch(
+    return await _api.post(
       fromJson: BasicSuccessModel.fromJson,
       endPoint: ApiEndPoints.resetPassword,
       isLoading: isLoading,
       body: inputBody,
       showSuccessSnackBar: true,
-      enableRetry: false,
       onSuccess: (result) {
-        // ✅ Clear temp data after successful reset
-        // AppStorage.clearTempData();
-
-        // ✅ Navigate to Login Screen
-        // Get.offAllNamed(Routes.loginScreen);
+        AppStorage.save(temporaryToken: '');
+        Get.offAllNamed(Routes.welcomeScreen);
 
         log('✅ Password reset successful - Please login with new password');
       },
@@ -313,14 +319,12 @@ class AuthService {
       isLoading: isLoading,
       body: inputBody,
       showSuccessSnackBar: false,
-      enableRetry: false,
       onSuccess: (result) {
         Get.offAll(
           ConfirmationWidget(
             iconPath: Assets.icons.vector,
             title: "Password Update Successfully",
-            subtitle:
-            'your password has been changed successfully',
+            subtitle: 'your password has been changed successfully',
           ),
         );
         log('✅ Password changed successfully');
@@ -362,7 +366,6 @@ class AuthService {
           isLoading: isLoading ?? false.obs,
           body: {},
           showSuccessSnackBar: showSuccessSnackBar,
-          checkNetwork: false,
         );
       }
 

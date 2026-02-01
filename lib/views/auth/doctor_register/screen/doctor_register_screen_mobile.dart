@@ -6,7 +6,7 @@ class DoctorRegisterScreenMobile extends GetView<DoctorRegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(title: "DoctorRegister"),
+      appBar: CommonAppBar(title: ""),
       body: SafeArea(
         child: ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
@@ -85,8 +85,7 @@ class DoctorRegisterScreenMobile extends GetView<DoctorRegisterController> {
                       title: "Register",
                       onPressed: () {
                         if (controller.fromKey.currentState!.validate()) {
-                          // controller.registerProcess();
-                          Get.toNamed(Routes.verificationScreen);
+                          controller.registerProcess();
                         }
                       },
                     ),

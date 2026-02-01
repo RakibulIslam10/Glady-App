@@ -51,7 +51,7 @@ class AppStorage {
   static String get token => _storage.read(tokenKey) ?? '';
   static String get temporaryToken => _storage.read(temporaryTokenKey) ?? '';
   static String get userId => _storage.read(userIdKey) ?? '';
-  static String get isUser => _storage.read(isUserKey) ?? '';
+  static String get isUser => _storage.read(isUserKey) ?? 'USER';
   static String get mobileCode => _storage.read(mobileCodeKey) ?? '';
   static String get waitTime => _storage.read(waitTimeKey) ?? '01:00';
   static bool get isLoggedIn => _storage.read(isLoggedInKey) ?? false;
@@ -75,7 +75,7 @@ class AppStorage {
       temporaryToken: _storage.read(temporaryTokenKey) ?? '',
       mobileCode: _storage.read(mobileCodeKey) ?? '',
       userId: _storage.read(userIdKey) ?? '',
-      isUser: _storage.read(isUserKey) ?? '',
+      isUser: _storage.read(isUserKey) ?? 'USER',
     );
   }
 

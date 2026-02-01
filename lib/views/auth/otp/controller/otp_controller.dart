@@ -4,6 +4,8 @@ import '../../../../core/api/model/basic_success_model.dart';
 import '../../../../core/api/services/auth_services.dart';
 import '../../../../core/utils/basic_import.dart';
 import '../../login/model/login_model.dart';
+import '../model/otp_verify_model.dart';
+
 class OtpController extends GetxController {
   final code = ''.obs;
   final otpController = TextEditingController();
@@ -30,31 +32,20 @@ class OtpController extends GetxController {
     });
   }
 
-
   RxBool isResending = false.obs;
 
   Future<BasicSuccessModel> resendOtpProcess() async {
-
     return await AuthService.resendOtpService(
       isLoading: isResending,
       email: Get.find<ForgotPasswordController>().emailController.text,
     );
   }
 
-  Future<LoginModel> verifyOtp() async {
-    return await AuthService.otpVerifyService(
+  Future<ResetOtpVerifyModel> verifyOtp() async {
+    return await AuthService.forgotOtpVerifyService(
       isLoading: isLoading,
       code: code.value,
       email: Get.find<ForgotPasswordController>().emailController.text,
     );
   }
-
-
-
-
-
-
-
-
-
 }
