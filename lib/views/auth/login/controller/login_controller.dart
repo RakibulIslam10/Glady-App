@@ -27,7 +27,7 @@ class LoginController extends GetxController {
     passwordController.text = 'rakibulislam';
   }
 
-   loginProcess() async {
+   Future<LoginModel> loginProcess() async {
     return await AuthService.loginService(
       isLoading: isLoading,
       email: emailController.text,
