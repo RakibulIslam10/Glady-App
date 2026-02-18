@@ -24,18 +24,15 @@ class UploadDocScreenMobile extends GetView<UploadDocController> {
 
             Space.height.v20,
 
-            Wrap(
-              children: List.generate(controller.attachmentList.length + 1, (
-                index,
-              ) {
-                if (controller.attachmentList.length == index) {
+            Obx(() => Wrap(
+              children: List.generate(controller.multipleImages.length + 1, (index) {
+                if (index == controller.multipleImages.length) {
                   return GestureDetector(
                     onTap: () {
                       BottomImagePicker.show(
                         multiple: true,
                         multipleImagesVariable: (image) {
                           controller.multipleImages.value = image;
-                          // print('✅ Single: ${image?.path}');
                           return image;
                         },
                       );
@@ -67,31 +64,21 @@ class UploadDocScreenMobile extends GetView<UploadDocController> {
                   width: 100.w,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(Dimensions.radius),
-                    child: CachedNetworkImage(
-                      imageUrl: controller.attachmentList[index],
+                    child: Image.file(
+                      File(controller.multipleImages[index].path),
                       fit: BoxFit.cover,
                     ),
                   ),
                 );
               }),
-            ),
+            )),
             Space.height.v40,
-            PrimaryButtonWidget(
-              title: "Continue",
-              onPressed: () => Get.offAll(
-                ConfirmationWidget(
-                  icon: Icon(
-                    Icons.access_time_rounded,
-                    size: Dimensions.iconSizeLarge * 4,
-                    color: CustomColors.primary,
-                  ),
-                  title: 'Awaiting Verification',
-                  subtitle:
-                      'The authority will check your documents to verify your authenticity.',
-                  onTap: () => Get.offAllNamed(Routes.loginScreen),
-                ),
-              ),
-            ),
+ Obx(() =>
+     PrimaryButtonWidget(
+         isLoading: controller.isLoading.value,
+         title: "Continue",
+         onPressed: () => controller.uploadFileDoc()
+     ),)
           ],
         ),
       ),

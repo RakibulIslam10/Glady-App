@@ -35,7 +35,6 @@ class AditionalController extends GetxController {
     );
   }
 
-
   RxBool isAdding = false.obs;
   Future<BasicSuccessModel> addSpeciality() async {
     return ApiRequest().post(

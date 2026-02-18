@@ -19,6 +19,13 @@ class ApiEndPoints {
 
   static const String getSpecialties = '/specialist';
   static const String createDoctorInfo = '/doctors/me/profile';
+  static const String docUpload = '/doctors/me/documents';
+  static const String notifications = '/notifications';
+  static const String terms = '/legal-content/terms-and-conditions';
+  static const String policy = '/legal-content/privacy-policy';
+
+  // PROFILE
+  static const String doctorProfile = '/doctors/me/profile';
 
   //  PRODUCT ENDPOINTS
   static const String products = '/products';

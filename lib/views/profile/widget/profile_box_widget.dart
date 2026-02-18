@@ -1,3 +1,5 @@
+import 'package:glady/views/profile/controller/profile_controller.dart';
+
 import '../../../core/utils/app_storage.dart';
 import '../../../core/utils/basic_import.dart';
 import '../../../core/widgets/profile_avater_widget.dart';
@@ -172,7 +174,7 @@ class ProfileBoxWidget extends StatelessWidget {
   }
 }
 
-class DoctorProfileBox extends StatelessWidget {
+class DoctorProfileBox extends GetView<ProfileController> {
   const DoctorProfileBox({super.key});
 
   @override
@@ -194,40 +196,45 @@ class DoctorProfileBox extends StatelessWidget {
             mainAxisAlignment: mainSpaceBet,
             children: [
               CustomLogoWidget(size: 40.h),
-              TextButton(
-                style: TextButton.styleFrom(
-                  minimumSize: Size.zero,
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: Dimensions.defaultHorizontalSize * 0.5,
-                    vertical: Dimensions.verticalSize * 0.25,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(Dimensions.radius * 2),
-                    side: BorderSide(color: CustomColors.primary),
-                  ),
-                ),
-                onPressed: () {},
-                child: TextWidget(
-                  'ID : 052415',
-                  fontSize: Dimensions.titleSmall,
-                  color: CustomColors.primary,
-                ),
-              ),
+              // TextButton(
+              //   style: TextButton.styleFrom(
+              //     minimumSize: Size.zero,
+              //     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              //     padding: EdgeInsets.symmetric(
+              //       horizontal: Dimensions.defaultHorizontalSize * 0.5,
+              //       vertical: Dimensions.verticalSize * 0.25,
+              //     ),
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(Dimensions.radius * 2),
+              //       side: BorderSide(color: CustomColors.primary),
+              //     ),
+              //   ),
+              //   onPressed: () {},
+              //   child: TextWidget(
+              //     'ID : 052415',
+              //     fontSize: Dimensions.titleSmall,
+              //     color: CustomColors.primary,
+              //   ),
+              // ),
+              SizedBox()
             ],
           ),
 
-          ProfileAvatarWidget(
+
+                    ProfileAvatarWidget(
             imageUrl:
-                'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
+                controller.doctorProfileModel?.data.userId.profileImage ?? ''  ,
 
             size: 100,
           ),
+
+          Space.height.v10,
+
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             spacing: Dimensions.widthSize * 0.8,
             children: [
-              TextWidget("Luna Kellan"),
+              TextWidget(controller.doctorProfileModel?.data.userId.name ?? "Luna Kellan"),
               TextButton(
                 style: TextButton.styleFrom(
                   minimumSize: Size.zero,
@@ -245,7 +252,7 @@ class DoctorProfileBox extends StatelessWidget {
                 ),
                 onPressed: () {},
                 child: TextWidget(
-                  '12 years',
+                  '${controller.doctorProfileModel?.data.totalExperienceYears.toString() ?? '0'} years',
                   fontSize: Dimensions.titleSmall * 0.9,
                   color: CustomColors.primary,
                 ),
@@ -253,38 +260,56 @@ class DoctorProfileBox extends StatelessWidget {
             ],
           ),
           TextWidget(
-            'Dentist',
+            controller.doctorProfileModel?.data.specialtyId.name.toString() ?? 'Specialty',
             fontSize: Dimensions.titleSmall,
             color: Colors.black.withOpacity(0.7),
           ),
           TextWidget(
-            'Central Dental care',
+              controller.doctorProfileModel?.data.currentOrganization.toString() ?? '',
             fontSize: Dimensions.titleSmall,
             color: Colors.black.withOpacity(0.7),
           ),
+        Row(
+
+          mainAxisAlignment: mainCenter,
+          children: [
           Wrap(
             children: List.generate(
               5,
-              (index) => Icon(Icons.star, color: Colors.orange),
+                  (index) {
+                final rating = controller.doctorProfileModel?.data.averageRating ?? 0;
+                if (index < rating.floor()) {
+                  return Icon(Icons.star, color: Colors.orange);
+                } else if (index < rating && rating % 1 >= 0.5) {
+                  return Icon(Icons.star_half, color: Colors.orange);
+                } else {
+                  return Icon(Icons.star_border, color: Colors.orange);
+                }
+              },
             ),
           ),
+          TextWidget(
+            '(${controller.doctorProfileModel?.data.averageRating.toStringAsFixed(1) ?? '0.0'})',
+            fontSize: Dimensions.titleSmall,
+            color: Colors.black.withOpacity(0.7),
+          ),
+        ],),
 
           Space.height.v20,
           Column(
             crossAxisAlignment: crossStart,
             children: [
               TextWidget('Services'),
-
               Space.height.v10,
               Wrap(
                 children: List.generate(
-                  4,
+                  controller.doctorProfileModel?.data.services.length ?? 0,
                   (index) => TextWidget(
                     padding: EdgeInsetsGeometry.only(
                       right: Dimensions.widthSize * 2,
                       bottom: Dimensions.heightSize,
                     ),
-                    'food allergies',
+                    controller.doctorProfileModel?.data.services[index].name.toString() ?? '',
                     fontSize: Dimensions.titleSmall,
                     color: CustomColors.grayShade,
                   ),
