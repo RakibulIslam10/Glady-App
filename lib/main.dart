@@ -60,8 +60,6 @@ class MyApp extends StatelessWidget {
         transitionDuration: const Duration(milliseconds: 400),
         themeMode: themes.currentTheme,
         // themeMode: ThemeMode.light,
-
-        // ✅ FIXED BUILDER
         builder: (context, widget) {
           return Overlay(
             initialEntries: [

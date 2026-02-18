@@ -23,8 +23,13 @@ class LoginController extends GetxController {
   @override
   onInit(){
     super.onInit();
-    emailController.text = '5xz@yopmail.com';
-    passwordController.text = 'rakibulislam';
+    //USER
+    emailController.text = 'xyan@yopmail.com';
+    passwordController.text = '11223344';
+
+    //DOCTOR
+    emailController.text = 'zyanmallik@yopmail.com';
+    passwordController.text = '11223344';
   }
 
    Future<LoginModel> loginProcess() async {

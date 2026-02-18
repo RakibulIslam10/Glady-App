@@ -13,19 +13,17 @@ class VerificationController extends GetxController {
   final isClipboardDetected = false.obs;
   final email = ''.obs;
 
+
+
   @override
   void onInit() {
     super.onInit();
-    _getEmailFromController(); // ✅ Email initialize kora
-  }
-
-  void _getEmailFromController() {
-    if (Get.isRegistered<RegisterController>()) {
-      email.value = Get.find<RegisterController>().emailController.text;
-    } else if (Get.isRegistered<DoctorRegisterController>()) {
-      email.value = Get.find<DoctorRegisterController>().emailController.text;
+    if (Get.arguments != null && Get.arguments['email'] != null) {
+      email.value = Get.arguments['email'];
     }
   }
+
+
 
   RxBool isResending = false.obs;
 

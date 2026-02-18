@@ -97,7 +97,11 @@ class AuthService {
       body: inputBody,
       showSuccessSnackBar: true,
       onSuccess: (result) {
-        Get.toNamed(Routes.verificationScreen);
+        Get.toNamed(Routes.verificationScreen,
+          arguments: {
+            "email": email.trim(),
+          },
+        );
         log('✅ Registration successful - Token saved');
       },
     );
@@ -141,6 +145,7 @@ class AuthService {
           isUser: result.data?.role,
 
         );
+        print(result.data?.accessToken ?? '');
         if (result.data?.role == 'USER') {
           log('USER');
           Get.offAllNamed(Routes.navigationScreen);

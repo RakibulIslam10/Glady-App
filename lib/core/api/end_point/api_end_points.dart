@@ -1,5 +1,5 @@
 class ApiEndPoints {
-  static const String baseUrl = 'http://10.10.20.22:3000/api';
+  static const String baseUrl = 'http://10.10.20.22:3001/api';
 
   // AUTH ENDPOINTS
   static const String login = '/auth/login';
@@ -16,6 +16,9 @@ class ApiEndPoints {
   static const String updateProfile = '/user/profile';
   static const String changePassword = '/users/change-password';
   static const String deleteAccount = '/user/delete';
+
+  static const String getSpecialties = '/specialist';
+  static const String createDoctorInfo = '/doctors/me/profile';
 
   //  PRODUCT ENDPOINTS
   static const String products = '/products';
