@@ -5,6 +5,10 @@ class UpdateProfileScreenMobile extends GetView<UpdateProfileController> {
 
   @override
   Widget build(BuildContext context) {
+    final profileController = Get.find<ProfileController>();
+    final existingImageUrl =
+        profileController.doctorProfileModel?.data.userId.profileImage ?? '';
+
     return Scaffold(
       appBar: CommonAppBar(title: "Update Profile"),
       body: SafeArea(
@@ -18,42 +22,36 @@ class UpdateProfileScreenMobile extends GetView<UpdateProfileController> {
                     context: context,
                     builder: (_) => BottomImagePicker(
                       singleImageVariable: (image) {
-                        // controller.profileImage.value = image;
+                        controller.profileImage.value = image;
                       },
                     ),
                   ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      if (AppStorage.isUser == 'USER')
+                  child: Obx(
+                    () => Stack(
+                      alignment: Alignment.center,
+                      children: [
                         ProfileAvatarWidget(
                           size: 100,
-                          // imageFile: controller.profileImage.value,
-                          imageUrl:
-                              'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
+                          imageFile: controller.profileImage.value != null
+                              ? File(controller.profileImage.value!.path)
+                              : null,
+                          imageUrl: existingImageUrl,
                         ),
-
-                      if (AppStorage.isUser == 'DOCTOR')
-                        ProfileAvatarWidget(
-                          size: 100,
-                          // imageFile: controller.profileImage.value,
-                          imageUrl:
-                              'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
+                        Container(
+                          height: 100.h,
+                          width: 100.w,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.black38,
+                          ),
+                          child: Icon(
+                            Icons.image_outlined,
+                            size: Dimensions.iconSizeLarge * 1.2,
+                            color: CustomColors.whiteColor,
+                          ),
                         ),
-                      Container(
-                        height: 100.h,
-                        width: 100.w,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.black38,
-                        ),
-                        child: Icon(
-                          Icons.image_outlined,
-                          size: Dimensions.iconSizeLarge * 1.2,
-                          color: CustomColors.whiteColor,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
 
@@ -79,15 +77,22 @@ class UpdateProfileScreenMobile extends GetView<UpdateProfileController> {
                 PrimaryInputFieldWidget(
                   controller: controller.phoneController,
                   hintText: 'Phone',
+                  keyBoardType: TextInputType.number,
                   label: 'Emergency Contact Number',
                 ),
 
                 Space.height.betweenInputBox,
 
-                PrimaryInputFieldWidget(
-                  controller: controller.dobController,
-                  hintText: 'Date of Birth',
+                DatePickerWidget(
+                  hint: 'Date of Birth',
                   label: 'Date of Birth',
+                  onDateSelected: (DateTime date) {
+                    controller.selectedDob.value = date;
+                    controller.dobController.text = date
+                        .toIso8601String()
+                        .split('T')
+                        .first;
+                  },
                 ),
 
                 Space.height.betweenInputBox,
@@ -103,16 +108,24 @@ class UpdateProfileScreenMobile extends GetView<UpdateProfileController> {
                     'Services',
                   ),
                   Space.height.betweenInputBox,
-                  Space.height.betweenInputBox,
                   _filedDoctorCard(
                     () => Get.toNamed(Routes.experienceScreen),
                     'Work Experience',
                   ),
                   Space.height.betweenInputBox,
                 ],
+
                 Space.height.betweenInputBox,
 
-                PrimaryButtonWidget(title: 'Update', onPressed: () {}),
+                Obx(
+                  () => PrimaryButtonWidget(
+                    isLoading: controller.isLoading.value,
+                    title: 'Update',
+                    onPressed: () {
+                      controller.doctorUpdateProfileProcess();
+                    },
+                  ),
+                ),
               ],
             ),
           ),

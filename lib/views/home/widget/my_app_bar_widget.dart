@@ -39,12 +39,31 @@ class MyAppBarWidget extends GetView<HomeController> {
                   ),
                 ),
                 Space.width.v10,
-                GestureDetector(
-                  onTap: () => Get.find<NavigationController>().goToProfile(),
-
-                  child: ProfileAvatarWidget(
-                    size: 50.h,
-                    imageUrl:'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png'
+                Obx(
+                      () => GestureDetector(
+                    onTap: () => Get.find<NavigationController>().goToProfile(),
+                    child: Get.find<ProfileController>().getDoctorProfileLoading.value
+                        ? Shimmer.fromColors(
+                      baseColor: Colors.grey.shade300,
+                      highlightColor: Colors.grey.shade100,
+                      child: Container(
+                        width: 50.h,
+                        height: 50.h,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                        : ProfileAvatarWidget(
+                      size: 50.h,
+                      imageUrl: Get.find<ProfileController>()
+                          .doctorProfileModel
+                          ?.data
+                          .userId
+                          .profileImage ??
+                          "https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png",
+                    ),
                   ),
                 ),
               ],

@@ -146,17 +146,20 @@ class SpecialtyId {
 class UserId {
   final String id;
   final String name;
+  final String? phone;
   final String profileImage;
 
   UserId({
     required this.id,
     required this.name,
+     this.phone,
     required this.profileImage,
   });
 
   factory UserId.fromJson(Map<String, dynamic> json) => UserId(
     id: json["_id"],
     name: json["name"],
+    phone: json["phone"],
     profileImage: json["profileImage"],
   );
 

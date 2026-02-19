@@ -14,6 +14,7 @@ class ApiEndPoints {
   //  USER ENDPOINTS
   static const String wellnessTips = '/wellness-tips';
   static const String updateProfile = '/user/profile';
+  static const String doctorUpdateProfile = '/doctors/me/profile';
   static const String changePassword = '/users/change-password';
   static const String deleteAccount = '/user/delete';
 
@@ -23,6 +24,7 @@ class ApiEndPoints {
   static const String notifications = '/notifications';
   static const String terms = '/legal-content/terms-and-conditions';
   static const String policy = '/legal-content/privacy-policy';
+  static const String addServiceDoctor = '/doctors/me/services';
 
   // PROFILE
   static const String doctorProfile = '/doctors/me/profile';
