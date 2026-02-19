@@ -1,6 +1,5 @@
 part of 'create_schedule_screen.dart';
 
-
 class CreateScheduleScreenMobile extends GetView<CreateScheduleController> {
   const CreateScheduleScreenMobile({super.key});
 
@@ -59,7 +58,6 @@ class CreateScheduleScreenMobile extends GetView<CreateScheduleController> {
                     controller: controller.durationController,
                     hintText: 'Duration (min)',
                     label: 'Duration',
-
                   ),
                 ),
                 Space.width.v15,
@@ -76,7 +74,7 @@ class CreateScheduleScreenMobile extends GetView<CreateScheduleController> {
             ),
             Space.height.v25,
             Obx(
-                  () => PrimaryButtonWidget(
+              () => PrimaryButtonWidget(
                 isLoading: controller.isLoading.value,
                 title: 'Continue',
                 onPressed: () => controller.createSchedule(),

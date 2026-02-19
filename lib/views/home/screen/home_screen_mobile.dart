@@ -12,7 +12,11 @@ class HomeScreenMobile extends GetView<HomeController> {
       ),
       body: SafeArea(
         child: Obx(
-          () => controller.isLoading.value  || Get.find<ProfileController>().getDoctorProfileLoading.value ? LoadingWidget() : _bodyWidget(),
+          () =>
+              controller.isLoading.value ||
+                  Get.find<ProfileController>().getDoctorProfileLoading.value
+              ? LoadingWidget()
+              : _bodyWidget(),
         ),
       ),
     );
@@ -31,6 +35,7 @@ class HomeScreenMobile extends GetView<HomeController> {
         if (controller.wellnessTipsList.isNotEmpty) ...[
           SliverToBoxAdapter(
             child: SectionHeader(
+
               title: "Daily Wellness Tips",
               onViewAllTap: () => Get.toNamed(Routes.tipsScreen),
             ),

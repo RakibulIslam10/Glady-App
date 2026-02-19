@@ -24,6 +24,8 @@ class ApiEndPoints {
   static const String notifications = '/notifications';
   static const String terms = '/legal-content/terms-and-conditions';
   static const String policy = '/legal-content/privacy-policy';
+  static const String support = '/contact';
+  static const String doctorHome = '/appointments/doctor/dashboard';
 
 
   static const String addServiceDoctor = '/doctors/me/services';
