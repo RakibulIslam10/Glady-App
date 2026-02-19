@@ -93,7 +93,7 @@ class DoctorHomeScreenMobile extends GetView<DoctorHomeController> {
                     padding: EdgeInsets.only(bottom: Dimensions.heightSize),
                     child: RequestCard(
                       name: appointment.patientName,
-                      service: appointment.patientProfileImage,
+                      service: appointment.reasonTitle,
                       time: appointment.timeRange,
                       status: appointment.status,
                       buttonTitle: 'View',

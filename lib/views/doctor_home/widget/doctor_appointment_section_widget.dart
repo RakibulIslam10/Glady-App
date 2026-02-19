@@ -3,14 +3,33 @@ part of '../screen/doctor_home_screen.dart';
 class DoctorAppointmentSectionWidget extends StatelessWidget {
   const DoctorAppointmentSectionWidget({super.key});
 
+  String _formatTime(String time) {
+    if (time.isEmpty) return '';
+    final parts = time.split(':');
+    final hour = int.tryParse(parts[0]) ?? 0;
+    final minute = parts[1];
+    final period = hour >= 12 ? 'PM' : 'AM';
+    final displayHour = hour > 12 ? hour - 12 : (hour == 0 ? 12 : hour);
+    return '$displayHour:$minute $period';
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<DoctorHomeController>();
 
     return Obx(() {
       final today = controller.dashboardModel.value?.data.today;
-      final nextSchedule = controller.dashboardModel.value?.data.nextSchedule ?? '';
-      final activeAppointment = controller.dashboardModel.value?.data.activeAppointment;
+      final nextSchedule =
+          controller.dashboardModel.value?.data.nextSchedule ?? '';
+      final activeAppointment =
+          controller.dashboardModel.value?.data.activeAppointment;
+
+      String formattedNextSchedule = '';
+      if (nextSchedule.contains(' - ')) {
+        final parts = nextSchedule.split(' - ');
+        formattedNextSchedule =
+        '${_formatTime(parts[0])} - ${_formatTime(parts[1])}';
+      }
 
       return Container(
         padding: EdgeInsets.symmetric(
@@ -69,7 +88,11 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                       TextWidget(
-                        today?.date.substring(0, 10) ?? '',
+                        today != null
+                            ? DateFormat("dd MMM").format(
+                          DateTime.parse(today.date),
+                        )
+                            : '',
                         color: CustomColors.whiteColor,
                         fontSize: Dimensions.titleSmall,
                         fontWeight: FontWeight.w400,
@@ -99,12 +122,15 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
                           Expanded(
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                horizontal: Dimensions.defaultHorizontalSize * 0.8,
+                                horizontal:
+                                Dimensions.defaultHorizontalSize * 0.8,
                                 vertical: Dimensions.verticalSize * 0.6,
                               ),
                               decoration: BoxDecoration(
                                 color: CustomColors.whiteColor,
-                                borderRadius: BorderRadius.circular(Dimensions.radius * 0.6),
+                                borderRadius: BorderRadius.circular(
+                                  Dimensions.radius * 0.6,
+                                ),
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -112,13 +138,14 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
                                 children: [
                                   TextWidget(
                                     "Starting",
-                                    color: CustomColors.blackColor.withOpacity(0.5),
+                                    color: CustomColors.blackColor
+                                        .withOpacity(0.5),
                                     fontSize: Dimensions.titleSmall * 0.9,
                                     fontWeight: FontWeight.w500,
                                   ),
                                   SizedBox(height: 2.h),
                                   TextWidget(
-                                    today?.startTime ?? '',
+                                    _formatTime(today?.startTime ?? ''),
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ],
@@ -129,12 +156,15 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
                           Expanded(
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                horizontal: Dimensions.defaultHorizontalSize * 0.8,
+                                horizontal:
+                                Dimensions.defaultHorizontalSize * 0.8,
                                 vertical: Dimensions.verticalSize * 0.6,
                               ),
                               decoration: BoxDecoration(
                                 color: CustomColors.whiteColor,
-                                borderRadius: BorderRadius.circular(Dimensions.radius * 0.6),
+                                borderRadius: BorderRadius.circular(
+                                  Dimensions.radius * 0.6,
+                                ),
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -142,13 +172,14 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
                                 children: [
                                   TextWidget(
                                     "Ending",
-                                    color: CustomColors.blackColor.withOpacity(0.5),
+                                    color: CustomColors.blackColor
+                                        .withOpacity(0.5),
                                     fontSize: Dimensions.titleSmall * 0.9,
                                     fontWeight: FontWeight.w500,
                                   ),
                                   SizedBox(height: 2.h),
                                   TextWidget(
-                                    today?.endTime ?? '',
+                                    _formatTime(today?.endTime ?? ''),
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ],
@@ -165,7 +196,9 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           color: CustomColors.whiteColor,
-                          borderRadius: BorderRadius.circular(Dimensions.radius * 0.6),
+                          borderRadius: BorderRadius.circular(
+                            Dimensions.radius * 0.6,
+                          ),
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -179,7 +212,7 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
                             ),
                             SizedBox(height: 2.h),
                             TextWidget(
-                              nextSchedule,
+                              formattedNextSchedule,
                               fontWeight: FontWeight.w500,
                             ),
                           ],
@@ -194,7 +227,7 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
               Space.height.v15,
               RequestCard(
                 name: activeAppointment.timeRange,
-                service: activeAppointment.status,
+                service: activeAppointment.reasonTitle,
                 time: activeAppointment.timeRange,
                 status: activeAppointment.status,
                 buttonTitle: 'Join',

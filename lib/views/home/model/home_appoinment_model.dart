@@ -76,11 +76,13 @@ class ActiveAppointment {
   final String id;
   final String timeRange;
   final String status;
+  final String reasonTitle;
 
   ActiveAppointment({
     required this.id,
     required this.timeRange,
     required this.status,
+    required this.reasonTitle,
   });
 
   factory ActiveAppointment.fromJson(Map<String, dynamic> json) =>
@@ -88,6 +90,7 @@ class ActiveAppointment {
         id: json['_id'],
         timeRange: json['timeRange'],
         status: json['status'],
+        reasonTitle: json['reasonTitle'],
       );
 }
 
@@ -109,6 +112,7 @@ class DashboardStats {
 class UpcomingAppointment {
   final String id;
   final String patientName;
+  final String reasonTitle;
   final String patientProfileImage;
   final String timeRange;
   final String date;
@@ -117,6 +121,7 @@ class UpcomingAppointment {
   UpcomingAppointment({
     required this.id,
     required this.patientName,
+    required this.reasonTitle,
     required this.patientProfileImage,
     required this.timeRange,
     required this.date,
@@ -127,6 +132,7 @@ class UpcomingAppointment {
       UpcomingAppointment(
         id: json['_id'],
         patientName: json['patientName'],
+        reasonTitle: json['reasonTitle'],
         patientProfileImage: json['patientProfileImage'],
         timeRange: json['timeRange'],
         date: json['date'],
