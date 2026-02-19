@@ -1,37 +1,50 @@
 part of 'request_view_screen.dart';
 
-class RequestViewScreenMobile extends GetView<RequestViewController> {
+class RequestViewScreenMobile extends GetView<DoctorHomeController> {
   const RequestViewScreenMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(title: "Appointment Request",isBack: false,),
+      appBar: CommonAppBar(title: "Appointment Request", isBack: false),
       body: SafeArea(
         child: ListView.builder(
-          padding: EdgeInsetsGeometry.symmetric(
-            horizontal: Dimensions.defaultHorizontalSize,
-            vertical: Dimensions.verticalSize * 0.8,
-          ),
-          itemCount: 10,
+          padding: EdgeInsets.symmetric(horizontal: Dimensions.defaultHorizontalSize),
+          itemCount:
+              controller
+                  .dashboardModel
+                  .value
+                  ?.data
+                  .upcomingAppointments
+                  .length ??
+              0,
           addRepaintBoundaries: true,
           cacheExtent: 500,
           shrinkWrap: true,
-          primary: true,
+          primary: false,
           physics: BouncingScrollPhysics(),
-          itemBuilder: (context, index) => Padding(
-            padding: EdgeInsets.only(bottom: Dimensions.heightSize),
-            child: RequestCard(
-              name: "Luna Kellan",
-              service: "Professional cleaning",
-              time: "10:30 PM - 11:00 PM",
-              status: "23 November",
-              buttonTitle: 'View',
-              cardOnTap: () {
-                Get.toNamed(Routes.appointmentDetailsScreen);
-              },
-            ),
-          ),
+          itemBuilder: (context, index) {
+            final appointment = controller
+                .dashboardModel
+                .value!
+                .data
+                .upcomingAppointments[index];
+            return Padding(
+              padding: EdgeInsets.only(bottom: Dimensions.heightSize),
+              child: RequestCard(
+                name: appointment.patientName,
+                service: appointment.reasonTitle,
+                time: appointment.timeRange,
+                status: DateFormat(
+                  "dd MMMM",
+                ).format(DateTime.parse(appointment.date)),
+                buttonTitle: 'View',
+                cardOnTap: () {
+                  Get.toNamed(Routes.appointmentDetailsScreen);
+                },
+              ),
+            );
+          },
         ),
       ),
     );
