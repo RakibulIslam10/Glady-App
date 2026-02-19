@@ -24,7 +24,14 @@ class ApiEndPoints {
   static const String notifications = '/notifications';
   static const String terms = '/legal-content/terms-and-conditions';
   static const String policy = '/legal-content/privacy-policy';
+
+
   static const String addServiceDoctor = '/doctors/me/services';
+  static const String addExperiencesDoctor = '/doctors/me/experiences';
+  static const String getAllExperience = '/doctors/me/experiences';
+
+    static const String getALlSchedule = '/doctors/me/availability';
+    static const String createSchedule = '/doctors/me/availability';
 
   // PROFILE
   static const String doctorProfile = '/doctors/me/profile';

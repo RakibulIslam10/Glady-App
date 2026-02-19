@@ -11,12 +11,13 @@ class DoctorProfileModel {
     required this.data,
   });
 
-  factory DoctorProfileModel.fromJson(Map<String, dynamic> json) => DoctorProfileModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: Data.fromJson(json["data"]),
-  );
+  factory DoctorProfileModel.fromJson(Map<String, dynamic> json) =>
+      DoctorProfileModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: Data.fromJson(json["data"]),
+      );
 }
 
 class Data {
@@ -42,6 +43,7 @@ class Data {
   final int totalEarnings;
   final int totalPayouts;
   final int totalExperienceYears;
+  final String? dateOfBirth;
   final List<Service> services;
   final num averageRating;
 
@@ -50,7 +52,7 @@ class Data {
     required this.userId,
     required this.currentOrganization,
     required this.specialtyId,
-     this.about,
+    this.about,
     required this.consultationFee,
     required this.verificationDocuments,
     required this.verificationStatus,
@@ -68,6 +70,7 @@ class Data {
     required this.totalEarnings,
     required this.totalPayouts,
     required this.totalExperienceYears,
+    this.dateOfBirth,
     required this.services,
     required this.averageRating,
   });
@@ -79,7 +82,9 @@ class Data {
     specialtyId: SpecialtyId.fromJson(json["specialtyId"]),
     about: json["about"] ?? '',
     consultationFee: json["consultationFee"],
-    verificationDocuments: List<String>.from(json["verificationDocuments"].map((x) => x)),
+    verificationDocuments: List<String>.from(
+      json["verificationDocuments"].map((x) => x),
+    ),
     verificationStatus: json["verificationStatus"],
     isVerified: json["isVerified"],
     createdAt: DateTime.parse(json["createdAt"]),
@@ -95,10 +100,12 @@ class Data {
     totalEarnings: json["totalEarnings"],
     totalPayouts: json["totalPayouts"],
     totalExperienceYears: json["totalExperienceYears"],
-    services: List<Service>.from(json["services"].map((x) => Service.fromJson(x))),
+    dateOfBirth: json["dateOfBirth"] ?? '',
+    services: List<Service>.from(
+      json["services"].map((x) => Service.fromJson(x)),
+    ),
     averageRating: json["averageRating"],
   );
-
 }
 
 class Service {
@@ -132,15 +139,10 @@ class SpecialtyId {
   final String id;
   final String name;
 
-  SpecialtyId({
-    required this.id,
-    required this.name,
-  });
+  SpecialtyId({required this.id, required this.name});
 
-  factory SpecialtyId.fromJson(Map<String, dynamic> json) => SpecialtyId(
-    id: json["_id"],
-    name: json["name"],
-  );
+  factory SpecialtyId.fromJson(Map<String, dynamic> json) =>
+      SpecialtyId(id: json["_id"], name: json["name"]);
 }
 
 class UserId {
@@ -152,7 +154,7 @@ class UserId {
   UserId({
     required this.id,
     required this.name,
-     this.phone,
+    this.phone,
     required this.profileImage,
   });
 
@@ -162,5 +164,4 @@ class UserId {
     phone: json["phone"],
     profileImage: json["profileImage"],
   );
-
 }

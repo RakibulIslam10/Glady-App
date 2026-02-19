@@ -86,6 +86,9 @@ class UpdateProfileScreenMobile extends GetView<UpdateProfileController> {
                 DatePickerWidget(
                   hint: 'Date of Birth',
                   label: 'Date of Birth',
+                  initialDate: controller.initialDateOfBirth.isNotEmpty
+                      ? DateTime.tryParse(controller.initialDateOfBirth)
+                      : null,
                   onDateSelected: (DateTime date) {
                     controller.selectedDob.value = date;
                     controller.dobController.text = date

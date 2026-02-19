@@ -48,35 +48,28 @@ class _MultiSelectDropDownWidgetState extends State<MultiSelectDropDownWidget> {
     return Column(
       crossAxisAlignment: crossStart,
       children: [
-        // TextWidget(
-        //   padding: EdgeInsetsGeometry.only(
-        //     bottom: Dimensions.spaceBetweenInputTitleAndBox * 0.6,
-        //   ),
-        //   widget.label ?? "Select Category",
-        //   fontSize: Dimensions.titleSmall,
-        //   fontWeight: FontWeight.w500,
-        //   color: CustomColors.blackColor,
-        // ),
-
         if (_selectedValues.isNotEmpty)
           Wrap(
             spacing: 6,
             runSpacing: 6,
             children: _selectedValues
-                .map((item) => Chip(
-              label: TextWidget(item,
+                .map(
+                  (item) => Chip(
+                label: TextWidget(
+                  item,
                   fontSize: Dimensions.titleSmall,
-                  color: CustomColors.blackColor),
-              backgroundColor: CustomColors.whiteColor,
-              shape: StadiumBorder(
-                side: BorderSide(color: CustomColors.primary, width: 1),
+                  color: CustomColors.blackColor,
+                ),
+                backgroundColor: CustomColors.whiteColor,
+                shape: StadiumBorder(
+                  side: BorderSide(color: CustomColors.primary, width: 1),
+                ),
+                deleteIcon: const Icon(Icons.close, size: 16),
+                onDeleted: () => _toggleValue(item),
               ),
-              deleteIcon: const Icon(Icons.close, size: 16),
-              onDeleted: () => _toggleValue(item),
-            ))
+            )
                 .toList(),
           ).marginOnly(bottom: 8),
-
         Container(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal * 0.5,
           height: Dimensions.inputBoxHeight * 0.85,
@@ -95,7 +88,7 @@ class _MultiSelectDropDownWidgetState extends State<MultiSelectDropDownWidget> {
               iconEnabledColor: _selectedValues.isEmpty
                   ? CustomColors.disableColor
                   : CustomColors.primary,
-              value: null, 
+              value: null,
               isExpanded: true,
               hint: TextWidget(
                 widget.hint,
@@ -103,25 +96,39 @@ class _MultiSelectDropDownWidgetState extends State<MultiSelectDropDownWidget> {
                 fontWeight: FontWeight.w500,
                 fontSize: width * 0.04,
               ),
-              items: widget.items
-                  .map(
-                    (item) => DropdownMenuItem(
+              items: widget.items.map((item) {
+                return DropdownMenuItem(
                   value: item,
-                  child: Row(
-                    children: [
-                      Checkbox(
-                        value: _selectedValues.contains(item),
-                        activeColor: CustomColors.primary,
-                        onChanged: (_) => _toggleValue(item),
-                      ),
-                      TextWidget(item,
-                          fontSize: Dimensions.titleSmall * 1.2,
-                          color: CustomColors.blackColor),
-                    ],
+                  enabled: true,
+                  child: StatefulBuilder(
+                    builder: (context, setItemState) {
+                      return InkWell(
+                        onTap: () {
+                          _toggleValue(item);
+                          setItemState(() {});
+                        },
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              value: _selectedValues.contains(item),
+                              activeColor: CustomColors.primary,
+                              onChanged: (_) {
+                                _toggleValue(item);
+                                setItemState(() {});
+                              },
+                            ),
+                            TextWidget(
+                              item,
+                              fontSize: Dimensions.titleSmall * 1.2,
+                              color: CustomColors.blackColor,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                ),
-              )
-                  .toList(),
+                );
+              }).toList(),
               onChanged: (value) {
                 if (value != null) _toggleValue(value);
               },

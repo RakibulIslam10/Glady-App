@@ -6,7 +6,9 @@ class AddExperienceScreenMobile extends GetView<AddExperienceController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(title: "Add Experience"),
+      appBar: CommonAppBar(
+        title: controller.isEditMode ? "Edit Experience" : "Add Experience",
+      ),
       body: SafeArea(
         child: ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
@@ -15,37 +17,36 @@ class AddExperienceScreenMobile extends GetView<AddExperienceController> {
             Space.height.v20,
             PrimaryInputFieldWidget(
               label: 'Organization Name',
-              controller: TextEditingController(),
+              controller: controller.organizationController,
               hintText: 'Organization Name',
             ),
             Space.height.betweenInputBox,
             PrimaryInputFieldWidget(
               label: 'Designation',
-              controller: TextEditingController(),
+              controller: controller.designationController,
               hintText: 'Designation',
             ),
             Space.height.betweenInputBox,
-            TextWidget(
-              padding: EdgeInsetsGeometry.only(
-                bottom: Dimensions.spaceBetweenInputTitleAndBox * 0.6,
+            Obx(
+                  () => DatePickerWidget(
+                label: 'Starting Date',
+                initialDate: controller.startDate.value,
+                onDateSelected: (date) {
+                  controller.startDate.value = date;
+                },
               ),
-              "Starting Date",
-              fontSize: Dimensions.titleSmall,
-              fontWeight: FontWeight.w500,
-              color: CustomColors.blackColor,
             ),
-            DatePickerWidget(label: 'Starting Date', onDateSelected: (date) {}),
             Space.height.v10,
             GestureDetector(
               onTap: () {
-                controller.isChecked.value != controller.isChecked.value;
+                controller.isChecked.value = !controller.isChecked.value;
               },
               child: Row(
                 children: [
                   TextWidget("Current working here"),
                   Space.width.v10,
                   Obx(
-                    () => Container(
+                        () => Container(
                       height: 18.h,
                       width: 18.w,
                       decoration: BoxDecoration(
@@ -60,14 +61,12 @@ class AddExperienceScreenMobile extends GetView<AddExperienceController> {
                         ),
                       ),
                       child: Icon(
-                       controller.isChecked.value
+                        controller.isChecked.value
                             ? Icons.check
                             : Icons.close,
-                        fontWeight: FontWeight.w900,
                         color: controller.isChecked.value
                             ? CustomColors.primary
                             : CustomColors.borderColor,
-
                         size: 16.sp,
                       ),
                     ),
@@ -75,23 +74,30 @@ class AddExperienceScreenMobile extends GetView<AddExperienceController> {
                 ],
               ),
             ),
-
             Space.height.betweenInputBox,
+            Obx(
+                  () => Visibility(
+                visible: !controller.isChecked.value,
+                child: DatePickerWidget(
+                  label: 'Ending Date',
 
-            TextWidget(
-              padding: EdgeInsetsGeometry.only(
-                bottom: Dimensions.spaceBetweenInputTitleAndBox * 0.6,
+                  initialDate: controller.endDate.value,
+                  onDateSelected: (date) {
+                    controller.endDate.value = date;
+                  },
+                ),
               ),
-              "Ending Date",
-              fontSize: Dimensions.titleSmall,
-              fontWeight: FontWeight.w500,
-              color: CustomColors.blackColor,
             ),
-            DatePickerWidget(label: 'Ending Date', onDateSelected: (date) {}),
-
             Space.height.v40,
-
-            PrimaryButtonWidget(title: "Save", onPressed: () {}),
+            Obx(
+                  () => PrimaryButtonWidget(
+                isLoading: controller.isLoading.value,
+                title: controller.isEditMode ? "Update" : "Save",
+                onPressed: () => controller.isEditMode
+                    ? controller.updateExperience()
+                    : controller.addExperience(),
+              ),
+            ),
           ],
         ),
       ),

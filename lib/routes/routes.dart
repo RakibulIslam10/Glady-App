@@ -97,15 +97,15 @@ part 'pages.dart';
 
 class Routes {
   static var list = RoutePageList.list;
-static const addExperienceScreen = '/add_experienceScreen';
-static const serviceScreen = '/serviceScreen';
-static const experienceScreen = '/experienceScreen';
-static const aboutScreen = '/aboutScreen';
-static const createScheduleScreen = '/create_scheduleScreen';
-static const scheduleScreen = '/scheduleScreen';
-static const chatScreen = '/chatScreen';
-static const request_viewScreen = '/request_viewScreen';
-static const doctor_homeScreen = '/doctor_homeScreen';
+  static const addExperienceScreen = '/add_experienceScreen';
+  static const serviceScreen = '/serviceScreen';
+  static const experienceScreen = '/experienceScreen';
+  static const aboutScreen = '/aboutScreen';
+  static const createScheduleScreen = '/create_scheduleScreen';
+  static const scheduleScreen = '/scheduleScreen';
+  static const chatScreen = '/chatScreen';
+  static const request_viewScreen = '/request_viewScreen';
+  static const doctor_homeScreen = '/doctor_homeScreen';
   static const aditionalScreen = '/aditionalScreen';
   static const doctorRegisterScreen = '/doctor_registerScreen';
   static const confirmationScreen = '/confirmationScreen';

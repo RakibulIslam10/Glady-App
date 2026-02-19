@@ -8,6 +8,7 @@ class RoutePageList {
       name: Routes.addExperienceScreen,
       page: () => const AddExperienceScreen(),
       binding: AddExperienceBinding(),
+      preventDuplicates: false,
     ),
     GetPage(
       name: Routes.serviceScreen,

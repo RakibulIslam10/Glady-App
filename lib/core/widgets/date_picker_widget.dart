@@ -29,6 +29,17 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
     _selectedDate = widget.initialDate;
   }
 
+  @override
+  void didUpdateWidget(DatePickerWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initialDate != oldWidget.initialDate &&
+        widget.initialDate != null) {
+      setState(() {
+        _selectedDate = widget.initialDate;
+      });
+    }
+  }
+
   Future<void> _pickDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -70,15 +81,15 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
     return Column(
       crossAxisAlignment: crossStart,
       children: [
-        // TextWidget(
-        //   padding: EdgeInsetsGeometry.only(
-        //     bottom: Dimensions.spaceBetweenInputTitleAndBox * 0.6,
-        //   ),
-        //   widget.label ?? "Select Date",
-        //   fontSize: Dimensions.titleSmall,
-        //   fontWeight: FontWeight.w500,
-        //   color: CustomColors.blackColor.withAlpha(888),
-        // ),
+        TextWidget(
+          padding: EdgeInsetsGeometry.only(
+            bottom: Dimensions.spaceBetweenInputTitleAndBox * 0.6,
+          ),
+          widget.label ?? "Select Date",
+          fontSize: Dimensions.titleSmall,
+          fontWeight: FontWeight.w500,
+          color: CustomColors.blackColor.withAlpha(888),
+        ),
         InkWell(
           onTap: () => _pickDate(context),
           borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),
@@ -86,7 +97,12 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
             padding: Dimensions.defaultHorizontalSize.edgeHorizontal * 0.5,
             height: Dimensions.inputBoxHeight * 0.85,
             decoration: BoxDecoration(
-              border: Border.all(color: _selectedDate == null ?CustomColors.borderColor : CustomColors.primary, width: 1.4),
+              border: Border.all(
+                color: _selectedDate == null
+                    ? CustomColors.borderColor
+                    : CustomColors.primary,
+                width: 1.4,
+              ),
               borderRadius: BorderRadius.circular(Dimensions.radius * 0.8),
             ),
             child: Row(
@@ -97,7 +113,6 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
                     _selectedDate == null
                         ? widget.hint
                         : _formatter.format(_selectedDate!),
-
                     fontSize: Dimensions.titleSmall * 1.2,
                     color: Colors.black.withOpacity(0.7),
                     fontWeight: FontWeight.w500,

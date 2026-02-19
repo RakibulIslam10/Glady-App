@@ -3,19 +3,14 @@ import 'dart:async';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
-
 class VideoCallController extends GetxController {
-  // Agora Configuration
   static const String appId = "296efbe76c6947018979a48113a46c7a";
   final String channelName = "test_channel";
-  final String token = "007eJxTYJg2iXFJ0KQzOa+XvFZjMtxm1rvH6xJH4oTShW6sp/foyxUpMBhZmqWmJaWamyWbWZqYGxhaWJpbJppYGBoaJ5qYJZsnaiQGZzYEMjKEerYzMTJAIIjPw1CSWlwSn5yRmJeXmsPAAADXPSBN";
+  final String token =
+      "007eJxTYJg2iXFJ0KQzOa+XvFZjMtxm1rvH6xJH4oTShW6sp/foyxUpMBhZmqWmJaWamyWbWZqYGxhaWJpbJppYGBoaJ5qYJZsnaiQGZzYEMjKEerYzMTJAIIjPw1CSWlwSn5yRmJeXmsPAAADXPSBN";
 
-
-  // Agora Engine
   late RtcEngine agoraEngine;
 
-  // Observable states
   final RxBool isMuted = false.obs;
   final RxBool isCameraFlipped = false.obs;
   final RxBool isConnected = false.obs;
@@ -23,11 +18,9 @@ class VideoCallController extends GetxController {
   final RxBool isLocalUserJoined = false.obs;
   final RxBool isRemoteUserJoined = false.obs;
 
-  // User IDs
   int? localUid;
   int? remoteUid;
 
-  // Timer for call duration
   Timer? _durationTimer;
   int _seconds = 0;
 
@@ -45,47 +38,38 @@ class VideoCallController extends GetxController {
     super.onClose();
   }
 
-  /// Initialize Agora Engine
   Future<void> _initializeAgora() async {
     try {
-      // Request permissions
       await _requestPermissions();
 
-      // Create Agora Engine
       agoraEngine = createAgoraRtcEngine();
 
-      // Initialize
-      await agoraEngine.initialize(const RtcEngineContext(
-        appId: appId,
-        channelProfile: ChannelProfileType.channelProfileCommunication,
-      ));
+      await agoraEngine.initialize(
+        const RtcEngineContext(
+          appId: appId,
+          channelProfile: ChannelProfileType.channelProfileCommunication,
+        ),
+      );
 
-      // Setup event handlers
       _setupEventHandlers();
 
-      // Enable video
       await agoraEngine.enableVideo();
       await agoraEngine.startPreview();
 
-      // Join channel
       await _joinChannel();
-
     } catch (e) {
       print('Error initializing Agora: $e');
       Get.snackbar('Error', 'Failed to initialize video call');
     }
   }
 
-  /// Request Camera and Microphone permissions
   Future<void> _requestPermissions() async {
     await [Permission.camera, Permission.microphone].request();
   }
 
-  /// Setup Agora Event Handlers
   void _setupEventHandlers() {
     agoraEngine.registerEventHandler(
       RtcEngineEventHandler(
-        // Local user joined
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
           print('Local user joined: ${connection.localUid}');
           localUid = connection.localUid;
@@ -94,28 +78,33 @@ class VideoCallController extends GetxController {
           _startDurationTimer();
         },
 
-        // Remote user joined
         onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
           print('Remote user joined: $remoteUid');
           this.remoteUid = remoteUid;
           isRemoteUserJoined.value = true;
         },
 
-        // Remote user left
-        onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
-          print('Remote user left: $remoteUid');
-          this.remoteUid = null;
-          isRemoteUserJoined.value = false;
-        },
+        onUserOffline:
+            (
+              RtcConnection connection,
+              int remoteUid,
+              UserOfflineReasonType reason,
+            ) {
+              print('Remote user left: $remoteUid');
+              this.remoteUid = null;
+              isRemoteUserJoined.value = false;
+            },
 
-        // Network quality
-        onNetworkQuality: (RtcConnection connection, int remoteUid,
-            QualityType txQuality, QualityType rxQuality) {
-          // Handle network quality
-          print('Network quality - TX: $txQuality, RX: $rxQuality');
-        },
+        onNetworkQuality:
+            (
+              RtcConnection connection,
+              int remoteUid,
+              QualityType txQuality,
+              QualityType rxQuality,
+            ) {
+              print('Network quality - TX: $txQuality, RX: $rxQuality');
+            },
 
-        // Error handling
         onError: (ErrorCodeType err, String msg) {
           print('Agora Error: $err - $msg');
         },
@@ -123,13 +112,12 @@ class VideoCallController extends GetxController {
     );
   }
 
-  /// Join Channel
   Future<void> _joinChannel() async {
     try {
       await agoraEngine.joinChannel(
         token: token,
         channelId: channelName,
-        uid: 0, // 0 means auto-generate UID
+        uid: 0,
         options: const ChannelMediaOptions(
           channelProfile: ChannelProfileType.channelProfileCommunication,
           clientRoleType: ClientRoleType.clientRoleBroadcaster,
@@ -142,7 +130,6 @@ class VideoCallController extends GetxController {
     }
   }
 
-  /// Leave Channel
   Future<void> _leaveChannel() async {
     try {
       await agoraEngine.leaveChannel();
@@ -154,7 +141,6 @@ class VideoCallController extends GetxController {
     }
   }
 
-  /// Start the call duration timer
   void _startDurationTimer() {
     _seconds = 0;
     _durationTimer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -165,7 +151,6 @@ class VideoCallController extends GetxController {
     });
   }
 
-  /// Toggle camera on/off
   Future<void> toggleCamera() async {
     try {
       bool isEnabled = !isCameraFlipped.value;
@@ -176,7 +161,6 @@ class VideoCallController extends GetxController {
     }
   }
 
-  /// Toggle microphone mute/unmute
   Future<void> toggleMute() async {
     try {
       isMuted.value = !isMuted.value;
@@ -187,7 +171,6 @@ class VideoCallController extends GetxController {
     }
   }
 
-  /// Flip camera (front/back)
   Future<void> flipCamera() async {
     try {
       await agoraEngine.switchCamera();
@@ -198,7 +181,6 @@ class VideoCallController extends GetxController {
     }
   }
 
-  /// End the call
   Future<void> endCall() async {
     try {
       _durationTimer?.cancel();

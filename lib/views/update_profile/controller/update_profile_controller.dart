@@ -18,6 +18,8 @@ class UpdateProfileController extends GetxController {
 
   Rx<DateTime?> selectedDob = Rx<DateTime?>(null);
 
+  String initialDateOfBirth = '';
+
   Rx<XFile?> profileImage = Rx<XFile?>(null);
   RxBool isLoading = false.obs;
 
@@ -33,6 +35,7 @@ class UpdateProfileController extends GetxController {
     if (data != null) {
       nameController.text = data.userId.name ?? '';
       phoneController.text = data.userId.phone ?? '';
+      initialDateOfBirth = data.dateOfBirth?.substring(0, 10) ?? '';
     }
   }
 

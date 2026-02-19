@@ -1,5 +1,6 @@
 part of 'create_schedule_screen.dart';
 
+
 class CreateScheduleScreenMobile extends GetView<CreateScheduleController> {
   const CreateScheduleScreenMobile({super.key});
 
@@ -13,14 +14,6 @@ class CreateScheduleScreenMobile extends GetView<CreateScheduleController> {
           physics: BouncingScrollPhysics(),
           children: [
             Space.height.v20,
-            DatePickerWidget(
-              hint: "Custom Date",
-              onDateSelected: (date) {
-                controller.selectedDate.value = date;
-              },
-            ),
-            Space.height.v20,
-
             MultiSelectDropDownWidget(
               hint: 'Day of week',
               items: [
@@ -36,9 +29,7 @@ class CreateScheduleScreenMobile extends GetView<CreateScheduleController> {
                 controller.dayList = value;
               },
             ),
-
             Space.height.v20,
-
             Row(
               children: [
                 Expanded(
@@ -60,79 +51,37 @@ class CreateScheduleScreenMobile extends GetView<CreateScheduleController> {
                 ),
               ],
             ),
-
             Space.height.v20,
-
             Row(
               children: [
                 Expanded(
-                  child: Container(
-                    padding:
-                        Dimensions.defaultHorizontalSize.edgeHorizontal * 0.5,
-                    height: Dimensions.inputBoxHeight * 0.85,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: CustomColors.borderColor,
-                        width: 1.4,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        Dimensions.radius * 0.8,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: mainSpaceBet,
-                      children: [
-                        TextWidget(
-                          "Duration",
-                          fontSize: Dimensions.titleSmall * 1.2,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black.withOpacity(0.7),
-                        ),
-                      ],
-                    ),
+                  child: PrimaryInputFieldWidget(
+                    controller: controller.durationController,
+                    hintText: 'Duration (min)',
+                    label: 'Duration',
+
                   ),
                 ),
                 Space.width.v15,
                 Expanded(
-                  child: Container(
-                    padding:
-                        Dimensions.defaultHorizontalSize.edgeHorizontal * 0.5,
-                    height: Dimensions.inputBoxHeight * 0.85,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: CustomColors.borderColor,
-                        width: 1.4,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        Dimensions.radius * 0.8,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: mainSpaceBet,
-                      children: [
-                        TextWidget(
-                          "Fee",
-                          fontSize: Dimensions.titleSmall * 1.2,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black.withOpacity(0.7),
-                        ),
-                        TextWidget(
-                          "\$12",
-                          fontSize: Dimensions.titleSmall * 1.2,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black.withOpacity(0.7),
-                        ),
-                      ],
-                    ),
+                  child: PrimaryInputFieldWidget(
+                    controller: controller.feeController,
+                    hintText: 'Fee (\$)',
+                    label: 'Fee',
+
+                    keyBoardType: TextInputType.number,
                   ),
                 ),
               ],
             ),
-
             Space.height.v25,
-
-            PrimaryButtonWidget(title: 'Continue', onPressed: () {}),
-
+            Obx(
+                  () => PrimaryButtonWidget(
+                isLoading: controller.isLoading.value,
+                title: 'Continue',
+                onPressed: () => controller.createSchedule(),
+              ),
+            ),
             Space.height.v25,
           ],
         ),
