@@ -24,7 +24,7 @@ class Data {
   final UserId userId;
   final String currentOrganization;
   final SpecialtyId specialtyId;
-  final String about;
+  final String? about;
   final int consultationFee;
   final List<String> verificationDocuments;
   final String verificationStatus;
@@ -50,7 +50,7 @@ class Data {
     required this.userId,
     required this.currentOrganization,
     required this.specialtyId,
-    required this.about,
+     this.about,
     required this.consultationFee,
     required this.verificationDocuments,
     required this.verificationStatus,
@@ -77,7 +77,7 @@ class Data {
     userId: UserId.fromJson(json["userId"]),
     currentOrganization: json["currentOrganization"],
     specialtyId: SpecialtyId.fromJson(json["specialtyId"]),
-    about: json["about"],
+    about: json["about"] ?? '',
     consultationFee: json["consultationFee"],
     verificationDocuments: List<String>.from(json["verificationDocuments"].map((x) => x)),
     verificationStatus: json["verificationStatus"],

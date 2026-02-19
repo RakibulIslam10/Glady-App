@@ -15,13 +15,19 @@ class ServiceScreenMobile extends GetView<ServiceController> {
             Space.height.v20,
             PrimaryInputFieldWidget(
               label: 'Service',
-              controller: TextEditingController(),
+              controller: controller.serviceNameController,
               hintText: 'Name of Service',
             ),
 
             Space.height.v20,
             Space.height.v20,
-            PrimaryButtonWidget(title: "Save", onPressed: () => Get.back()),
+            Obx(
+              () => PrimaryButtonWidget(
+                isLoading: controller.isLoading.value,
+                title: "Save",
+                onPressed: () => controller.addService(),
+              ),
+            ),
           ],
         ),
       ),
