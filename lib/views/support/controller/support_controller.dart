@@ -22,7 +22,7 @@ class SupportController extends GetxController {
       isLoading: isLoading,
       body: {
         'name': nameController.text,
-        'email': emailController.text,
+        'email': emailController.text.trim(),
         'message': messageController.text,
       },
       // showSuccessSnackBar: true,
@@ -42,11 +42,4 @@ class SupportController extends GetxController {
     );
   }
 
-  @override
-  void onClose() {
-    nameController.dispose();
-    emailController.dispose();
-    messageController.dispose();
-    super.onClose();
-  }
 }

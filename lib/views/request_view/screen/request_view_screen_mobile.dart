@@ -8,44 +8,48 @@ class RequestViewScreenMobile extends GetView<DoctorHomeController> {
     return Scaffold(
       appBar: CommonAppBar(title: "Appointment Request", isBack: false),
       body: SafeArea(
-        child: ListView.builder(
-          padding: EdgeInsets.symmetric(horizontal: Dimensions.defaultHorizontalSize),
-          itemCount:
-              controller
-                  .dashboardModel
-                  .value
-                  ?.data
-                  .upcomingAppointments
-                  .length ??
-              0,
-          addRepaintBoundaries: true,
-          cacheExtent: 500,
-          shrinkWrap: true,
-          primary: false,
-          physics: BouncingScrollPhysics(),
-          itemBuilder: (context, index) {
-            final appointment = controller
-                .dashboardModel
-                .value!
-                .data
-                .upcomingAppointments[index];
-            return Padding(
-              padding: EdgeInsets.only(bottom: Dimensions.heightSize),
-              child: RequestCard(
-                name: appointment.patientName,
-                service: appointment.reasonTitle,
-                time: appointment.timeRange,
-                status: DateFormat(
-                  "dd MMMM",
-                ).format(DateTime.parse(appointment.date)),
-                buttonTitle: 'View',
-                cardOnTap: () {
-                  Get.toNamed(Routes.appointmentDetailsScreen);
-                },
+        child: Obx(() {
+          final appointments =
+              controller.dashboardModel.value?.data.upcomingAppointments ?? [];
+
+          if (appointments.isEmpty) {
+            return Center(
+              child: TextWidget(
+                'No appointment requests found',
+                color: CustomColors.grayShade,
+                fontSize: Dimensions.titleSmall,
               ),
             );
-          },
-        ),
+          }
+
+          return ListView.builder(
+            padding: EdgeInsets.symmetric(
+              horizontal: Dimensions.defaultHorizontalSize,
+            ),
+            itemCount: appointments.length,
+            addRepaintBoundaries: true,
+            cacheExtent: 500,
+            physics: AlwaysScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              final appointment = appointments[index];
+              return Padding(
+                padding: EdgeInsets.only(bottom: Dimensions.heightSize),
+                child: RequestCard(
+                  name: appointment.patientName,
+                  service: appointment.reasonTitle,
+                  time: appointment.timeRange,
+                  status: DateFormat(
+                    "dd MMMM",
+                  ).format(DateTime.parse(appointment.date)),
+                  buttonTitle: 'View',
+                  cardOnTap: () {
+                    Get.toNamed(Routes.appointmentDetailsScreen);
+                  },
+                ),
+              );
+            },
+          );
+        }),
       ),
     );
   }

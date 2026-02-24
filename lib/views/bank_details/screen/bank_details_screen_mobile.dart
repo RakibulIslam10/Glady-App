@@ -19,12 +19,13 @@ class BankDetailsScreenMobile extends GetView<BankDetailsController> {
             ),
             Space.height.betweenInputBox,
             PrimaryInputFieldWidget(
-              hintText: "New password",
+              hintText: "Account Name",
               controller: controller.accountNameController,
             ),
             Space.height.betweenInputBox,
             PrimaryInputFieldWidget(
-              hintText: "Confirm password",
+              keyBoardType: TextInputType.number,
+              hintText: "Account Number",
               controller: controller.numberController,
             ),
             Space.height.betweenInputBox,
@@ -33,7 +34,9 @@ class BankDetailsScreenMobile extends GetView<BankDetailsController> {
               () => PrimaryButtonWidget(
                 title: 'Save',
                 isLoading: controller.isLoading.value,
-                onPressed: () {},
+                onPressed: () {
+                  controller.addBankAccount();
+                },
               ),
             ),
           ],

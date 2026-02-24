@@ -133,6 +133,7 @@ class _PrimaryInputFieldWidgetState extends State<PrimaryInputFieldWidget> {
             ),
           ),
         TextFormField(
+          keyboardType: widget.keyBoardType,
           onChanged: widget.onChange,
           style: TextStyle(
             color: widget.readOnly == true ? Colors.grey : Colors.black,

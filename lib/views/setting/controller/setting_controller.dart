@@ -1,5 +1,8 @@
-import '../../../core/utils/basic_import.dart';
+import 'package:glady/core/api/model/basic_success_model.dart';
 
+import '../../../core/api/end_point/api_end_points.dart';
+import '../../../core/api/services/api_request.dart';
+import '../../../core/utils/basic_import.dart';
 
 class SettingController extends GetxController {
   RxBool isLoading = false.obs;
@@ -19,5 +22,6 @@ class SettingController extends GetxController {
   // }
 
 
-Future<void> deleteUserAccount ()async{}
+
+  Future<void> deleteUserAccount() async {}
 }

@@ -21,7 +21,7 @@ class DoctorHomeScreenMobile extends GetView<DoctorHomeController> {
                     controller.fetchDashboard();
                   },
                   child: ListView(
-                    physics: BouncingScrollPhysics(),
+                    physics: AlwaysScrollableScrollPhysics(),
                     padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
                     children: [
                       Space.height.v20,
@@ -89,45 +89,82 @@ class DoctorHomeScreenMobile extends GetView<DoctorHomeController> {
                         ),
                       ),
                       Space.height.v20,
-                      ListView.builder(
-                        itemCount:
-                            controller
-                                .dashboardModel
-                                .value
-                                ?.data
-                                .upcomingAppointments
-                                .length ??
-                            0,
-                        addRepaintBoundaries: true,
-                        cacheExtent: 500,
-                        shrinkWrap: true,
-                        primary: false,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          final appointment = controller
-                              .dashboardModel
-                              .value!
-                              .data
-                              .upcomingAppointments[index];
-                          return Padding(
-                            padding: EdgeInsets.only(
-                              bottom: Dimensions.heightSize,
+                      // ListView.builder(
+                      //   itemCount:
+                      //       controller
+                      //           .dashboardModel
+                      //           .value
+                      //           ?.data
+                      //           .upcomingAppointments
+                      //           .length ??
+                      //       0,
+                      //   addRepaintBoundaries: true,
+                      //   cacheExtent: 500,
+                      //   shrinkWrap: true,
+                      //   primary: false,
+                      //   physics: NeverScrollableScrollPhysics(),
+                      //   itemBuilder: (context, index) {
+                      //     final appointment = controller
+                      //         .dashboardModel
+                      //         .value!
+                      //         .data
+                      //         .upcomingAppointments[index];
+                      //     return Padding(
+                      //       padding: EdgeInsets.only(
+                      //         bottom: Dimensions.heightSize,
+                      //       ),
+                      //       child: RequestCard(
+                      //         name: appointment.patientName,
+                      //         service: appointment.reasonTitle,
+                      //         time: appointment.timeRange,
+                      //         status: DateFormat(
+                      //           "dd MMMM",
+                      //         ).format(DateTime.parse(appointment.date)),
+                      //         buttonTitle: 'View',
+                      //         cardOnTap: () {
+                      //           Get.toNamed(Routes.appointmentDetailsScreen);
+                      //         },
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
+
+                      if ((controller.dashboardModel.value?.data.upcomingAppointments.length ?? 0) == 0)
+                        Center(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: Dimensions.heightSize * 5),
+                            child: TextWidget(
+                              'No upcoming appointments',
+                              color: CustomColors.grayShade,
+                              fontSize: Dimensions.titleSmall,
                             ),
-                            child: RequestCard(
-                              name: appointment.patientName,
-                              service: appointment.reasonTitle,
-                              time: appointment.timeRange,
-                              status: DateFormat(
-                                "dd MMMM",
-                              ).format(DateTime.parse(appointment.date)),
-                              buttonTitle: 'View',
-                              cardOnTap: () {
-                                Get.toNamed(Routes.appointmentDetailsScreen);
-                              },
-                            ),
-                          );
-                        },
-                      ),
+                          ),
+                        )
+                      else
+                        ListView.builder(
+                          itemCount: controller.dashboardModel.value!.data.upcomingAppointments.length,
+                          addRepaintBoundaries: true,
+                          cacheExtent: 500,
+                          shrinkWrap: true,
+                          primary: false,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            final appointment = controller.dashboardModel.value!.data.upcomingAppointments[index];
+                            return Padding(
+                              padding: EdgeInsets.only(bottom: Dimensions.heightSize),
+                              child: RequestCard(
+                                name: appointment.patientName,
+                                service: appointment.reasonTitle,
+                                time: appointment.timeRange,
+                                status: DateFormat("dd MMMM").format(DateTime.parse(appointment.date)),
+                                buttonTitle: 'View',
+                                cardOnTap: () {
+                                  Get.toNamed(Routes.appointmentDetailsScreen);
+                                },
+                              ),
+                            );
+                          },
+                        ),
                     ],
                   ),
                 ),

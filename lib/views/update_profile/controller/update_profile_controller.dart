@@ -35,7 +35,9 @@ class UpdateProfileController extends GetxController {
     if (data != null) {
       nameController.text = data.userId.name ?? '';
       phoneController.text = data.userId.phone ?? '';
-      initialDateOfBirth = data.dateOfBirth?.substring(0, 10) ?? '';
+      initialDateOfBirth = (data.dateOfBirth != null && data.dateOfBirth!.length >= 10)
+          ? data.dateOfBirth!.substring(0, 10)
+          : '';
     }
   }
 

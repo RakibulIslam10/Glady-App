@@ -26,6 +26,7 @@ class ApiEndPoints {
   static const String policy = '/legal-content/privacy-policy';
   static const String support = '/contact';
   static const String doctorHome = '/appointments/doctor/dashboard';
+  static const String addBankAccount = '/doctors/me/bank-details';
 
 
   static const String addServiceDoctor = '/doctors/me/services';
