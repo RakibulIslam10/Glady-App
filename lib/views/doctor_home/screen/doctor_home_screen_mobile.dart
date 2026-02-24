@@ -159,7 +159,9 @@ class DoctorHomeScreenMobile extends GetView<DoctorHomeController> {
                                 status: DateFormat("dd MMMM").format(DateTime.parse(appointment.date)),
                                 buttonTitle: 'View',
                                 cardOnTap: () {
-                                  Get.toNamed(Routes.appointmentDetailsScreen);
+                                  Get.toNamed(Routes.appointmentDetailsScreen,
+                                      arguments: appointment.id
+                                  );
                                 },
                               ),
                             );

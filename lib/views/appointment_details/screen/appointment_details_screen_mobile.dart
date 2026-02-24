@@ -6,12 +6,14 @@ class AppointmentDetailsScreenMobile
 
   @override
   Widget build(BuildContext context) {
+    var patient = controller.doctorAppointmentDetailsModel?.data.patient;
+
     return Scaffold(
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: Dimensions.defaultHorizontalSize,
-            vertical: Dimensions.verticalSize * 0.5
+            vertical: Dimensions.verticalSize * 0.5,
           ),
           child: Column(
             mainAxisSize: mainMin,
@@ -31,7 +33,8 @@ class AppointmentDetailsScreenMobile
                             titleColor: CustomColors.rejected,
                             isInputField: true,
                             title: 'Reject Request',
-                            subTitle: 'write a reason for rejecting the appointment request',
+                            subTitle:
+                                'write a reason for rejecting the appointment request',
                             isLoading: false.obs,
                             buttonTex: 'Reject',
                             action: () {},
@@ -53,7 +56,7 @@ class AppointmentDetailsScreenMobile
                         color: CustomColors.primary,
                         borderRadius: BorderRadius.circular(Dimensions.radius),
                       ),
-              
+
                       child: TextWidget("Chat", color: CustomColors.whiteColor),
                     ),
                   ),
@@ -76,32 +79,35 @@ class AppointmentDetailsScreenMobile
           children: [
             Space.height.v15,
 
+            if (AppStorage.isUser == 'USER')
+              DoctorDetailsCard(
+                imageUrl:
+                    'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
+                name: 'Dr. Elowyn Starcrest',
+                specialty: 'Dentist',
+                clinicName: 'Central Dental Care',
+                rating: 4.7,
+                yearsOfExperience: 12,
+                startingPrice: 10,
+                onTap: () {},
+              ),
 
-            if(AppStorage.isUser == 'USER')  DoctorDetailsCard(
-              imageUrl:
-              'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
-              name: 'Dr. Elowyn Starcrest',
-              specialty: 'Dentist',
-              clinicName: 'Central Dental Care',
-              rating: 4.7,
-              yearsOfExperience: 12,
-              startingPrice: 10,
-              onTap: () {},
-            ),
-            if(AppStorage.isUser != 'USER') PatientInfoWidgetWithAsset(
-              patientImageNetwork: 'https://raw.githubusercontent.com/ai-py-auto/souce/refs/heads/main/Rectangle%202.png',
-              patientName: 'Luna Kellan',
-              dateOfBirth: '10- Aug-1986',
-              phoneNumber: '+1263565 36565',
-              bloodGroup: 'A+',
-              allergies: [
-                'Food Allergies',
-                'Seasonal Allergies',
-                'Pet Allergies',
-                'Insect Sting Allergies',
-              ],
-            ),
+            if (AppStorage.isUser != 'USER')
+              PatientInfoWidgetWithAsset(
+                patientImageNetwork: patient?.profileImage ?? 'N/A',
+                patientName: patient?.name ?? 'N/A',
+                dateOfBirth: patient != null
+                    ? "${patient.dateOfBirth.day}/${patient.dateOfBirth.month}/${patient.dateOfBirth.year}"
+                    : 'N/A',
 
+                phoneNumber: patient?.phone ?? 'N/A',
+                bloodGroup: patient?.bloodGroup ?? 'N/A',
+                allergies: patient != null
+                    ? (patient.allergies.isNotEmpty
+                          ? patient.allergies
+                          : ['None'])
+                    : ['N/A'],
+              ),
 
             TextWidget(
               padding: EdgeInsetsGeometry.symmetric(
@@ -156,6 +162,7 @@ class AppointmentDetailsScreenMobile
               "Attachment",
               fontWeight: FontWeight.bold,
             ),
+
             Wrap(
               children: List.generate(
                 3,
