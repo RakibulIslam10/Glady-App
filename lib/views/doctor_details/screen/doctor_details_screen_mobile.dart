@@ -6,20 +6,24 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: PrimaryButtonWidget(
-        padding: EdgeInsets.symmetric(
-          horizontal: Dimensions.defaultHorizontalSize,
-          vertical: Dimensions.verticalSize,
-        ),
-        title: "Book Appointment",
-        onPressed: () {
-          Get.dialog(const BookingDialog(), barrierDismissible: true);
-        },
+      bottomNavigationBar: Obx(
+        () => controller.isLoading.value
+            ? SizedBox.shrink()
+            : PrimaryButtonWidget(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.defaultHorizontalSize,
+                  vertical: Dimensions.verticalSize,
+                ),
+                title: "Book Appointment",
+                onPressed: () {
+                  Get.dialog(const BookingDialog(), barrierDismissible: true);
+                },
+              ),
       ),
       appBar: CommonAppBar(title: "Doctor Details"),
       body: SafeArea(
         child: Obx(
-              () => controller.isLoading.value
+          () => controller.isLoading.value
               ? LoadingWidget()
               : _buildBody(context),
         ),
@@ -29,7 +33,8 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
 
   Widget _buildBody(BuildContext context) {
     final doctor = controller.doctorDetailsInfoModel?.data.doctor;
-    final availability = controller.doctorDetailsInfoModel?.data.availability ?? [];
+    final availability =
+        controller.doctorDetailsInfoModel?.data.availability ?? [];
 
     return ListView(
       physics: const BouncingScrollPhysics(),
@@ -47,7 +52,8 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
           clinicName: doctor?.currentOrganization ?? '',
           rating: controller.doctorDetailsInfoModel?.data.rating.average ?? 0.0,
           yearsOfExperience: doctor?.totalExperienceYears ?? 0,
-          startingPrice: (doctor?.consultationFee ?? 0).toDouble(),          onTap: () {},
+          startingPrice: (doctor?.consultationFee ?? 0).toDouble(),
+          onTap: () {},
         ),
 
         Space.height.v15,
@@ -61,13 +67,14 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
           ),
           Space.height.v15,
           ...availability.map(
-                (slot) => Padding(
+            (slot) => Padding(
               padding: EdgeInsets.only(bottom: Dimensions.verticalSize * 0.25),
               child: AppointmentSectionWidget(
                 days: slot.dayOfWeek,
                 time: "${slot.startTime} - ${slot.endTime}",
                 price: "\$${slot.fee}",
-                slot: "${(slot.slotSizeMinutes > 0 ? ((int.tryParse(slot.endTime.split(':')[0]) ?? 0) - (int.tryParse(slot.startTime.split(':')[0]) ?? 0)) * 60 ~/ slot.slotSizeMinutes : 0)} Slot",
+                slot:
+                    "${(slot.slotSizeMinutes > 0 ? ((int.tryParse(slot.endTime.split(':')[0]) ?? 0) - (int.tryParse(slot.startTime.split(':')[0]) ?? 0)) * 60 ~/ slot.slotSizeMinutes : 0)} Slot",
                 duration: "${slot.slotSizeMinutes} Minutes",
               ),
             ),
@@ -89,10 +96,10 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
         // Reviews List
         ...controller.doctorDetailsInfoModel?.data.reviews.map(
               (review) => Padding(
-            padding: EdgeInsets.only(bottom: Dimensions.verticalSize * 0.5),
-            child: _ReviewCard(review: review),
-          ),
-        ) ??
+                padding: EdgeInsets.only(bottom: Dimensions.verticalSize * 0.5),
+                child: _ReviewCard(review: review),
+              ),
+            ) ??
             [],
 
         // Read All Reviews Button
@@ -123,12 +130,15 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
 
 class _ReviewCard extends StatelessWidget {
   final Review review;
+
   const _ReviewCard({required this.review});
 
   String _timeAgo(DateTime date) {
     final diff = DateTime.now().difference(date);
-    if (diff.inDays >= 1) return '${diff.inDays} Day${diff.inDays > 1 ? 's' : ''} Ago';
-    if (diff.inHours >= 1) return '${diff.inHours} Hour${diff.inHours > 1 ? 's' : ''} Ago';
+    if (diff.inDays >= 1)
+      return '${diff.inDays} Day${diff.inDays > 1 ? 's' : ''} Ago';
+    if (diff.inHours >= 1)
+      return '${diff.inHours} Hour${diff.inHours > 1 ? 's' : ''} Ago';
     return '${diff.inMinutes} Min Ago';
   }
 
@@ -137,9 +147,7 @@ class _ReviewCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(Dimensions.radius),
-        border: Border.all(
-          color: CustomColors.grayShade.withOpacity(0.15),
-        ),
+        border: Border.all(color: CustomColors.grayShade.withOpacity(0.15)),
       ),
       padding: EdgeInsets.symmetric(
         horizontal: Dimensions.defaultHorizontalSize,
@@ -173,7 +181,7 @@ class _ReviewCard extends StatelessWidget {
           Row(
             children: List.generate(
               5,
-                  (i) => Icon(
+              (i) => Icon(
                 i < review.rating ? Icons.star : Icons.star_border,
                 size: 16.sp,
                 color: const Color(0xFFFF9500),

@@ -8,7 +8,7 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: LoadingAnimationWidget.fourRotatingDots(
+      child: LoadingAnimationWidget.discreteCircle(
         color: color ?? CustomColors.primary,
         size: Dimensions.verticalSize * 1.5,
       ),
