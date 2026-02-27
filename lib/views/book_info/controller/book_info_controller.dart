@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:glady/core/api/end_point/api_end_points.dart';
-import 'package:glady/core/widgets/loading_widget.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../core/api/model/basic_success_model.dart';
+import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
+import '../../../core/widgets/loading_widget.dart';
 import '../../doctor_details/controller/doctor_details_controller.dart';
+import '../model/create_appoinment_model.dart';
 
 class BookInfoController extends GetxController {
   final reasonTitleController = TextEditingController();
@@ -14,6 +14,8 @@ class BookInfoController extends GetxController {
   final formKey = GlobalKey<FormState>();
 
   final RxList<XFile> selectedAttachments = <XFile>[].obs;
+
+  String? appointmentId;
 
   RxBool isLoading = false.obs;
 
@@ -73,8 +75,6 @@ class BookInfoController extends GetxController {
           .toList();
     }
 
-    String? appointmentId;
-
     try {
       await ApiRequest().multiMultipartRequest(
         endPoint: ApiEndPoints.appointments,
@@ -83,9 +83,9 @@ class BookInfoController extends GetxController {
         body: body,
         files: filesMap,
         filesList: filesList,
-        fromJson: BasicSuccessModel.fromJson,
+        fromJson: CreateAppoinmentModel.fromJson,
         onSuccess: (result) {
-          appointmentId = result.data?.id;
+          appointmentId = result.data.id;
         },
       );
     } catch (_) {
@@ -97,5 +97,12 @@ class BookInfoController extends GetxController {
       await Future.delayed(const Duration(milliseconds: 100));
       Get.toNamed(Routes.paymentScreen, arguments: appointmentId);
     }
+  }
+
+  @override
+  void onClose() {
+    reasonTitleController.dispose();
+    reasonDetailsController.dispose();
+    super.onClose();
   }
 }

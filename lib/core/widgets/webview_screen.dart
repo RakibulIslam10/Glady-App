@@ -10,6 +10,7 @@ class WebPaymentScreen extends StatefulWidget {
   @override
   State<WebPaymentScreen> createState() => _WebPaymentScreenState();
 }
+
 class _WebPaymentScreenState extends State<WebPaymentScreen> {
   final controller = Get.find<PaymentController>();
   late final WebViewController _webViewController;
@@ -22,7 +23,6 @@ class _WebPaymentScreenState extends State<WebPaymentScreen> {
   }
 
   void _initializeWebView() {
-
     final paymentUrl = controller.paymentUrl;
 
     if (paymentUrl.isEmpty) {
@@ -43,13 +43,35 @@ class _WebPaymentScreenState extends State<WebPaymentScreen> {
             setState(() => isLoading = false);
             debugPrint("✅ Current URL: $url");
 
-            // ✅ Success check
-            if (url.contains('success')) {
+            final uri = Uri.parse(url);
+
+            // ✅ Paystack success
+            final trxref = uri.queryParameters['trxref'];
+            final reference = uri.queryParameters['reference'];
+            if ((trxref != null || reference != null) &&
+                (url.contains('callback') || url.contains('verify'))) {
               _handleSuccess();
+              return;
             }
-            // ✅ Cancel/Failed check
-            else if (url.contains('cancel') || url.contains('failed')) {
-              _handleFailure("Payment failed or was cancelled");
+
+            // ✅ Stripe success
+            final redirectStatus = uri.queryParameters['redirect_status'];
+            final paymentIntent = uri.queryParameters['payment_intent'];
+            if (paymentIntent != null && redirectStatus == 'succeeded') {
+              _handleSuccess();
+              return;
+            }
+
+            // ✅ Stripe failed
+            if (paymentIntent != null && redirectStatus == 'failed') {
+              _handleFailure("Payment failed");
+              return;
+            }
+
+            // ✅ Paystack / Stripe cancel
+            if (url.contains('cancel') || url.contains('close')) {
+              _handleFailure("Payment was cancelled");
+              return;
             }
           },
           onWebResourceError: (WebResourceError error) {
@@ -63,6 +85,30 @@ class _WebPaymentScreenState extends State<WebPaymentScreen> {
     setState(() => isLoading = false);
   }
 
+  void _handleSuccess() {
+    if (!mounted) return;
+    controller.paymentUrl = '';
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.offAll(
+            () => ConfirmationWidget(
+          iconPath: Assets.icons.vector,
+          title: "Payment Successful",
+          subtitle:
+          'About this payment information has been sent to your email.\nWaiting for doctor confirmation.',
+        ),
+      );
+    });
+  }
+
+  void _handleFailure(String message) {
+    if (!mounted) return;
+    controller.paymentUrl = '';
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.back();
+      CustomSnackBar.error(message);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,29 +120,5 @@ class _WebPaymentScreenState extends State<WebPaymentScreen> {
           ? const LoadingWidget()
           : WebViewWidget(controller: _webViewController),
     );
-  }
-
-  void _handleSuccess() {
-    debugPrint("✅ Payment Successful");
-
-    controller.paymentUrl = '';
-
-    Get.offAll(
-      ConfirmationWidget(
-        iconPath: Assets.icons.vector,
-        title: "payment successful",
-        subtitle:
-        'About this payment information has been sent your email\n Waiting for doctor Confirmation',
-      ),
-    );
-  }
-
-  void _handleFailure(String message) {
-    debugPrint("❌ Payment Failed: $message");
-
-    controller.paymentUrl = '';
-
-    Get.back();
-    CustomSnackBar.error(message);
   }
 }
