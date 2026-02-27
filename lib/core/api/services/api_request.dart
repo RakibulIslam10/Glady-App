@@ -21,6 +21,24 @@ class ApiRequest {
     };
   }
 
+
+  void _handleUnauthorized(http.Response response) {
+    if (response.statusCode == 401) {
+      final error = jsonDecode(response.body);
+      final errorMessage = (error['message'] ?? '').toString().toLowerCase();
+      if (errorMessage.contains('jwt') ||
+          errorMessage.contains('token') ||
+          errorMessage.contains('expired') ||
+          errorMessage.contains('invalid') ||
+          errorMessage.contains('unauthorized')) {
+        AppStorage.clear();
+
+        Get.offAllNamed(Routes.loginScreen);
+        CustomSnackBar.error('Session expired. Please login again.');
+      }
+    }
+  }
+
   void printBody(Map<String, dynamic> body) {
     body.forEach((key, value) {
       log("🔹 '$key': '$value'");
@@ -75,6 +93,7 @@ class ApiRequest {
         if (onSuccess != null) onSuccess(result);
         return result;
       } else {
+        _handleUnauthorized(response);
         final error = jsonDecode(response.body);
         final errorMessage = error['message'] ?? 'Something went wrong!';
         log('❌ Error: $errorMessage');
@@ -140,7 +159,6 @@ class ApiRequest {
           log('|📤| RESPONSE (raw) |📤|: ${response.body}');
         }
       }
-
       log('|✅|---------[ ✅ HTTP GET REQUEST COMPLETED ]---------|✅|');
       log(
         '╚════════════════════════════════════════════════════════════════════════════════════════════',
@@ -161,6 +179,8 @@ class ApiRequest {
         if (onSuccess != null) onSuccess(result);
         return result;
       } else {
+        _handleUnauthorized(response);
+
         final error = jsonDecode(response.body);
         final errorMessage = error['message'] ?? 'Something went wrong!';
         log('❌ Error: $errorMessage');
@@ -225,6 +245,8 @@ class ApiRequest {
 
         return result;
       } else {
+        _handleUnauthorized(response);
+
         final error = jsonDecode(response.body);
         final errorMessage = error['message'] ?? 'Something went wrong!';
         log('❌ Error: $errorMessage');
@@ -282,6 +304,7 @@ class ApiRequest {
 
         return result;
       } else {
+        _handleUnauthorized(response);
         final error = jsonDecode(response.body);
         final errorMessage = error['message'] ?? 'Something went wrong!';
         log('❌ Error: $errorMessage');
@@ -350,6 +373,7 @@ class ApiRequest {
 
         return result;
       } else {
+        _handleUnauthorized(response);
         final error = jsonDecode(response.body);
         final errorMessage = error['message'] ?? 'Something went wrong!';
         log('❌ Error: $errorMessage');
@@ -464,6 +488,7 @@ class ApiRequest {
         if (onSuccess != null) onSuccess(result);
         return result;
       } else {
+        _handleUnauthorized(response);
         final error = jsonDecode(response.body);
         final errorMessage = error['message'] ?? 'Something went wrong!';
         log('❌ MULTIPART ERROR: $errorMessage');
@@ -531,6 +556,7 @@ class ApiRequest {
           return false;
         }
       } else {
+        _handleUnauthorized(response);
         isFavorite.value = oldValue;
         final error = jsonDecode(response.body);
         final errorMessage = (error);

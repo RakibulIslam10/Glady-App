@@ -57,6 +57,7 @@ class ProfileBoxWidget extends GetView<ProfileController> {
             imageUrl: controller.userProfileModel?.data.profileImage ?? ''  ,
             size: 100,
           ),
+          Space.height.v10,
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             spacing: Dimensions.widthSize * 0.8,

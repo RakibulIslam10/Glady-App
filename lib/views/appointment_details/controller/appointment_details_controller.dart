@@ -5,7 +5,7 @@ import '../../../core/utils/basic_import.dart';
 import '../model/appoinment_details_model.dart';
 
 class AppointmentDetailsController extends GetxController {
-  String appointmentId = '';
+ late String appointmentId = '';
 
   @override
   void onInit() {

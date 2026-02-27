@@ -31,9 +31,9 @@ class CategorySectionWidget extends GetView<HomeController> {
               onTap: () => Get.toNamed(
                 Routes.categoryDetailsScreen,
                 arguments: {
-                  'id' :  controller.specialitiesList[index].id,
-                  'name' :  controller.specialitiesList[index].name,
-                }
+                  'id': controller.specialitiesList[index].id,
+                  'name': controller.specialitiesList[index].name,
+                },
               ),
               child: Container(
                 padding: EdgeInsets.symmetric(
