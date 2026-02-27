@@ -1,5 +1,4 @@
 import 'package:glady/core/api/end_point/api_end_points.dart';
-
 import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
 import '../model/search_doctor_model.dart';
@@ -24,9 +23,7 @@ class FindController extends GetxController {
       hasSearched.value = false;
       return;
     }
-
     hasSearched.value = true;
-
     await ApiRequest().get(
       fromJson: (json) => json,
       endPoint: '${ApiEndPoints.searchDoctors}$query',
