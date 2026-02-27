@@ -27,7 +27,7 @@ class FindScreenMobile extends GetView<FindController> {
                   onChanged: (value) => controller.searchDoctors(value),
                   cursorColor: CustomColors.primary,
                   decoration: InputDecoration(
-                    hintText: 'Find Specialties or Doctor',
+                    hintText: 'Find Specialties Doctor',
                     hintStyle: TextStyle(
                       color: Colors.grey.shade600,
                       fontSize: Dimensions.titleMedium * 0.9,

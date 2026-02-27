@@ -89,7 +89,7 @@ class DoctorDetailsCard extends StatelessWidget {
                           ),
                         ),
                         child: TextWidget(
-                          '${yearsOfExperience}Years',
+                          '$yearsOfExperience Years',
                           fontSize: Dimensions.bodySmall,
                           fontWeight: FontWeight.w600,
                           color: CustomColors.primary,
@@ -122,9 +122,13 @@ class DoctorDetailsCard extends StatelessWidget {
                       Row(
                         children: [
                           ...List.generate(
-                            4,
-                            (index) => Icon(
-                              Icons.star,
+                            5,
+                                (i) => Icon(
+                              i < rating.floor()
+                                  ? Icons.star
+                                  : (i < rating && rating % 1 >= 0.5)
+                                  ? Icons.star_half
+                                  : Icons.star_border,
                               color: Color(0xffF29500),
                               size: Dimensions.iconSizeDefault * 1.125,
                             ),

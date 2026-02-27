@@ -20,7 +20,7 @@ class SearchHeaderWidget extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
                 child: Text(
-                  'Find Specialties or Doctor',
+                  'Find Specialties Doctor',
                   style: TextStyle(
                     fontSize: 15.sp,
                     color: Colors.grey.shade600,
