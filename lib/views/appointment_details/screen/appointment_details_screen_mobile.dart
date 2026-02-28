@@ -101,12 +101,8 @@ class AppointmentDetailsScreenMobile
           if (controller.isLoading.value) {
             return LoadingWidget();
           }
-
-          // ✅ Check user type and load appropriate data
           if (AppStorage.isUser == 'USER') {
-            // 👤 USER: Show doctor info
-            final appointmentData =
-                controller.userAppointmentDetailsModel.value;
+            final appointmentData = controller.userAppointmentDetailsModel.value;
             if (appointmentData == null) {
               return Center(
                 child: TextWidget(
@@ -235,7 +231,8 @@ class AppointmentDetailsScreenMobile
               ],
             );
           } else {
-            // 👨‍⚕️ DOCTOR: Show patient info
+
+
             final appointmentData =
                 controller.doctorAppointmentDetailsModel.value;
             if (appointmentData == null) {

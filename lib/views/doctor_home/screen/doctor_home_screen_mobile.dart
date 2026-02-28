@@ -50,7 +50,7 @@ class DoctorHomeScreenMobile extends GetView<DoctorHomeController> {
                                 crossAxisAlignment: crossStart,
                                 children: [
                                   TextWidget(
-                                    "Booking Request",
+                                    "Completed",
                                     color: CustomColors.grayShade,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -75,7 +75,7 @@ class DoctorHomeScreenMobile extends GetView<DoctorHomeController> {
                                 crossAxisAlignment: crossEnd,
                                 children: [
                                   TextWidget(
-                                    "Accepted",
+                                    "Cancelled",
                                     color: CustomColors.grayShade,
                                     fontWeight: FontWeight.w500,
                                   ),

@@ -104,8 +104,8 @@ class DashboardStats {
   });
 
   factory DashboardStats.fromJson(Map<String, dynamic> json) => DashboardStats(
-    bookingRequestCount: json['bookingRequestCount'],
-    acceptedCount: json['acceptedCount'],
+    bookingRequestCount: json['completedCount'],
+    acceptedCount: json['cancelledCount'],
   );
 }
 

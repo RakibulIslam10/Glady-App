@@ -26,16 +26,13 @@ class LoginController extends GetxController {
     //USER
     // emailController.text = 'xyan@yopmail.com';
     // passwordController.text = '11223344';
-
-    emailController.text = 'user.uno@yopmail.com';
+    emailController.text = 'dr.uno@yopmail.com';
+    // emailController.text = 'user.uno@yopmail.com';
     passwordController.text = 'securepass';
 
     //DOCTOR
     // emailController.text = 'xzyanmallik@yopmail.com';
     // passwordController.text = '11223344';
-
-    // emailController.text = 'dr.uno@yopmail.com';
-    // passwordController.text = 'securepass';
 
 
   }
