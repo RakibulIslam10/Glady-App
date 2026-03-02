@@ -1,13 +1,18 @@
+import 'package:glady/core/api/services/api_request.dart';
+
 import '../../../core/utils/basic_import.dart';
 import 'dart:async';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../appointment/model/join_video_call_model.dart';
+
 class VideoCallController extends GetxController {
-  static const String appId = "296efbe76c6947018979a48113a46c7a";
-  final String channelName = "test_channel";
-  final String token =
-      "007eJxTYJg2iXFJ0KQzOa+XvFZjMtxm1rvH6xJH4oTShW6sp/foyxUpMBhZmqWmJaWamyWbWZqYGxhaWJpbJppYGBoaJ5qYJZsnaiQGZzYEMjKEerYzMTJAIIjPw1CSWlwSn5yRmJeXmsPAAADXPSBN";
+  late String appId = "";
+  late String channelName = "";
+  late String token = "";
+
+  late String appointmentId = '';
 
   late RtcEngine agoraEngine;
 
@@ -27,6 +32,7 @@ class VideoCallController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    appointmentId = Get.arguments;
     _initializeAgora();
   }
 
@@ -45,7 +51,7 @@ class VideoCallController extends GetxController {
       agoraEngine = createAgoraRtcEngine();
 
       await agoraEngine.initialize(
-        const RtcEngineContext(
+        RtcEngineContext(
           appId: appId,
           channelProfile: ChannelProfileType.channelProfileCommunication,
         ),
@@ -190,5 +196,20 @@ class VideoCallController extends GetxController {
     } catch (e) {
       print('Error ending call: $e');
     }
+  }
+
+  RxBool isLoadingCall = false.obs;
+
+  Future<JoinVideoCallModel> getVideoCallInfo() async {
+    return ApiRequest().get(
+      fromJson: JoinVideoCallModel.fromJson,
+      endPoint: '/appointments/$appointmentId/video/token',
+      isLoading: isLoadingCall,
+      onSuccess: (result) {
+        appId = result.data.appId;
+        token = result.data.token;
+        channelName = result.data.channel;
+      },
+    );
   }
 }

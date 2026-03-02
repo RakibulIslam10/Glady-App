@@ -96,21 +96,6 @@ class AppointmentScreenMobile extends GetView<AppointmentController> {
                     .parse(appointment.appointmentEndTime);
 
                 return
-
-                //   RequestCard(
-                //   name: appointment.patientName,
-                //   service: appointment.specialtyName,
-                //   time: '${DateFormat('HH:mm').format(startTime)} - ${DateFormat('HH:mm').format(endTime)}',
-                //   status: DateFormat('dd MMM yyyy')
-                //       .format(appointment.appointmentDate.toLocal()),
-                //   buttonTitle: appointment.status == 'ONGOING' ? 'Join' : appointment.status == 'CANCELLED' ? 'Cancelled' : 'Chat',
-                //   onTap: () =>
-                //       controller.handleAppointmentAction(appointment),
-                //   cardOnTap: () {
-                //     Get.toNamed(Routes.appointmentDetailsScreen);
-                //   },
-                // );
-
                   AppointmentCard(
                     appointmentId: appointment.id,
                     doctorName: appointment.patientName,

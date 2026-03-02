@@ -62,9 +62,7 @@ class AppointmentController extends GetxController {
   void joinVideoCall(String appointmentId) {
     Get.toNamed(
       Routes.videoCallScreen,
-      arguments: {
-        'appointmentId': appointmentId,
-      },
+      arguments: appointmentId
     );
   }
 
@@ -76,4 +74,17 @@ class AppointmentController extends GetxController {
       },
     );
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
