@@ -25,7 +25,7 @@ class AppointmentDetailsScreenMobile
               children: [
                 Row(
                   children: [
-                    if (AppStorage.isUser != 'USER') ...[
+                    if (AppStorage.isUser != 'USER' && currentStatus != 'CANCELLED') ...[
                       Expanded(
                         child: PrimaryButtonWidget(
                           outlineButton: true,

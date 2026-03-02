@@ -8,11 +8,10 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../appointment/model/join_video_call_model.dart';
 
 class VideoCallController extends GetxController {
+
   late String appId = "";
   late String channelName = "";
   late String token = "";
-
-  late String appointmentId = '';
 
   late RtcEngine agoraEngine;
 
@@ -32,7 +31,16 @@ class VideoCallController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    appointmentId = Get.arguments;
+
+    /// ✅ Properly receive Map arguments
+    final args = Get.arguments as Map<String, dynamic>?;
+
+    if (args != null) {
+      appId = args['AppId'] ?? '';
+      token = args['Token'] ?? '';
+      channelName = args['Channel'] ?? '';
+    }
+
     _initializeAgora();
   }
 
@@ -77,79 +85,51 @@ class VideoCallController extends GetxController {
     agoraEngine.registerEventHandler(
       RtcEngineEventHandler(
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-          print('Local user joined: ${connection.localUid}');
           localUid = connection.localUid;
           isLocalUserJoined.value = true;
           isConnected.value = true;
           _startDurationTimer();
         },
-
         onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
-          print('Remote user joined: $remoteUid');
           this.remoteUid = remoteUid;
           isRemoteUserJoined.value = true;
         },
-
-        onUserOffline:
-            (
-              RtcConnection connection,
-              int remoteUid,
-              UserOfflineReasonType reason,
+        onUserOffline: (
+            RtcConnection connection,
+            int remoteUid,
+            UserOfflineReasonType reason,
             ) {
-              print('Remote user left: $remoteUid');
-              this.remoteUid = null;
-              isRemoteUserJoined.value = false;
-            },
-
-        onNetworkQuality:
-            (
-              RtcConnection connection,
-              int remoteUid,
-              QualityType txQuality,
-              QualityType rxQuality,
-            ) {
-              print('Network quality - TX: $txQuality, RX: $rxQuality');
-            },
-
-        onError: (ErrorCodeType err, String msg) {
-          print('Agora Error: $err - $msg');
+          this.remoteUid = null;
+          isRemoteUserJoined.value = false;
         },
       ),
     );
   }
 
   Future<void> _joinChannel() async {
-    try {
-      await agoraEngine.joinChannel(
-        token: token,
-        channelId: channelName,
-        uid: 0,
-        options: const ChannelMediaOptions(
-          channelProfile: ChannelProfileType.channelProfileCommunication,
-          clientRoleType: ClientRoleType.clientRoleBroadcaster,
-          publishCameraTrack: true,
-          publishMicrophoneTrack: true,
-        ),
-      );
-    } catch (e) {
-      print('Error joining channel: $e');
-    }
+    await agoraEngine.joinChannel(
+      token: token,
+      channelId: channelName,
+      uid: 0,
+      options: const ChannelMediaOptions(
+        channelProfile: ChannelProfileType.channelProfileCommunication,
+        clientRoleType: ClientRoleType.clientRoleBroadcaster,
+        publishCameraTrack: true,
+        publishMicrophoneTrack: true,
+      ),
+    );
   }
 
   Future<void> _leaveChannel() async {
-    try {
-      await agoraEngine.leaveChannel();
-      isLocalUserJoined.value = false;
-      isRemoteUserJoined.value = false;
-      isConnected.value = false;
-    } catch (e) {
-      print('Error leaving channel: $e');
-    }
+    await agoraEngine.leaveChannel();
+    isLocalUserJoined.value = false;
+    isRemoteUserJoined.value = false;
+    isConnected.value = false;
   }
 
   void _startDurationTimer() {
     _seconds = 0;
-    _durationTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _durationTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       _seconds++;
       final minutes = (_seconds ~/ 60).toString().padLeft(2, '0');
       final seconds = (_seconds % 60).toString().padLeft(2, '0');
@@ -157,59 +137,19 @@ class VideoCallController extends GetxController {
     });
   }
 
-  Future<void> toggleCamera() async {
-    try {
-      bool isEnabled = !isCameraFlipped.value;
-      await agoraEngine.enableLocalVideo(isEnabled);
-      print('Camera ${isEnabled ? 'enabled' : 'disabled'}');
-    } catch (e) {
-      print('Error toggling camera: $e');
-    }
-  }
-
   Future<void> toggleMute() async {
-    try {
-      isMuted.value = !isMuted.value;
-      await agoraEngine.muteLocalAudioStream(isMuted.value);
-      print('Microphone ${isMuted.value ? 'muted' : 'unmuted'}');
-    } catch (e) {
-      print('Error toggling mute: $e');
-    }
+    isMuted.value = !isMuted.value;
+    await agoraEngine.muteLocalAudioStream(isMuted.value);
   }
 
   Future<void> flipCamera() async {
-    try {
-      await agoraEngine.switchCamera();
-      isCameraFlipped.value = !isCameraFlipped.value;
-      print('Camera flipped to ${isCameraFlipped.value ? 'back' : 'front'}');
-    } catch (e) {
-      print('Error flipping camera: $e');
-    }
+    await agoraEngine.switchCamera();
+    isCameraFlipped.value = !isCameraFlipped.value;
   }
 
   Future<void> endCall() async {
-    try {
-      _durationTimer?.cancel();
-      await _leaveChannel();
-      Get.back();
-      print('Call ended');
-    } catch (e) {
-      print('Error ending call: $e');
-    }
-  }
-
-  RxBool isLoadingCall = false.obs;
-
-  Future<JoinVideoCallModel> getVideoCallInfo() async {
-    return ApiRequest().get(
-      fromJson: JoinVideoCallModel.fromJson,
-      endPoint: '/appointments/$appointmentId/video/token',
-      isLoading: isLoadingCall,
-      onSuccess: (result) {
-        appId = result.data.appId;
-        token = result.data.token;
-        channelName = result.data.channel;
-      },
-    );
+    _durationTimer?.cancel();
+    await _leaveChannel();
+    Get.back();
   }
 }
