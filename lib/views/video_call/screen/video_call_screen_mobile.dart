@@ -18,11 +18,11 @@ class VideoCallScreenMobile extends GetView<VideoCallController> {
                 onTap: () => Get.toNamed(Routes.inboxScreen),
                 backgroundColor: Colors.white.withOpacity(0.9),
               ),
-              // _buildControlButton(
-              //   icon: Icons.cameraswitch,
-              //   onTap: controller.toggleCamera,
-              //   backgroundColor: Colors.white.withOpacity(0.9),
-              // ),
+              _buildControlButton(
+                icon: Icons.cameraswitch,
+                onTap: controller.toggleCamera,
+                backgroundColor: Colors.white.withOpacity(0.9),
+              ),
               Obx(
                     () => _buildControlButton(
                   icon: controller.isMuted.value ? Icons.mic_off : Icons.mic,

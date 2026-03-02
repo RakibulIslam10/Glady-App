@@ -21,14 +21,13 @@ class AppointmentScreenMobile extends GetView<AppointmentController> {
             }
           },
           child: Obx(() {
-
             /// ================= USER =================
             if (isUser) {
-
               if (controller.isUserLoading.value) {
                 return LoadingWidget();
               }
-              final appointments = controller.userAppointments.value?.data ?? [];
+              final appointments =
+                  controller.userAppointments.value?.data ?? [];
               if (appointments.isEmpty) {
                 return _emptyWidget();
               }
@@ -41,23 +40,25 @@ class AppointmentScreenMobile extends GetView<AppointmentController> {
                 physics: const BouncingScrollPhysics(),
                 itemCount: appointments.length,
                 itemBuilder: (context, index) {
-
                   final appointment = appointments[index];
 
-                  final startTime = DateFormat('HH:mm')
-                      .parse(appointment.appointmentTime ?? '00:00');
+                  final startTime = DateFormat(
+                    'HH:mm',
+                  ).parse(appointment.appointmentTime ?? '00:00');
 
-                  final endTime = DateFormat('HH:mm')
-                      .parse(appointment.appointmentEndTime ?? '00:00');
+                  final endTime = DateFormat(
+                    'HH:mm',
+                  ).parse(appointment.appointmentEndTime ?? '00:00');
 
                   return AppointmentCard(
                     appointmentId: appointment.id,
                     doctorName: appointment.doctorName,
                     specialization: appointment.specialtyName,
                     time:
-                    '${DateFormat('HH:mm').format(startTime)} - ${DateFormat('HH:mm').format(endTime)}',
-                    date: DateFormat('dd MMM yyyy')
-                        .format(appointment.appointmentDate.toLocal()),
+                        '${DateFormat('HH:mm').format(startTime)} - ${DateFormat('HH:mm').format(endTime)}',
+                    date: DateFormat(
+                      'dd MMM yyyy',
+                    ).format(appointment.appointmentDate.toLocal()),
                     status: appointment.status.toLowerCase() ?? '',
                     onPressed: () =>
                         controller.handleAppointmentAction(appointment),
@@ -86,28 +87,29 @@ class AppointmentScreenMobile extends GetView<AppointmentController> {
               physics: const BouncingScrollPhysics(),
               itemCount: appointments.length,
               itemBuilder: (context, index) {
-
                 final appointment = appointments[index];
 
-                final startTime = DateFormat('HH:mm')
-                    .parse(appointment.appointmentTime);
+                final startTime = DateFormat(
+                  'HH:mm',
+                ).parse(appointment.appointmentTime);
 
-                final endTime = DateFormat('HH:mm')
-                    .parse(appointment.appointmentEndTime);
+                final endTime = DateFormat(
+                  'HH:mm',
+                ).parse(appointment.appointmentEndTime);
 
-                return
-                  AppointmentCard(
-                    appointmentId: appointment.id,
-                    doctorName: appointment.patientName,
-                    specialization: appointment.specialtyName,
-                    time:
-                    '${DateFormat('HH:mm').format(startTime)} - ${DateFormat('HH:mm').format(endTime)}',
-                    date: DateFormat('dd MMM yyyy')
-                        .format(appointment.appointmentDate.toLocal()),
-                    status: appointment.status.toLowerCase() ?? '',
-                    onPressed: () =>
-                        controller.handleAppointmentAction(appointment),
-                  );
+                return AppointmentCard(
+                  appointmentId: appointment.id,
+                  doctorName: appointment.patientName,
+                  specialization: appointment.specialtyName,
+                  time:
+                      '${DateFormat('HH:mm').format(startTime)} - ${DateFormat('HH:mm').format(endTime)}',
+                  date: DateFormat(
+                    'dd MMM yyyy',
+                  ).format(appointment.appointmentDate.toLocal()),
+                  status: appointment.status.toLowerCase() ?? '',
+                  onPressed: () =>
+                      controller.handleAppointmentAction(appointment),
+                );
               },
             );
           }),

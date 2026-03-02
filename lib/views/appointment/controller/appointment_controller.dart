@@ -3,7 +3,6 @@ import '../../../core/utils/basic_import.dart';
 import '../../../core/api/services/api_request.dart';
 import '../../../core/api/end_point/api_end_points.dart';
 import '../model/doctor_appoinment_model.dart';
-import '../model/join_video_call_model.dart';
 import '../model/user_all_appoinment.dart';
 
 class AppointmentController extends GetxController {
@@ -35,6 +34,12 @@ class AppointmentController extends GetxController {
       isLoading: isUserLoading,
       onSuccess: (result) {
         userAppointments.value = result;
+        // print('************************************');
+        // print('************************************');
+        // print('************************************');
+        for (var a in result.data) {
+          print('Appointment: ${a.id} | Status: ${a.status}');
+        }
       },
     );
   }
@@ -55,13 +60,18 @@ class AppointmentController extends GetxController {
 
     if (status == 'ONGOING') {
       joinVideoCall(appointment.id);
+    } else if (status == 'COMPLETED' || status == 'CANCELLED' ||status == 'UPCOMING') {
+      Get.toNamed(Routes.appointmentDetailsScreen, arguments: appointment.id);
     } else {
       openChat(appointment.id);
     }
   }
 
   void joinVideoCall(String appointmentId) {
-    videoCallInfo(appointmentId);
+    Get.toNamed(
+      Routes.videoCallScreen,
+      arguments: appointmentId
+    );
   }
 
   void openChat(String appointmentId) {
@@ -73,24 +83,16 @@ class AppointmentController extends GetxController {
     );
   }
 
-  RxBool isLoading = false.obs;
 
-  Future<JoinVideoCallModel> videoCallInfo(String appointmentId) async {
-    return ApiRequest().post(
-      fromJson: JoinVideoCallModel.fromJson,
-      endPoint: '/appointments/$appointmentId/video/token',
-      isLoading: isLoading,
-      body: {},
-      onSuccess: (result) {
-        Get.toNamed(
-          Routes.videoCallScreen,
-          arguments: {
-            'AppId': result.data.appId,
-            'Token': result.data.token,
-            'Channel': result.data.channel,
-          },
-        );
-      },
-    );
-  }
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -4,16 +4,19 @@ class CustomSnackBar {
     required String title,
     required String message,
     void Function(GetSnackBar)? onTap,
+
+
   }) {
     final ctx = Get.overlayContext ?? Get.context;
     if (ctx == null) return;
+
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.rawSnackbar(
         backgroundColor: CustomColors.primary,
         snackStyle: SnackStyle.FLOATING,
         snackPosition: SnackPosition.BOTTOM,
-        duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 2),
         margin: EdgeInsets.symmetric(
           horizontal: Dimensions.defaultHorizontalSize * 0.7,
           vertical: Dimensions.verticalSize * 0.3,
