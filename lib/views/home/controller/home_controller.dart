@@ -1,8 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:glady/core/api/model/basic_success_model.dart';
 import 'package:glady/core/api/services/api_request.dart';
+import 'package:glady/core/utils/app_storage.dart';
+import 'package:glady/views/home/model/donation_model.dart';
 import 'package:glady/views/home/model/popular_doctor_model.dart';
 import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/utils/basic_import.dart';
+import '../../../core/widgets/loading_widget.dart';
+import '../../../core/widgets/webview_screen.dart';
 import '../model/popular_specialities_model.dart';
 import '../model/wellness_tips_model.dart';
 
@@ -120,6 +125,54 @@ class HomeController extends GetxController {
     } catch (e) {
       wellnessTipsList[index].isFavourite = !wellnessTipsList[index].isFavourite;
       wellnessTipsList.refresh();
+    }
+  }
+
+  final donationEmailController = TextEditingController();
+  final donationAmountController = TextEditingController();
+
+  Future<void> donationProcess() async {
+    Get.dialog(
+      const CupertinoAlertDialog(
+        content: Padding(
+          padding: EdgeInsets.only(top: 8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              LoadingWidget(),
+              SizedBox(height: 12),
+              Text('Please wait...'),
+            ],
+          ),
+        ),
+      ),
+      barrierDismissible: false,
+    );
+
+    try {
+      await ApiRequest().post(
+        fromJson: DonationModel.fromJson,
+        endPoint: ApiEndPoints.donationPayment,
+        isLoading: isLoading,
+        body: {
+          "email": donationEmailController.text.trim(),
+          "amount": int.tryParse(donationAmountController.text.trim()) ?? 0,
+          "userId": AppStorage.userId,
+        },
+        onSuccess: (result) {
+          final donationUrl = result.data.authorizationUrl;
+          if (donationUrl.isNotEmpty) {
+            Get.back(); // dialog close
+            Get.back(); // bottom sheet close
+            Future.delayed(const Duration(milliseconds: 100), () {
+              Get.to(() => WebPaymentScreen(paymentUrl: donationUrl));
+            });
+          }
+        },
+      );
+    } catch (_) {
+    } finally {
+      if (Get.isDialogOpen ?? false) Get.back();
     }
   }
 

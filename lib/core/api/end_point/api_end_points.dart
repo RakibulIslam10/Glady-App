@@ -30,6 +30,7 @@ class ApiEndPoints {
   static const String doctorAppointmentDetails = '/appointments/doctor';
   static const String userAppointmentDetails = '/appointments/me';
   static const String appointments = '/appointments/me';
+  static const String donationPayment = '/payments/donations/initialize';
   static const String appointmentsBook = '/appointments/me';
   static const String doctorAppointments = '/appointments/doctor/me';
   static const String getPopularDoctors = '/doctors/popular';

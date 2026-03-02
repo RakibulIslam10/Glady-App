@@ -60,7 +60,7 @@ class PaymentController extends GetxController {
 
     if (paymentUrl.isNotEmpty) {
       await Future.delayed(const Duration(milliseconds: 100));
-      Get.to(() => WebPaymentScreen());
+      Get.to(() => WebPaymentScreen(paymentUrl: paymentUrl,));
     }
   }
 }

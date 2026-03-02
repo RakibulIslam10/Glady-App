@@ -66,7 +66,6 @@ class HomeScreenMobile extends GetView<HomeController> {
           ),
           const SliverToBoxAdapter(child: HomeDoctorCardWidget()),
         ],
-
         const SliverToBoxAdapter(child: BottomBannerWidget()),
       ],
     );
