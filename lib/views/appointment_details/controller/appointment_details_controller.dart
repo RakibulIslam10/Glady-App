@@ -105,8 +105,11 @@ class AppointmentDetailsController extends GetxController {
       },
       onSuccess: (result) {
         Get.close(2);
-        fetchUserAppointmentDetails();
-      },
+        CustomSnackBar.success(
+          title: 'Review Submitted',
+          message: 'Thank you for your feedback.',
+        );
+        },
     );
   }
   void showReviewDialog(BuildContext context) {
@@ -172,13 +175,14 @@ class AppointmentDetailsController extends GetxController {
               ),
 
               Space.height.v20,
-
-              /// Submit Button
               Obx(
                     () => PrimaryButtonWidget(
                   isLoading: isSubmit.value,
                   onPressed: submitReview,
                   title: 'Submit',
+                      
+                      
+                      
                 ),
               ),            ],
           ),

@@ -1,3 +1,4 @@
+
 class AllReviewModel {
   final bool success;
   final int statusCode;
@@ -20,13 +21,21 @@ class AllReviewModel {
     data: List<Reviews>.from(json["data"].map((x) => Reviews.fromJson(x))),
     meta: Meta.fromJson(json["meta"]),
   );
+
+  Map<String, dynamic> toJson() => {
+    "success": success,
+    "statusCode": statusCode,
+    "message": message,
+    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+    "meta": meta.toJson(),
+  };
 }
 
 class Reviews {
   final String id;
   final String appointmentId;
   final UserId userId;
-  final DoctorId doctorId;
+  final String doctorId;
   final int rating;
   final String reviewText;
   final DateTime createdAt;
@@ -49,7 +58,7 @@ class Reviews {
     id: json["_id"],
     appointmentId: json["appointmentId"],
     userId: UserId.fromJson(json["userId"]),
-    doctorId: DoctorId.fromJson(json["doctorId"]),
+    doctorId: json["doctorId"],
     rating: json["rating"],
     reviewText: json["reviewText"],
     createdAt: DateTime.parse(json["createdAt"]),
@@ -61,28 +70,12 @@ class Reviews {
     "_id": id,
     "appointmentId": appointmentId,
     "userId": userId.toJson(),
-    "doctorId": doctorId.toJson(),
+    "doctorId": doctorId,
     "rating": rating,
     "reviewText": reviewText,
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
     "__v": v,
-  };
-}
-
-class DoctorId {
-  final String id;
-
-  DoctorId({
-    required this.id,
-  });
-
-  factory DoctorId.fromJson(Map<String, dynamic> json) => DoctorId(
-    id: json["_id"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "_id": id,
   };
 }
 
@@ -130,4 +123,10 @@ class Meta {
     totalPages: json["totalPages"],
   );
 
+  Map<String, dynamic> toJson() => {
+    "total": total,
+    "page": page,
+    "limit": limit,
+    "totalPages": totalPages,
+  };
 }

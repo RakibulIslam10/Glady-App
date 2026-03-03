@@ -4,10 +4,13 @@ import '../../../core/utils/basic_import.dart';
 
 class AllReviewController extends GetxController {
 
+  late String doctorId = '';
+
   @override
   void onInit() {
     super.onInit();
-    getAllReviews();
+    doctorId =  Get.arguments;
+    getAllReviews(doctorId);
   }
 
   RxBool isLoading = false.obs;
@@ -16,10 +19,10 @@ class AllReviewController extends GetxController {
   AllReviewModel? allReviewModel;
   RxList<Reviews> reviewList = <Reviews>[].obs;
 
-  Future<AllReviewModel> getAllReviews() async {
+  Future<AllReviewModel> getAllReviews(String doctorId) async {
     return ApiRequest().get(
       fromJson: AllReviewModel.fromJson,
-      endPoint: '/reviews',
+      endPoint: '/reviews/doctor/$doctorId',
       isLoading: isLoading,
       onSuccess: (result) {
         allReviewModel = result;

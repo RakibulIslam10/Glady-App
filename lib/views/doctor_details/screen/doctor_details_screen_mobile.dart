@@ -94,18 +94,23 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
         Space.height.v15,
 
         // Reviews List
-        ...controller.doctorDetailsInfoModel?.data.reviews.map(
+        ...(controller.doctorDetailsInfoModel?.data.reviews
+            .take(2)
+            .map(
               (review) => Padding(
-                padding: EdgeInsets.only(bottom: Dimensions.verticalSize * 0.5),
-                child: _ReviewCard(review: review),
-              ),
-            ) ??
-            [],
+            padding: EdgeInsets.only(
+              bottom: Dimensions.verticalSize * 0.5,
+            ),
+            child: _ReviewCard(review: review),
+          ),
+        )
+            .toList() ??
+            []),
 
         // Read All Reviews Button
         if ((controller.doctorDetailsInfoModel?.data.reviews.length ?? 0) > 0)
           GestureDetector(
-            onTap: () => Get.toNamed(Routes.allReviewScreen),
+            onTap: () => Get.toNamed(Routes.allReviewScreen,arguments: controller.doctorDetailsInfoModel?.data.doctor.id),
             child: Container(
               alignment: Alignment.center,
               padding: EdgeInsets.symmetric(
