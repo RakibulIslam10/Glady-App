@@ -73,8 +73,7 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
                 days: slot.dayOfWeek,
                 time: "${slot.startTime} - ${slot.endTime}",
                 price: "\$${slot.fee}",
-                slot:
-                    "${(slot.slotSizeMinutes > 0 ? ((int.tryParse(slot.endTime.split(':')[0]) ?? 0) - (int.tryParse(slot.startTime.split(':')[0]) ?? 0)) * 60 ~/ slot.slotSizeMinutes : 0)} Slot",
+                slot: "${(slot.slotSizeMinutes > 0 ? ((int.tryParse(slot.endTime.split(':')[0]) ?? 0) - (int.tryParse(slot.startTime.split(':')[0]) ?? 0)) * 60 ~/ slot.slotSizeMinutes : 0)} Slot",
                 duration: "${slot.slotSizeMinutes} Minutes",
               ),
             ),

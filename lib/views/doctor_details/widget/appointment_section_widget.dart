@@ -39,6 +39,11 @@ class AppointmentSectionWidget extends StatelessWidget {
                   fontSize: Dimensions.titleSmall,
                   fontWeight: FontWeight.w400,
                 ),
+                TextWidget(
+                  price,
+                  fontSize: Dimensions.titleSmall,
+                  fontWeight: FontWeight.w400,
+                ),
               ],
             ),
           ],
@@ -46,23 +51,14 @@ class AppointmentSectionWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: crossEnd,
           children: [
-            Row(
-              crossAxisAlignment: crossCenter,
-              children: [
-                TextWidget(slot, fontSize: Dimensions.titleSmall),
-                Space.width.v5,
-                TextWidget(
-                  duration,
-                  fontSize: Dimensions.titleSmall,
-                  fontWeight: FontWeight.w400,
-                ),
-              ],
-            ),
+            TextWidget(slot, fontSize: Dimensions.titleSmall),
+            Space.width.v5,
             TextWidget(
-              price,
+              duration,
               fontSize: Dimensions.titleSmall,
               fontWeight: FontWeight.w400,
             ),
+
           ],
         ),
       ],
