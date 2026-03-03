@@ -135,10 +135,8 @@ class _ReviewCard extends StatelessWidget {
 
   String _timeAgo(DateTime date) {
     final diff = DateTime.now().difference(date);
-    if (diff.inDays >= 1)
-      return '${diff.inDays} Day${diff.inDays > 1 ? 's' : ''} Ago';
-    if (diff.inHours >= 1)
-      return '${diff.inHours} Hour${diff.inHours > 1 ? 's' : ''} Ago';
+    if (diff.inDays >= 1) return '${diff.inDays} Day${diff.inDays > 1 ? 's' : ''} Ago';
+    if (diff.inHours >= 1) return '${diff.inHours} Hour${diff.inHours > 1 ? 's' : ''} Ago';
     return '${diff.inMinutes} Min Ago';
   }
 

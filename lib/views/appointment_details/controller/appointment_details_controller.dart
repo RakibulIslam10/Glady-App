@@ -36,14 +36,13 @@ class AppointmentDetailsController extends GetxController {
       // showResponse: true,
       onSuccess: (result) {
         doctorAppointmentDetailsModel.value = result;
-        print('✅ Data loaded: ${result.data.patient.name}'); // Debug
+        print('✅ Data loaded: ${result.data.patient.name}');
       },
     );
   }
 
-
   Rx<UserAppointmentDetailsModel?> userAppointmentDetailsModel =
-  Rx<UserAppointmentDetailsModel?>(null);
+      Rx<UserAppointmentDetailsModel?>(null);
 
   Future<void> fetchUserAppointmentDetails() async {
     await ApiRequest().get(
@@ -72,9 +71,10 @@ class AppointmentDetailsController extends GetxController {
     );
   }
 
-
-
   //Review
+
+  RxBool isSubmit = false.obs;
+
 
   RxInt rating = 0.obs;
   TextEditingController feedbackController = TextEditingController();
@@ -83,21 +83,33 @@ class AppointmentDetailsController extends GetxController {
     rating.value = value;
   }
 
-  void submitReview() {
+  Future<void> submitReview() async {
     if (rating.value == 0) {
       Get.snackbar('Error', 'Please select rating');
       return;
     }
 
-    // TODO: API call here
-    print("Rating: ${rating.value}");
-    print("Feedback: ${feedbackController.text}");
+    if (feedbackController.text.trim().isEmpty) {
+      Get.snackbar('Error', 'Please write feedback');
+      return;
+    }
 
-    Get.back();
+    await ApiRequest().post(
+      fromJson: BasicSuccessModel.fromJson,
+      endPoint: '/reviews',
+      isLoading: isSubmit,
+      body: {
+        "appointmentId": appointmentId,
+        "rating": rating.value,
+        "reviewText": feedbackController.text.trim(),
+      },
+      onSuccess: (result) {
+        Get.close(2);
+        fetchUserAppointmentDetails();
+      },
+    );
   }
-
   void showReviewDialog(BuildContext context) {
-
     Get.dialog(
       Dialog(
         shape: RoundedRectangleBorder(
@@ -108,7 +120,6 @@ class AppointmentDetailsController extends GetxController {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-
               /// Title
               TextWidget(
                 'How Was Your Doctor',
@@ -120,7 +131,7 @@ class AppointmentDetailsController extends GetxController {
 
               /// Star Rating
               Obx(
-                    () => Row(
+                () => Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(5, (index) {
                     final starIndex = index + 1;
@@ -145,14 +156,10 @@ class AppointmentDetailsController extends GetxController {
 
               /// Feedback Field
               Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 12.w,
-                  vertical: 8.h,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade200,
-                  borderRadius:
-                  BorderRadius.circular(Dimensions.radius),
+                  borderRadius: BorderRadius.circular(Dimensions.radius),
                 ),
                 child: TextField(
                   controller: feedbackController,
@@ -167,16 +174,16 @@ class AppointmentDetailsController extends GetxController {
               Space.height.v20,
 
               /// Submit Button
-              PrimaryButtonWidget(
-                onPressed: submitReview,
-                title: 'Submit',
-              ),
-            ],
+              Obx(
+                    () => PrimaryButtonWidget(
+                  isLoading: isSubmit.value,
+                  onPressed: submitReview,
+                  title: 'Submit',
+                ),
+              ),            ],
           ),
         ),
       ),
     );
   }
-
-
 }
