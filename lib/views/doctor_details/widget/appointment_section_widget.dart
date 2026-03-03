@@ -27,7 +27,10 @@ class AppointmentSectionWidget extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(top: 2.h),
-              child: const Icon(Icons.circle_outlined, color: Color(0xff006C93)),
+              child: const Icon(
+                Icons.circle_outlined,
+                color: Color(0xff006C93),
+              ),
             ),
             Space.width.v10,
             Column(
@@ -58,12 +61,9 @@ class AppointmentSectionWidget extends StatelessWidget {
               fontSize: Dimensions.titleSmall,
               fontWeight: FontWeight.w400,
             ),
-
           ],
         ),
       ],
     );
   }
 }
-
-
