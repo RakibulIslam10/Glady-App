@@ -60,8 +60,7 @@ class AppointmentScreenMobile extends GetView<AppointmentController> {
                       'dd MMM yyyy',
                     ).format(appointment.appointmentDate.toLocal()),
                     status: appointment.status.toLowerCase() ?? '',
-                    onPressed: () =>
-                        controller.handleAppointmentAction(appointment),
+                    onPressed: () => controller.handleAppointmentAction(appointment),
                   );
                 },
               );
@@ -107,8 +106,7 @@ class AppointmentScreenMobile extends GetView<AppointmentController> {
                     'dd MMM yyyy',
                   ).format(appointment.appointmentDate.toLocal()),
                   status: appointment.status.toLowerCase() ?? '',
-                  onPressed: () =>
-                      controller.handleAppointmentAction(appointment),
+                  onPressed: () => controller.handleAppointmentAction(appointment),
                 );
               },
             );

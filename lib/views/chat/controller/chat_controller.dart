@@ -1,9 +1,6 @@
 import 'package:agora_chat_sdk/agora_chat_sdk.dart';
 import '../../../core/utils/app_storage.dart';
 import '../../../core/utils/basic_import.dart';
-
-import 'package:agora_chat_sdk/agora_chat_sdk.dart';
-import '../../../core/utils/basic_import.dart';
 import '../../../core/api/services/api_request.dart';
 import '../../../core/api/end_point/api_end_points.dart';
 import '../../appointment/model/user_all_appoinment.dart';

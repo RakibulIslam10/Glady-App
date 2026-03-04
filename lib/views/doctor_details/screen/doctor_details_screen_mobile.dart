@@ -182,8 +182,7 @@ class _ReviewCard extends StatelessWidget {
           Space.height.v10,
           Row(
             children: List.generate(
-              5,
-              (i) => Icon(
+              5, (i) => Icon(
                 i < review.rating ? Icons.star : Icons.star_border,
                 size: 16.sp,
                 color: const Color(0xFFFF9500),

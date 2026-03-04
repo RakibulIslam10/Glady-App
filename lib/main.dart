@@ -41,7 +41,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     String savedLang = AppStorage.languageCode;
     final themes = Themes();
-    print(MediaQuery.of(context).size.height);
     return ScreenUtilInit(
       designSize: const Size(411, 915),
       minTextAdapt: true,
