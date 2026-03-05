@@ -419,7 +419,7 @@ class AppointmentDetailsScreenMobile
           Routes.inboxScreen,
           arguments: {
             'appointmentId': appointmentId,
-            'receiverId': 'doctor_id', // TODO: Get actual doctor ID
+            'receiverId': 'doctor_id',
           },
         );
       },

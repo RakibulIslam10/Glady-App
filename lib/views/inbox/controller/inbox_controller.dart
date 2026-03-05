@@ -1,350 +1,350 @@
-import 'package:agora_chat_sdk/agora_chat_sdk.dart' hide MessageType;
+import 'dart:developer';
+import 'package:dio/dio.dart';
+import 'package:glady/core/api/services/api_request.dart';
 import 'package:http/http.dart' hide MultipartFile;
 import 'package:image_picker/image_picker.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 import '../../../core/utils/app_storage.dart';
 import '../../../core/utils/basic_import.dart' hide FormData, MultipartFile;
-import '../../../core/api/services/api_request.dart';
+import '../model/all_conversation_model.dart';
 import '../model/chat_message_model.dart';
 import '../model/inbox_args_model.dart';
-import '../model/chat_token_model.dart';
-import 'package:agora_chat_sdk/agora_chat_sdk.dart' hide MessageType;
-import '../../../core/utils/basic_import.dart';
 
-import 'package:agora_chat_sdk/agora_chat_sdk.dart' hide MessageType;
-import 'package:image_picker/image_picker.dart';
-import '../../../core/utils/app_storage.dart';
-import '../../../core/utils/basic_import.dart';
-import '../../../core/api/services/api_request.dart';
-import '../model/chat_message_model.dart';
-import '../model/inbox_args_model.dart';
-import '../model/chat_token_model.dart';
 
 class InboxController extends GetxController {
   final textController = TextEditingController();
   final scrollController = ScrollController();
-  late final InboxArgsModel args;
+  final args = InboxArgsModel.fromMap(Get.arguments);
 
+  final RxBool shouldAutoScroll = true.obs;
   final RxBool isLoading = false.obs;
-  final RxBool isChatReady = false.obs;
+  final RxBool isTyping = false.obs;
   final int maxImageCount = 5;
 
   RxList<ChatMessageModel> messagesList = <ChatMessageModel>[].obs;
   final RxList<XFile> multipleImages = <XFile>[].obs;
+  final RxSet<String> animatedMessageIds = <String>{}.obs;
 
-  late String myUserId;
-  late String appointmentId;
-  late String conversationId;
+  late IO.Socket socket;
+  String myId = '';
 
-  ChatConversation? currentConversation;
+
+
 
   @override
   void onInit() {
     super.onInit();
-
-    final arguments = Get.arguments;
-    if (arguments == null || arguments['appointmentId'] == null) {
-      print('❌ No appointment ID provided');
-      Get.back();
-      CustomSnackBar.error('Invalid chat session');
-      return;
-    }
-
-    args = InboxArgsModel.fromMap(arguments);
-    appointmentId = args.appointmentId ?? '';
-    conversationId = appointmentId;
-
-    initializeChat();
-  }
-
-  // ✅ Step 1: Initialize Chat
-  Future<void> initializeChat() async {
-    try {
-      isLoading.value = true;
-
-      // Get token and login
-      await getChatTokenAndLogin();
-
-      // Setup listener
-      setupMessageListener();
-
-      // Load old messages
-      await loadOldMessages();
-
-      isChatReady.value = true;
-      isLoading.value = false;
-
-      print('✅ Chat initialized successfully');
-    } catch (e) {
-      print('❌ Chat initialization error: $e');
-      isLoading.value = false;
-      CustomSnackBar.error('Failed to initialize chat');
-    }
-  }
-
-  // ✅ Step 2: Get Token & Login
-  Future<void> getChatTokenAndLogin() async {
-    await ApiRequest().get(
-      fromJson: ChatTokenModel.fromJson,
-      endPoint: '/appointments/$appointmentId/chat/token',
-      showResponse: true,
-      onSuccess: (ChatTokenModel result) async {
-        try {
-          myUserId = result.data.userId;
-
-          // Initialize Agora Chat SDK
-          final options = ChatOptions(
-            appKey: result.data.chatAppKey,
-            autoLogin: false,
-          );
-
-          await ChatClient.getInstance.init(options);
-
-          // Login with token
-          await ChatClient.getInstance.loginWithAgoraToken(
-            result.data.userId,
-            result.data.token,
-          );
-
-          print('✅ Logged in as: ${result.data.userId}');
-        } on ChatError catch (e) {
-          if (e.code == 200) {
-            print('⚠️ Already logged in');
-            myUserId = result.data.userId;
-          } else {
-            print('❌ Login error: ${e.code} - ${e.description}');
-            throw Exception('Chat login failed');
-          }
-        }
-      },
-      isLoading: isLoading,
-    );
-  }
-
-  // ✅ Step 3: Setup Message Listener
-  void setupMessageListener() {
-    ChatClient.getInstance.chatManager.addEventHandler(
-      "INBOX_$appointmentId",
-      ChatEventHandler(
-        onMessagesReceived: (messages) {
-          print('📥 Received ${messages.length} messages');
-
-          for (var msg in messages) {
-            if (msg.conversationId == conversationId) {
-              _addMessageToUI(msg, isMe: false);
-            }
-          }
-
-          _scrollToBottom();
-        },
-        onMessagesRead: (messages) {
-          // Mark messages as read
-          for (var msg in messages) {
-            final index = messagesList.indexWhere(
-              (m) => m.senderId == msg.msgId,
-            );
-            if (index != -1) {
-              messagesList[index] = messagesList[index].copyWith(isSeen: true);
-            }
-          }
-          messagesList.refresh();
-        },
-      ),
-    );
-  }
-
-  // ✅ Step 4: Load Old Messages
-  Future<void> loadOldMessages() async {
-    try {
-      // Get or create conversation
-      currentConversation = await ChatClient.getInstance.chatManager
-          .getConversation(
-            conversationId,
-            type: ChatConversationType.GroupChat,
-            createIfNeed: true,
-          );
-
-      if (currentConversation != null) {
-        // Load last 50 messages
-        final messages = await currentConversation!.loadMessages(loadCount: 50);
-
-        print('📜 Loaded ${messages.length} old messages');
-
-        messagesList.clear();
-
-        for (var msg in messages.reversed) {
-          _addMessageToUI(msg, isMe: msg.from == myUserId);
-        }
-      }
-    } catch (e) {
-      print('❌ Load messages error: $e');
-    }
-  }
-
-  // ✅ Parse & Add Message to UI
-  void _addMessageToUI(ChatMessage msg, {required bool isMe}) {
-    if (msg.body is ChatTextMessageBody) {
-      final body = msg.body as ChatTextMessageBody;
-
-      messagesList.add(
-        ChatMessageModel(
-          isMe: isMe,
-          type: MessageType.text,
-          message: body.content,
-          senderId: msg.msgId,
-          isSeen: msg.hasReadAck,
-          createdAt: DateTime.fromMillisecondsSinceEpoch(msg.serverTime),
-        ),
-      );
-    } else if (msg.body is ChatImageMessageBody) {
-      final body = msg.body as ChatImageMessageBody;
-
-      messagesList.add(
-        ChatMessageModel(
-          isMe: isMe,
-          type: MessageType.image,
-          message: '',
-          images: [body.remotePath ?? body.localPath ?? ''],
-          senderId: msg.msgId,
-          isSeen: msg.hasReadAck,
-          createdAt: DateTime.fromMillisecondsSinceEpoch(msg.serverTime),
-        ),
-      );
-    }
-  }
-
-  // ✅ Send Message
-  void sendMessage() {
-    final hasText = textController.text.trim().isNotEmpty;
-    final hasImages = multipleImages.isNotEmpty;
-
-    if (!hasText && !hasImages) return;
-
-    if (hasImages) {
-      _sendImageMessages();
+    scrollController.addListener(_onScroll); // ✅ added
+    if (args.conversationId.isNotEmpty) {
+      getOldMessages().then((_) => _initSocket());
     } else {
-      _sendTextMessage();
+      _initSocket();
     }
   }
 
-  // ✅ Send Text Message
-  Future<void> _sendTextMessage() async {
-    final text = textController.text.trim();
-    if (text.isEmpty) return;
-
-    final tempId = DateTime.now().millisecondsSinceEpoch.toString();
-
-    // Add to UI immediately (optimistic update)
-    messagesList.add(
-      ChatMessageModel(
-        isMe: true,
-        senderId: tempId,
-        type: MessageType.text,
-        message: text,
-        createdAt: DateTime.now(),
-      ),
+// ✅ scroll উপরে গেলে আরো load করো
+  void _onScroll() {
+    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent - 200) {
+      if (!isPaginationLoading.value && hasMore) {
+        currentPage++;
+        getOldMessages(isPagination: true);
+      }
+    }
+  }
+  void _initSocket() {
+    socket = IO.io(
+      "https://bvh0nlc7-3001.inc1.devtunnels.ms"
+          "?token=${AppStorage.token}",
+      IO.OptionBuilder()
+          .setTransports(['websocket'])
+          .enableAutoConnect()
+          .setReconnectionAttempts(10)
+          .build(),
     );
 
-    textController.clear();
-    _scrollToBottom();
+    socket.onConnect((_) { log("✅ Socket connected: $myId"); });
+    socket.onDisconnect((_) => log("❌ Socket disconnected"));
+    socket.onError((error) => log("❌ Socket error: $error"));
+    socket.onConnectError((error) => log("❌ Socket connect error: $error"));
+    socket.onReconnect((_) => log("✅ Socket reconnected"));
+    socket.onReconnectError((error) => log("❌ Socket reconnect error: $error"));
 
-    try {
-      // Create message
-      final msg = ChatMessage.createTxtSendMessage(
-        targetId: conversationId,
-        content: text,
-      );
+    // ✅ connection confirmed
+    socket.on('connection_confirmed', (data) {
+      log("✅ connection_confirmed: $data");
+      // ✅ userId socket থেকে নাও
+      myId = data['data']?['userId']?.toString() ?? AppStorage.userId;
+      log("✅ myId set: $myId");
+    });
 
-      msg.chatType = ChatType.GroupChat;
+    // ✅ new message listen
+    socket.on('message_new', (data) { listenMsgInstant(data); });
 
-      // Send via Agora
-      await ChatClient.getInstance.chatManager.sendMessage(msg);
+    // ✅ typing indicator
+    socket.on('typing', (data) {
+      log("✏️ typing: $data");
+      isTyping.value = (data['senderId'] != myId) && (data['isTyping'] == true);
+    });
 
-      print('✅ Text message sent');
-    } on ChatError catch (e) {
-      print('❌ Send error: ${e.code} - ${e.description}');
-      CustomSnackBar.error('Failed to send message');
+    // ✅ conversation update
+    socket.on('conversation_update', (data) {
+      log("🔄 conversation_update: $data");
+    });
+  }
 
-      // Remove from UI if failed
-      messagesList.removeWhere((m) => m.senderId == tempId);
+  // ✅ Listen new message from socket
+  void listenMsgInstant(dynamic data) {
+    final senderId = data["sender"]?["id"]?.toString() ?? '';
+    if (senderId == myId) return;
+
+    List<String> imagesList = [];
+    if (data["images"] != null) {
+      imagesList = (data["images"] as List)
+          .where((e) => e != null)
+          .map((e) => e.toString())
+          .toList();
+    }
+
+    messagesList.add(ChatMessageModel(
+      isMe: false,
+      type: imagesList.isNotEmpty ? MessageType.image : MessageType.text,
+      message: data['text'] ?? '',
+      images: imagesList,
+      senderId: data['_id']?.toString(),
+      isUploading: false,
+      isSeen: data['seen'] ?? false,
+      createdAt: DateTime.tryParse(data['createdAt'] ?? '') ?? DateTime.now(),
+    ));
+
+    shouldAutoScroll.value = true;
+  }
+
+  // ✅ Send message — decide text or image
+  void sendMessage() {
+    if (textController.text.trim().isEmpty && multipleImages.isEmpty) return;
+
+    if (multipleImages.isNotEmpty) {
+      sendMessageWithImages();
+    } else {
+      sendTextMessage();
     }
   }
 
-  // ✅ Send Image Messages
-  Future<void> _sendImageMessages() async {
-    final images = List<XFile>.from(multipleImages);
-    final text = textController.text.trim();
-
-    multipleImages.clear();
-    textController.clear();
-
+  // ✅ Send text only
+  void sendTextMessage() {
     final tempId = DateTime.now().millisecondsSinceEpoch.toString();
+    shouldAutoScroll.value = true;
 
-    // Show loading in UI
+    messagesList.add(ChatMessageModel(
+      isMe: true,
+      senderId: tempId,
+      type: MessageType.text,
+      message: textController.text.trim(),
+    ));
+
+    final body = {
+      "sender": {
+        "id": myId,
+        "role": AppStorage.isUser
+      },
+      "receiver": {
+        "id": args.receiverId,
+        "role": args.receiverRole, // ✅ AppStorage.isUser → args.receiverRole
+      },
+      "text": textController.text.trim()
+    };
+
+    log("📤 Emitting: $body");
+    socket.emit('send_message', body);
+    textController.clear();
+  }
+
+  // ✅ Send with images
+  Future<void> sendMessageWithImages() async {
+    final tempId = DateTime.now().millisecondsSinceEpoch.toString();
+    shouldAutoScroll.value = true;
+
     messagesList.add(
       ChatMessageModel(
         isMe: true,
         senderId: tempId,
         type: MessageType.image,
-        message: text,
-        images: images.map((e) => e.path).toList(),
+        message: textController.text.trim(),
         isUploading: true,
-        createdAt: DateTime.now(),
       ),
     );
 
-    _scrollToBottom();
+    final List<String> uploadedImagePaths = await uploadImages(multipleImages);
+
+    if (uploadedImagePaths.isEmpty) {
+      CustomSnackBar.error('Failed to send images');
+      messagesList.removeWhere((msg) => msg.senderId == tempId);
+      return;
+    }
+
+    final messageIndex = messagesList.indexWhere((msg) => msg.senderId == tempId);
+    if (messageIndex != -1) {
+      messagesList[messageIndex] = messagesList[messageIndex].copyWith(
+        images: uploadedImagePaths,
+        isUploading: false,
+      );
+      messagesList.refresh();
+    }
+
+    final body = {
+      "receiverId": args.receiverId,
+      "text": textController.text.trim(),
+      "images": uploadedImagePaths,
+    };
+    socket.emit('send_message', body);
+
+    textController.clear();
+    multipleImages.clear();
+  }
+
+  // ✅ Upload images to server
+  Future<List<String>> uploadImages(List<XFile> images) async {
+    if (images.isEmpty) return [];
 
     try {
-      // Send each image
-      for (final image in images) {
-        final msg = ChatMessage.createImageSendMessage(
-          targetId: conversationId,
-          filePath: image.path,
+      final List<String> uploadedPaths = [];
+      final dio = Dio();
+
+      for (int i = 0; i < images.length; i++) {
+        final image = images[i];
+
+        String mimeType = 'image/jpeg';
+        final extension = image.path.toLowerCase();
+        if (extension.endsWith('.png')) {
+          mimeType = 'image/png';
+        } else if (extension.endsWith('.gif')) {
+          mimeType = 'image/gif';
+        } else if (extension.endsWith('.webp')) {
+          mimeType = 'image/webp';
+        }
+
+        final formData = FormData.fromMap({
+          'image': await MultipartFile.fromFile(
+            image.path,
+            filename: image.name,
+            contentType: MediaType.parse(mimeType),
+          ),
+        });
+
+        log('📤 Uploading image ${i + 1}/${images.length}: ${image.name}');
+
+        final response = await dio.post(
+          'http://10.10.20.52:6002/chat/chat-images-video',
+          data: formData,
+          options: Options(
+            headers: {
+              'Authorization': 'Bearer ${AppStorage.token}',
+              'Content-Type': 'multipart/form-data',
+            },
+            validateStatus: (status) => status! < 500,
+          ),
         );
 
-        msg.chatType = ChatType.GroupChat;
+        log('📥 Response status: ${response.statusCode}');
+        log('📥 Response data: ${response.data}');
 
-        await ChatClient.getInstance.chatManager.sendMessage(msg);
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          final responseData = response.data;
+          if (responseData['success'] == true &&
+              responseData['images'] != null &&
+              responseData['images'] is List) {
+            for (var imagePath in responseData['images'] as List) {
+              if (imagePath != null && imagePath.toString().isNotEmpty) {
+                uploadedPaths.add(imagePath.toString());
+                log('✅ Image path added: $imagePath');
+              }
+            }
+          }
+        } else {
+          log('❌ Upload failed for image ${i + 1} with status ${response.statusCode}');
+        }
       }
 
-      // Send text if any
-      if (text.isNotEmpty) {
-        final textMsg = ChatMessage.createTxtSendMessage(
-          targetId: conversationId,
-          content: text,
-        );
-        textMsg.chatType = ChatType.GroupChat;
-        await ChatClient.getInstance.chatManager.sendMessage(textMsg);
+      log('✅ Total uploaded: ${uploadedPaths.length}/${images.length}');
+      return uploadedPaths;
+
+    } catch (e) {
+      log('❌ Error uploading images: $e');
+      if (e is DioException) {
+        log('❌ DioException: ${e.type} | ${e.message}');
+        if (e.type == DioExceptionType.connectionTimeout ||
+            e.type == DioExceptionType.receiveTimeout) {
+          CustomSnackBar.error('Upload timeout. Please check your connection');
+        } else if (e.type == DioExceptionType.connectionError) {
+          CustomSnackBar.error('Network error. Please try again');
+        }
+      } else {
+        CustomSnackBar.error('Unexpected error during upload');
       }
-
-      // Update loading state
-      final index = messagesList.indexWhere((m) => m.senderId == tempId);
-      if (index != -1) {
-        messagesList[index] = messagesList[index].copyWith(isUploading: false);
-        messagesList.refresh();
-      }
-
-      print('✅ Images sent');
-    } on ChatError catch (e) {
-      print('❌ Send image error: ${e.code} - ${e.description}');
-      CustomSnackBar.error('Failed to send images');
-
-      messagesList.removeWhere((m) => m.senderId == tempId);
+      return [];
     }
   }
 
-  void onEmojiSelect(String emoji) {
-    textController.text += emoji;
-    textController.selection = TextSelection.fromPosition(
-      TextPosition(offset: textController.text.length),
+  final RxBool isLoadingOldMessage = false.obs;
+  final RxBool isPaginationLoading = false.obs;
+
+  bool hasMore = true;
+  int currentPage = 1;
+  int limit = 10;
+  int skip = 0;
+
+  Future<void> getOldMessages({bool isPagination = false}) async {
+    if (isPagination && !hasMore) return;
+
+    if (isPagination) {
+      isPaginationLoading.value = true;
+    } else {
+      isLoading.value = true;
+    }
+
+    await ApiRequest().get(
+      fromJson: AllConversationModel.fromJson,
+      endPoint: '/chat/messages/${args.conversationId}?page=$currentPage&limit=$limit', // ✅ dynamic page
+      isLoading: isLoading,
+      onSuccess: (result) {
+        final newMessages = (result.conversation ?? []).map((conversion) {
+          return ChatMessageModel(
+            id: conversion.id,
+            isMe: conversion.sender.id == myId,
+            type: conversion.images.isNotEmpty
+                ? MessageType.image
+                : MessageType.text,
+            message: conversion.text,
+            images: conversion.images,
+            senderId: conversion.sender.id,
+            isUploading: false,
+            isSeen: conversion.seen,
+            createdAt: conversion.createdAt,
+          );
+        }).toList().reversed.toList();
+
+        if (isPagination) {
+          messagesList.insertAll(0, newMessages); // ✅ উপরে যোগ
+        } else {
+          messagesList.assignAll(newMessages);
+          scrollToBottom();
+        }
+
+        skip += newMessages.length;
+        if (newMessages.length < limit) hasMore = false;
+      },
     );
+
+    isPaginationLoading.value = false;
+    isLoading.value = false;
   }
 
-  void _scrollToBottom() {
+// ✅ scroll method
+  void scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (scrollController.hasClients) {
         scrollController.animateTo(
-          0,
+          0.0,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOut,
         );
@@ -354,9 +354,8 @@ class InboxController extends GetxController {
 
   @override
   void onClose() {
-    ChatClient.getInstance.chatManager.removeEventHandler(
-      "INBOX_$appointmentId",
-    );
+    socket.disconnect();
+    socket.dispose();
     textController.dispose();
     scrollController.dispose();
     super.onClose();

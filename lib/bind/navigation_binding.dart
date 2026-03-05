@@ -13,7 +13,6 @@ class NavigationBinding extends Bindings {
     Get.lazyPut<HomeController>(() => HomeController());
     Get.lazyPut<FindController>(() => FindController());
     Get.lazyPut<AppointmentController>(() => AppointmentController());
-
     Get.put(ProfileController());
 
     Get.lazyPut<DoctorHomeController>(() => DoctorHomeController());

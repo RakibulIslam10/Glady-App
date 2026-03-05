@@ -1,6 +1,9 @@
 import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/utils/basic_import.dart';
 
+import '../../../core/api/end_point/api_end_points.dart';
+import '../../../core/utils/basic_import.dart';
+
 class SingleImageWidget {
   static Widget buildSingleImage(
       String imagePath,
@@ -10,10 +13,11 @@ class SingleImageWidget {
         double? height,
         bool isSingle = false,
       }) {
-    final cleanPath = imagePath
-        .replaceAll('\\', '/')
-        .replaceFirst(RegExp(r'^/+'), '');
-    final fullImageUrl = '${ApiEndPoints.baseUrl}/$cleanPath';
+
+    // ✅ Already full URL হলে সরাসরি use করো, নাহলে baseUrl যোগ করো
+    final fullImageUrl = imagePath.startsWith('http')
+        ? imagePath
+        : '${ApiEndPoints.baseUrl}/${imagePath.replaceAll('\\', '/').replaceFirst(RegExp(r'^/+'), '')}';
 
     final imageWidget = Image.network(
       fullImageUrl,

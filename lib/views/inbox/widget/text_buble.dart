@@ -8,30 +8,31 @@ class TextBubbleWidget extends GetView<InboxController> {
 
   @override
   Widget build(BuildContext context) {
-    final msg =
-        controller.messagesList[controller.messagesList.length - 1 - index];
+    final msg = controller.messagesList[controller.messagesList.length - 1 - index];
     final width = MediaQuery.of(context).size.width;
 
     return Container(
-      constraints: BoxConstraints(maxWidth: width * 0.7),
+      constraints: BoxConstraints(maxWidth: width * 0.72),
       padding: EdgeInsets.symmetric(
-        vertical: 10.h,
-        horizontal: Dimensions.widthSize,
+        vertical: 12.h,
+        horizontal: 14.w,
       ),
       decoration: BoxDecoration(
-        color: msg.isMe ? CustomColors.secondary : Colors.grey[200],
+        color: msg.isMe ? CustomColors.primary : Colors.grey[200],
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(Dimensions.radius * 2),
-          bottomRight: Radius.circular(msg.isMe ? Dimensions.radius * 2 : 0.r),
-          bottomLeft: Radius.circular(Dimensions.radius * 2),
+          topLeft: Radius.circular(18.r),
+          topRight: Radius.circular(18.r),
+          bottomLeft: Radius.circular(msg.isMe ? 18.r : 4.r),
+          bottomRight: Radius.circular(msg.isMe ? 4.r : 18.r),
         ),
       ),
       child: Text(
         msg.message,
         style: TextStyle(
           color: msg.isMe ? Colors.white : Colors.black87,
-          fontSize: 15.sp,
-          height: 1.3,
+          fontSize: 14.sp,
+          height: 1.4,
+          fontWeight: FontWeight.w400,
         ),
       ),
     );
