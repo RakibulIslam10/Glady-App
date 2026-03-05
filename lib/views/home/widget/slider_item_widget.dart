@@ -24,10 +24,11 @@ class SliderItemWidget extends GetView<HomeController> {
                     padding: EdgeInsetsGeometry.only(
                       left: Dimensions.widthSize * 2,
                     ),
-                    "WeCure \nYour Health\n Comes First ",
+                    "WeCure \nHealth – Skip the \nWaiting Room. ",
                     fontSize: Dimensions.titleLarge,
                     fontWeight: FontWeight.w600,
-
+                    maxLines: 3,
+                    textOverflow: TextOverflow.ellipsis,
                   ),
 
                   Image.asset(Assets.dummy.sh.path, height: 125.h),

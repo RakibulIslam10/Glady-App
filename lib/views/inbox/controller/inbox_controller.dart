@@ -51,7 +51,7 @@ class InboxController extends GetxController {
 
     args = InboxArgsModel.fromMap(arguments);
     appointmentId = args.appointmentId ?? '';
-    conversationId = appointmentId; // Using appointment ID as conversation ID
+    conversationId = appointmentId;
 
     initializeChat();
   }
@@ -115,7 +115,8 @@ class InboxController extends GetxController {
             throw Exception('Chat login failed');
           }
         }
-      }, isLoading: isLoading,
+      },
+      isLoading: isLoading,
     );
   }
 
@@ -138,7 +139,9 @@ class InboxController extends GetxController {
         onMessagesRead: (messages) {
           // Mark messages as read
           for (var msg in messages) {
-            final index = messagesList.indexWhere((m) => m.senderId == msg.msgId);
+            final index = messagesList.indexWhere(
+              (m) => m.senderId == msg.msgId,
+            );
             if (index != -1) {
               messagesList[index] = messagesList[index].copyWith(isSeen: true);
             }
@@ -153,11 +156,12 @@ class InboxController extends GetxController {
   Future<void> loadOldMessages() async {
     try {
       // Get or create conversation
-      currentConversation = await ChatClient.getInstance.chatManager.getConversation(
-        conversationId,
-        type: ChatConversationType.GroupChat,
-        createIfNeed: true,
-      );
+      currentConversation = await ChatClient.getInstance.chatManager
+          .getConversation(
+            conversationId,
+            type: ChatConversationType.GroupChat,
+            createIfNeed: true,
+          );
 
       if (currentConversation != null) {
         // Load last 50 messages
@@ -181,26 +185,30 @@ class InboxController extends GetxController {
     if (msg.body is ChatTextMessageBody) {
       final body = msg.body as ChatTextMessageBody;
 
-      messagesList.add(ChatMessageModel(
-        isMe: isMe,
-        type: MessageType.text,
-        message: body.content,
-        senderId: msg.msgId,
-        isSeen: msg.hasReadAck,
-        createdAt: DateTime.fromMillisecondsSinceEpoch(msg.serverTime),
-      ));
+      messagesList.add(
+        ChatMessageModel(
+          isMe: isMe,
+          type: MessageType.text,
+          message: body.content,
+          senderId: msg.msgId,
+          isSeen: msg.hasReadAck,
+          createdAt: DateTime.fromMillisecondsSinceEpoch(msg.serverTime),
+        ),
+      );
     } else if (msg.body is ChatImageMessageBody) {
       final body = msg.body as ChatImageMessageBody;
 
-      messagesList.add(ChatMessageModel(
-        isMe: isMe,
-        type: MessageType.image,
-        message: '',
-        images: [body.remotePath ?? body.localPath ?? ''],
-        senderId: msg.msgId,
-        isSeen: msg.hasReadAck,
-        createdAt: DateTime.fromMillisecondsSinceEpoch(msg.serverTime),
-      ));
+      messagesList.add(
+        ChatMessageModel(
+          isMe: isMe,
+          type: MessageType.image,
+          message: '',
+          images: [body.remotePath ?? body.localPath ?? ''],
+          senderId: msg.msgId,
+          isSeen: msg.hasReadAck,
+          createdAt: DateTime.fromMillisecondsSinceEpoch(msg.serverTime),
+        ),
+      );
     }
   }
 
@@ -226,13 +234,15 @@ class InboxController extends GetxController {
     final tempId = DateTime.now().millisecondsSinceEpoch.toString();
 
     // Add to UI immediately (optimistic update)
-    messagesList.add(ChatMessageModel(
-      isMe: true,
-      senderId: tempId,
-      type: MessageType.text,
-      message: text,
-      createdAt: DateTime.now(),
-    ));
+    messagesList.add(
+      ChatMessageModel(
+        isMe: true,
+        senderId: tempId,
+        type: MessageType.text,
+        message: text,
+        createdAt: DateTime.now(),
+      ),
+    );
 
     textController.clear();
     _scrollToBottom();
@@ -270,15 +280,17 @@ class InboxController extends GetxController {
     final tempId = DateTime.now().millisecondsSinceEpoch.toString();
 
     // Show loading in UI
-    messagesList.add(ChatMessageModel(
-      isMe: true,
-      senderId: tempId,
-      type: MessageType.image,
-      message: text,
-      images: images.map((e) => e.path).toList(),
-      isUploading: true,
-      createdAt: DateTime.now(),
-    ));
+    messagesList.add(
+      ChatMessageModel(
+        isMe: true,
+        senderId: tempId,
+        type: MessageType.image,
+        message: text,
+        images: images.map((e) => e.path).toList(),
+        isUploading: true,
+        createdAt: DateTime.now(),
+      ),
+    );
 
     _scrollToBottom();
 
@@ -342,7 +354,9 @@ class InboxController extends GetxController {
 
   @override
   void onClose() {
-    ChatClient.getInstance.chatManager.removeEventHandler("INBOX_$appointmentId");
+    ChatClient.getInstance.chatManager.removeEventHandler(
+      "INBOX_$appointmentId",
+    );
     textController.dispose();
     scrollController.dispose();
     super.onClose();
