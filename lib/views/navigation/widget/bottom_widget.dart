@@ -21,6 +21,7 @@ class BottomNavWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            // 1. Home
             _BottomBarItem(
               path: Assets.icons.hh,
               label: '',
@@ -28,7 +29,7 @@ class BottomNavWidget extends StatelessWidget {
               svgSize: 21.h,
             ),
 
-            // 2. Find/Schedule - Second (index 1)
+            // 2. Find/Schedule
             isUser
                 ? _BottomBarItem(
               path: Assets.icons.find,
@@ -41,7 +42,7 @@ class BottomNavWidget extends StatelessWidget {
               index: 1,
             ),
 
-            // 3. Appointment - Center (index 2)
+            // 3. Appointment - Center
             _BottomBarItem(
               path: Assets.icons.appoinment,
               label: '',
@@ -49,19 +50,18 @@ class BottomNavWidget extends StatelessWidget {
               isCenter: true,
             ),
 
-            // 4. Message - Only for Doctor (index 3)
-            if (!isUser)
-              _BottomBarItem(
-                path: Assets.icons.buble,
-                label: '',
-                index: 3,
-              ),
+            // 4. Message - Both User and Doctor
+            _BottomBarItem(
+              path: Assets.icons.buble,
+              label: '',
+              index: 3,
+            ),
 
-            // 5. Profile - Last (index 3 for User, 4 for Doctor)
+            // 5. Profile
             _BottomBarItem(
               path: Assets.icons.profile,
               label: '',
-              index: isUser ? 3 : 4,
+              index: 4,
             ),
           ],
         ),
@@ -103,9 +103,9 @@ class _BottomBarItem extends StatelessWidget {
             padding: EdgeInsets.all(Dimensions.paddingSize * 0.4),
             decoration: isSelected
                 ? BoxDecoration(
-                    color: CustomColors.whiteColor,
-                    shape: BoxShape.circle,
-                  )
+              color: CustomColors.whiteColor,
+              shape: BoxShape.circle,
+            )
                 : null,
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -120,19 +120,14 @@ class _BottomBarItem extends StatelessWidget {
 
                 if (label != null && label!.isNotEmpty) ...[
                   SizedBox(height: Dimensions.verticalSize * 0.25),
-
                   AnimatedDefaultTextStyle(
                     duration: const Duration(milliseconds: 250),
                     curve: Curves.easeInOut,
                     style: TextStyle(
                       fontSize: 15.sp,
-                      fontWeight: isSelected
-                          ? FontWeight.w600
-                          : FontWeight.w500,
+                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                       color: isSelected
-                          ? CustomColors.primary.withOpacity(
-                              1.0,
-                            ) // FULL opacity
+                          ? CustomColors.primary.withOpacity(1.0)
                           : CustomColors.blackColor.withOpacity(0.7),
                     ),
                     child: Text(label!),

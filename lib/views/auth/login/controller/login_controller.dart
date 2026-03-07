@@ -16,7 +16,6 @@ class LoginController extends GetxController {
   final isPasswordValid = false.obs;
   final isPasswordVisible = false.obs;
   final rememberMe = false.obs;
-
   RxBool isLoading = false.obs;
 
   @override

@@ -14,8 +14,10 @@ class AppointmentDetailsScreenMobile
 
         // ✅ Get current status (uppercase for comparison)
         final currentStatus = isUser
-            ? controller.userAppointmentDetailsModel.value?.data.status.toUpperCase()
-            : controller.doctorAppointmentDetailsModel.value?.data.status.toUpperCase();
+            ? controller.userAppointmentDetailsModel.value?.data.status
+                  .toUpperCase()
+            : controller.doctorAppointmentDetailsModel.value?.data.status
+                  .toUpperCase();
 
         // ✅ Get appointment ID
         final appointmentId = isUser
@@ -54,7 +56,7 @@ class AppointmentDetailsScreenMobile
                                 title: 'Reject Request',
                                 inputController: controller.reasonController,
                                 subTitle:
-                                'write a reason for rejecting the appointment request',
+                                    'write a reason for rejecting the appointment request',
                                 isLoading: controller.isDeleting,
                                 buttonTex: 'Reject',
                                 action: () {
@@ -107,13 +109,8 @@ class AppointmentDetailsScreenMobile
                           onPressed: currentStatus == 'CANCELLED'
                               ? () {}
                               : () {
-                            Get.toNamed(
-                              Routes.inboxScreen,
-                              arguments: {
-                                'appointmentId': appointmentId,
-                              },
-                            );
-                          },
+                                  Get.find<NavigationController>().goToChat();
+                                },
                           buttonColor: currentStatus == 'CANCELLED'
                               ? CustomColors.disableColor
                               : CustomColors.primary,
@@ -137,7 +134,8 @@ class AppointmentDetailsScreenMobile
 
           // USER VIEW
           if (AppStorage.isUser == 'USER') {
-            final appointmentData = controller.userAppointmentDetailsModel.value;
+            final appointmentData =
+                controller.userAppointmentDetailsModel.value;
             if (appointmentData == null) {
               return Center(
                 child: TextWidget(
@@ -177,8 +175,9 @@ class AppointmentDetailsScreenMobile
                   leftTitle: 'Reason',
                   leftValue: data.reasonTitle,
                   rightTitle: 'Booking Date',
-                  rightValue: DateFormat("dd MMM yyyy")
-                      .format(data.appointmentDate.toLocal()),
+                  rightValue: DateFormat(
+                    "dd MMM yyyy",
+                  ).format(data.appointmentDate.toLocal()),
                 ),
                 Space.height.v15,
                 TextWidget(
@@ -200,7 +199,7 @@ class AppointmentDetailsScreenMobile
                 InfoPairRow(
                   leftTitle: 'Visiting Date',
                   leftValue:
-                  '${DateFormat("dd MMM yyyy").format(data.appointmentDate.toLocal())}\n${data.appointmentTime}',
+                      '${DateFormat("dd MMM yyyy").format(data.appointmentDate.toLocal())}\n${data.appointmentTime}',
                   rightTitle: 'Status',
                   rightValue: data.status,
                 ),
@@ -223,19 +222,21 @@ class AppointmentDetailsScreenMobile
                     runSpacing: Dimensions.heightSize,
                     children: List.generate(
                       data.attachments.length,
-                          (index) => Container(
+                      (index) => Container(
                         height: 100.h,
                         width: 100.w,
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: CustomColors.grayShade.withOpacity(0.7),
                           ),
-                          borderRadius:
-                          BorderRadius.circular(Dimensions.radius),
+                          borderRadius: BorderRadius.circular(
+                            Dimensions.radius,
+                          ),
                         ),
                         child: ClipRRect(
-                          borderRadius:
-                          BorderRadius.circular(Dimensions.radius),
+                          borderRadius: BorderRadius.circular(
+                            Dimensions.radius,
+                          ),
                           child: CachedNetworkImage(
                             imageUrl: data.attachments[index].url,
                             fit: BoxFit.cover,
@@ -253,7 +254,6 @@ class AppointmentDetailsScreenMobile
               ],
             );
           }
-
           // DOCTOR VIEW
           else {
             final appointmentData =
@@ -278,8 +278,9 @@ class AppointmentDetailsScreenMobile
                 PatientInfoWidgetWithAsset(
                   patientImageNetwork: patient.profileImage,
                   patientName: patient.name,
-                  dateOfBirth: DateFormat("dd MMM yyyy")
-                      .format(patient.dateOfBirth.toLocal()),
+                  dateOfBirth: DateFormat(
+                    "dd MMM yyyy",
+                  ).format(patient.dateOfBirth.toLocal()),
                   phoneNumber: patient.phone,
                   bloodGroup: patient.bloodGroup,
                   allergies: patient.allergies.isNotEmpty
@@ -298,8 +299,9 @@ class AppointmentDetailsScreenMobile
                   leftTitle: 'Reason',
                   leftValue: data.reasonTitle,
                   rightTitle: 'Booking Date',
-                  rightValue: DateFormat("dd MMM yyyy")
-                      .format(data.appointmentDate.toLocal()),
+                  rightValue: DateFormat(
+                    "dd MMM yyyy",
+                  ).format(data.appointmentDate.toLocal()),
                 ),
                 Space.height.v15,
                 TextWidget(
@@ -321,7 +323,7 @@ class AppointmentDetailsScreenMobile
                 InfoPairRow(
                   leftTitle: 'Visiting Date',
                   leftValue:
-                  '${DateFormat("dd MMM yyyy").format(data.appointmentDate.toLocal())}\n${data.appointmentTime}',
+                      '${DateFormat("dd MMM yyyy").format(data.appointmentDate.toLocal())}\n${data.appointmentTime}',
                   rightTitle: 'Status',
                   rightValue: data.status,
                 ),
@@ -344,19 +346,21 @@ class AppointmentDetailsScreenMobile
                     runSpacing: Dimensions.heightSize,
                     children: List.generate(
                       data.attachments.length,
-                          (index) => Container(
+                      (index) => Container(
                         height: 100.h,
                         width: 100.w,
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: CustomColors.grayShade.withOpacity(0.7),
                           ),
-                          borderRadius:
-                          BorderRadius.circular(Dimensions.radius),
+                          borderRadius: BorderRadius.circular(
+                            Dimensions.radius,
+                          ),
                         ),
                         child: ClipRRect(
-                          borderRadius:
-                          BorderRadius.circular(Dimensions.radius),
+                          borderRadius: BorderRadius.circular(
+                            Dimensions.radius,
+                          ),
                           child: CachedNetworkImage(
                             imageUrl: data.attachments[index].url,
                             fit: BoxFit.cover,
@@ -415,9 +419,7 @@ class AppointmentDetailsScreenMobile
     return PrimaryButtonWidget(
       title: 'Chat',
       onPressed: () {
-        Get.toNamed(
-          Routes.chatScreen,
-        );
+        Get.toNamed(Routes.chatScreen);
       },
       buttonColor: CustomColors.primary,
     );
