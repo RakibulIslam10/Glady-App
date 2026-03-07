@@ -8,7 +8,7 @@ class AppointmentDetailsScreenMobile
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Obx(() {
-        if (controller.isLoading.value || controller.isLoadingInfo.value) return const SizedBox.shrink();
+        if (controller.isLoading.value) return const SizedBox.shrink();
 
         final isUser = AppStorage.isUser == 'USER';
 
@@ -131,7 +131,7 @@ class AppointmentDetailsScreenMobile
       appBar: CommonAppBar(title: "Details"),
       body: SafeArea(
         child: Obx(() {
-          if (controller.isLoading.value ||  controller.isLoadingInfo.value) {
+          if (controller.isLoading.value) {
             return LoadingWidget();
           }
 
@@ -416,14 +416,7 @@ class AppointmentDetailsScreenMobile
       title: 'Chat',
       onPressed: () {
         Get.toNamed(
-          Routes.inboxScreen,
-          arguments: {
-            'conversationId': controller.chattingInfoModel?.conversationId ?? '',
-            'receiverId': controller.chattingInfoModel?.recipient.id ?? '',
-            'receiverRole': controller.chattingInfoModel?.recipient.role ?? '',
-            'avatar': controller.chattingInfoModel?.recipient.image ?? '',
-            'name':controller.chattingInfoModel?.recipient.name ?? '',
-          },
+          Routes.chatScreen,
         );
       },
       buttonColor: CustomColors.primary,

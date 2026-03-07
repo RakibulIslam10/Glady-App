@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "577371322057",
+    "project_id": "wecure-health",
+    "storage_bucket": "wecure-health.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577371322057:android:b8a372ef6e20c6b8f33f18",
+        "android_client_info": {
+          "package_name": "com.health.we_cure"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACDpWAwF6d97zxaf91gVA4FYKjWjTQNKE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

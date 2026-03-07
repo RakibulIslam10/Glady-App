@@ -23,23 +23,23 @@ class AppointmentDetailsController extends GetxController {
       fetchDoctorAppointmentDetails();
     }
 
-    getChattingInfo(appointmentId);
+    // getChattingInfo(appointmentId);
   }
 
-  ChattingInfoModel? chattingInfoModel;
-  RxBool isLoadingInfo = false.obs;
-
-  Future<ChattingInfoModel> getChattingInfo(String appointmentId) async {
-    return await ApiRequest().get(
-      fromJson: ChattingInfoModel.fromJson,
-      endPoint: '/chat/messages-by-appointment',
-      queryParams: {
-        'appointmentId' : appointmentId
-      },
-      isLoading: isLoadingInfo,
-      onSuccess: (result) => chattingInfoModel = result,
-    );
-  }
+  // ChattingInfoModel? chattingInfoModel;
+  // RxBool isLoadingInfo = false.obs;
+  //
+  // Future<ChattingInfoModel> getChattingInfo(String appointmentId) async {
+  //   return await ApiRequest().get(
+  //     fromJson: ChattingInfoModel.fromJson,
+  //     endPoint: '/chat/messages-by-appointment',
+  //     queryParams: {
+  //       'appointmentId' : appointmentId
+  //     },
+  //     isLoading: isLoadingInfo,
+  //     onSuccess: (result) => chattingInfoModel = result,
+  //   );
+  // }
 
 
 
