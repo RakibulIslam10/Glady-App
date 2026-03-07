@@ -6,6 +6,7 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
   String _formatTime(String time) {
     if (time.isEmpty) return '';
     final parts = time.split(':');
+    if (parts.length < 2) return time;
     final hour = int.tryParse(parts[0]) ?? 0;
     final minute = parts[1];
     final period = hour >= 12 ? 'PM' : 'AM';

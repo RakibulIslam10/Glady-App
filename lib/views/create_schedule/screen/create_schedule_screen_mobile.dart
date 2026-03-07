@@ -64,7 +64,7 @@ class CreateScheduleScreenMobile extends GetView<CreateScheduleController> {
                 Expanded(
                   child: PrimaryInputFieldWidget(
                     controller: controller.feeController,
-                    hintText: 'Fee (\$)',
+                    hintText: 'Fee (₦)',
                     label: 'Fee',
 
                     keyBoardType: TextInputType.number,

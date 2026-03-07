@@ -26,7 +26,7 @@ class Data {
   final String currentOrganization;
   final SpecialtyId specialtyId;
   final String? about;
-  final int consultationFee;
+  final dynamic consultationFee;
   final List<String> verificationDocuments;
   final String verificationStatus;
   final bool isVerified;
@@ -39,7 +39,7 @@ class Data {
   final String bankName;
   final String paystackRecipientCode;
   final int pendingPayouts;
-  final DateTime recipientCreatedAt;
+  final DateTime? recipientCreatedAt;
   final int totalEarnings;
   final int totalPayouts;
   final int totalExperienceYears;
@@ -81,7 +81,7 @@ class Data {
     currentOrganization: json["currentOrganization"],
     specialtyId: SpecialtyId.fromJson(json["specialtyId"]),
     about: json["about"] ?? '',
-    consultationFee: json["consultationFee"],
+    consultationFee: json["consultationFee"] ?? 0,
     verificationDocuments: List<String>.from(
       json["verificationDocuments"].map((x) => x),
     ),
@@ -91,12 +91,14 @@ class Data {
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
     verificationNote: json["verificationNote"],
-    accountName: json["accountName"],
-    accountNumber: json["accountNumber"],
-    bankName: json["bankName"],
-    paystackRecipientCode: json["paystackRecipientCode"],
+    accountName: json["accountName"] ?? 'N/A',
+    accountNumber: json["accountNumber"] ?? 'N/A',
+    bankName: json["bankName"] ?? 'N/A',
+    paystackRecipientCode: json["paystackRecipientCode"] ?? 'N/A',
     pendingPayouts: json["pendingPayouts"],
-    recipientCreatedAt: DateTime.parse(json["recipientCreatedAt"]),
+    recipientCreatedAt: json["recipientCreatedAt"] != null
+        ? DateTime.parse(json["recipientCreatedAt"])
+        : null,
     totalEarnings: json["totalEarnings"],
     totalPayouts: json["totalPayouts"],
     totalExperienceYears: json["totalExperienceYears"],
@@ -162,6 +164,6 @@ class UserId {
     id: json["_id"],
     name: json["name"],
     phone: json["phone"],
-    profileImage: json["profileImage"],
+    profileImage: json["profileImage"] ?? '',
   );
 }

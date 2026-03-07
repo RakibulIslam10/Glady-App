@@ -64,11 +64,11 @@ class TodaySchedule {
   });
 
   factory TodaySchedule.fromJson(Map<String, dynamic> json) => TodaySchedule(
-    date: json['date'],
-    dayName: json['dayName'],
-    slotCount: json['slotCount'],
-    startTime: json['startTime'],
-    endTime: json['endTime'],
+    date: json['date'] ?? 'N/A',
+    dayName: json['dayName'] ?? 'N/A',
+    slotCount: json['slotCount'] ?? 0,
+    startTime: json['startTime'] ?? 'N/A',
+    endTime: json['endTime'] ??  'N/A',
   );
 }
 

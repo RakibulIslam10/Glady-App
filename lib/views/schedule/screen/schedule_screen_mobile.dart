@@ -76,7 +76,7 @@ class ScheduleScreenMobile extends GetView<ScheduleController> {
                           color: CustomColors.blackColor.withOpacity(0.6),
                         ),
                         TextWidget(
-                          '\$${schedule.fee}',
+                          '₦${schedule.fee}',
                           fontWeight: FontWeight.w500,
                         ),
                       ],
