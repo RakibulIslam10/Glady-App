@@ -14,7 +14,6 @@ class VerificationController extends GetxController {
   final email = ''.obs;
 
 
-
   @override
   void onInit() {
     super.onInit();
