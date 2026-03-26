@@ -15,6 +15,10 @@ class NavigationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    if (Get.arguments != null && Get.arguments is int) {
+      selectedIndex.value = Get.arguments;
+    }
+
     if (AppStorage.isUser == 'USER') {
       bodyScreen = [
         HomeScreen(), // index 0

@@ -4,7 +4,9 @@ import 'package:glady/views/find/controller/find_controller.dart';
 import 'package:glady/views/home/controller/home_controller.dart';
 import 'package:glady/views/profile/controller/profile_controller.dart';
 import '../views/doctor_home/controller/doctor_home_controller.dart';
+import '../views/chat/controller/chat_controller.dart';
 import '../views/navigation/controller/navigation_controller.dart';
+import '../views/request_view/controller/request_view_controller.dart';
 
 class NavigationBinding extends Bindings {
   @override
@@ -16,5 +18,7 @@ class NavigationBinding extends Bindings {
     Get.put(ProfileController());
 
     Get.lazyPut<DoctorHomeController>(() => DoctorHomeController());
+    Get.lazyPut<ChatController>(() => ChatController());
+    Get.lazyPut<RequestViewController>(() => RequestViewController());
   }
 }

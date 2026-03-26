@@ -25,6 +25,13 @@ class AppointmentDetailsController extends GetxController {
     // getChattingInfo(appointmentId);
   }
 
+  @override
+  void onClose() {
+    reasonController.dispose();
+    feedbackController.dispose();
+    super.onClose();
+  }
+
   // ChattingInfoModel? chattingInfoModel;
   // RxBool isLoadingInfo = false.obs;
   //
@@ -92,7 +99,7 @@ class AppointmentDetailsController extends GetxController {
   RxBool isSubmit = false.obs;
 
   RxInt rating = 0.obs;
-  TextEditingController feedbackController = TextEditingController();
+  final feedbackController = TextEditingController();
 
   void setRating(int value) {
     rating.value = value;

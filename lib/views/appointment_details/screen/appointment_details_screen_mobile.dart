@@ -108,9 +108,10 @@ class AppointmentDetailsScreenMobile
                           title: 'Chat',
                           onPressed: currentStatus == 'CANCELLED'
                               ? () {}
-                              : () {
-                                  Get.find<NavigationController>().goToChat();
-                                },
+                                : () {
+                                    Get.offAllNamed(Routes.navigationScreen,
+                                        arguments: 3);
+                                  },
                           buttonColor: currentStatus == 'CANCELLED'
                               ? CustomColors.disableColor
                               : CustomColors.primary,
@@ -419,7 +420,7 @@ class AppointmentDetailsScreenMobile
     return PrimaryButtonWidget(
       title: 'Chat',
       onPressed: () {
-        Get.toNamed(Routes.chatScreen);
+        Get.offAllNamed(Routes.navigationScreen, arguments: 3);
       },
       buttonColor: CustomColors.primary,
     );
