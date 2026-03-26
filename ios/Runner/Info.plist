@@ -46,16 +46,15 @@
     <key>UIApplicationSupportsIndirectInputEvents</key>
     <true/>
     <key>NSCameraUsageDescription</key>
-    <string>Camera permission is required for video calls</string>
+    <string>We Cure needs camera access for video consultations and medical document scanning.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>Microphone permission is required for video calls</string>
+    <string>We Cure needs microphone access to allow you to speak with doctors during video calls.</string>
 
-    <!-- image_picker এর জন্য -->
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>We Cure needs photo library access to upload profile and documents.</string>
+    <string>We Cure needs access to your photo library to upload profile pictures and share medical documents with doctors.</string>
 
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>We Cure needs permission to save photos to your library.</string>
+    <string>We Cure needs permission to save medical prescriptions and reports to your photo library.</string>
 
     <!-- firebase_messaging background notification এর জন্য -->
     <key>UIBackgroundModes</key>
