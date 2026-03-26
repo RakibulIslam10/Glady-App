@@ -55,19 +55,19 @@ class _MultiSelectDropDownWidgetState extends State<MultiSelectDropDownWidget> {
             children: _selectedValues
                 .map(
                   (item) => Chip(
-                label: TextWidget(
-                  item,
-                  fontSize: Dimensions.titleSmall,
-                  color: CustomColors.blackColor,
-                ),
-                backgroundColor: CustomColors.whiteColor,
-                shape: StadiumBorder(
-                  side: BorderSide(color: CustomColors.primary, width: 1),
-                ),
-                deleteIcon: const Icon(Icons.close, size: 16),
-                onDeleted: () => _toggleValue(item),
-              ),
-            )
+                    label: TextWidget(
+                      item,
+                      fontSize: Dimensions.titleSmall,
+                      color: CustomColors.blackColor,
+                    ),
+                    backgroundColor: CustomColors.whiteColor,
+                    shape: StadiumBorder(
+                      side: BorderSide(color: CustomColors.primary, width: 1),
+                    ),
+                    deleteIcon: const Icon(Icons.close, size: 16),
+                    onDeleted: () => _toggleValue(item),
+                  ),
+                )
                 .toList(),
           ).marginOnly(bottom: 8),
         Container(

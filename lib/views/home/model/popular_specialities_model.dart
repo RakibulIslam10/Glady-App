@@ -13,14 +13,16 @@ class PopularSpecialitesModel {
     required this.meta,
   });
 
-  factory PopularSpecialitesModel.fromJson(Map<String, dynamic> json) => PopularSpecialitesModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: List<Specialities>.from(json["data"].map((x) => Specialities.fromJson(x))),
-    meta: Meta.fromJson(json["meta"]),
-  );
-
+  factory PopularSpecialitesModel.fromJson(Map<String, dynamic> json) =>
+      PopularSpecialitesModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: List<Specialities>.from(
+          json["data"].map((x) => Specialities.fromJson(x)),
+        ),
+        meta: Meta.fromJson(json["meta"]),
+      );
 }
 
 class Specialities {
@@ -54,7 +56,6 @@ class Specialities {
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
   );
-
 }
 
 class Meta {
@@ -76,5 +77,4 @@ class Meta {
     limit: json["limit"],
     totalPages: json["totalPages"],
   );
-
 }

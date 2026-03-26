@@ -1,4 +1,5 @@
 import '../utils/basic_import.dart';
+
 class OfflineWidget extends StatelessWidget {
   const OfflineWidget({super.key});
 
@@ -32,5 +33,3 @@ class OfflineWidget extends StatelessWidget {
     );
   }
 }
-
-

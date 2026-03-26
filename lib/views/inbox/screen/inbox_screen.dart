@@ -1,7 +1,6 @@
 import 'package:glady/core/widgets/profile_avater_widget.dart';
 
 import '../../../core/utils/basic_import.dart';
-import '../../../core/widgets/common_app_bar.dart';
 import '../controller/inbox_controller.dart';
 import '../widget/img_preview.dart';
 import '../widget/message_body.dart';

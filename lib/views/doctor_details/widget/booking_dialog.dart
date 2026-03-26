@@ -40,7 +40,10 @@ class BookingDialog extends GetView<DoctorDetailsController> {
         borderRadius: BorderRadius.circular(Dimensions.radius * 1.5),
       ),
       child: Container(
-        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.85),        child: Column(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.85,
+        ),
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
@@ -202,8 +205,9 @@ class BookingDialog extends GetView<DoctorDetailsController> {
                                                   controller.timeList[index];
                                               return InkWell(
                                                 onTap: () {
-                                                  if (!timeItem.isAvailable)
+                                                  if (!timeItem.isAvailable) {
                                                     return;
+                                                  }
                                                   controller
                                                           .selectedTimeIndex
                                                           .value =

@@ -1,4 +1,3 @@
-
 class PaymentModel {
   final bool success;
   final int statusCode;
@@ -31,10 +30,7 @@ class Data {
   final String authorizationUrl;
   final String reference;
 
-  Data({
-    required this.authorizationUrl,
-    required this.reference,
-  });
+  Data({required this.authorizationUrl, required this.reference});
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     authorizationUrl: json["authorization_url"],

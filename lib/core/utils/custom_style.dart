@@ -3,15 +3,19 @@ import 'dimensions.dart';
 
 class CustomStyle {
   static TextStyle displayLarge = TextStyle(fontSize: Dimensions.displayLarge);
-  static TextStyle displayMedium =
-      TextStyle(fontSize: Dimensions.displayMedium);
+  static TextStyle displayMedium = TextStyle(
+    fontSize: Dimensions.displayMedium,
+  );
   static TextStyle displaySmall = TextStyle(fontSize: Dimensions.displaySmall);
-  static TextStyle headlineLarge =
-      TextStyle(fontSize: Dimensions.headlineLarge);
-  static TextStyle headlineMedium =
-      TextStyle(fontSize: Dimensions.headlineMedium);
-  static TextStyle headlineSmall =
-      TextStyle(fontSize: Dimensions.headlineSmall);
+  static TextStyle headlineLarge = TextStyle(
+    fontSize: Dimensions.headlineLarge,
+  );
+  static TextStyle headlineMedium = TextStyle(
+    fontSize: Dimensions.headlineMedium,
+  );
+  static TextStyle headlineSmall = TextStyle(
+    fontSize: Dimensions.headlineSmall,
+  );
   static TextStyle titleLarge = TextStyle(fontSize: Dimensions.titleLarge);
   static TextStyle titleMedium = TextStyle(fontSize: Dimensions.titleMedium);
   static TextStyle titleSmall = TextStyle(fontSize: Dimensions.titleSmall);

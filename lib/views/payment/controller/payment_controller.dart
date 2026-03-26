@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:glady/core/api/services/api_request.dart';
 
 import '../../../core/utils/basic_import.dart';
 import '../../../core/widgets/loading_dialog.dart';
-import '../../../core/widgets/loading_widget.dart';
 import '../../../core/widgets/webview_screen.dart';
 import '../model/payment_model.dart';
 
@@ -46,7 +44,7 @@ class PaymentController extends GetxController {
 
     if (paymentUrl.isNotEmpty) {
       await Future.delayed(const Duration(milliseconds: 100));
-      Get.to(() => WebPaymentScreen(paymentUrl: paymentUrl,));
+      Get.to(() => WebPaymentScreen(paymentUrl: paymentUrl));
     }
   }
 }

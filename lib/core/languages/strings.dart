@@ -15,7 +15,6 @@ class Strings {
   static const String pleaseFillOutTheField = "Please Fill Out The Field";
   static const String noInternetConnection = "No Internet Connection";
   static const String connectionRestored = "Connection Restored";
-  static const String youAreBackOnline = "You are back online. All features are available again.";
-
+  static const String youAreBackOnline =
+      "You are back online. All features are available again.";
 }
-

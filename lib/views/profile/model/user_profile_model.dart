@@ -11,12 +11,13 @@ class UserProfileModel {
     required this.data,
   });
 
-  factory UserProfileModel.fromJson(Map<String, dynamic> json) => UserProfileModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: UserData.fromJson(json["data"]),
-  );
+  factory UserProfileModel.fromJson(Map<String, dynamic> json) =>
+      UserProfileModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: UserData.fromJson(json["data"]),
+      );
 }
 
 class UserData {
@@ -81,13 +82,17 @@ class UserData {
     status: json["status"] ?? '',
     updatedAt: DateTime.parse(json["updatedAt"]),
     refreshToken: json["refreshToken"] ?? '',
-    dateOfBirth: json["dateOfBirth"] != null ? DateTime.parse(json["dateOfBirth"]) : null,
+    dateOfBirth: json["dateOfBirth"] != null
+        ? DateTime.parse(json["dateOfBirth"])
+        : null,
     phone: json["phone"] ?? '',
     profileImage: json["profileImage"] ?? '',
     passwordResetOtp: json["passwordResetOtp"],
     passwordResetOtpExpires: json["passwordResetOtpExpires"],
     bloodGroup: json["bloodGroup"] ?? '',
-    allergies: json["allergies"] != null ? List<String>.from(json["allergies"].map((x) => x)) : [],
+    allergies: json["allergies"] != null
+        ? List<String>.from(json["allergies"].map((x) => x))
+        : [],
     accountName: json["accountName"] ?? '',
     accountNumber: json["accountNumber"] ?? '',
     bankName: json["bankName"] ?? '',

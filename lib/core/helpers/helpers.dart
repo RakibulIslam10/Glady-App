@@ -1,7 +1,6 @@
 import 'package:intl/intl.dart';
 
 class Helpers {
-
   static DateTime _toBDTime(String timestamp) {
     final utcTime = DateTime.parse(timestamp).toUtc();
     return utcTime.add(const Duration(hours: 6));
@@ -15,7 +14,9 @@ class Helpers {
 
     try {
       final bdTime = _toBDTime(timestamp);
-      final now = DateTime.now().toUtc().add(const Duration(hours: 6)); // current BD time
+      final now = DateTime.now().toUtc().add(
+        const Duration(hours: 6),
+      ); // current BD time
       final today = DateTime(now.year, now.month, now.day);
       final messageDate = DateTime(bdTime.year, bdTime.month, bdTime.day);
 
@@ -42,7 +43,6 @@ class Helpers {
       return DateFormat('hh:mm a').format(DateTime.now());
     }
   }
-
 
   static String formatDate(String? timestamp) {
     if (timestamp == null || timestamp.isEmpty) {

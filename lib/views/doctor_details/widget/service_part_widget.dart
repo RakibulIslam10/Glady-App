@@ -15,19 +15,23 @@ class ServicePartWidget extends GetView<DoctorDetailsController> {
         Space.height.v5,
         Column(
           crossAxisAlignment: crossStart,
-          children: services.map((service) => Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            alignment: WrapAlignment.start,
-            spacing: Dimensions.widthSize * 0.5,
-            children: [
-              Icon(
-                Icons.circle,
-                color: const Color(0xff006C93),
-                size: Dimensions.iconSizeDefault * 0.8,
-              ),
-              TextWidget(service.name, fontWeight: FontWeight.w500),
-            ],
-          )).toList(),
+          children: services
+              .map(
+                (service) => Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  alignment: WrapAlignment.start,
+                  spacing: Dimensions.widthSize * 0.5,
+                  children: [
+                    Icon(
+                      Icons.circle,
+                      color: const Color(0xff006C93),
+                      size: Dimensions.iconSizeDefault * 0.8,
+                    ),
+                    TextWidget(service.name, fontWeight: FontWeight.w500),
+                  ],
+                ),
+              )
+              .toList(),
         ),
       ],
     );

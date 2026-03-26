@@ -25,9 +25,13 @@ class AditionalScreenMobile extends GetView<AditionalController> {
 
                     CustomDropDownWidget(
                       hint: "Select your Specialties",
-                      items: controller.allSpecialist.map((e) => e.name).toList(),
+                      items: controller.allSpecialist
+                          .map((e) => e.name)
+                          .toList(),
                       onChanged: (value) {
-                        final found = controller.allSpecialist.firstWhere((e) => e.name == value);
+                        final found = controller.allSpecialist.firstWhere(
+                          (e) => e.name == value,
+                        );
                         controller.specialityId.value = found.id;
                         print(controller.specialityId.value);
                       },

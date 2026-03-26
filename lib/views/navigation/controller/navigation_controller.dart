@@ -17,19 +17,19 @@ class NavigationController extends GetxController {
     super.onInit();
     if (AppStorage.isUser == 'USER') {
       bodyScreen = [
-        HomeScreen(),        // index 0
-        FindScreen(),        // index 1
+        HomeScreen(), // index 0
+        FindScreen(), // index 1
         AppointmentScreen(), // index 2
-        ChatScreen(),        // index 3
-        ProfileScreen(),     // index 4
+        ChatScreen(), // index 3
+        ProfileScreen(), // index 4
       ];
     } else {
       bodyScreen = [
-        DoctorHomeScreen(),  // index 0
+        DoctorHomeScreen(), // index 0
         RequestViewScreen(), // index 1
         AppointmentScreen(), // index 2
-        ChatScreen(),        // index 3
-        ProfileScreen(),     // index 4
+        ChatScreen(), // index 3
+        ProfileScreen(), // index 4
       ];
     }
   }

@@ -1,4 +1,3 @@
-
 class AllTimeModel {
   final bool success;
   final int statusCode;

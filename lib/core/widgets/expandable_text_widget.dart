@@ -1,4 +1,5 @@
 import '../utils/basic_import.dart';
+
 class ExpandableTextWidget extends StatefulWidget {
   final String text;
   final int maxLines;

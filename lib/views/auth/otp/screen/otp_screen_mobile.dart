@@ -11,7 +11,7 @@ class OtpScreenMobile extends GetView<OtpController> {
     );
   }
 
-  _bodyWidget() {
+  ListView _bodyWidget() {
     return ListView(
       padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
       children: [
@@ -88,7 +88,7 @@ class OtpScreenMobile extends GetView<OtpController> {
         Space.height.v20,
         Space.height.v30,
         Obx(
-              () => PrimaryButtonWidget(
+          () => PrimaryButtonWidget(
             title: 'Verify',
             isLoading: controller.isLoading.value,
             onPressed: () {

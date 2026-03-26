@@ -16,7 +16,7 @@ class PrimaryButtonWidget extends StatelessWidget {
   final bool isLoading;
   final bool primary;
   final bool disable;
-  final bool outlineButton; // new flag for outline button
+  final bool outlineButton;
   final EdgeInsets? padding;
 
   PrimaryButtonWidget({
@@ -35,12 +35,11 @@ class PrimaryButtonWidget extends StatelessWidget {
     this.isLoading = false,
     this.primary = false,
     this.disable = false,
-    this.outlineButton = false, // default false
+    this.outlineButton = false,
     this.padding,
   });
 
   final ValueNotifier<bool> isPadding = ValueNotifier<bool>(false);
-
   @override
   Widget build(BuildContext context) {
     if (isLoading) return const LoadingWidget();
@@ -57,97 +56,97 @@ class PrimaryButtonWidget extends StatelessWidget {
             width: double.infinity,
             child: outlineButton
                 ? OutlinedButton(
-                    onPressed: disable
-                        ? null
-                        : () {
-                            isPadding.value = true;
-                            Future.delayed(
-                              const Duration(milliseconds: 220),
-                              () {
-                                isPadding.value = false;
-                              },
-                            );
-                            onPressed();
-                          },
-                    style: OutlinedButton.styleFrom(
-                      side: BorderSide(
-                        width: borderWidth,
-                        color: disable
-                            ? CustomColors.disableColor
-                            : borderColor ?? CustomColors.primary,
+              onPressed: disable
+                  ? null
+                  : () {
+                isPadding.value = true;
+                Future.delayed(
+                  const Duration(milliseconds: 220),
+                      () {
+                    isPadding.value = false;
+                  },
+                );
+                onPressed();
+              },
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(
+                  width: borderWidth,
+                  color: disable
+                      ? CustomColors.disableColor
+                      : borderColor ?? CustomColors.primary,
+                ),
+                shape:
+                shape ??
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        Dimensions.radius * 0.8,
                       ),
-                      shape:
-                          shape ??
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              Dimensions.radius * 0.8,
-                            ),
-                          ),
-                      backgroundColor: Colors.transparent,
                     ),
-                    child: TextWidget(
-                      title,
-                      fontSize: isPadded
-                          ? (fontSize ?? Dimensions.titleMedium)
-                          : fontSize ?? Dimensions.titleMedium * 1.1,
-                      fontWeight: fontWeight ?? FontWeight.w700,
-                      color: primary
-                          ? CustomColors.primary
-                          : buttonTextColor ?? CustomColors.primary,
-                      maxLines: 1,
-                      textOverflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                    ),
-                  )
+                backgroundColor: Colors.transparent,
+              ),
+              child: TextWidget(
+                title,
+                fontSize: isPadded
+                    ? (fontSize ?? Dimensions.titleMedium)
+                    : fontSize ?? Dimensions.titleMedium * 1.1,
+                fontWeight: fontWeight ?? FontWeight.w700,
+                color: primary
+                    ? CustomColors.primary
+                    : buttonTextColor ?? CustomColors.primary,
+                maxLines: 1,
+                textOverflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+              ),
+            )
                 : ElevatedButton(
-                    onPressed: disable
-                        ? null
-                        : () {
-                            isPadding.value = true;
-                            Future.delayed(
-                              const Duration(milliseconds: 220),
-                              () {
-                                isPadding.value = false;
-                              },
-                            );
-                            onPressed();
-                          },
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      backgroundColor:
-                          (disable ? CustomColors.disableColor : buttonColor) ??
-                          CustomColors.primary,
-                      shape:
-                          shape ??
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              Dimensions.radius * 0.8,
-                            ),
-                          ),
-                      side: BorderSide(
-                        width: borderWidth,
-                        color: disable
-                            ? CustomColors.disableColor
-                            : borderColor ?? CustomColors.primary,
+              onPressed: disable
+                  ? null
+                  : () {
+                isPadding.value = true;
+                Future.delayed(
+                  const Duration(milliseconds: 220),
+                      () {
+                    isPadding.value = false;
+                  },
+                );
+                onPressed();
+              },
+              style: ElevatedButton.styleFrom(
+                elevation: 0,
+                backgroundColor:
+                (disable ? CustomColors.disableColor : buttonColor) ??
+                    CustomColors.primary,
+                shape:
+                shape ??
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        Dimensions.radius * 0.8,
                       ),
                     ),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 350),
-                      child: TextWidget(
-                        title,
-                        fontSize: isPadded
-                            ? (fontSize ?? Dimensions.titleMedium)
-                            : fontSize ?? Dimensions.titleMedium * 1.1,
-                        fontWeight: fontWeight ?? FontWeight.w700,
-                        color: primary
-                            ? CustomColors.primary
-                            : buttonTextColor ?? Colors.white,
-                        maxLines: 1,
-                        textOverflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
+                side: BorderSide(
+                  width: borderWidth,
+                  color: disable
+                      ? CustomColors.disableColor
+                      : borderColor ?? CustomColors.primary,
+                ),
+              ),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 350),
+                child: TextWidget(
+                  title,
+                  fontSize: isPadded
+                      ? (fontSize ?? Dimensions.titleMedium)
+                      : fontSize ?? Dimensions.titleMedium * 1.1,
+                  fontWeight: fontWeight ?? FontWeight.w700,
+                  color: primary
+                      ? CustomColors.primary
+                      : buttonTextColor ?? Colors.white,
+                  maxLines: 1,
+                  textOverflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         );
       },

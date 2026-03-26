@@ -1,7 +1,5 @@
 import 'dart:async';
 import '../utils/basic_import.dart';
-import 'dart:async';
-
 
 class TimerWidget extends StatefulWidget {
   const TimerWidget({super.key, required this.onResendCode});
@@ -9,7 +7,7 @@ class TimerWidget extends StatefulWidget {
   final VoidCallback onResendCode;
 
   @override
-  _TimerWidgetState createState() => _TimerWidgetState();
+  State<TimerWidget> createState() => _TimerWidgetState(); // ✅ FIXED
 }
 
 class _TimerWidgetState extends State<TimerWidget> {
@@ -31,6 +29,8 @@ class _TimerWidgetState extends State<TimerWidget> {
   }
 
   void startTimer() {
+    _timer?.cancel(); // ✅ safety (avoid multiple timers)
+
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (totalTimeInSeconds > 0) {
         setState(() {
@@ -38,7 +38,7 @@ class _TimerWidgetState extends State<TimerWidget> {
         });
       } else {
         setState(() {
-          showResend = true; // Show "Resend" when the timer ends
+          showResend = true;
         });
         timer.cancel();
       }
@@ -48,12 +48,12 @@ class _TimerWidgetState extends State<TimerWidget> {
   void resetTimer() {
     setState(() {
       totalTimeInSeconds = _parseTime('00:30');
-      showResend = false; // Hide "Resend" and show the timer again
+      showResend = false;
     });
     startTimer();
   }
 
-  // Parse the "mm:ss" format into total seconds
+  // Parse "mm:ss" → seconds
   int _parseTime(String time) {
     final parts = time.split(':');
     final minutes = int.parse(parts[0]);
@@ -63,14 +63,17 @@ class _TimerWidgetState extends State<TimerWidget> {
 
   String formatTime(int seconds) {
     final minutes = (seconds ~/ 60).toString().padLeft(2, '0');
-    final remainingSeconds = (seconds % 60).toString().padLeft(2, '0');
+    final remainingSeconds =
+    (seconds % 60).toString().padLeft(2, '0');
     return '$minutes:$remainingSeconds';
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: Dimensions.verticalSize * 0.5),
+      padding: EdgeInsets.symmetric(
+        vertical: Dimensions.verticalSize * 0.5,
+      ),
       child: Row(
         mainAxisAlignment: mainCenter,
         children: [
@@ -81,7 +84,9 @@ class _TimerWidgetState extends State<TimerWidget> {
           ),
           Space.width.v5,
           TextWidget(
-            showResend ? 'Resend Code' : formatTime(totalTimeInSeconds),
+            showResend
+                ? 'Resend Code'
+                : formatTime(totalTimeInSeconds),
             color: CustomColors.primary,
             fontWeight: FontWeight.w600,
             fontSize: Dimensions.titleSmall,

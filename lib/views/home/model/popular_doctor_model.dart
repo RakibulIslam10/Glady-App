@@ -13,13 +13,16 @@ class PopularDoctorModel {
     required this.meta,
   });
 
-  factory PopularDoctorModel.fromJson(Map<String, dynamic> json) => PopularDoctorModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: List<AllDoctors>.from(json["data"].map((x) => AllDoctors.fromJson(x))),
-    meta: Meta.fromJson(json["meta"]),
-  );
+  factory PopularDoctorModel.fromJson(Map<String, dynamic> json) =>
+      PopularDoctorModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: List<AllDoctors>.from(
+          json["data"].map((x) => AllDoctors.fromJson(x)),
+        ),
+        meta: Meta.fromJson(json["meta"]),
+      );
 }
 
 class AllDoctors {

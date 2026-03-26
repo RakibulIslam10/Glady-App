@@ -44,18 +44,19 @@ class ProfileAvatarWidget extends StatelessWidget {
         width: size,
         height: size,
         fit: BoxFit.cover,
-        placeholder: (context, url) => Container(
-          width: size.w,
-          height: size.h,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.grey.shade200,
-          ),
-        ).withShadifyLoading(
-          loading: true,
-          borderRadius: BorderRadius.circular(100.r),
-        ),
+        placeholder: (context, url) =>
+            Container(
+              width: size.w,
+              height: size.h,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.grey.shade200,
+              ),
+            ).withShadifyLoading(
+              loading: true,
+              borderRadius: BorderRadius.circular(100.r),
+            ),
         errorWidget: (context, url, error) => Container(
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -79,11 +80,7 @@ class ProfileAvatarWidget extends StatelessWidget {
           shape: BoxShape.circle,
           color: Colors.grey.shade300,
         ),
-        child: Icon(
-          Icons.person,
-          color: Colors.white,
-          size: size,
-        ),
+        child: Icon(Icons.person, color: Colors.white, size: size),
       );
     }
 
@@ -95,9 +92,9 @@ class ProfileAvatarWidget extends StatelessWidget {
         shape: BoxShape.circle,
         border: hasBorder
             ? Border.all(
-          color: borderColor ?? CustomColors.primary,
-          width: borderWidth,
-        )
+                color: borderColor ?? CustomColors.primary,
+                width: borderWidth,
+              )
             : null,
       ),
       child: ClipOval(child: imageWidget),

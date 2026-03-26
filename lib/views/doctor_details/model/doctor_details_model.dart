@@ -11,12 +11,13 @@ class DoctorDetailsInfoModel {
     required this.data,
   });
 
-  factory DoctorDetailsInfoModel.fromJson(Map<String, dynamic> json) => DoctorDetailsInfoModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: Data.fromJson(json["data"]),
-  );
+  factory DoctorDetailsInfoModel.fromJson(Map<String, dynamic> json) =>
+      DoctorDetailsInfoModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: Data.fromJson(json["data"]),
+      );
 }
 
 class Data {
@@ -38,11 +39,17 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     doctor: Doctor.fromJson(json["doctor"]),
-    services: List<Service>.from(json["services"].map((x) => Service.fromJson(x))),
-    experiences: List<Experience>.from(json["experiences"].map((x) => Experience.fromJson(x))),
+    services: List<Service>.from(
+      json["services"].map((x) => Service.fromJson(x)),
+    ),
+    experiences: List<Experience>.from(
+      json["experiences"].map((x) => Experience.fromJson(x)),
+    ),
     rating: Rating.fromJson(json["rating"]),
     reviews: List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
-    availability: List<Availability>.from(json["availability"].map((x) => Availability.fromJson(x))),
+    availability: List<Availability>.from(
+      json["availability"].map((x) => Availability.fromJson(x)),
+    ),
   );
 }
 
@@ -153,11 +160,13 @@ class Doctor {
     v: json["__v"],
     verificationNote: json["verificationNote"],
     accountName: json["accountName"] ?? 'N/A',
-    accountNumber: json["accountNumber"]?? 'N/A',
-    bankName: json["bankName"]?? 'N/A',
+    accountNumber: json["accountNumber"] ?? 'N/A',
+    bankName: json["bankName"] ?? 'N/A',
     paystackRecipientCode: json["paystackRecipientCode"] ?? 'N/A',
     pendingPayouts: json["pendingPayouts"],
-    recipientCreatedAt: json["recipientCreatedAt"] != null ? DateTime.parse(json["recipientCreatedAt"]) : null,
+    recipientCreatedAt: json["recipientCreatedAt"] != null
+        ? DateTime.parse(json["recipientCreatedAt"])
+        : null,
     totalEarnings: json["totalEarnings"],
     totalPayouts: json["totalPayouts"],
     dateOfBirth: json["dateOfBirth"],
@@ -170,15 +179,10 @@ class SpecialtyId {
   final String id;
   final String name;
 
-  SpecialtyId({
-    required this.id,
-    required this.name,
-  });
+  SpecialtyId({required this.id, required this.name});
 
-  factory SpecialtyId.fromJson(Map<String, dynamic> json) => SpecialtyId(
-    id: json["_id"],
-    name: json["name"],
-  );
+  factory SpecialtyId.fromJson(Map<String, dynamic> json) =>
+      SpecialtyId(id: json["_id"], name: json["name"]);
 }
 
 class UserId {
@@ -246,16 +250,14 @@ class Rating {
   final int total;
   final Map<String, int> breakdown;
 
-  Rating({
-    required this.average,
-    required this.total,
-    required this.breakdown,
-  });
+  Rating({required this.average, required this.total, required this.breakdown});
 
   factory Rating.fromJson(Map<String, dynamic> json) => Rating(
     average: json["average"]?.toDouble(),
     total: json["total"],
-    breakdown: Map.from(json["breakdown"]).map((k, v) => MapEntry<String, int>(k, v)),
+    breakdown: Map.from(
+      json["breakdown"],
+    ).map((k, v) => MapEntry<String, int>(k, v)),
   );
 }
 

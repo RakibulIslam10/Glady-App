@@ -20,10 +20,4 @@ class ResetPasswordController extends GetxController {
       password: passwordController.text,
     );
   }
-
-
-
-
-
-
 }

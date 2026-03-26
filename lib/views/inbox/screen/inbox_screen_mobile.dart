@@ -21,14 +21,16 @@ class InboxScreenMobile extends GetView<InboxController> {
                   fontSize: Dimensions.titleSmall,
                   fontWeight: FontWeight.w600,
                 ),
-                Obx(() => controller.isTyping.value
-                    ? TextWidget(
-                  "typing...",
-                  fontSize: Dimensions.labelSmall,
-                  color: CustomColors.primary,
-                  fontWeight: FontWeight.w400,
-                )
-                    : const SizedBox.shrink()),
+                Obx(
+                  () => controller.isTyping.value
+                      ? TextWidget(
+                          "typing...",
+                          fontSize: Dimensions.labelSmall,
+                          color: CustomColors.primary,
+                          fontWeight: FontWeight.w400,
+                        )
+                      : const SizedBox.shrink(),
+                ),
               ],
             ),
           ],

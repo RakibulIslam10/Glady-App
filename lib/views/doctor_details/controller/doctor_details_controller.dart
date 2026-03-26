@@ -4,8 +4,6 @@ import 'package:glady/views/doctor_details/model/all_date_model.dart';
 import 'package:glady/views/doctor_details/model/doctor_details_model.dart';
 import 'package:glady/views/doctor_details/model/time_model.dart';
 import '../../../core/utils/basic_import.dart';
-import '../model/rating_model.dart';
-
 
 class DoctorDetailsController extends GetxController {
   String? doctorId = '';
@@ -17,7 +15,6 @@ class DoctorDetailsController extends GetxController {
     getDoctorDetailsInfo(doctorId ?? '');
     fetchAllDate();
   }
-
 
   // Booking Dialog
   RxString selectedDate = ''.obs;

@@ -2,9 +2,8 @@ import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
 import '../../terms/model/terms_model.dart';
+
 class PolicyController extends GetxController {
-
-
   @override
   void onInit() {
     super.onInit();
@@ -22,12 +21,4 @@ class PolicyController extends GetxController {
       onSuccess: (result) => privacyDescription = result.data.content,
     );
   }
-
-
-
-
-
-
-
-
 }

@@ -11,13 +11,15 @@ class AllExperienceModel {
     required this.experiences,
   });
 
-  factory AllExperienceModel.fromJson(Map<String, dynamic> json) => AllExperienceModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    experiences: List<Experiences>.from(json["data"].map((x) => Experiences.fromJson(x))),
-  );
-
+  factory AllExperienceModel.fromJson(Map<String, dynamic> json) =>
+      AllExperienceModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        experiences: List<Experiences>.from(
+          json["data"].map((x) => Experiences.fromJson(x)),
+        ),
+      );
 }
 
 class Experiences {

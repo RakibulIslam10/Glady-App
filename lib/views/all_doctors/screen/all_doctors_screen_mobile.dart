@@ -21,7 +21,9 @@ class AllDoctorsScreenMobile extends GetView<AllDoctorsController> {
                   childAspectRatio: 0.75,
                   mainAxisSpacing: Dimensions.heightSize,
                 ),
-                itemCount: controller.allDoctorsList.length + (controller.doctorsHasMore.value ? 1 : 0),
+                itemCount:
+                    controller.allDoctorsList.length +
+                    (controller.doctorsHasMore.value ? 1 : 0),
                 itemBuilder: (context, index) {
                   if (index == controller.allDoctorsList.length) {
                     if (index == controller.allDoctorsList.length) {
@@ -45,7 +47,8 @@ class AllDoctorsScreenMobile extends GetView<AllDoctorsController> {
                   }
 
                   return DoctorCardWidget(
-                    imageUrl: controller.allDoctorsList[index].profileImage ?? '',
+                    imageUrl:
+                        controller.allDoctorsList[index].profileImage ?? '',
                     rating:
                         controller.allDoctorsList[index].averageRating
                             .toStringAsFixed(1) ??

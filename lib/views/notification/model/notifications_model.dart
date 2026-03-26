@@ -1,4 +1,3 @@
-
 class NotificationsModel {
   final bool success;
   final int statusCode;
@@ -12,12 +11,15 @@ class NotificationsModel {
     required this.notifications,
   });
 
-  factory NotificationsModel.fromJson(Map<String, dynamic> json) => NotificationsModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    notifications: List<Notifications>.from(json["data"].map((x) => Notifications.fromJson(x))),
-  );
+  factory NotificationsModel.fromJson(Map<String, dynamic> json) =>
+      NotificationsModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        notifications: List<Notifications>.from(
+          json["data"].map((x) => Notifications.fromJson(x)),
+        ),
+      );
 }
 
 class Notifications {
@@ -57,17 +59,13 @@ class Notifications {
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
   );
-
 }
 
 class Data {
   final String doctorId;
 
-  Data({
-    required this.doctorId,
-  });
+  Data({required this.doctorId});
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-    doctorId: json["doctorId"] ?? '',
-  );
+  factory Data.fromJson(Map<String, dynamic> json) =>
+      Data(doctorId: json["doctorId"] ?? '');
 }

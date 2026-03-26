@@ -9,7 +9,7 @@ class SelectedImagePreviewWidget extends GetView<InboxController> {
 
   @override
   Widget build(BuildContext context) {
-    return  Obx(() {
+    return Obx(() {
       if (controller.multipleImages.isEmpty) {
         return const SizedBox.shrink();
       }
@@ -37,7 +37,9 @@ class SelectedImagePreviewWidget extends GetView<InboxController> {
                         height: 80,
                         margin: const EdgeInsets.only(right: 8),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(Dimensions.radius),
+                          borderRadius: BorderRadius.circular(
+                            Dimensions.radius,
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.1),
@@ -47,7 +49,9 @@ class SelectedImagePreviewWidget extends GetView<InboxController> {
                           ],
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(Dimensions.radius),
+                          borderRadius: BorderRadius.circular(
+                            Dimensions.radius,
+                          ),
                           child: Image.file(
                             File(controller.multipleImages[index].path),
                             fit: BoxFit.cover,
@@ -59,8 +63,8 @@ class SelectedImagePreviewWidget extends GetView<InboxController> {
                         right: 12,
                         child: GestureDetector(
                           onTap: () {
-                            if (index >= 0 && index <
-                                controller.multipleImages.length) {
+                            if (index >= 0 &&
+                                index < controller.multipleImages.length) {
                               controller.multipleImages.removeAt(index);
                             }
                           },
@@ -76,7 +80,7 @@ class SelectedImagePreviewWidget extends GetView<InboxController> {
                                 ),
                               ],
                             ),
-                            child:  Icon(
+                            child: Icon(
                               Icons.close,
                               color: Colors.white,
                               size: 14.sp,
@@ -92,7 +96,7 @@ class SelectedImagePreviewWidget extends GetView<InboxController> {
             // Add more button if less than max
             if (controller.multipleImages.length < controller.maxImageCount)
               GestureDetector(
-                onTap:() {
+                onTap: () {
                   BottomImagePicker.show(
                     maxImages: 12,
                     multiple: true,

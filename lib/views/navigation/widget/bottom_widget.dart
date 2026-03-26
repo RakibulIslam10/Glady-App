@@ -31,16 +31,8 @@ class BottomNavWidget extends StatelessWidget {
 
             // 2. Find/Schedule
             isUser
-                ? _BottomBarItem(
-              path: Assets.icons.find,
-              label: '',
-              index: 1,
-            )
-                : _BottomBarItem(
-              path: Assets.icons.sr,
-              label: '',
-              index: 1,
-            ),
+                ? _BottomBarItem(path: Assets.icons.find, label: '', index: 1)
+                : _BottomBarItem(path: Assets.icons.sr, label: '', index: 1),
 
             // 3. Appointment - Center
             _BottomBarItem(
@@ -51,18 +43,10 @@ class BottomNavWidget extends StatelessWidget {
             ),
 
             // 4. Message - Both User and Doctor
-            _BottomBarItem(
-              path: Assets.icons.buble,
-              label: '',
-              index: 3,
-            ),
+            _BottomBarItem(path: Assets.icons.buble, label: '', index: 3),
 
             // 5. Profile
-            _BottomBarItem(
-              path: Assets.icons.profile,
-              label: '',
-              index: 4,
-            ),
+            _BottomBarItem(path: Assets.icons.profile, label: '', index: 4),
           ],
         ),
       ),
@@ -76,8 +60,7 @@ class _BottomBarItem extends StatelessWidget {
     required this.index,
     this.path,
     this.svgSize,
-    this.isCenter = false,
-    this.icon,
+    this.isCenter = false, this.icon,
   });
 
   final IconData? icon;
@@ -103,9 +86,9 @@ class _BottomBarItem extends StatelessWidget {
             padding: EdgeInsets.all(Dimensions.paddingSize * 0.4),
             decoration: isSelected
                 ? BoxDecoration(
-              color: CustomColors.whiteColor,
-              shape: BoxShape.circle,
-            )
+                    color: CustomColors.whiteColor,
+                    shape: BoxShape.circle,
+                  )
                 : null,
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -125,7 +108,9 @@ class _BottomBarItem extends StatelessWidget {
                     curve: Curves.easeInOut,
                     style: TextStyle(
                       fontSize: 15.sp,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.w500,
                       color: isSelected
                           ? CustomColors.primary.withOpacity(1.0)
                           : CustomColors.blackColor.withOpacity(0.7),

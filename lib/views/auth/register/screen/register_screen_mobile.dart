@@ -64,7 +64,8 @@ class RegisterScreenMobile extends GetView<RegisterController> {
                     controller: controller.passConfirmController,
                     focusNode: controller.confirmPasswordFocus,
                     nextFocusNode: null,
-                    confirmWith: controller.passwordController, // only checks matching
+                    confirmWith:
+                        controller.passwordController, // only checks matching
                   ),
                   Space.height.betweenInputBox,
                   Space.height.betweenInputBox,
@@ -75,8 +76,6 @@ class RegisterScreenMobile extends GetView<RegisterController> {
                       onPressed: () {
                         if (controller.fromKey.currentState!.validate()) {
                           controller.registerProcess();
-
-
                         }
                       },
                     ),

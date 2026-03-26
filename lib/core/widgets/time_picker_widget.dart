@@ -129,12 +129,9 @@ class _TimePickerWidgetState extends State<TimePickerWidget> {
 
                   fontSize: Dimensions.titleSmall * 1.2,
                   fontWeight: FontWeight.w500,
-                  color:  Colors.black.withOpacity(0.7),
+                  color: Colors.black.withOpacity(0.7),
                 ),
-                Icon(
-                  Icons.access_time,
-                  color: CustomColors.primary,
-                ),
+                Icon(Icons.access_time, color: CustomColors.primary),
               ],
             ),
           ),

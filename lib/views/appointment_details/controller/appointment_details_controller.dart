@@ -4,7 +4,6 @@ import 'package:glady/core/api/services/api_request.dart';
 import 'package:glady/core/utils/app_storage.dart';
 
 import '../../../core/utils/basic_import.dart';
-import '../../appointment/model/chatting_info_model.dart';
 import '../model/appoinment_details_model.dart';
 import '../model/user_appoinment_details_model.dart';
 

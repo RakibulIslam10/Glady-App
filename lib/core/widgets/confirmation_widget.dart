@@ -1,6 +1,5 @@
 import '../utils/basic_import.dart';
 
-
 class ConfirmationWidget extends StatelessWidget {
   final String? iconPath;
   final Widget? icon;
@@ -61,8 +60,7 @@ class ConfirmationWidget extends StatelessWidget {
               vertical: Dimensions.verticalSize,
             ),
             title: "Okay",
-            onPressed: onTap ??
-                    () => Get.offAllNamed(Routes.navigationScreen),
+            onPressed: onTap ?? () => Get.offAllNamed(Routes.navigationScreen),
           ),
         ],
       ),

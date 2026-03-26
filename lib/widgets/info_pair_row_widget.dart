@@ -20,18 +20,10 @@ class InfoPairRow extends StatelessWidget {
       mainAxisAlignment: mainSpaceBet,
       children: [
         /// Left Column (start)
-        _InfoColumn(
-          title: leftTitle,
-          value: leftValue,
-          alignment: crossStart,
-        ),
+        _InfoColumn(title: leftTitle, value: leftValue, alignment: crossStart),
 
         /// Right Column (end)
-        _InfoColumn(
-          title: rightTitle,
-          value: rightValue,
-          alignment: crossEnd,
-        ),
+        _InfoColumn(title: rightTitle, value: rightValue, alignment: crossEnd),
       ],
     );
   }
@@ -77,10 +69,11 @@ class _InfoColumn extends StatelessWidget {
         TextWidget(
           value,
           color: _getValueColor(),
-          fontWeight: value.toUpperCase() == 'CANCELLED' ||
-              value.toUpperCase() == 'UPCOMING' ||
-              value.toUpperCase() == 'COMPLETED' ||
-              value.toUpperCase() == 'PENDING'
+          fontWeight:
+              value.toUpperCase() == 'CANCELLED' ||
+                  value.toUpperCase() == 'UPCOMING' ||
+                  value.toUpperCase() == 'COMPLETED' ||
+                  value.toUpperCase() == 'PENDING'
               ? FontWeight.w600
               : FontWeight.w500,
         ),
@@ -88,4 +81,3 @@ class _InfoColumn extends StatelessWidget {
     );
   }
 }
-

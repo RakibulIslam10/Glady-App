@@ -4,12 +4,7 @@ class LoginModel {
   final String? message;
   final Data? data;
 
-  LoginModel({
-    this.success,
-    this.statusCode,
-    this.message,
-    this.data,
-  });
+  LoginModel({this.success, this.statusCode, this.message, this.data});
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
     success: json["success"],
@@ -26,13 +21,7 @@ class Data {
   final String? email;
   final String? role;
 
-  Data({
-    this.accessToken,
-    this.refreshToken,
-    this.name,
-    this.email,
-    this.role,
-  });
+  Data({this.accessToken, this.refreshToken, this.name, this.email, this.role});
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     accessToken: json["accessToken"],

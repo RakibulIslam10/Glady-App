@@ -4,7 +4,12 @@ import '../../../core/utils/basic_import.dart';
 class UserHomeShimmerWidget extends StatelessWidget {
   const UserHomeShimmerWidget({super.key});
 
-  Widget _box({double? width, double? height, double? radius, BorderRadius? borderRadius}) {
+  Widget _box({
+    double? width,
+    double? height,
+    double? radius,
+    BorderRadius? borderRadius,
+  }) {
     return Container(
       width: width,
       height: height,
@@ -49,14 +54,17 @@ class UserHomeShimmerWidget extends StatelessWidget {
             // Dots indicator
             Row(
               mainAxisAlignment: mainCenter,
-              children: List.generate(3, (i) => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4.w),
-                child: _box(
-                  width: i == 0 ? 20.w : 8.w,
-                  height: 6.h,
-                  radius: 4.r,
+              children: List.generate(
+                3,
+                (i) => Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4.w),
+                  child: _box(
+                    width: i == 0 ? 20.w : 8.w,
+                    height: 6.h,
+                    radius: 4.r,
+                  ),
                 ),
-              )),
+              ),
             ),
 
             Space.height.v25,

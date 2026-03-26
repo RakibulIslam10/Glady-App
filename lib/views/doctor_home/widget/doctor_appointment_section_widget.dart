@@ -29,7 +29,7 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
       if (nextSchedule.contains(' - ')) {
         final parts = nextSchedule.split(' - ');
         formattedNextSchedule =
-        '${_formatTime(parts[0])} - ${_formatTime(parts[1])}';
+            '${_formatTime(parts[0])} - ${_formatTime(parts[1])}';
       }
 
       return Container(
@@ -90,9 +90,9 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
                       ),
                       TextWidget(
                         today != null
-                            ? DateFormat("dd MMM").format(
-                          DateTime.parse(today.date),
-                        )
+                            ? DateFormat(
+                                "dd MMM",
+                              ).format(DateTime.parse(today.date))
                             : '',
                         color: CustomColors.whiteColor,
                         fontSize: Dimensions.titleSmall,
@@ -124,7 +124,7 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
                             child: Container(
                               padding: EdgeInsets.symmetric(
                                 horizontal:
-                                Dimensions.defaultHorizontalSize * 0.8,
+                                    Dimensions.defaultHorizontalSize * 0.8,
                                 vertical: Dimensions.verticalSize * 0.6,
                               ),
                               decoration: BoxDecoration(
@@ -139,8 +139,9 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
                                 children: [
                                   TextWidget(
                                     "Starting",
-                                    color: CustomColors.blackColor
-                                        .withOpacity(0.5),
+                                    color: CustomColors.blackColor.withOpacity(
+                                      0.5,
+                                    ),
                                     fontSize: Dimensions.titleSmall * 0.9,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -158,7 +159,7 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
                             child: Container(
                               padding: EdgeInsets.symmetric(
                                 horizontal:
-                                Dimensions.defaultHorizontalSize * 0.8,
+                                    Dimensions.defaultHorizontalSize * 0.8,
                                 vertical: Dimensions.verticalSize * 0.6,
                               ),
                               decoration: BoxDecoration(
@@ -173,8 +174,9 @@ class DoctorAppointmentSectionWidget extends StatelessWidget {
                                 children: [
                                   TextWidget(
                                     "Ending",
-                                    color: CustomColors.blackColor
-                                        .withOpacity(0.5),
+                                    color: CustomColors.blackColor.withOpacity(
+                                      0.5,
+                                    ),
                                     fontSize: Dimensions.titleSmall * 0.9,
                                     fontWeight: FontWeight.w500,
                                   ),

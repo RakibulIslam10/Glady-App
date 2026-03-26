@@ -4,6 +4,8 @@ import '../views/appointment_details/controller/appointment_details_controller.d
 class AppointmentDetailsBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AppointmentDetailsController>(() => AppointmentDetailsController());
+    Get.lazyPut<AppointmentDetailsController>(
+      () => AppointmentDetailsController(),
+    );
   }
 }

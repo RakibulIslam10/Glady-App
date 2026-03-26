@@ -13,13 +13,16 @@ class CategoryDetailsModel {
     required this.meta,
   });
 
-  factory CategoryDetailsModel.fromJson(Map<String, dynamic> json) => CategoryDetailsModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: List<Specialists>.from(json["data"].map((x) => Specialists.fromJson(x))),
-    meta: Meta.fromJson(json["meta"]),
-  );
+  factory CategoryDetailsModel.fromJson(Map<String, dynamic> json) =>
+      CategoryDetailsModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: List<Specialists>.from(
+          json["data"].map((x) => Specialists.fromJson(x)),
+        ),
+        meta: Meta.fromJson(json["meta"]),
+      );
 }
 
 class Specialists {
@@ -40,10 +43,10 @@ class Specialists {
     required this.specialty,
     required this.experienceYears,
     required this.totalReviews,
-     this.minFee,
+    this.minFee,
     required this.name,
     required this.profileImage,
-     this.totalExperienceYears,
+    this.totalExperienceYears,
     required this.averageRating,
   });
 

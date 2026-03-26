@@ -28,6 +28,7 @@ class ProfileBoxWidget extends GetView<ProfileController> {
             mainAxisAlignment: mainSpaceBet,
             children: [
               CustomLogoWidget(size: 40.h),
+
               // TextButton(
               //   style: TextButton.styleFrom(
               //     minimumSize: Size.zero,
@@ -48,13 +49,12 @@ class ProfileBoxWidget extends GetView<ProfileController> {
               //     color: CustomColors.primary,
               //   ),
               // ),
-
-              SizedBox()
+              SizedBox(),
             ],
           ),
 
           ProfileAvatarWidget(
-            imageUrl: controller.userProfileModel?.data.profileImage ?? ''  ,
+            imageUrl: controller.userProfileModel?.data.profileImage ?? '',
             size: 100.sp,
           ),
           Space.height.v10,
@@ -88,13 +88,15 @@ class ProfileBoxWidget extends GetView<ProfileController> {
           ),
           TextWidget(
             controller.userProfileModel?.data.dateOfBirth != null
-                ? DateFormat('dd - MMM - yyyy').format(controller.userProfileModel!.data.dateOfBirth!)
+                ? DateFormat(
+                    'dd - MMM - yyyy',
+                  ).format(controller.userProfileModel!.data.dateOfBirth!)
                 : 'N/A',
             fontSize: Dimensions.titleSmall,
             color: Colors.black.withOpacity(0.7),
           ),
           TextWidget(
-          controller.userProfileModel?.data.phone ?? '',
+            controller.userProfileModel?.data.phone ?? '',
             fontSize: Dimensions.titleSmall,
             color: Colors.black.withOpacity(0.7),
           ),
@@ -113,7 +115,9 @@ class ProfileBoxWidget extends GetView<ProfileController> {
                       right: Dimensions.widthSize * 2,
                       bottom: Dimensions.heightSize,
                     ),
-                    controller.userProfileModel!.data.allergies?[index].toString() ?? '',
+                    controller.userProfileModel!.data.allergies?[index]
+                            .toString() ??
+                        '',
                     fontSize: Dimensions.titleSmall,
                     color: CustomColors.grayShade,
                   ),
@@ -127,9 +131,7 @@ class ProfileBoxWidget extends GetView<ProfileController> {
                   decoration: BoxDecoration(
                     color: CustomColors.primary,
 
-                    borderRadius: BorderRadius.circular(
-                      Dimensions.radius,
-                    ),
+                    borderRadius: BorderRadius.circular(Dimensions.radius),
                   ),
                   padding: EdgeInsetsGeometry.symmetric(
                     horizontal: Dimensions.defaultHorizontalSize * 2,
@@ -191,12 +193,12 @@ class DoctorProfileBox extends GetView<ProfileController> {
               //     color: CustomColors.primary,
               //   ),
               // ),
-              SizedBox()
+              SizedBox(),
             ],
           ),
           ProfileAvatarWidget(
             imageUrl:
-                controller.doctorProfileModel?.data.userId.profileImage ?? ''  ,
+                controller.doctorProfileModel?.data.userId.profileImage ?? '',
 
             size: 100,
           ),
@@ -207,7 +209,10 @@ class DoctorProfileBox extends GetView<ProfileController> {
             crossAxisAlignment: WrapCrossAlignment.center,
             spacing: Dimensions.widthSize * 0.8,
             children: [
-              TextWidget(controller.doctorProfileModel?.data.userId.name ?? "Luna Kellan"),
+              TextWidget(
+                controller.doctorProfileModel?.data.userId.name ??
+                    "Luna Kellan",
+              ),
               TextButton(
                 style: TextButton.styleFrom(
                   minimumSize: Size.zero,
@@ -233,40 +238,41 @@ class DoctorProfileBox extends GetView<ProfileController> {
             ],
           ),
           TextWidget(
-            controller.doctorProfileModel?.data.specialtyId.name.toString() ?? 'Specialty',
+            controller.doctorProfileModel?.data.specialtyId.name.toString() ??
+                'Specialty',
             fontSize: Dimensions.titleSmall,
             color: Colors.black.withOpacity(0.7),
           ),
           TextWidget(
-              controller.doctorProfileModel?.data.currentOrganization.toString() ?? '',
+            controller.doctorProfileModel?.data.currentOrganization
+                    .toString() ??
+                '',
             fontSize: Dimensions.titleSmall,
             color: Colors.black.withOpacity(0.7),
           ),
-        Row(
-
-          mainAxisAlignment: mainCenter,
-          children: [
-          Wrap(
-            children: List.generate(
-              5,
-                  (index) {
-                final rating = controller.doctorProfileModel?.data.averageRating ?? 0;
-                if (index < rating.floor()) {
-                  return Icon(Icons.star, color: Colors.orange);
-                } else if (index < rating && rating % 1 >= 0.5) {
-                  return Icon(Icons.star_half, color: Colors.orange);
-                } else {
-                  return Icon(Icons.star_border, color: Colors.orange);
-                }
-              },
-            ),
+          Row(
+            mainAxisAlignment: mainCenter,
+            children: [
+              Wrap(
+                children: List.generate(5, (index) {
+                  final rating =
+                      controller.doctorProfileModel?.data.averageRating ?? 0;
+                  if (index < rating.floor()) {
+                    return Icon(Icons.star, color: Colors.orange);
+                  } else if (index < rating && rating % 1 >= 0.5) {
+                    return Icon(Icons.star_half, color: Colors.orange);
+                  } else {
+                    return Icon(Icons.star_border, color: Colors.orange);
+                  }
+                }),
+              ),
+              TextWidget(
+                '(${controller.doctorProfileModel?.data.averageRating.toStringAsFixed(1) ?? '0.0'})',
+                fontSize: Dimensions.titleSmall,
+                color: Colors.black.withOpacity(0.7),
+              ),
+            ],
           ),
-          TextWidget(
-            '(${controller.doctorProfileModel?.data.averageRating.toStringAsFixed(1) ?? '0.0'})',
-            fontSize: Dimensions.titleSmall,
-            color: Colors.black.withOpacity(0.7),
-          ),
-        ],),
 
           Space.height.v20,
           Column(
@@ -282,7 +288,9 @@ class DoctorProfileBox extends GetView<ProfileController> {
                       right: Dimensions.widthSize * 2,
                       bottom: Dimensions.heightSize,
                     ),
-                    controller.doctorProfileModel?.data.services[index].name.toString() ?? '',
+                    controller.doctorProfileModel?.data.services[index].name
+                            .toString() ??
+                        '',
                     fontSize: Dimensions.titleSmall,
                     color: CustomColors.grayShade,
                   ),

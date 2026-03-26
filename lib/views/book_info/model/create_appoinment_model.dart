@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
-CreateAppoinmentModel createAppoinmentModelFromJson(String str) => CreateAppoinmentModel.fromJson(json.decode(str));
+CreateAppoinmentModel createAppoinmentModelFromJson(String str) =>
+    CreateAppoinmentModel.fromJson(json.decode(str));
 
-String createAppoinmentModelToJson(CreateAppoinmentModel data) => json.encode(data.toJson());
+String createAppoinmentModelToJson(CreateAppoinmentModel data) =>
+    json.encode(data.toJson());
 
 class CreateAppoinmentModel {
   final bool success;
@@ -21,12 +23,13 @@ class CreateAppoinmentModel {
     required this.data,
   });
 
-  factory CreateAppoinmentModel.fromJson(Map<String, dynamic> json) => CreateAppoinmentModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: Data.fromJson(json["data"]),
-  );
+  factory CreateAppoinmentModel.fromJson(Map<String, dynamic> json) =>
+      CreateAppoinmentModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: Data.fromJson(json["data"]),
+      );
 
   Map<String, dynamic> toJson() => {
     "success": success,

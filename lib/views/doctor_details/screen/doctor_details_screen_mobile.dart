@@ -73,7 +73,8 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
                 days: slot.dayOfWeek,
                 time: "${slot.startTime} - ${slot.endTime}",
                 price: "\$${slot.fee}",
-                slot: "${(slot.slotSizeMinutes > 0 ? ((int.tryParse(slot.endTime.split(':')[0]) ?? 0) - (int.tryParse(slot.startTime.split(':')[0]) ?? 0)) * 60 ~/ slot.slotSizeMinutes : 0)} Slot",
+                slot:
+                    "${(slot.slotSizeMinutes > 0 ? ((int.tryParse(slot.endTime.split(':')[0]) ?? 0) - (int.tryParse(slot.startTime.split(':')[0]) ?? 0)) * 60 ~/ slot.slotSizeMinutes : 0)} Slot",
                 duration: "${slot.slotSizeMinutes} Minutes",
               ),
             ),
@@ -94,22 +95,25 @@ class DoctorDetailsScreenMobile extends GetView<DoctorDetailsController> {
 
         // Reviews List
         ...(controller.doctorDetailsInfoModel?.data.reviews
-            .take(2)
-            .map(
-              (review) => Padding(
-            padding: EdgeInsets.only(
-              bottom: Dimensions.verticalSize * 0.5,
-            ),
-            child: _ReviewCard(review: review),
-          ),
-        )
-            .toList() ??
+                .take(2)
+                .map(
+                  (review) => Padding(
+                    padding: EdgeInsets.only(
+                      bottom: Dimensions.verticalSize * 0.5,
+                    ),
+                    child: _ReviewCard(review: review),
+                  ),
+                )
+                .toList() ??
             []),
 
         // Read All Reviews Button
         if ((controller.doctorDetailsInfoModel?.data.reviews.length ?? 0) > 0)
           GestureDetector(
-            onTap: () => Get.toNamed(Routes.allReviewScreen,arguments: controller.doctorDetailsInfoModel?.data.doctor.id),
+            onTap: () => Get.toNamed(
+              Routes.allReviewScreen,
+              arguments: controller.doctorDetailsInfoModel?.data.doctor.id,
+            ),
             child: Container(
               alignment: Alignment.center,
               padding: EdgeInsets.symmetric(
@@ -139,8 +143,12 @@ class _ReviewCard extends StatelessWidget {
 
   String _timeAgo(DateTime date) {
     final diff = DateTime.now().difference(date);
-    if (diff.inDays >= 1) return '${diff.inDays} Day${diff.inDays > 1 ? 's' : ''} Ago';
-    if (diff.inHours >= 1) return '${diff.inHours} Hour${diff.inHours > 1 ? 's' : ''} Ago';
+    if (diff.inDays >= 1) {
+      return '${diff.inDays} Day${diff.inDays > 1 ? 's' : ''} Ago';
+    }
+    if (diff.inHours >= 1) {
+      return '${diff.inHours} Hour${diff.inHours > 1 ? 's' : ''} Ago';
+    }
     return '${diff.inMinutes} Min Ago';
   }
 
@@ -182,7 +190,8 @@ class _ReviewCard extends StatelessWidget {
           Space.height.v10,
           Row(
             children: List.generate(
-              5, (i) => Icon(
+              5,
+              (i) => Icon(
                 i < review.rating ? Icons.star : Icons.star_border,
                 size: 16.sp,
                 color: const Color(0xFFFF9500),

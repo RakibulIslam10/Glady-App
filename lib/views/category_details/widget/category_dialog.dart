@@ -36,7 +36,6 @@ class CategoryDialog extends GetView<CategoryDetailsController> {
                       controller.selectedTime.value = '';
                       controller.selectedDate.value = '';
                       controller.showTimeSlots.value = false;
-
                     },
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
@@ -54,26 +53,26 @@ class CategoryDialog extends GetView<CategoryDetailsController> {
                   vertical: Dimensions.verticalSize * 0.2,
                 ),
                 child: Obx(
-                      () => Column(
+                  () => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          childAspectRatio: 2.2,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                        ),
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              childAspectRatio: 2.2,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12,
+                            ),
                         itemCount: controller.datesDayList.length,
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
                               controller.selectedDateIndex.value = index;
                               controller.selectedDate.value =
-                              controller.datesDayList[index];
+                                  controller.datesDayList[index];
                               controller.showTimeSlots.value = true;
                               print(controller.selectedDate.value);
                             },
@@ -81,11 +80,11 @@ class CategoryDialog extends GetView<CategoryDetailsController> {
                               Dimensions.radius,
                             ),
                             child: Obx(
-                                  () => Container(
+                              () => Container(
                                 decoration: BoxDecoration(
                                   color:
-                                  controller.selectedDateIndex.value ==
-                                      index
+                                      controller.selectedDateIndex.value ==
+                                          index
                                       ? CustomColors.primary
                                       : Color(0xFFF5F5F5),
                                   borderRadius: BorderRadius.circular(
@@ -102,8 +101,8 @@ class CategoryDialog extends GetView<CategoryDetailsController> {
                                     fontSize: Dimensions.titleSmall,
                                     fontWeight: FontWeight.w400,
                                     color:
-                                    controller.selectedDateIndex.value ==
-                                        index
+                                        controller.selectedDateIndex.value ==
+                                            index
                                         ? Colors.white
                                         : CustomColors.blackColor,
                                     textAlign: TextAlign.center,
@@ -120,75 +119,80 @@ class CategoryDialog extends GetView<CategoryDetailsController> {
                         curve: Curves.easeInOut,
                         child: controller.showTimeSlots.value
                             ? Column(
-                          mainAxisSize: mainMin,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Space.height.v15,
-                            TextWidget(
-                              'Select Time',
-                              fontSize: Dimensions.titleLarge * 0.8,
-                            ),
-                            Space.height.v10,
-                            GridView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                childAspectRatio: 2.2,
-                                crossAxisSpacing: 12,
-                                mainAxisSpacing: 12,
-                              ),
-                              itemCount: controller.timeList.length,
-                              itemBuilder: (context, index) {
-                                final time = controller.timeList[index];
-
-                                return InkWell(
-                                  onTap: () {
-                                    controller.selectedTimeIndex.value = index;
-                                    controller.selectedTime.value = time;
-                                    print(controller.selectedTime.value);
-                                  },
-                                  borderRadius: BorderRadius.circular(
-                                    Dimensions.radius,
+                                mainAxisSize: mainMin,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Space.height.v15,
+                                  TextWidget(
+                                    'Select Time',
+                                    fontSize: Dimensions.titleLarge * 0.8,
                                   ),
-                                  child: Obx(
-                                        () => Container(
-                                      decoration: BoxDecoration(
-                                        color:
-                                        controller.selectedTimeIndex.value ==
-                                            index
-                                            ? CustomColors.primary
-                                            : Color(0xFFF5F5F5),
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          color: Colors.transparent,
-                                          width: 2,
+                                  Space.height.v10,
+                                  GridView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 3,
+                                          childAspectRatio: 2.2,
+                                          crossAxisSpacing: 12,
+                                          mainAxisSpacing: 12,
                                         ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          time,
-                                          style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w500,
-                                            color:
-                                            controller
-                                                .selectedTimeIndex
-                                                .value ==
-                                                index
-                                                ? Colors.white
-                                                : CustomColors.blackColor,
+                                    itemCount: controller.timeList.length,
+                                    itemBuilder: (context, index) {
+                                      final time = controller.timeList[index];
+
+                                      return InkWell(
+                                        onTap: () {
+                                          controller.selectedTimeIndex.value =
+                                              index;
+                                          controller.selectedTime.value = time;
+                                          print(controller.selectedTime.value);
+                                        },
+                                        borderRadius: BorderRadius.circular(
+                                          Dimensions.radius,
+                                        ),
+                                        child: Obx(
+                                          () => Container(
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  controller
+                                                          .selectedTimeIndex
+                                                          .value ==
+                                                      index
+                                                  ? CustomColors.primary
+                                                  : Color(0xFFF5F5F5),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              border: Border.all(
+                                                color: Colors.transparent,
+                                                width: 2,
+                                              ),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                time,
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w500,
+                                                  color:
+                                                      controller
+                                                              .selectedTimeIndex
+                                                              .value ==
+                                                          index
+                                                      ? Colors.white
+                                                      : CustomColors.blackColor,
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
+                                      );
+                                    },
                                   ),
-                                );
-                              },
-                            ),
-                          ],
-                        )
+                                ],
+                              )
                             : const SizedBox.shrink(),
                       ),
                     ],

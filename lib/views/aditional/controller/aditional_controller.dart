@@ -29,8 +29,6 @@ class AditionalController extends GetxController {
         final seen = <String>{};
         final unique = result.data.where((e) => seen.add(e.name)).toList();
         allSpecialist.assignAll(unique);
-
-
       },
     );
   }
@@ -40,7 +38,10 @@ class AditionalController extends GetxController {
     return ApiRequest().post(
       fromJson: BasicSuccessModel.fromJson,
       endPoint: ApiEndPoints.createDoctorInfo,
-      body: {"currentOrganization": nameController.text, "specialtyId": specialityId.value},
+      body: {
+        "currentOrganization": nameController.text,
+        "specialtyId": specialityId.value,
+      },
       isLoading: isAdding,
       onSuccess: (result) => Get.toNamed(Routes.uploadDocScreen),
     );

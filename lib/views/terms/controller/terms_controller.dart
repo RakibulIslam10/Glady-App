@@ -2,8 +2,8 @@ import '../../../core/api/end_point/api_end_points.dart';
 import '../../../core/api/services/api_request.dart';
 import '../../../core/utils/basic_import.dart';
 import '../model/terms_model.dart';
-class TermsController extends GetxController {
 
+class TermsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
@@ -21,6 +21,4 @@ class TermsController extends GetxController {
       onSuccess: (result) => termsDescription = result.data.content,
     );
   }
-
-
 }

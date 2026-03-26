@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
-ResetOtpVerifyModel resetOtpVerifyModelFromJson(String str) => ResetOtpVerifyModel.fromJson(json.decode(str));
+ResetOtpVerifyModel resetOtpVerifyModelFromJson(String str) =>
+    ResetOtpVerifyModel.fromJson(json.decode(str));
 
-String resetOtpVerifyModelToJson(ResetOtpVerifyModel data) => json.encode(data.toJson());
+String resetOtpVerifyModelToJson(ResetOtpVerifyModel data) =>
+    json.encode(data.toJson());
 
 class ResetOtpVerifyModel {
   final bool? success;
@@ -14,19 +16,15 @@ class ResetOtpVerifyModel {
   final String? message;
   final Data? data;
 
-  ResetOtpVerifyModel({
-    this.success,
-    this.statusCode,
-    this.message,
-    this.data,
-  });
+  ResetOtpVerifyModel({this.success, this.statusCode, this.message, this.data});
 
-  factory ResetOtpVerifyModel.fromJson(Map<String, dynamic> json) => ResetOtpVerifyModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: json["data"] == null ? null : Data.fromJson(json["data"]),
-  );
+  factory ResetOtpVerifyModel.fromJson(Map<String, dynamic> json) =>
+      ResetOtpVerifyModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+      );
 
   Map<String, dynamic> toJson() => {
     "success": success,
@@ -39,15 +37,10 @@ class ResetOtpVerifyModel {
 class Data {
   final String? resetToken;
 
-  Data({
-    this.resetToken,
-  });
+  Data({this.resetToken});
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-    resetToken: json["resetToken"],
-  );
+  factory Data.fromJson(Map<String, dynamic> json) =>
+      Data(resetToken: json["resetToken"]);
 
-  Map<String, dynamic> toJson() => {
-    "resetToken": resetToken,
-  };
+  Map<String, dynamic> toJson() => {"resetToken": resetToken};
 }

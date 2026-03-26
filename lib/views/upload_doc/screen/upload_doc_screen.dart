@@ -1,10 +1,7 @@
 import 'dart:io';
 
-import 'package:glady/core/widgets/confirmation_widget.dart';
-
 import '../../../core/utils/basic_import.dart';
 import '../../../core/widgets/bottom_image_picker.dart';
-import '../../../core/widgets/common_app_bar.dart';
 import '../controller/upload_doc_controller.dart';
 
 part 'upload_doc_screen_mobile.dart';

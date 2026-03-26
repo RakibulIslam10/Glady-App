@@ -13,14 +13,16 @@ class AllConversationModel {
     required this.meta,
   });
 
-  factory AllConversationModel.fromJson(Map<String, dynamic> json) => AllConversationModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    conversation: List<Conversation>.from(json["data"].map((x) => Conversation.fromJson(x))),
-    meta: Meta.fromJson(json["meta"]),
-  );
-
+  factory AllConversationModel.fromJson(Map<String, dynamic> json) =>
+      AllConversationModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        conversation: List<Conversation>.from(
+          json["data"].map((x) => Conversation.fromJson(x)),
+        ),
+        meta: Meta.fromJson(json["meta"]),
+      );
 }
 
 class Conversation {
@@ -66,15 +68,10 @@ class Receiver {
   final String id;
   final String role;
 
-  Receiver({
-    required this.id,
-    required this.role,
-  });
+  Receiver({required this.id, required this.role});
 
-  factory Receiver.fromJson(Map<String, dynamic> json) => Receiver(
-    id: json["id"],
-    role: json["role"],
-  );
+  factory Receiver.fromJson(Map<String, dynamic> json) =>
+      Receiver(id: json["id"], role: json["role"]);
 }
 
 class Meta {

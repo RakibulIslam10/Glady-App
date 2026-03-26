@@ -38,16 +38,16 @@ class DoctorCardWidget extends StatelessWidget {
           children: [
             _imageSection(),
             Space.height.v5,
+            _text(name, fontWeight: FontWeight.w600),
             _text(
-              name,
-              fontWeight: FontWeight.w600,
+              profession,
+              color: CustomColors.blackColor.withOpacity(0.7),
+              fontSize: Dimensions.titleSmall,
             ),
-            _text(profession, color: CustomColors.blackColor.withOpacity(0.7),
-                fontSize: Dimensions.titleSmall
-
-            ),
-            _text(hospital, color: CustomColors.blackColor.withOpacity(0.7),
-            fontSize: Dimensions.titleSmall
+            _text(
+              hospital,
+              color: CustomColors.blackColor.withOpacity(0.7),
+              fontSize: Dimensions.titleSmall,
             ),
           ],
         ),

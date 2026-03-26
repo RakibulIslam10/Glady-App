@@ -1,4 +1,5 @@
 import '../utils/basic_import.dart';
+
 class CustomDropDownWidget extends StatefulWidget {
   final String hint;
   final String? label;
@@ -66,17 +67,18 @@ class _DropdownWidgetState extends State<CustomDropDownWidget> {
               value: _selectedValue,
               isExpanded: true,
               hint: TextWidget(
-                  widget.hint,
-                  fontSize: Dimensions.titleSmall * 1.2,
-                  color: CustomColors.blackColor.withOpacity(0.7),
+                widget.hint,
+                fontSize: Dimensions.titleSmall * 1.2,
+                color: CustomColors.blackColor.withOpacity(0.7),
                 fontWeight: FontWeight.w500,
-
               ),
               items: widget.items
                   .map(
                     (item) => DropdownMenuItem(
                       value: item,
-                      child: TextWidget(item, fontSize: Dimensions.titleSmall * 1.2,
+                      child: TextWidget(
+                        item,
+                        fontSize: Dimensions.titleSmall * 1.2,
 
                         fontWeight: FontWeight.w500,
                       ),

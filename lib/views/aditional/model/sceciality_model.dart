@@ -13,15 +13,16 @@ class SpecialistsModel {
     required this.meta,
   });
 
-  factory SpecialistsModel.fromJson(Map<String, dynamic> json) => SpecialistsModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: List<Specialis>.from(json["data"].map((x) => Specialis.fromJson(x))),
-    meta: Meta.fromJson(json["meta"]),
-  );
-
-
+  factory SpecialistsModel.fromJson(Map<String, dynamic> json) =>
+      SpecialistsModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: List<Specialis>.from(
+          json["data"].map((x) => Specialis.fromJson(x)),
+        ),
+        meta: Meta.fromJson(json["meta"]),
+      );
 }
 
 class Specialis {

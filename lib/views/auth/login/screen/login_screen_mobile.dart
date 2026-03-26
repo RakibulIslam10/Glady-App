@@ -9,7 +9,7 @@ class LoginScreenMobile extends GetView<LoginController> {
       '══════════════════════════════════════════════════════════════════════════════',
     );
     log(
-      '═══════════════════ Role=== ${AppStorage.isUser == "USER"  ? 'USER' : 'DOCTOR'} ════════════════════════',
+      '═══════════════════ Role=== ${AppStorage.isUser == "USER" ? 'USER' : 'DOCTOR'} ════════════════════════',
     );
     return Scaffold(
       appBar: CommonAppBar(title: "", isBack: false),
@@ -45,7 +45,6 @@ class LoginScreenMobile extends GetView<LoginController> {
                   ),
 
                   Space.height.betweenInputBox,
-
 
                   PrimaryInputFieldWidget(
                     hintText: "password",

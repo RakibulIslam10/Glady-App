@@ -1,7 +1,6 @@
 class ApiEndPoints {
   // static const String baseUrl = 'https://bvh0nlc7-3001.inc1.devtunnels.ms/api';
-  static const String baseUrl = 'http://16.58.107.165/api';
-
+  static const String baseUrl = 'https://api.wecurehealth.com';
 
   // AUTH ENDPOINTS
   static const String login = '/auth/login';
@@ -38,13 +37,12 @@ class ApiEndPoints {
   static const String getPopularDoctors = '/doctors/popular';
   static const String getAllSpecialDoctor = '/doctors/specialty';
 
-
   static const String addServiceDoctor = '/doctors/me/services';
   static const String addExperiencesDoctor = '/doctors/me/experiences';
   static const String getAllExperience = '/doctors/me/experiences';
 
-    static const String getALlSchedule = '/doctors/me/availability';
-    static const String createSchedule = '/doctors/me/availability';
+  static const String getALlSchedule = '/doctors/me/availability';
+  static const String createSchedule = '/doctors/me/availability';
 
   // PROFILE
   static const String doctorProfile = '/doctors/me/profile';

@@ -11,12 +11,13 @@ class BankDetailsModel {
     this.data,
   });
 
-  factory BankDetailsModel.fromJson(Map<String, dynamic> json) => BankDetailsModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: json["data"] != null ? Data.fromJson(json["data"]) : null,
-  );
+  factory BankDetailsModel.fromJson(Map<String, dynamic> json) =>
+      BankDetailsModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: json["data"] != null ? Data.fromJson(json["data"]) : null,
+      );
 }
 
 class Data {
@@ -24,11 +25,7 @@ class Data {
   final String? accountName;
   final String? accountNumber;
 
-  Data({
-    this.bankName,
-    this.accountName,
-    this.accountNumber,
-  });
+  Data({this.bankName, this.accountName, this.accountNumber});
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     bankName: json["bankName"] ?? '',

@@ -28,7 +28,7 @@ class AddExperienceScreenMobile extends GetView<AddExperienceController> {
             ),
             Space.height.betweenInputBox,
             Obx(
-                  () => DatePickerWidget(
+              () => DatePickerWidget(
                 label: 'Starting Date',
                 initialDate: controller.startDate.value,
                 onDateSelected: (date) {
@@ -46,7 +46,7 @@ class AddExperienceScreenMobile extends GetView<AddExperienceController> {
                   TextWidget("Current working here"),
                   Space.width.v10,
                   Obx(
-                        () => Container(
+                    () => Container(
                       height: 18.h,
                       width: 18.w,
                       decoration: BoxDecoration(
@@ -61,9 +61,7 @@ class AddExperienceScreenMobile extends GetView<AddExperienceController> {
                         ),
                       ),
                       child: Icon(
-                        controller.isChecked.value
-                            ? Icons.check
-                            : Icons.close,
+                        controller.isChecked.value ? Icons.check : Icons.close,
                         color: controller.isChecked.value
                             ? CustomColors.primary
                             : CustomColors.borderColor,
@@ -76,7 +74,7 @@ class AddExperienceScreenMobile extends GetView<AddExperienceController> {
             ),
             Space.height.betweenInputBox,
             Obx(
-                  () => Visibility(
+              () => Visibility(
                 visible: !controller.isChecked.value,
                 child: DatePickerWidget(
                   label: 'Ending Date',
@@ -90,7 +88,7 @@ class AddExperienceScreenMobile extends GetView<AddExperienceController> {
             ),
             Space.height.v40,
             Obx(
-                  () => PrimaryButtonWidget(
+              () => PrimaryButtonWidget(
                 isLoading: controller.isLoading.value,
                 title: controller.isEditMode ? "Update" : "Save",
                 onPressed: () => controller.isEditMode

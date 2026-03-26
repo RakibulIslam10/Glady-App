@@ -5,13 +5,6 @@ import '../../../core/utils/app_storage.dart';
 import '../../../core/utils/basic_import.dart';
 import '../model/bank_details_model.dart';
 
-import '../../../core/api/end_point/api_end_points.dart';
-import '../../../core/api/model/basic_success_model.dart';
-import '../../../core/api/services/api_request.dart';
-import '../../../core/utils/app_storage.dart';
-import '../../../core/utils/basic_import.dart';
-import '../model/bank_details_model.dart';
-
 class BankDetailsController extends GetxController {
   final bankNameController = TextEditingController();
   final isBankNameFocus = FocusNode();

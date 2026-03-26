@@ -1,15 +1,13 @@
 import '../utils/basic_import.dart';
+
 class CustomSnackBar {
   static void success({
     required String title,
     required String message,
     void Function(GetSnackBar)? onTap,
-
-
   }) {
     final ctx = Get.overlayContext ?? Get.context;
     if (ctx == null) return;
-
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.rawSnackbar(

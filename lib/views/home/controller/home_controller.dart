@@ -102,11 +102,11 @@ class HomeController extends GetxController {
         if (specialitiesCurrentPage.value == 1) specialitiesList.clear();
         specialitiesList.addAll(result.data);
         specialitiesTotalPages.value = (result.meta.total / limit).ceil();
-        specialitiesHasMore.value = specialitiesCurrentPage.value < specialitiesTotalPages.value;
+        specialitiesHasMore.value =
+            specialitiesCurrentPage.value < specialitiesTotalPages.value;
       },
     );
   }
-
 
   RxBool isTogglingFavorite = false.obs;
 
@@ -123,7 +123,8 @@ class HomeController extends GetxController {
         onSuccess: (result) {},
       );
     } catch (e) {
-      wellnessTipsList[index].isFavourite = !wellnessTipsList[index].isFavourite;
+      wellnessTipsList[index].isFavourite =
+          !wellnessTipsList[index].isFavourite;
       wellnessTipsList.refresh();
     }
   }
@@ -175,6 +176,4 @@ class HomeController extends GetxController {
       if (Get.isDialogOpen ?? false) Get.back();
     }
   }
-
-
 }

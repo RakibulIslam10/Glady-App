@@ -17,11 +17,10 @@ class InboxController extends GetxController {
   final args = InboxArgsModel.fromMap(Get.arguments);
 
   final RxBool shouldAutoScroll = true.obs;
-   final RxBool isTyping = false.obs;
+  final RxBool isTyping = false.obs;
   final int maxImageCount = 5;
 
   final RxBool isLoading = true.obs;
-
 
   RxList<ChatMessageModel> messagesList = <ChatMessageModel>[].obs;
   final RxList<XFile> multipleImages = <XFile>[].obs;
@@ -46,7 +45,8 @@ class InboxController extends GetxController {
   }
 
   void _onScroll() {
-    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent - 200) {
+    if (scrollController.position.pixels >=
+        scrollController.position.maxScrollExtent - 200) {
       if (!isPaginationLoading.value && hasMore) {
         currentPage++;
         getOldMessages(isPagination: true);
@@ -57,11 +57,17 @@ class InboxController extends GetxController {
   void _initSocket() {
     socket = IO.io(
       "https://bvh0nlc7-3001.inc1.devtunnels.ms"
-          "?token=${AppStorage.token}",
-      IO.OptionBuilder().setTransports(['websocket']).enableAutoConnect().setReconnectionAttempts(10).build(),
+      "?token=${AppStorage.token}",
+      IO.OptionBuilder()
+          .setTransports(['websocket'])
+          .enableAutoConnect()
+          .setReconnectionAttempts(10)
+          .build(),
     );
 
-    socket.onConnect((_) { log("✅ Socket connected"); });
+    socket.onConnect((_) {
+      log("✅ Socket connected");
+    });
     socket.onDisconnect((_) => log("❌ Socket disconnected"));
     socket.onError((error) => log("❌ Socket error: $error"));
     socket.onConnectError((error) => log("❌ Socket connect error: $error"));
@@ -79,7 +85,9 @@ class InboxController extends GetxController {
       }
     });
 
-    socket.on('message_new', (data) { listenMsgInstant(data); });
+    socket.on('message_new', (data) {
+      listenMsgInstant(data);
+    });
 
     socket.on('typing', (data) {
       log("✏️ typing: $data");
@@ -103,16 +111,18 @@ class InboxController extends GetxController {
           .toList();
     }
 
-    messagesList.add(ChatMessageModel(
-      isMe: false,
-      type: imagesList.isNotEmpty ? MessageType.image : MessageType.text,
-      message: data['text'] ?? '',
-      images: imagesList,
-      senderId: data['_id']?.toString(),
-      isUploading: false,
-      isSeen: data['seen'] ?? false,
-      createdAt: DateTime.tryParse(data['createdAt'] ?? '') ?? DateTime.now(),
-    ));
+    messagesList.add(
+      ChatMessageModel(
+        isMe: false,
+        type: imagesList.isNotEmpty ? MessageType.image : MessageType.text,
+        message: data['text'] ?? '',
+        images: imagesList,
+        senderId: data['_id']?.toString(),
+        isUploading: false,
+        isSeen: data['seen'] ?? false,
+        createdAt: DateTime.tryParse(data['createdAt'] ?? '') ?? DateTime.now(),
+      ),
+    );
 
     scrollToBottom();
   }
@@ -129,12 +139,14 @@ class InboxController extends GetxController {
   void sendTextMessage() {
     final tempId = DateTime.now().millisecondsSinceEpoch.toString();
 
-    messagesList.add(ChatMessageModel(
-      isMe: true,
-      senderId: tempId,
-      type: MessageType.text,
-      message: textController.text.trim(),
-    ));
+    messagesList.add(
+      ChatMessageModel(
+        isMe: true,
+        senderId: tempId,
+        type: MessageType.text,
+        message: textController.text.trim(),
+      ),
+    );
     scrollToBottom();
 
     final body = {
@@ -180,10 +192,13 @@ class InboxController extends GetxController {
       return;
     }
 
-    final messageIndex = messagesList.indexWhere((msg) => msg.senderId == tempId);
+    final messageIndex = messagesList.indexWhere(
+      (msg) => msg.senderId == tempId,
+    );
     if (messageIndex != -1) {
       messagesList[messageIndex] = messagesList[messageIndex].copyWith(
-        images: uploadedImagePaths, isUploading: false,
+        images: uploadedImagePaths,
+        isUploading: false,
       );
       messagesList.refresh();
     }
@@ -209,9 +224,12 @@ class InboxController extends GetxController {
 
         String mimeType = 'image/jpeg';
         final extension = image.path.toLowerCase();
-        if (extension.endsWith('.png')) mimeType = 'image/png';
-        else if (extension.endsWith('.gif')) mimeType = 'image/gif';
-        else if (extension.endsWith('.webp')) mimeType = 'image/webp';
+        if (extension.endsWith('.png')) {
+          mimeType = 'image/png';
+        } else if (extension.endsWith('.gif'))
+          mimeType = 'image/gif';
+        else if (extension.endsWith('.webp'))
+          mimeType = 'image/webp';
 
         final formData = FormData.fromMap({
           'image': await MultipartFile.fromFile(
@@ -256,7 +274,6 @@ class InboxController extends GetxController {
 
       log('✅ Total uploaded: ${uploadedPaths.length}/${images.length}');
       return uploadedPaths;
-
     } catch (e) {
       log('❌ Error: $e');
       if (e is DioException) {
@@ -288,24 +305,31 @@ class InboxController extends GetxController {
 
     await ApiRequest().get(
       fromJson: AllConversationModel.fromJson,
-      endPoint: '/chat/messages/${args.conversationId}?page=$currentPage&limit=$limit',
-      isLoading: isPagination ? isPaginationLoading : isLoading, // ✅ আলাদা loading variable
+      endPoint:
+          '/chat/messages/${args.conversationId}?page=$currentPage&limit=$limit',
+      isLoading: isPagination
+          ? isPaginationLoading
+          : isLoading, // ✅ আলাদা loading variable
       onSuccess: (result) {
-        final newMessages = (result.conversation ?? []).map((conversion) {
-          return ChatMessageModel(
-            id: conversion.id,
-            isMe: conversion.sender.id == myId,
-            type: conversion.images.isNotEmpty
-                ? MessageType.image
-                : MessageType.text,
-            message: conversion.text,
-            images: conversion.images,
-            senderId: conversion.sender.id,
-            isUploading: false,
-            isSeen: conversion.seen,
-            createdAt: conversion.createdAt,
-          );
-        }).toList().reversed.toList();
+        final newMessages = (result.conversation ?? [])
+            .map((conversion) {
+              return ChatMessageModel(
+                id: conversion.id,
+                isMe: conversion.sender.id == myId,
+                type: conversion.images.isNotEmpty
+                    ? MessageType.image
+                    : MessageType.text,
+                message: conversion.text,
+                images: conversion.images,
+                senderId: conversion.sender.id,
+                isUploading: false,
+                isSeen: conversion.seen,
+                createdAt: conversion.createdAt,
+              );
+            })
+            .toList()
+            .reversed
+            .toList();
 
         if (isPagination) {
           messagesList.insertAll(0, newMessages);
@@ -328,6 +352,7 @@ class InboxController extends GetxController {
     isPaginationLoading.value = false;
     isLoading.value = false;
   }
+
   void scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (scrollController.hasClients) {

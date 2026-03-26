@@ -27,7 +27,9 @@ class PaginationLoaderWidget extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: padding ?? EdgeInsets.symmetric(vertical: Dimensions.paddingSize * 0.5),
+        padding:
+            padding ??
+            EdgeInsets.symmetric(vertical: Dimensions.paddingSize * 0.5),
         child: CircularProgressIndicator(color: CustomColors.primary),
       ),
     );

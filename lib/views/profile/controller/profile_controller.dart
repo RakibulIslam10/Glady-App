@@ -31,8 +31,6 @@ class ProfileController extends GetxController {
     {'title': 'Logout', 'icon': Icons.logout},
   ];
 
-
-
   @override
   void onInit() {
     super.onInit();
@@ -46,13 +44,11 @@ class ProfileController extends GetxController {
   RxBool isLoading = false.obs;
 
   Future<void> logoutProcess() async {
-    await AuthService.logoutService(
-
-        isLoading: isLoading, callApi: true);
+    await AuthService.logoutService(isLoading: isLoading, callApi: true);
   }
 
   RxBool getDoctorProfileLoading = false.obs;
-  DoctorProfileModel ? doctorProfileModel;
+  DoctorProfileModel? doctorProfileModel;
 
   Future<DoctorProfileModel> getDoctorProfile() async {
     return await ApiRequest().get(
@@ -65,7 +61,7 @@ class ProfileController extends GetxController {
     );
   }
 
-  UserProfileModel ? userProfileModel;
+  UserProfileModel? userProfileModel;
   RxBool getUserProfileLoading = false.obs;
   Future<UserProfileModel> getUserProfile() async {
     return await ApiRequest().get(

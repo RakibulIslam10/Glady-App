@@ -82,7 +82,7 @@ class FindScreenMobile extends GetView<FindController> {
           TextWidget('Recent Search', fontWeight: FontWeight.w600),
           Space.height.v10,
           ...controller.recentSearches.map(
-                (query) => InkWell(
+            (query) => InkWell(
               onTap: () {
                 controller.searchController.text = query;
                 controller.searchDoctors(query);
@@ -146,9 +146,7 @@ class FindScreenMobile extends GetView<FindController> {
           margin: EdgeInsets.only(bottom: Dimensions.heightSize * 1.2),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Dimensions.radius),
-            border: Border.all(
-              color: CustomColors.grayShade.withOpacity(0.15),
-            ),
+            border: Border.all(color: CustomColors.grayShade.withOpacity(0.15)),
           ),
           child: DoctorDetailsCard(
             imageUrl: doctor.profileImage ?? '',
@@ -160,10 +158,8 @@ class FindScreenMobile extends GetView<FindController> {
             startingPrice: doctor.minFee.toDouble(),
             isPriceShow: false,
             borderHide: true,
-            onTap: () => Get.toNamed(
-              Routes.doctorDetailsScreen,
-              arguments: doctor.id,
-            ),
+            onTap: () =>
+                Get.toNamed(Routes.doctorDetailsScreen, arguments: doctor.id),
           ),
         );
       },

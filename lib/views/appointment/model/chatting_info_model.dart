@@ -13,13 +13,14 @@ class ChattingInfoModel {
     required this.recipient,
   });
 
-  factory ChattingInfoModel.fromJson(Map<String, dynamic> json) => ChattingInfoModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    conversationId: json["conversationId"],
-    recipient: Recipient.fromJson(json["recipient"]),
-  );
+  factory ChattingInfoModel.fromJson(Map<String, dynamic> json) =>
+      ChattingInfoModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        conversationId: json["conversationId"],
+        recipient: Recipient.fromJson(json["recipient"]),
+      );
 }
 
 class Recipient {

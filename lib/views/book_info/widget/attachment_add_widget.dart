@@ -6,11 +6,10 @@ class AttachmentAddWidget extends GetView<BookInfoController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () => Wrap(
+      () => Wrap(
         spacing: Dimensions.widthSize,
         runSpacing: Dimensions.heightSize,
         children: [
-
           ...List.generate(controller.selectedAttachments.length, (index) {
             final file = File(controller.selectedAttachments[index].path);
             return Stack(
@@ -41,7 +40,11 @@ class AttachmentAddWidget extends GetView<BookInfoController> {
                         shape: BoxShape.circle,
                       ),
                       padding: EdgeInsets.all(3.r),
-                      child: Icon(Icons.close, size: 12.sp, color: Colors.white),
+                      child: Icon(
+                        Icons.close,
+                        size: 12.sp,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),

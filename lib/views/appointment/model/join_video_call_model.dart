@@ -11,12 +11,13 @@ class JoinVideoCallModel {
     required this.data,
   });
 
-  factory JoinVideoCallModel.fromJson(Map<String, dynamic> json) => JoinVideoCallModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: Data.fromJson(json["data"]),
-  );
+  factory JoinVideoCallModel.fromJson(Map<String, dynamic> json) =>
+      JoinVideoCallModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: Data.fromJson(json["data"]),
+      );
 }
 
 class Data {
@@ -24,11 +25,7 @@ class Data {
   final String channel;
   final String token;
 
-  Data({
-    required this.appId,
-    required this.channel,
-    required this.token,
-  });
+  Data({required this.appId, required this.channel, required this.token});
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     appId: json["appId"],

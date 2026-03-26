@@ -38,11 +38,14 @@ class ReviewRatingPartWidget extends GetView<DoctorDetailsController> {
                   fontWeight: FontWeight.w600,
                 ),
                 Space.width.v10,
-                ...List.generate(5, (i) => Icon(
-                  i < rating.average.round() ? Icons.star : Icons.star_border,
-                  color: const Color(0xffF29500),
-                  size: Dimensions.iconSizeDefault * 1.125,
-                )),
+                ...List.generate(
+                  5,
+                  (i) => Icon(
+                    i < rating.average.round() ? Icons.star : Icons.star_border,
+                    color: const Color(0xffF29500),
+                    size: Dimensions.iconSizeDefault * 1.125,
+                  ),
+                ),
                 Space.width.add(4.w),
                 TextWidget(
                   '(${rating.total} Rating)',
@@ -50,7 +53,10 @@ class ReviewRatingPartWidget extends GetView<DoctorDetailsController> {
                 ),
               ],
             ),
-            TextWidget("${reviews.length} Review", fontSize: Dimensions.titleSmall),
+            TextWidget(
+              "${reviews.length} Review",
+              fontSize: Dimensions.titleSmall,
+            ),
           ],
         ),
 

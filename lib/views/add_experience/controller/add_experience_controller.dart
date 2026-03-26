@@ -29,8 +29,6 @@ class AddExperienceController extends GetxController {
     }
   }
 
-
-
   void _prefill() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       organizationController.text = editData!.organizationName;

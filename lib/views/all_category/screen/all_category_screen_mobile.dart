@@ -40,10 +40,10 @@ class AllCategoryScreenMobile extends GetView<AllCategoryController> {
                     return GestureDetector(
                       onTap: () => Get.toNamed(
                         Routes.categoryDetailsScreen,
-                          arguments: {
-                            'id' :  controller.specialitiesList[index].id,
-                            'name' :  controller.specialitiesList[index].name,
-                          }
+                        arguments: {
+                          'id': controller.specialitiesList[index].id,
+                          'name': controller.specialitiesList[index].name,
+                        },
                       ),
                       child: Container(
                         alignment: AlignmentGeometry.center,

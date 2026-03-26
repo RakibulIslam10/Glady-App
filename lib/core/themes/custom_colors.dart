@@ -27,4 +27,3 @@ class CustomColors {
   static Color active = const Color(0xFF726EF5);
   static Color success = const Color(0xFF17C200);
 }
-

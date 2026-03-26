@@ -44,9 +44,7 @@ class ChatMessageModel {
       senderId: json['sender_id'],
       receiverId: json['receiver_id'],
       message: json['message'] ?? '',
-      images: json['images'] != null
-          ? List<String>.from(json['images'])
-          : null,
+      images: json['images'] != null ? List<String>.from(json['images']) : null,
       isMe: json['sender_id'] == myId,
       isSeen: json['is_seen'] ?? false,
       isUploading: false,

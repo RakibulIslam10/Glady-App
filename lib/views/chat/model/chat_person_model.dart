@@ -13,13 +13,16 @@ class ChatPersonListModel {
     required this.meta,
   });
 
-  factory ChatPersonListModel.fromJson(Map<String, dynamic> json) => ChatPersonListModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: List<PersonData>.from(json["data"].map((x) => PersonData.fromJson(x))),
-    meta: ChatPersonListModelMeta.fromJson(json["meta"]),
-  );
+  factory ChatPersonListModel.fromJson(Map<String, dynamic> json) =>
+      ChatPersonListModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: List<PersonData>.from(
+          json["data"].map((x) => PersonData.fromJson(x)),
+        ),
+        meta: ChatPersonListModelMeta.fromJson(json["meta"]),
+      );
 }
 
 class PersonData {
@@ -35,7 +38,7 @@ class PersonData {
   PersonData({
     required this.id,
     required this.participants,
-     this.appointmentId,
+    this.appointmentId,
     required this.meta,
     required this.createdAt,
     required this.updatedAt,
@@ -45,7 +48,9 @@ class PersonData {
 
   factory PersonData.fromJson(Map<String, dynamic> json) => PersonData(
     id: json["_id"],
-    participants: List<Participant>.from(json["participants"].map((x) => Participant.fromJson(x))),
+    participants: List<Participant>.from(
+      json["participants"].map((x) => Participant.fromJson(x)),
+    ),
     appointmentId: json["appointmentId"] ?? '',
     meta: DatumMeta.fromJson(json["meta"]),
     createdAt: DateTime.parse(json["createdAt"]),
@@ -101,32 +106,23 @@ class LastMessage {
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
   );
-
 }
 
 class Receiver {
   final String id;
   final String role;
 
-  Receiver({
-    required this.id,
-    required this.role,
-  });
+  Receiver({required this.id, required this.role});
 
-  factory Receiver.fromJson(Map<String, dynamic> json) => Receiver(
-    id: json["id"],
-    role: json["role"],
-  );
+  factory Receiver.fromJson(Map<String, dynamic> json) =>
+      Receiver(id: json["id"], role: json["role"]);
 }
 
 class DatumMeta {
   final String id;
   final DateTime lastActivityAt;
 
-  DatumMeta({
-    required this.id,
-    required this.lastActivityAt,
-  });
+  DatumMeta({required this.id, required this.lastActivityAt});
 
   factory DatumMeta.fromJson(Map<String, dynamic> json) => DatumMeta(
     id: json["_id"],
@@ -168,10 +164,11 @@ class ChatPersonListModelMeta {
     required this.totalPages,
   });
 
-  factory ChatPersonListModelMeta.fromJson(Map<String, dynamic> json) => ChatPersonListModelMeta(
-    total: json["total"],
-    page: json["page"],
-    limit: json["limit"],
-    totalPages: json["totalPages"],
-  );
+  factory ChatPersonListModelMeta.fromJson(Map<String, dynamic> json) =>
+      ChatPersonListModelMeta(
+        total: json["total"],
+        page: json["page"],
+        limit: json["limit"],
+        totalPages: json["totalPages"],
+      );
 }

@@ -37,7 +37,7 @@ class BankDetailsScreenMobile extends GetView<BankDetailsController> {
                       Space.height.betweenInputBox,
                       Space.height.betweenInputBox,
                       Obx(
-                            () => PrimaryButtonWidget(
+                        () => PrimaryButtonWidget(
                           title: 'Save',
                           isLoading: controller.isLoading.value,
                           onPressed: () {

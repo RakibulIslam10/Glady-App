@@ -1,18 +1,15 @@
 import 'dart:math';
 
-import 'package:glady/core/widgets/loading_widget.dart';
 import 'package:glady/core/widgets/pagination_loader.dart';
 import 'package:glady/core/widgets/profile_avater_widget.dart';
 import 'package:glady/views/navigation/controller/navigation_controller.dart';
 import 'package:glady/views/profile/controller/profile_controller.dart';
 import 'package:glady/widgets/custom_logo_widget.dart';
 import 'package:glady/widgets/doctor_card_widget.dart';
-import 'package:shadify/shadify.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/utils/app_storage.dart';
 import '../../../core/utils/basic_import.dart';
-import '../../../core/widgets/common_app_bar.dart';
 import '../../../widgets/section_header.dart';
 import '../controller/home_controller.dart';
 import '../widget/shimmer.dart';

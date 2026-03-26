@@ -6,7 +6,6 @@ class RatingsCard extends GetView<DoctorDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-
     final rating = controller.doctorDetailsInfoModel?.data.rating;
     if (rating == null) return const SizedBox.shrink();
     final totalCount = rating.total == 0 ? 1 : rating.total;
@@ -44,7 +43,9 @@ class RatingsCard extends GetView<DoctorDetailsController> {
                         height: 8.h,
                         decoration: BoxDecoration(
                           color: const Color(0xFFE5E5E5),
-                          borderRadius: BorderRadius.circular(Dimensions.radius),
+                          borderRadius: BorderRadius.circular(
+                            Dimensions.radius,
+                          ),
                         ),
                       ),
                       FractionallySizedBox(
@@ -53,7 +54,9 @@ class RatingsCard extends GetView<DoctorDetailsController> {
                           height: 8.h,
                           decoration: BoxDecoration(
                             color: const Color(0xFFFF9500),
-                            borderRadius: BorderRadius.circular(Dimensions.radius),
+                            borderRadius: BorderRadius.circular(
+                              Dimensions.radius,
+                            ),
                           ),
                         ),
                       ),

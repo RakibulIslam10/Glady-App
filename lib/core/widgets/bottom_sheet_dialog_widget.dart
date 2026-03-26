@@ -1,4 +1,5 @@
 import '../utils/basic_import.dart';
+
 class BottomSheetDialogWidget extends StatelessWidget {
   final String title;
   final String subTitle;
@@ -7,7 +8,7 @@ class BottomSheetDialogWidget extends StatelessWidget {
   final RxBool isLoading;
   final void Function() action;
   final bool? isInputField;
-  final Color ? titleColor;
+  final Color? titleColor;
   final TextEditingController? inputController;
 
   const BottomSheetDialogWidget({
@@ -19,7 +20,8 @@ class BottomSheetDialogWidget extends StatelessWidget {
     required this.isLoading,
     required this.action,
     this.isInputField = false,
-    this.inputController, this.titleColor,
+    this.inputController,
+    this.titleColor,
   });
 
   @override

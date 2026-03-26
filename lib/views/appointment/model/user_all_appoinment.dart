@@ -13,13 +13,16 @@ class UserAllAppointment {
     required this.meta,
   });
 
-  factory UserAllAppointment.fromJson(Map<String, dynamic> json) => UserAllAppointment(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: List<Appointments>.from(json["data"].map((x) => Appointments.fromJson(x))),
-    meta: Meta.fromJson(json["meta"]),
-  );
+  factory UserAllAppointment.fromJson(Map<String, dynamic> json) =>
+      UserAllAppointment(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: List<Appointments>.from(
+          json["data"].map((x) => Appointments.fromJson(x)),
+        ),
+        meta: Meta.fromJson(json["meta"]),
+      );
 }
 
 class Appointments {

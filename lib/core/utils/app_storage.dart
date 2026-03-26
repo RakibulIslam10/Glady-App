@@ -34,18 +34,28 @@ class AppStorage {
     String? languageCode, // ✅ New
   }) async {
     if (token != null) await _storage.write(tokenKey, token);
-    if (temporaryToken != null) await _storage.write(temporaryTokenKey, temporaryToken);
+    if (temporaryToken != null) {
+      await _storage.write(temporaryTokenKey, temporaryToken);
+    }
     if (userId != null) await _storage.write(userIdKey, userId);
     if (isUser != null) await _storage.write(isUserKey, isUser);
     if (mobileCode != null) await _storage.write(mobileCodeKey, mobileCode);
     if (onboardSave != null) await _storage.write(onboardSaveKey, onboardSave);
     if (waitTime != null) await _storage.write(waitTimeKey, waitTime);
     if (isLoggedIn != null) await _storage.write(isLoggedInKey, isLoggedIn);
-    if (isEmailVerified != null) await _storage.write(isEmailVerifiedKey, isEmailVerified);
-    if (isKycVerified != null) await _storage.write(isKycVerifiedKey, isKycVerified);
-    if (isSmsVerified != null) await _storage.write(isSmsVerifiedKey, isSmsVerified);
+    if (isEmailVerified != null) {
+      await _storage.write(isEmailVerifiedKey, isEmailVerified);
+    }
+    if (isKycVerified != null) {
+      await _storage.write(isKycVerifiedKey, isKycVerified);
+    }
+    if (isSmsVerified != null) {
+      await _storage.write(isSmsVerifiedKey, isSmsVerified);
+    }
     if (isKycStatus != null) await _storage.write(kycStatusKey, isKycStatus);
-    if (languageCode != null) await _storage.write(languageCodeKey, languageCode); // ✅ New
+    if (languageCode != null) {
+      await _storage.write(languageCodeKey, languageCode); // ✅ New
+    }
   }
 
   static String get token => _storage.read(tokenKey) ?? '';
@@ -60,7 +70,8 @@ class AppStorage {
   static bool get isEmailVerified => _storage.read(isEmailVerifiedKey) ?? false;
   static bool get isSmsVerified => _storage.read(isSmsVerifiedKey) ?? false;
   static bool get isKycStatus => _storage.read(kycStatusKey) ?? false;
-  static String get languageCode => _storage.read(languageCodeKey) ?? 'en'; // ✅ New
+  static String get languageCode =>
+      _storage.read(languageCodeKey) ?? 'en'; // ✅ New
 
   static AppStorageModel get common {
     return AppStorageModel(
@@ -78,8 +89,6 @@ class AppStorage {
       isUser: _storage.read(isUserKey) ?? 'USER',
     );
   }
-
-
 
   static String getSavedLanguage() {
     final box = GetStorage();

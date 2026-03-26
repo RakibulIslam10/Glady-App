@@ -38,9 +38,7 @@ class AppointmentCard extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.radius * 1.5),
-          border: Border.all(
-            color: CustomColors.grayShade.withOpacity(0.2),
-          ),
+          border: Border.all(color: CustomColors.grayShade.withOpacity(0.2)),
         ),
         child: Row(
           children: [
@@ -142,10 +140,7 @@ class AppointmentCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: CustomColors.rejected.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(Dimensions.radius),
-                  border: Border.all(
-                    color: CustomColors.rejected,
-                    width: 1.5,
-                  ),
+                  border: Border.all(color: CustomColors.rejected, width: 1.5),
                 ),
                 child: TextWidget(
                   'Cancelled',

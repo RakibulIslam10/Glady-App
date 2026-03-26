@@ -42,5 +42,4 @@ class SupportController extends GetxController {
       },
     );
   }
-
 }

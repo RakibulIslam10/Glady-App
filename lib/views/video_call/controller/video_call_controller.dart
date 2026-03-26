@@ -5,13 +5,6 @@ import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../appointment/model/join_video_call_model.dart';
 
-import 'package:glady/core/api/services/api_request.dart';
-import '../../../core/utils/basic_import.dart';
-import 'dart:async';
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
-import 'package:permission_handler/permission_handler.dart';
-import '../../appointment/model/join_video_call_model.dart';
-
 class VideoCallController extends GetxController {
   late RtcEngine agoraEngine;
 

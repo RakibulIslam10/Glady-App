@@ -1,4 +1,3 @@
-
 class AllReviewModel {
   final bool success;
   final int statusCode;
@@ -84,11 +83,7 @@ class UserId {
   final String name;
   final String profileImage;
 
-  UserId({
-    required this.id,
-    required this.name,
-    required this.profileImage,
-  });
+  UserId({required this.id, required this.name, required this.profileImage});
 
   factory UserId.fromJson(Map<String, dynamic> json) => UserId(
     id: json["_id"],

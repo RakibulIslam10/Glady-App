@@ -18,7 +18,9 @@ class DoctorAppointmentsModel {
         success: json["success"],
         statusCode: json["statusCode"],
         message: json["message"],
-        data: List<DoctorAppointments>.from(json["data"].map((x) => DoctorAppointments.fromJson(x))),
+        data: List<DoctorAppointments>.from(
+          json["data"].map((x) => DoctorAppointments.fromJson(x)),
+        ),
         meta: Meta.fromJson(json["meta"]),
       );
 }
@@ -44,16 +46,17 @@ class DoctorAppointments {
     required this.specialtyName,
   });
 
-  factory DoctorAppointments.fromJson(Map<String, dynamic> json) => DoctorAppointments(
-    id: json["_id"],
-    appointmentDate: DateTime.parse(json["appointmentDate"]),
-    appointmentTime: json["appointmentTime"],
-    appointmentEndTime: json["appointmentEndTime"],
-    status: json["status"],
-    consultationFee: json["consultationFee"],
-    patientName: json["patientName"],
-    specialtyName: json["specialtyName"],
-  );
+  factory DoctorAppointments.fromJson(Map<String, dynamic> json) =>
+      DoctorAppointments(
+        id: json["_id"],
+        appointmentDate: DateTime.parse(json["appointmentDate"]),
+        appointmentTime: json["appointmentTime"],
+        appointmentEndTime: json["appointmentEndTime"],
+        status: json["status"],
+        consultationFee: json["consultationFee"],
+        patientName: json["patientName"],
+        specialtyName: json["specialtyName"],
+      );
 }
 
 class Meta {

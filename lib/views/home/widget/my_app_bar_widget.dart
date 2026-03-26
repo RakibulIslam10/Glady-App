@@ -72,10 +72,7 @@ class MyAppBarWidget extends GetView<HomeController> {
                               ),
                             ),
                           )
-                        : ProfileAvatarWidget(
-                            size: 50.h,
-                            imageUrl: imageUrl,
-                          ),
+                        : ProfileAvatarWidget(size: 50.h, imageUrl: imageUrl),
                   );
                 }),
               ],

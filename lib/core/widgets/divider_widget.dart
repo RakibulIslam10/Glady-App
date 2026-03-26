@@ -1,4 +1,5 @@
 import '../utils/basic_import.dart';
+
 class DividerWidget extends StatelessWidget {
   const DividerWidget({super.key, this.padding = EdgeInsets.zero});
 
@@ -16,7 +17,6 @@ class DividerWidget extends StatelessWidget {
   }
 }
 
-
 class DividerWidgetTwo extends StatelessWidget {
   final double thickness;
   final Color color;
@@ -30,10 +30,7 @@ class DividerWidgetTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        height: thickness,
-        color: color.withOpacity(0.4),
-      ),
+      child: Container(height: thickness, color: color.withOpacity(0.4)),
     );
   }
 }

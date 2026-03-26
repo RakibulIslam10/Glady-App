@@ -1,4 +1,3 @@
-
 //          IconButton(
 //             onPressed: () {
 //               ImagePickerBottomSheet.show(
@@ -49,7 +48,9 @@ class BottomImagePicker extends StatelessWidget {
       padding: EdgeInsets.all(Dimensions.paddingSize * 0.25),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(Dimensions.radius)),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(Dimensions.radius),
+        ),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -89,8 +90,12 @@ class BottomImagePicker extends StatelessWidget {
                   singleImageVariable?.call(image);
                 }
               } catch (e) {
-                Get.snackbar('Error', 'Failed to capture image',
-                    backgroundColor: Colors.red, colorText: Colors.white);
+                Get.snackbar(
+                  'Error',
+                  'Failed to capture image',
+                  backgroundColor: Colors.red,
+                  colorText: Colors.white,
+                );
               }
             },
           ),
@@ -110,9 +115,12 @@ class BottomImagePicker extends StatelessWidget {
                   );
                   if (images.isNotEmpty) {
                     if (images.length > maxImages) {
-                      Get.snackbar('Limit Exceeded',
-                          'Maximum $maxImages images allowed',
-                          backgroundColor: Colors.red, colorText: Colors.white);
+                      Get.snackbar(
+                        'Limit Exceeded',
+                        'Maximum $maxImages images allowed',
+                        backgroundColor: Colors.red,
+                        colorText: Colors.white,
+                      );
                       return;
                     }
                     multipleImagesVariable?.call(images);
@@ -127,8 +135,12 @@ class BottomImagePicker extends StatelessWidget {
                   singleImageVariable?.call(image);
                 }
               } catch (e) {
-                Get.snackbar('Error', 'Failed to pick image',
-                    backgroundColor: Colors.red, colorText: Colors.white);
+                Get.snackbar(
+                  'Error',
+                  'Failed to pick image',
+                  backgroundColor: Colors.red,
+                  colorText: Colors.white,
+                );
               }
             },
           ),
@@ -145,8 +157,8 @@ class BottomImagePicker extends StatelessWidget {
     String title = 'Select Image',
   }) async {
     assert(
-    multiple ? multipleImagesVariable != null : singleImageVariable != null,
-    'You must provide ${multiple ? "multipleImagesVariable" : "singleImageVariable"} when multiple is $multiple',
+      multiple ? multipleImagesVariable != null : singleImageVariable != null,
+      'You must provide ${multiple ? "multipleImagesVariable" : "singleImageVariable"} when multiple is $multiple',
     );
 
     await Get.bottomSheet(

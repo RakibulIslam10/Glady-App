@@ -17,7 +17,6 @@ class TermsModel {
     message: json["message"],
     data: Data.fromJson(json["data"]),
   );
-
 }
 
 class Data {
@@ -48,5 +47,4 @@ class Data {
     isActive: json["isActive"],
     updatedAt: DateTime.parse(json["updatedAt"]),
   );
-
 }

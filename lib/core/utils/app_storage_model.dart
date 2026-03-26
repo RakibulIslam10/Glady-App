@@ -27,4 +27,3 @@ class AppStorageModel {
     required this.isUser,
   });
 }
-

@@ -3,11 +3,7 @@ class BasicSuccessModel {
   final String message;
   final dynamic data;
 
-  BasicSuccessModel({
-    required this.success,
-    required this.message,
-    this.data,
-  });
+  BasicSuccessModel({required this.success, required this.message, this.data});
 
   factory BasicSuccessModel.fromJson(Map<String, dynamic> json) {
     return BasicSuccessModel(
@@ -18,10 +14,6 @@ class BasicSuccessModel {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'success': success,
-      'message': message,
-      'data': data,
-    };
+    return {'success': success, 'message': message, 'data': data};
   }
 }

@@ -123,7 +123,7 @@ class DoctorDetailsCard extends StatelessWidget {
                         children: [
                           ...List.generate(
                             5,
-                                (i) => Icon(
+                            (i) => Icon(
                               i < rating.floor()
                                   ? Icons.star
                                   : (i < rating && rating % 1 >= 0.5)

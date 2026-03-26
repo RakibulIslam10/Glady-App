@@ -11,12 +11,13 @@ class DoctorAppointmentDetailsModel {
     required this.data,
   });
 
-  factory DoctorAppointmentDetailsModel.fromJson(Map<String, dynamic> json) => DoctorAppointmentDetailsModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: Data.fromJson(json["data"]),
-  );
+  factory DoctorAppointmentDetailsModel.fromJson(Map<String, dynamic> json) =>
+      DoctorAppointmentDetailsModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: Data.fromJson(json["data"]),
+      );
 }
 
 class Data {
@@ -56,7 +57,9 @@ class Data {
     reasonTitle: json["reasonTitle"],
     reasonDetails: json["reasonDetails"],
     patient: Patient.fromJson(json["patient"]),
-    attachments: List<Attachment>.from(json["attachments"].map((x) => Attachment.fromJson(x))),
+    attachments: List<Attachment>.from(
+      json["attachments"].map((x) => Attachment.fromJson(x)),
+    ),
     createdAt: DateTime.parse(json["createdAt"]),
   );
 }

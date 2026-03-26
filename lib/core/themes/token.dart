@@ -41,10 +41,10 @@ final ThemeData darkThemeData = ThemeData.dark().copyWith(
   colorScheme: ColorScheme.dark(surface: CustomColors.tertiaryDark),
   scaffoldBackgroundColor: CustomColors.backgroundDark,
   brightness: Brightness.dark,
-    appBarTheme: AppBarTheme(
+  appBarTheme: AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark, 
+      statusBarIconBrightness: Brightness.dark,
       statusBarBrightness: Brightness.light,
     ),
   ),
@@ -60,4 +60,3 @@ final ThemeData darkThemeData = ThemeData.dark().copyWith(
     ),
   ),
 );
-

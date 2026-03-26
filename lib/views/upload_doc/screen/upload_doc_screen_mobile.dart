@@ -24,61 +24,68 @@ class UploadDocScreenMobile extends GetView<UploadDocController> {
 
             Space.height.v20,
 
-            Obx(() => Wrap(
-              children: List.generate(controller.multipleImages.length + 1, (index) {
-                if (index == controller.multipleImages.length) {
-                  return GestureDetector(
-                    onTap: () {
-                      BottomImagePicker.show(
-                        multiple: true,
-                        multipleImagesVariable: (image) {
-                          controller.multipleImages.value = image;
-                          return image;
-                        },
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(right: Dimensions.widthSize),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: CustomColors.disableColor.withOpacity(0.8),
-                          width: 1.1,
+            Obx(
+              () => Wrap(
+                children: List.generate(controller.multipleImages.length + 1, (
+                  index,
+                ) {
+                  if (index == controller.multipleImages.length) {
+                    return GestureDetector(
+                      onTap: () {
+                        BottomImagePicker.show(
+                          multiple: true,
+                          multipleImagesVariable: (image) {
+                            controller.multipleImages.value = image;
+                            return image;
+                          },
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(right: Dimensions.widthSize),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: CustomColors.disableColor.withOpacity(0.8),
+                            width: 1.1,
+                          ),
+                          borderRadius: BorderRadius.circular(
+                            Dimensions.radius,
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(Dimensions.radius),
+                        height: 100.h,
+                        width: 100.w,
+                        child: Icon(Icons.add, size: 50.sp),
                       ),
-                      height: 100.h,
-                      width: 100.w,
-                      child: Icon(Icons.add, size: 50.sp),
+                    );
+                  }
+                  return Container(
+                    margin: EdgeInsets.only(right: Dimensions.widthSize),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: CustomColors.disableColor.withOpacity(0.2),
+                      ),
+                      borderRadius: BorderRadius.circular(Dimensions.radius),
+                    ),
+                    height: 100.h,
+                    width: 100.w,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(Dimensions.radius),
+                      child: Image.file(
+                        File(controller.multipleImages[index].path),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   );
-                }
-                return Container(
-                  margin: EdgeInsets.only(right: Dimensions.widthSize),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: CustomColors.disableColor.withOpacity(0.2),
-                    ),
-                    borderRadius: BorderRadius.circular(Dimensions.radius),
-                  ),
-                  height: 100.h,
-                  width: 100.w,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(Dimensions.radius),
-                    child: Image.file(
-                      File(controller.multipleImages[index].path),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                );
-              }),
-            )),
+                }),
+              ),
+            ),
             Space.height.v40,
- Obx(() =>
-     PrimaryButtonWidget(
-         isLoading: controller.isLoading.value,
-         title: "Continue",
-         onPressed: () => controller.uploadFileDoc()
-     ),)
+            Obx(
+              () => PrimaryButtonWidget(
+                isLoading: controller.isLoading.value,
+                title: "Continue",
+                onPressed: () => controller.uploadFileDoc(),
+              ),
+            ),
           ],
         ),
       ),

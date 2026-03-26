@@ -23,7 +23,7 @@ class PaymentScreenMobile extends GetView<PaymentController> {
           vertical: Dimensions.verticalSize,
         ),
       ),
-      appBar: CommonAppBar(title: "Payment",),
+      appBar: CommonAppBar(title: "Payment"),
       body: SafeArea(
         child: ListView(
           padding: Dimensions.defaultHorizontalSize.edgeHorizontal,
@@ -84,9 +84,6 @@ class PaymentScreenMobile extends GetView<PaymentController> {
               duration: selectedTimeData?.duration != null
                   ? '${selectedTimeData!.duration} Minutes'
                   : '',
-
-
-
             ),
 
             Space.height.v20,

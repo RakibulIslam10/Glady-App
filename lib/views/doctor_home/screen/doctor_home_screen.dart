@@ -1,7 +1,6 @@
 import 'package:intl/intl.dart';
 
 import '../../../core/utils/basic_import.dart';
-import '../../../core/widgets/common_app_bar.dart';
 import '../../../core/widgets/loading_widget.dart';
 import '../../home/screen/home_screen.dart';
 import '../controller/doctor_home_controller.dart';

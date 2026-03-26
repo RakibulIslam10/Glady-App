@@ -1,5 +1,4 @@
 import 'package:webview_flutter/webview_flutter.dart';
-import '../../views/payment/controller/payment_controller.dart';
 import '../utils/basic_import.dart';
 import 'confirmation_widget.dart';
 import 'loading_widget.dart';
@@ -145,9 +144,6 @@ import 'loading_widget.dart';
 //   }
 // }
 
-
-
-
 class WebPaymentScreen extends StatefulWidget {
   final String paymentUrl;
 
@@ -249,11 +245,11 @@ class _WebPaymentScreenState extends State<WebPaymentScreen> {
     _successHandled = true;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.offAll(
-            () => ConfirmationWidget(
+        () => ConfirmationWidget(
           iconPath: Assets.icons.vector,
           title: "Payment Successful",
           subtitle:
-          'About this payment information has been sent to your email.\nWaiting for doctor confirmation.',
+              'About this payment information has been sent to your email.\nWaiting for doctor confirmation.',
         ),
       );
     });
@@ -270,10 +266,7 @@ class _WebPaymentScreenState extends State<WebPaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(
-        title: 'Payment',
-        isBack: true,
-      ),
+      appBar: CommonAppBar(title: 'Payment', isBack: true),
       body: isLoading
           ? const LoadingWidget()
           : WebViewWidget(controller: _webViewController),

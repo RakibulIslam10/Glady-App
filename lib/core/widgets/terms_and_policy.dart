@@ -35,7 +35,7 @@ class TermsAndPolicyWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Obx(
-                () => SizedBox(
+            () => SizedBox(
               height: 24.h,
               width: 24.w,
               child: Checkbox(
@@ -53,7 +53,7 @@ class TermsAndPolicyWidget extends StatelessWidget {
           Space.width.v10,
           Expanded(
             child: Obx(
-                  () => AnimatedContainer(
+              () => AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 transform: Matrix4.translationValues(
                   isError.value ? 10 : 0,
@@ -91,7 +91,10 @@ class TermsAndPolicyWidget extends StatelessWidget {
   }
 
   Widget _text(String text, {required Color color}) {
-    return Text(text, style: TextStyle(fontSize: 14.sp, color: color));
+    return Text(
+      text,
+      style: TextStyle(fontSize: 14.sp, color: color),
+    );
   }
 
   Widget _link(String text, VoidCallback onTap, Color color) {
@@ -108,5 +111,3 @@ class TermsAndPolicyWidget extends StatelessWidget {
     );
   }
 }
-
-

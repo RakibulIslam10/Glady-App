@@ -12,11 +12,7 @@ class NotificationService {
   static final _messaging = FirebaseMessaging.instance;
 
   static Future<void> init() async {
-    await _messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
+    await _messaging.requestPermission(alert: true, badge: true, sound: true);
 
     await _messaging.setForegroundNotificationPresentationOptions(
       alert: true,
@@ -77,21 +73,19 @@ class NotificationService {
     return ApiRequest().patch(
       body: {'token': token},
       fromJson: BasicSuccessModel.fromJson,
-      endPoint:  '/users/fcm-token',
+      endPoint: '/users/fcm-token',
       isLoading: false.obs,
       onSuccess: (result) {
-        debugPrint('✅---------------------------------------------------------------------');
+        debugPrint(
+          '✅---------------------------------------------------------------------',
+        );
         debugPrint('✅ FCM Token: $token');
-        debugPrint('✅---------------------------------------------------------------------');
-
-
+        debugPrint(
+          '✅---------------------------------------------------------------------',
+        );
       },
     );
   }
-
-
-
-
 
   //In app notification style
   static void _showCustomNotification(RemoteMessage message) {

@@ -27,5 +27,4 @@ class ChangePasswordController extends GetxController {
       newPassword: passwordController.text,
     );
   }
-
 }

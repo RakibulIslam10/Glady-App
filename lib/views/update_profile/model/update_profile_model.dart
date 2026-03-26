@@ -11,12 +11,13 @@ class UpdateProfileModel {
     required this.data,
   });
 
-  factory UpdateProfileModel.fromJson(Map<String, dynamic> json) => UpdateProfileModel(
-    success: json["success"],
-    statusCode: json["statusCode"],
-    message: json["message"],
-    data: Data.fromJson(json["data"]),
-  );
+  factory UpdateProfileModel.fromJson(Map<String, dynamic> json) =>
+      UpdateProfileModel(
+        success: json["success"],
+        statusCode: json["statusCode"],
+        message: json["message"],
+        data: Data.fromJson(json["data"]),
+      );
 }
 
 class Data {
@@ -61,7 +62,9 @@ class Data {
     userId: UserId.fromJson(json["userId"]),
     currentOrganization: json["currentOrganization"],
     specialtyId: SpecialtyId.fromJson(json["specialtyId"]),
-    verificationDocuments: List<String>.from(json["verificationDocuments"].map((x) => x)),
+    verificationDocuments: List<String>.from(
+      json["verificationDocuments"].map((x) => x),
+    ),
     verificationStatus: json["verificationStatus"],
     isVerified: json["isVerified"],
     totalEarnings: json["totalEarnings"],
@@ -80,15 +83,10 @@ class SpecialtyId {
   final String id;
   final String name;
 
-  SpecialtyId({
-    required this.id,
-    required this.name,
-  });
+  SpecialtyId({required this.id, required this.name});
 
-  factory SpecialtyId.fromJson(Map<String, dynamic> json) => SpecialtyId(
-    id: json["_id"],
-    name: json["name"],
-  );
+  factory SpecialtyId.fromJson(Map<String, dynamic> json) =>
+      SpecialtyId(id: json["_id"], name: json["name"]);
 }
 
 class UserId {
@@ -110,5 +108,4 @@ class UserId {
     name: json["name"],
     phone: json["phone"],
   );
-
 }

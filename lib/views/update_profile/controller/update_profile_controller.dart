@@ -1,6 +1,5 @@
 import 'package:glady/core/api/end_point/api_end_points.dart';
 import 'package:glady/core/api/services/api_request.dart';
-import 'package:glady/views/update_profile/model/update_profile_model.dart';
 
 import '../../../core/utils/basic_import.dart';
 
@@ -8,14 +7,8 @@ import 'dart:io';
 import 'package:glady/views/profile/controller/profile_controller.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'dart:io';
-import 'package:glady/core/api/end_point/api_end_points.dart';
 import 'package:glady/core/api/model/basic_success_model.dart';
-import 'package:glady/core/api/services/api_request.dart';
-import 'package:glady/views/profile/controller/profile_controller.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../../core/utils/app_storage.dart';
-import '../../../core/utils/basic_import.dart';
 
 class UpdateProfileController extends GetxController {
   final nameController = TextEditingController();
@@ -62,7 +55,7 @@ class UpdateProfileController extends GetxController {
         nameController.text = data.userId.name ?? '';
         phoneController.text = data.userId.phone ?? '';
         initialDateOfBirth =
-        (data.dateOfBirth != null && data.dateOfBirth!.length >= 10)
+            (data.dateOfBirth != null && data.dateOfBirth!.length >= 10)
             ? data.dateOfBirth!.substring(0, 10)
             : '';
         dobController.text = initialDateOfBirth;

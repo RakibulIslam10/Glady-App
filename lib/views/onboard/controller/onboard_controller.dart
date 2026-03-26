@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:glady/core/utils/app_storage.dart';
 import 'package:glady/core/utils/basic_import.dart';
 

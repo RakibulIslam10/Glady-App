@@ -21,8 +21,6 @@ class TipsController extends GetxController {
     fetchWellnessTips();
   }
 
-
-
   Future<WellnessTipModel> fetchWellnessTips() async {
     return ApiRequest().get(
       fromJson: WellnessTipModel.fromJson,
@@ -46,7 +44,6 @@ class TipsController extends GetxController {
     );
   }
 
-
   void refreshLikedTips() {
     wellnessLickedTipsList.clear();
     wellnessLickedTipsList.addAll(
@@ -69,9 +66,9 @@ class TipsController extends GetxController {
         onSuccess: (result) {},
       );
     } catch (e) {
-      wellnessTipsList[index].isFavourite = !wellnessTipsList[index].isFavourite;
+      wellnessTipsList[index].isFavourite =
+          !wellnessTipsList[index].isFavourite;
       wellnessTipsList.refresh();
     }
   }
-
 }

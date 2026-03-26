@@ -1,10 +1,10 @@
 import 'basic_import.dart';
 
-
 class Space {
   static SizeHeightModel height = SizeHeightModel(
-    btnInputTitleAndBox:
-        SizedBox(height: Dimensions.spaceBetweenInputTitleAndBox),
+    btnInputTitleAndBox: SizedBox(
+      height: Dimensions.spaceBetweenInputTitleAndBox,
+    ),
     betweenInputBox: SizedBox(height: Dimensions.spaceBetweenInputBox),
     v5: SizedBox(height: Dimensions.heightSize * 0.5),
     v10: SizedBox(height: Dimensions.heightSize),
@@ -39,7 +39,6 @@ class SizeHeightModel {
   final SizedBox v40;
   final SizedBox v100;
 
-
   SizedBox add(double value) => SizedBox(height: value);
 
   SizeHeightModel({
@@ -53,7 +52,6 @@ class SizeHeightModel {
     required this.v30,
     required this.v40,
     required this.v100,
-
   });
 }
 

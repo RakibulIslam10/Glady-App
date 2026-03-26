@@ -68,7 +68,7 @@ class TodaySchedule {
     dayName: json['dayName'] ?? 'N/A',
     slotCount: json['slotCount'] ?? 0,
     startTime: json['startTime'] ?? 'N/A',
-    endTime: json['endTime'] ??  'N/A',
+    endTime: json['endTime'] ?? 'N/A',
   );
 }
 

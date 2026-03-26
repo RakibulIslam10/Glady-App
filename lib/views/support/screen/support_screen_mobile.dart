@@ -35,7 +35,7 @@ class SupportScreenMobile extends GetView<SupportController> {
               ),
               Space.height.betweenInputBox,
               Obx(
-                    () => GestureDetector(
+                () => GestureDetector(
                   onTap: () => BottomImagePicker.show(
                     singleImageVariable: (image) {
                       controller.attachment.value = image;
@@ -95,14 +95,14 @@ class SupportScreenMobile extends GetView<SupportController> {
               ),
               Space.height.betweenInputBox,
               Obx(
-                    () => PrimaryButtonWidget(
+                () => PrimaryButtonWidget(
                   isLoading: controller.isLoading.value,
                   title: "Submit",
                   onPressed: () {
-                    if(controller.formKey.currentState!.validate()){
+                    if (controller.formKey.currentState!.validate()) {
                       controller.sendSupport();
                     }
-                  }
+                  },
                 ),
               ),
               Space.height.betweenInputBox,

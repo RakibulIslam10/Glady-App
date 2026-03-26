@@ -3,7 +3,6 @@ import 'package:glady/views/auth/forgot_password/controller/forgot_password_cont
 import '../../../../core/api/model/basic_success_model.dart';
 import '../../../../core/api/services/auth_services.dart';
 import '../../../../core/utils/basic_import.dart';
-import '../../login/model/login_model.dart';
 import '../model/otp_verify_model.dart';
 
 class OtpController extends GetxController {
